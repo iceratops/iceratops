@@ -72,6 +72,40 @@ const Forge = () => {
     }
   ]
 
+  const pricingTiers = [
+    {
+      name: "Simple Automation",
+      price: "Starting from $499*",
+      description: "Basic workflow automation and data processing",
+      features: [
+        "Single process automation",
+        "Basic integration",
+        "2-3 weeks delivery"
+      ]
+    },
+    {
+      name: "Standard Automation",
+      price: "Starting from $999*",
+      description: "Multi-process automation with AI integration",
+      features: [
+        "Multiple process automation",
+        "AI integration",
+        "4-6 weeks delivery"
+      ],
+      popular: true
+    },
+    {
+      name: "Enterprise Automation",
+      price: "Custom Quote*",
+      description: "Complex automation with custom development",
+      features: [
+        "Custom development",
+        "Advanced AI features",
+        "6+ weeks delivery"
+      ]
+    }
+  ]
+
   return (
     <div className="pt-24 pb-20">
       {/* Hero Section */}
@@ -185,45 +219,27 @@ const Forge = () => {
             </p>
           </div>
           
-                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-             <div className="glass-card p-8 text-center">
-               <h3 className="font-orbitron text-xl font-semibold mb-4">Simple Automation</h3>
-               <p className="text-gray-300 mb-4">Basic workflow automation and data processing</p>
-                               <div className="text-4xl font-bold gradient-text mb-4">Starting from $499*</div>
-               <ul className="text-gray-300 space-y-2 text-sm">
-                 <li>• Single process automation</li>
-                 <li>• Basic integration</li>
-                 <li>• 2-3 weeks delivery</li>
-               </ul>
-             </div>
-             
-             <div className="glass-card p-8 text-center relative ring-2 ring-yellow-400">
-               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                 <span className="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-semibold">
-                   Most Popular
-                 </span>
-               </div>
-               <h3 className="font-orbitron text-xl font-semibold mb-4">Standard Automation</h3>
-               <p className="text-gray-300 mb-4">Multi-process automation with AI integration</p>
-                               <div className="text-4xl font-bold gradient-text mb-4">Starting from $999*</div>
-               <ul className="text-gray-300 space-y-2 text-sm">
-                 <li>• Multiple process automation</li>
-                 <li>• AI integration</li>
-                 <li>• 4-6 weeks delivery</li>
-               </ul>
-             </div>
-             
-             <div className="glass-card p-8 text-center">
-               <h3 className="font-orbitron text-xl font-semibold mb-4">Enterprise Automation</h3>
-               <p className="text-gray-300 mb-4">Complex automation with custom development</p>
-               <div className="text-4xl font-bold gradient-text mb-4">Custom Quote*</div>
-               <ul className="text-gray-300 space-y-2 text-sm">
-                 <li>• Custom development</li>
-                 <li>• Advanced AI features</li>
-                 <li>• 6+ weeks delivery</li>
-               </ul>
-             </div>
-           </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {pricingTiers.map((tier, index) => (
+              <div key={index} className={`glass-card p-8 text-center ${tier.popular ? 'relative ring-2 ring-yellow-400' : ''}`}>
+                {tier.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-semibold">
+                      Most Popular
+                    </span>
+                  </div>
+                )}
+                <h3 className="font-orbitron text-xl font-semibold mb-4">{tier.name}</h3>
+                <p className="text-gray-300 mb-4">{tier.description}</p>
+                <div className="text-4xl font-bold gradient-text mb-4" dangerouslySetInnerHTML={{ __html: tier.price }}></div>
+                <ul className="text-gray-300 space-y-2 text-sm">
+                  {tier.features.map((feature, featureIndex) => (
+                    <li key={featureIndex}>• {feature}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
           
                      <div className="text-center">
              <p className="text-gray-300 mb-4 max-w-2xl mx-auto">

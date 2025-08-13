@@ -16,7 +16,7 @@ const Launchlite = () => {
   const pricingTiers = [
     {
       name: "Starter",
-      price: "$199",
+      price: "$199*",
       description: "Perfect for small businesses and personal brands",
       features: [
         "One-page responsive website",
@@ -28,7 +28,7 @@ const Launchlite = () => {
     },
     {
       name: "Professional",
-      price: "$399",
+      price: "$399*",
       description: "Ideal for growing businesses and entrepreneurs",
       features: [
         "Everything in Starter",
@@ -42,7 +42,7 @@ const Launchlite = () => {
     },
     {
       name: "Enterprise",
-      price: "$599",
+      price: "$599*",
       description: "For established businesses requiring premium features",
       features: [
         "Everything in Professional",
@@ -160,6 +160,12 @@ const Launchlite = () => {
             ))}
           </div>
           
+          <div className="text-center mt-12">
+            <p className="text-gray-300 mb-4 max-w-2xl mx-auto">
+              * Monthly hosting and maintenance fees may apply if we manage your website hosting and ongoing maintenance. 
+              Details will be included in your service agreement.
+            </p>
+          </div>
 
         </div>
       </section>
