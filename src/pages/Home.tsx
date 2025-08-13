@@ -72,7 +72,7 @@ const Home = () => {
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
               Professional web design and powerful automation solutions for businesses worldwide
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/launchlite" className="btn-primary text-lg px-8 py-4">
                 Get Website
                 <ArrowRight className="inline ml-2" size={20} />

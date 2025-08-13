@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Check, Zap, Globe, Smartphone, ArrowRight } from 'lucide-react'
+import { Check, Zap, Globe, Smartphone, ArrowRight, Mail } from 'lucide-react'
 
 const Launchlite = () => {
   const features = [
@@ -176,7 +176,7 @@ const Launchlite = () => {
             </p>
             <a href="mailto:hello@iceratops.com?subject=Website Project Discussion" className="btn-primary text-lg px-8 py-4">
               Start the Conversation
-              <ArrowRight className="inline ml-2" size={20} />
+              <Mail className="inline ml-2" size={20} />
             </a>
           </div>
         </div>
