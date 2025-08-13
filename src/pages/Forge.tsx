@@ -189,7 +189,7 @@ const Forge = () => {
              <div className="glass-card p-8 text-center">
                <h3 className="font-orbitron text-xl font-semibold mb-4">Simple Automation</h3>
                <p className="text-gray-300 mb-4">Basic workflow automation and data processing</p>
-               <div className="text-4xl font-bold gradient-text mb-4">Starting from $2,500*</div>
+                               <div className="text-4xl font-bold gradient-text mb-4">Starting from $500*</div>
                <ul className="text-gray-300 space-y-2 text-sm">
                  <li>• Single process automation</li>
                  <li>• Basic integration</li>
@@ -205,7 +205,7 @@ const Forge = () => {
                </div>
                <h3 className="font-orbitron text-xl font-semibold mb-4">Standard Automation</h3>
                <p className="text-gray-300 mb-4">Multi-process automation with AI integration</p>
-               <div className="text-4xl font-bold gradient-text mb-4">Starting from $5,000*</div>
+                               <div className="text-4xl font-bold gradient-text mb-4">Starting from $1,000*</div>
                <ul className="text-gray-300 space-y-2 text-sm">
                  <li>• Multiple process automation</li>
                  <li>• AI integration</li>

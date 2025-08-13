@@ -49,8 +49,25 @@ const DataRequestForm = () => {
     e.preventDefault()
     setIsSubmitted(true)
     
-    // Here you would typically send the request to your backend
-    // For now, we'll just show the success message
+    // Create email content with form data
+    const subject = `GDPR Data Subject Request - ${formData.requestType.charAt(0).toUpperCase() + formData.requestType.slice(1)}`
+    const body = `New GDPR Data Subject Request
+
+Request Type: ${formData.requestType.charAt(0).toUpperCase() + formData.requestType.slice(1)}
+Name: ${formData.name}
+Email: ${formData.email}
+Company: ${formData.company || 'Not provided'}
+
+Request Description:
+${formData.description}
+
+---
+This request was submitted through the website's GDPR form.
+Please process this request within 30 days as required by GDPR.`
+
+    // Open email client with pre-filled content
+    const mailtoLink = `mailto:hello@iceratops.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    window.open(mailtoLink, '_blank')
   }
 
   const handleInputChange = (field: keyof FormData, value: string) => {
