@@ -51,8 +51,8 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <a href="mailto:hello@iceratops.com?subject=General Quote Request" className="btn-primary">
-              Get Started
+            <a href="mailto:hello@iceratops.com?subject=Project Consultation" className="btn-primary">
+              Let's Talk
             </a>
           </div>
 
@@ -89,8 +89,8 @@ const Navbar = () => {
               </Link>
             ))}
             <div className="px-3 py-2">
-              <a href="mailto:hello@iceratops.com?subject=General Quote Request" className="btn-primary w-full">
-                Get Started
+              <a href="mailto:hello@iceratops.com?subject=Project Consultation" className="btn-primary w-full">
+                Let's Talk
               </a>
             </div>
           </div>
