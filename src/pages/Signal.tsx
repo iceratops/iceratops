@@ -5,12 +5,12 @@ const Signal = () => {
   const upcomingTopics = [
     {
       title: "AI Automation Trends 2025",
-      description: "Exploring the latest developments in AI-driven business automation across global markets",
+      description: "Exploring the latest developments in smart business automation across global markets",
       category: "Technology",
       readTime: "5 min read"
     },
     {
-      title: "Global Web Design Standards",
+      title: "Web Design Standards",
       description: "Best practices for creating websites that perform well in international markets",
       category: "Design",
       readTime: "7 min read"
@@ -47,7 +47,7 @@ const Signal = () => {
             <span className="gradient-text">Signal</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8">
-            Insights, trends, and stories from the world of AI automation and global web design
+            Insights, trends, and stories from the world of AI automation and web design
           </p>
           <div className="glass-card p-6 inline-block">
             <div className="flex items-center justify-center space-x-2 text-yellow-400">
@@ -66,7 +66,7 @@ const Signal = () => {
               What to <span className="gradient-text">Expect</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Signal will be your go-to resource for staying ahead in the rapidly evolving world of AI, automation, and global web design
+              Signal will be your go-to resource for staying ahead in the rapidly evolving world of AI, automation, and web design
             </p>
           </div>
 

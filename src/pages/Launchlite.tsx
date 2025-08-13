@@ -10,29 +10,25 @@ const Launchlite = () => {
     "Global CDN deployment",
     "SSL certificate included",
     "Contact form integration",
-    "Social media integration",
-    "Analytics setup",
-    "24/7 global support",
-    "30-day money-back guarantee"
+    "Social media integration"
   ]
 
   const pricingTiers = [
     {
       name: "Starter",
-      price: "$299",
+      price: "$199",
       description: "Perfect for small businesses and personal brands",
       features: [
         "One-page responsive website",
         "Basic SEO optimization",
         "Contact form",
         "Social media links",
-        "Mobile optimization",
-        "1 month support"
+        "Mobile optimization"
       ]
     },
     {
       name: "Professional",
-      price: "$599",
+      price: "$399",
       description: "Ideal for growing businesses and entrepreneurs",
       features: [
         "Everything in Starter",
@@ -40,43 +36,22 @@ const Launchlite = () => {
         "Google Analytics integration",
         "Custom animations",
         "Lead capture forms",
-        "3 months support",
         "Performance optimization"
       ],
       popular: true
     },
     {
       name: "Enterprise",
-      price: "$999",
+      price: "$599",
       description: "For established businesses requiring premium features",
       features: [
         "Everything in Professional",
         "Custom integrations",
         "Advanced analytics",
         "A/B testing setup",
-        "Priority support",
-        "6 months support",
         "Conversion optimization",
         "Multi-language support"
       ]
-    }
-  ]
-
-  const portfolioSamples = [
-    {
-      title: "Tech Startup Landing",
-      description: "Modern SaaS landing page with conversion optimization",
-      image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800"
-    },
-    {
-      title: "Restaurant Website",
-      description: "Elegant dining experience showcase with online reservations",
-      image: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=800"
-    },
-    {
-      title: "Professional Services",
-      description: "Clean, trustworthy design for consulting businesses",
-      image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
     }
   ]
 
@@ -92,13 +67,10 @@ const Launchlite = () => {
             Lightning-fast one-page websites that convert visitors into customers worldwide
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:hello@iceratops.com" className="btn-primary text-lg px-8 py-4">
-              Start Your Project
-              <ArrowRight className="inline ml-2" size={20} />
-            </a>
-            <button className="btn-secondary text-lg px-8 py-4">
-              View Portfolio
-            </button>
+                      <a href="mailto:hello@iceratops.com?subject=Website Project Discussion" className="btn-primary text-lg px-8 py-4">
+            Start Your Project
+            <ArrowRight className="inline ml-2" size={20} />
+          </a>
           </div>
         </div>
       </section>
@@ -143,6 +115,7 @@ const Launchlite = () => {
                 </div>
               ))}
             </div>
+
           </div>
         </div>
       </section>
@@ -182,42 +155,12 @@ const Launchlite = () => {
                     </li>
                   ))}
                 </ul>
-                <a href="mailto:hello@iceratops.com" className={`w-full text-center ${tier.popular ? 'btn-primary' : 'btn-secondary'}`}>
-                  Get Started
-                </a>
+
               </div>
             ))}
           </div>
-        </div>
-      </section>
+          
 
-      {/* Portfolio Section */}
-      <section className="px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-orbitron text-3xl md:text-5xl font-bold mb-6">
-              Our <span className="gradient-text">Portfolio</span>
-            </h2>
-            <p className="text-xl text-gray-300">
-              See how we've helped businesses worldwide launch successfully
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {portfolioSamples.map((sample, index) => (
-              <div key={index} className="glass-card overflow-hidden">
-                <img 
-                  src={sample.image} 
-                  alt={sample.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="font-orbitron text-xl font-semibold mb-2">{sample.title}</h3>
-                  <p className="text-gray-300">{sample.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -231,15 +174,10 @@ const Launchlite = () => {
             <p className="text-xl text-gray-300 mb-8">
               Join hundreds of businesses worldwide who've launched successfully with Launchlite
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="mailto:hello@iceratops.com" className="btn-primary text-lg px-8 py-4">
-                Start Your Project Today
-                <ArrowRight className="inline ml-2" size={20} />
-              </a>
-              <Link to="/about" className="btn-secondary text-lg px-8 py-4">
-                Learn More About Us
-              </Link>
-            </div>
+            <a href="mailto:hello@iceratops.com?subject=Website Project Discussion" className="btn-primary text-lg px-8 py-4">
+              Start the Conversation
+              <ArrowRight className="inline ml-2" size={20} />
+            </a>
           </div>
         </div>
       </section>

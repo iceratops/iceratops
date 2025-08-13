@@ -260,7 +260,7 @@ const Labs = () => {
                   <Cpu className="w-6 h-6 text-yellow-400 mt-1 flex-shrink-0" />
                   <div>
                     <h3 className="font-semibold text-lg mb-2">AI Integration</h3>
-                    <p className="text-gray-300">Artificial intelligence isn't just a feature—it's woven into the fabric of everything we build.</p>
+                    <p className="text-gray-300">Artificial intelligence isn't just a feature, it's built into everything we create.</p>
                   </div>
                 </div>
               </div>
