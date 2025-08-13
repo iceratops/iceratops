@@ -18,8 +18,8 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Launchlite', path: '/launchlite' },
-    { name: 'Forge', path: '/forge' },
+    { name: 'Web Design', path: '/launchlite' },
+    { name: 'Automation', path: '/forge' },
   ]
 
   return (
