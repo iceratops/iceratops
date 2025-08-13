@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-6">
-              <img src="/static/iceratops_logo.svg" alt="Iceratops" className="h-20 w-auto" />
+              <img src="/iceratops_logo.svg" alt="Iceratops" className="h-20 w-auto" />
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
               Empowering the future with AI automation and professional web design.
@@ -54,7 +54,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 text-gray-300 hover:text-yellow-400 transition-colors"
               >
-                <img src="/static/linktree.svg" alt="Linktree" className="w-4 h-4" />
+                <img src="/linktree.svg" alt="Linktree" className="w-4 h-4" />
                 <span>Follow Us</span>
               </a>
             </div>

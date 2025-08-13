@@ -30,7 +30,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20 px-6">
           <Link to="/" className="flex items-center justify-center group">
             <img 
-              src="/static/iceratops_text_logo.svg" 
+              src="/iceratops_text_logo.svg"
               alt="Iceratops" 
               className="h-16 w-auto transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:drop-shadow-[0_0_20px_rgba(251,176,64,0.6)] group-hover:filter group-hover:brightness-110" 
             />
