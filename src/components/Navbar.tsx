@@ -18,6 +18,7 @@ const Navbar = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
+    { name: 'Portfolio', path: '/portfolio' },
     { name: 'Web Design', path: '/launchlite' },
     { name: 'Automation', path: '/forge' },
   ]

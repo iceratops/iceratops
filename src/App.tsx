@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import About from './pages/About'
+import Portfolio from './pages/Portfolio'
 import Launchlite from './pages/Launchlite'
 import Blueprints from './pages/Blueprints'
 import Signal from './pages/Signal'
@@ -34,6 +35,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/launchlite" element={<Launchlite />} />
           <Route path="/blueprints" element={<Blueprints />} />
           <Route path="/signal" element={<Signal />} />

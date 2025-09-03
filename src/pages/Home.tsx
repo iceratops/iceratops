@@ -75,11 +75,11 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/launchlite" className="btn-primary text-lg px-8 py-4">
                 Get Website
-                <ArrowRight className="inline ml-2" size={20} />
+                <ArrowRight size={20} />
               </Link>
               <Link to="/forge" className="btn-secondary text-lg px-8 py-4">
                 Get Automation
-                <ArrowRight className="inline ml-2" size={20} />
+                <ArrowRight size={20} />
               </Link>
             </div>
           </div>
@@ -166,11 +166,11 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/launchlite" className="btn-primary text-lg px-8 py-4 glow-effect">
               Get Website
-              <ArrowRight className="inline ml-2" size={20} />
+              <ArrowRight size={20} />
             </Link>
             <Link to="/forge" className="btn-secondary text-lg px-8 py-4">
               Get Automation
-              <ArrowRight className="inline ml-2" size={20} />
+              <ArrowRight size={20} />
             </Link>
           </div>
         </div>
