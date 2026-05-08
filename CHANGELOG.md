@@ -6,6 +6,12 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Phase 1A site foundation
+- Added the shared marketing site shell with header, footer, primary navigation, footer navigation, and the Free workflow review CTA path.
+- Added reusable button, card, container, section, and route shell primitives for the Next.js App Router rebuild.
+- Added placeholder route shells for `/`, `/services`, approved service detail pages, `/use-cases`, `/about`, `/contact`, `/case-studies`, `/demos`, and `/resources`.
+- Added reusable SEO metadata helpers plus `robots.ts` and `sitemap.ts` for the planned public site.
+
 ### Build, lint, deploy
 - Added `scripts/check-em-dashes.mjs` and wired it into `npm run lint` via a new `lint:copy` script. The check scans `.ts`, `.tsx`, and `.mdx` files in `src/`, `app/`, `components/`, and `content/`, including untracked-but-not-ignored files. Top-level `*.md` docs are intentionally excluded.
 - `npm run lint` currently runs `lint:copy` only. The legacy Vite ESLint script never had a config and has been broken since the initial commit; we are not fixing it because Phase 0 replaces ESLint and Prettier with Biome. Phase 0 will re-introduce `npm run lint` as `biome check && lint:copy`.
