@@ -18,8 +18,9 @@ Authoritative direction lives in `WEBSITE_BRIEF.md`. Read it before substantive 
 - Server actions for the contact form
 - Biome for lint and formatting (replaces ESLint and Prettier)
 - Resend or Postmark for transactional email
-- Plausible or Vercel Analytics
-- Vercel for hosting
+- Plausible or Netlify Analytics
+- Netlify for hosting (deploy previews and production), via the
+  `@netlify/plugin-nextjs` Next.js runtime
 
 The current branch may still be running the legacy Vite stack. Confirm the current state before assuming Next.js paths exist. ESLint and Prettier are not used. Phase 0 of the migration removes their dependencies and installs Biome in their place.
 
@@ -130,7 +131,7 @@ chore: enforce em dash lint
 
 ## Secrets and environment
 
-- Real secrets only in Vercel environment settings or a local `.env.local` (never committed).
+- Real secrets only in Netlify environment variables or a local `.env.local` (never committed).
 - `.env.example` lists required keys with placeholder values.
 - Never paste real API keys, customer emails, or form submissions into chat or commits.
 

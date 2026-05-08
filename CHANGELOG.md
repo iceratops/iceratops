@@ -10,6 +10,9 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 - Added `scripts/check-em-dashes.mjs` and wired it into `npm run lint` via a new `lint:copy` script. The check scans `.ts`, `.tsx`, and `.mdx` files in `src/`, `app/`, `components/`, and `content/`, including untracked-but-not-ignored files. Top-level `*.md` docs are intentionally excluded.
 - `npm run lint` currently runs `lint:copy` only. The legacy Vite ESLint script never had a config and has been broken since the initial commit; we are not fixing it because Phase 0 replaces ESLint and Prettier with Biome. Phase 0 will re-introduce `npm run lint` as `biome check && lint:copy`.
 
+### Content and positioning
+- Locked the hosting decision to Netlify only (deploy previews and production). Removed Vercel references from `AGENTS.md`. Phase 0 keeps `netlify.toml` and rewrites it for the Next.js runtime (`@netlify/plugin-nextjs`).
+
 ## 0.1.0 — Documentation setup
 
 Initial repo documentation for the rebuild. No code or content changes yet.
@@ -56,7 +59,7 @@ One or two lines on the goal of the batch and any notes that future agents shoul
 ### Build, lint, deploy
 - Added em dash lint check
 - CI runs lint, typecheck, build on every PR
-- Configured Vercel preview deployments
+- Configured Netlify deploy previews
 ```
 
 Sections that do not apply in a given batch can be omitted. Keep entries short. If a section needs more than a handful of bullets, the batch is probably too big.
