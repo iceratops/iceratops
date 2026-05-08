@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 /**
  * Em-dash lint check.
  *
@@ -13,8 +14,8 @@
  * extend this script to honor it.
  */
 
-import { readFileSync, statSync } from 'node:fs'
 import { execSync } from 'node:child_process'
+import { readFileSync, statSync } from 'node:fs'
 import { relative } from 'node:path'
 
 const SCAN_DIRS = ['src', 'app', 'components', 'content']
@@ -42,15 +43,15 @@ try {
   // catches new files before they are committed.
   const out = execSync(
     `git ls-files --cached --others --exclude-standard -- ${existing.map((d) => `'${d}'`).join(' ')}`,
-    { encoding: 'utf8' }
+    { encoding: 'utf8' },
   )
   files = Array.from(
     new Set(
       out
         .split('\n')
         .map((f) => f.trim())
-        .filter((f) => f && SCAN_EXTS.some((ext) => f.endsWith(ext)))
-    )
+        .filter((f) => f && SCAN_EXTS.some((ext) => f.endsWith(ext))),
+    ),
   )
 } catch (err) {
   console.error('em-dash check: failed to list files via git')
@@ -87,7 +88,9 @@ if (offenders.length > 0) {
     console.error(`  ${o.file}:${o.line}: ${o.text}`)
   }
   console.error('')
-  console.error(`em-dash check: failed (${offenders.length} occurrence${offenders.length === 1 ? '' : 's'} in ${new Set(offenders.map((o) => o.file)).size} file${new Set(offenders.map((o) => o.file)).size === 1 ? '' : 's'})`)
+  console.error(
+    `em-dash check: failed (${offenders.length} occurrence${offenders.length === 1 ? '' : 's'} in ${new Set(offenders.map((o) => o.file)).size} file${new Set(offenders.map((o) => o.file)).size === 1 ? '' : 's'})`,
+  )
   process.exit(1)
 }
 

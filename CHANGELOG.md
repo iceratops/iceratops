@@ -9,6 +9,9 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 ### Build, lint, deploy
 - Added `scripts/check-em-dashes.mjs` and wired it into `npm run lint` via a new `lint:copy` script. The check scans `.ts`, `.tsx`, and `.mdx` files in `src/`, `app/`, `components/`, and `content/`, including untracked-but-not-ignored files. Top-level `*.md` docs are intentionally excluded.
 - `npm run lint` currently runs `lint:copy` only. The legacy Vite ESLint script never had a config and has been broken since the initial commit; we are not fixing it because Phase 0 replaces ESLint and Prettier with Biome. Phase 0 will re-introduce `npm run lint` as `biome check && lint:copy`.
+- Migrated the application shell from Vite to Next.js 15 App Router with pnpm scripts, TypeScript, Tailwind CSS, and a small branded placeholder page.
+- Replaced the legacy ESLint/Vite dependency set with Biome and Next.js build, lint, typecheck, and start scripts.
+- Updated `netlify.toml` for Next.js on Netlify using `pnpm run build`, `.next`, and `@netlify/plugin-nextjs`.
 
 ### Content and positioning
 - Locked the hosting decision to Netlify only (deploy previews and production). Removed Vercel references from `AGENTS.md`. Phase 0 keeps `netlify.toml` and rewrites it for the Next.js runtime (`@netlify/plugin-nextjs`).

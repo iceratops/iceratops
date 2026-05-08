@@ -1,4 +1,10 @@
 node_modules
+.pnpm-store
 dist
+.next
+out
+pnpm-debug.log*
+tsconfig.tsbuildinfo
+.env*.local
 # Local Netlify folder
 .netlify
