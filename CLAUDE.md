@@ -37,6 +37,7 @@ Claude should not:
 - Open PRs, push branches, or commit code unless explicitly asked.
 - Create new top-level documentation files without a specific need.
 - Duplicate product strategy here instead of pointing to `WEBSITE_BRIEF.md`.
+- Create new git worktrees. The project operates linearly on branches off `master` in the main checkout.
 
 ## Working Rules
 

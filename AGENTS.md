@@ -116,6 +116,7 @@ When using tools that support output limits, set a small output cap first and in
 - Do not log PII from contact forms or integrations.
 - Do not add new top-level docs unless the user explicitly asks. Prefer updating existing docs.
 - Do not touch `.claude/worktrees/` unless the user specifically asks.
+- Do not create new git worktrees. The project operates linearly on branches off `master`. Existing entries under `.claude/worktrees/` are being phased out; new work goes on a regular branch in the main checkout.
 
 ## Responsive Design
 

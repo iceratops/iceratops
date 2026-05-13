@@ -24,6 +24,8 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ### Documentation
 - Refined repo docs to make mobile-first responsive design an explicit project requirement. Added a "Primary surface" section to `WEBSITE_BRIEF.md`, a "Responsive design requirements" section and viewport testing checklist to `AGENTS.md`, and mobile review responsibilities to `CLAUDE.md`. Visitors will arrive mostly from phone-based outreach (Instagram DMs, text, email, local search), so mobile browser UX is treated as the first impression.
+- Refactored `AGENTS.md` into a compact operating guide and `CLAUDE.md` into a focused role guide, folding the mobile-first additions into the new structure.
+- Switched the project workflow to a single linear branch model off `master`. Agents must not create new git worktrees; existing entries under `.claude/worktrees/` are being phased out. Recorded in `AGENTS.md` (Implementation Guardrails) and `CLAUDE.md` (Claude should not).
 
 ## 0.1.0 — Documentation setup
 
