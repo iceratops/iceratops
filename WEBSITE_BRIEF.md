@@ -20,6 +20,20 @@ The visitor is busy, technically literate enough to run a business but not a dev
 - The local angle is the personality and trust frame. It should feel warm.
 - The remote angle is capability, not the main personality. It should feel like reach, not the brand.
 
+## Primary surface
+
+Most first impressions will come from mobile browsers. Visitors land here from Instagram DMs, text messages, email links, and quick local searches done on a phone. A polished mobile experience is the difference between a kept lead and a lost one.
+
+- Design every page mobile-first. Layout, copy hierarchy, and CTA placement work on a small screen first, then scale up.
+- The primary CTA (Free workflow review) is visible and tappable without zoom on a 375px viewport.
+- Local trust cues (Pflugerville, founder name, "we reply within one business day") are visible quickly, not buried below a tall hero.
+- Hero sections stay compact on mobile, never full-height.
+- Cards stack cleanly. Side-by-side grids only on tablet and up.
+- Text blocks stay short and readable. No dense paragraphs on small screens.
+- Forms are easy to complete with thumbs: comfortable tap targets, sensible input types, no horizontal scrolling.
+
+Tablet and desktop are enhancements, not the design starting point.
+
 ## What Iceratops is
 
 - Founder-led

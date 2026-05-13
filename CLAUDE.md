@@ -33,6 +33,7 @@ Claude is the architect. Codex is the implementer.
 - ADRs when a decision is non-obvious or reversible at cost
 - Implementation review against the brief
 - Updates to `WEBSITE_BRIEF.md` when the founder changes direction
+- Mobile-first responsive design review across common phone, tablet, and desktop widths
 
 ### Claude does not
 
@@ -60,7 +61,7 @@ Banned hype words: revolutionize, cutting-edge, world-class, bleeding-edge, unle
 2. **For copy work**, draft inline in chat or in `content/*.ts` files. Do not write copy directly in JSX components.
 3. **For architecture decisions**, if reversible at low cost, decide and document briefly in chat. If reversible at higher cost (URL structure, schema, content model), write a short ADR-style note in the chat or as an entry in `CHANGELOG.md` before Codex implements.
 4. **For SEO review**, check titles, descriptions, JSON-LD, OG images, canonical URLs, and internal linking against the IA in the brief.
-5. **For implementation review**, read the diff, check that copy matches the brief, that components are reusable, that no banned words or em dashes are present, and that the change does not introduce a competing CTA.
+5. **For implementation review**, read the diff, check that copy matches the brief, that components are reusable, that no banned words or em dashes are present, that the change does not introduce a competing CTA, and that responsive design holds at the viewports listed in `AGENTS.md` (320, 375, 390, 430, 768, 1024, 1280).
 
 ## Project structure pointer
 

@@ -22,6 +22,9 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 ### Content and positioning
 - Locked the hosting decision to Netlify only (deploy previews and production). Removed Vercel references from `AGENTS.md`. Phase 0 keeps `netlify.toml` and rewrites it for the Next.js runtime (`@netlify/plugin-nextjs`).
 
+### Documentation
+- Refined repo docs to make mobile-first responsive design an explicit project requirement. Added a "Primary surface" section to `WEBSITE_BRIEF.md`, a "Responsive design requirements" section and viewport testing checklist to `AGENTS.md`, and mobile review responsibilities to `CLAUDE.md`. Visitors will arrive mostly from phone-based outreach (Instagram DMs, text, email, local search), so mobile browser UX is treated as the first impression.
+
 ## 0.1.0 — Documentation setup
 
 Initial repo documentation for the rebuild. No code or content changes yet.

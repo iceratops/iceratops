@@ -104,6 +104,34 @@ For any PR that ships user-visible code:
 7. Accessibility: forms have labels, images have alt text, focus states are visible, color contrast passes.
 8. Lighthouse target on changed pages: 90+ Performance, 100 Accessibility, 100 Best Practices, 95+ SEO.
 9. `CHANGELOG.md` updated under "Unreleased" if the change is meaningful (see CHANGELOG rules).
+10. Responsive design verified at the viewports listed under "Responsive design requirements."
+
+## Responsive design requirements
+
+The site is mobile-first. Most first impressions come from phones (see `WEBSITE_BRIEF.md` → Primary surface).
+
+Codex implementation rules:
+
+- Build the mobile layout first, then add `sm:`, `md:`, `lg:`, `xl:` Tailwind variants for larger screens. Do not start from a desktop layout and shrink it down.
+- No fixed pixel widths that can break narrow viewports. Use `max-w-*`, `w-full`, percentages, or fluid utilities.
+- No horizontal scrolling at any common width.
+- No hover-only interactions for primary actions. Anything reachable by hover on desktop is reachable by tap on mobile.
+- The primary CTA stays visible and usable on a 375px viewport without zoom.
+- Cards collapse to a single column at mobile widths. Multi-column grids only above `md:`.
+- Forms use a single column on mobile with comfortable spacing, native input types, and no horizontal overflow.
+- Hero sections are compact on mobile. Avoid 100vh heroes on small screens.
+
+Required viewport checks before returning a route or component:
+
+- 320px (small phones)
+- 375px (iPhone SE class, common baseline)
+- 390px (iPhone 13/14/15 class)
+- 430px (iPhone Pro Max class)
+- 768px (tablet portrait)
+- 1024px (tablet landscape, small laptop)
+- 1280px (desktop)
+
+At each width verify: no horizontal scroll, header and nav function cleanly, primary CTA is visible and tappable, cards stack as expected, and forms are usable. Manual visual checks in browser devtools are enough for Phase 1B guidance. Note any tradeoffs in the PR description.
 
 ## Commit conventions
 
