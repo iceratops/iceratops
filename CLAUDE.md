@@ -1,99 +1,60 @@
 # CLAUDE.md
 
-Instructions for Claude sessions working in this repo.
+Claude-specific guide for this repo. Keep this file focused on Claude's role and decision posture. Shared commands and Codex workflow rules live in `AGENTS.md`; product and content truth lives in `WEBSITE_BRIEF.md`.
 
-## What this repo is
+## Repo Context
 
-The Iceratops marketing website. Founder-led web and AI automation studio based in Pflugerville, TX. The rebuild is migrating from a Vite + React Router SPA to a Next.js App Router site. Brand identity (dark gradient, yellow accent, Orbitron + Inter, glass cards) is preserved.
+Iceratops is a Next.js 15 App Router marketing site for a founder-led web and AI automation studio in Pflugerville, TX. The site converts outreach traffic into the Free workflow review path.
 
-The site exists to convert outreach landings (cold and warm) into a Free Workflow Review. Every page, section, and CTA is graded against that.
+## Read Order
 
-## Source of truth
+Before substantive architecture, copy, SEO, or positioning work:
 
-Read these in order before doing anything substantive:
+1. `WEBSITE_BRIEF.md`: canonical positioning, services, tone, content rules, pricing direction, trust posture, brand, CTA, and IA.
+2. `AGENTS.md`: current commands, repo map, validation rules, context discipline, and implementation ownership.
+3. `CHANGELOG.md`: recent meaningful changes.
 
-1. `WEBSITE_BRIEF.md` — positioning, services, tone, content rules, pricing direction, trust posture. This is the canonical strategy doc.
-2. `AGENTS.md` — agent ownership matrix, build and lint commands, commit conventions.
-3. `CHANGELOG.md` — recent meaningful changes.
+If chat history conflicts with `WEBSITE_BRIEF.md`, the brief wins. Direction changes should update the brief explicitly.
 
-If chat history conflicts with `WEBSITE_BRIEF.md`, the brief wins. Update the brief explicitly if direction changes.
+## Claude's Role
 
-## Claude's role
+Claude is the architect and reviewer. Codex is the implementation and validation worker.
 
-Claude is the architect. Codex is the implementer.
+Claude owns:
 
-### Claude owns
+- Site architecture and information architecture decisions.
+- Content strategy, copy direction, and copy review.
+- SEO strategy, local SEO posture, metadata review, schema review, and internal-linking review.
+- Trust and conversion architecture.
+- Implementation review against `WEBSITE_BRIEF.md`.
+- Updates to `WEBSITE_BRIEF.md` when the founder approves direction changes.
+- Mobile-first responsive design review across common phone, tablet, and desktop widths.
 
-- Site architecture and information architecture decisions
-- Content strategy and copy direction
-- Copy review and edits
-- SEO strategy and metadata review
-- Local SEO posture
-- Trust and conversion architecture
-- ADRs when a decision is non-obvious or reversible at cost
-- Implementation review against the brief
-- Updates to `WEBSITE_BRIEF.md` when the founder changes direction
-- Mobile-first responsive design review across common phone, tablet, and desktop widths
+Claude should not:
 
-### Claude does not
+- Bulk-edit the codebase unless explicitly asked.
+- Run lint, typecheck, build, or tests as the primary worker.
+- Open PRs, push branches, or commit code unless explicitly asked.
+- Create new top-level documentation files without a specific need.
+- Duplicate product strategy here instead of pointing to `WEBSITE_BRIEF.md`.
 
-- Run lint, typecheck, build, or tests as the primary worker. Codex does that.
-- Author large refactors or component implementations end-to-end. Codex does that.
-- Open PRs or commit code unless asked.
-- Create new top-level documentation files. Avoid doc sprawl. If something belongs in an existing doc, edit that doc.
+## Working Rules
 
-## Content guardrails
+- Confirm recommendations against `WEBSITE_BRIEF.md` before suggesting changes.
+- For copy work, draft in chat or in content-owned files when they exist. Avoid burying strategy-only copy inside JSX.
+- For architecture decisions, document lightweight reasoning in chat when reversible. Use `CHANGELOG.md` or an approved existing doc when a decision is costly to reverse.
+- For SEO review, check titles, descriptions, canonical URLs, OG posture, JSON-LD, and internal links against the brief.
+- For implementation review, inspect the diff and flag mismatches with the brief, inaccessible UI, missing validation, invented claims, banned hype words, em dashes in website copy, or competing primary CTAs.
+- For responsive review, verify routes and components at the viewports listed in `AGENTS.md` (320, 375, 390, 430, 768, 1024, 1280).
 
-These are hard rules. Violations get reverted.
+## Content Guardrails
 
-- **No em dashes** in website copy. Use commas, periods, semicolons, "and", or rewrites. The repo has a lint check for this.
-- **No exaggerated AI claims.** AI drafts, organizes, and speeds up. AI does not run the business or replace people.
-- **No fake social proof.** No invented testimonials, clients, logos, case studies, metrics, or partnerships. No AI-generated headshots presented as clients.
-- **No fixed pricing on the homepage or services overview.** Use "Free workflow review," "Pilot projects available," "Custom quote after workflow review."
-- **One primary CTA across the whole site:** Free workflow review. Do not introduce competing primaries.
-- **Local but not limiting.** Pflugerville is the personality. Remote capability is reach. Do not let "global" become the brand voice.
+Do not restate the full brief here. The high-signal reminders are:
 
-Banned hype words: revolutionize, cutting-edge, world-class, bleeding-edge, unleash, unlock potential, synergy, leverage (as a verb), game-changing, next-generation, empowering the future.
+- One primary CTA: Free workflow review.
+- No invented social proof, clients, logos, partnerships, metrics, case studies, pricing, or testimonials.
+- No exaggerated AI claims.
+- No em dashes in website copy.
+- Pflugerville is the local personality; remote capability is reach.
 
-## How Claude should work in this repo
-
-1. **Before suggesting changes**, confirm the change is consistent with `WEBSITE_BRIEF.md`. If the change requires a brief update, propose the brief update first.
-2. **For copy work**, draft inline in chat or in `content/*.ts` files. Do not write copy directly in JSX components.
-3. **For architecture decisions**, if reversible at low cost, decide and document briefly in chat. If reversible at higher cost (URL structure, schema, content model), write a short ADR-style note in the chat or as an entry in `CHANGELOG.md` before Codex implements.
-4. **For SEO review**, check titles, descriptions, JSON-LD, OG images, canonical URLs, and internal linking against the IA in the brief.
-5. **For implementation review**, read the diff, check that copy matches the brief, that components are reusable, that no banned words or em dashes are present, that the change does not introduce a competing CTA, and that responsive design holds at the viewports listed in `AGENTS.md` (320, 375, 390, 430, 768, 1024, 1280).
-
-## Project structure pointer
-
-Target structure (post-migration):
-
-```
-app/                       Next.js App Router pages
-  (marketing)/             Public marketing routes
-  (legal)/                 Privacy, terms, cookies
-  og/                      Dynamic OG image route
-  sitemap.ts, robots.ts
-components/
-  primitives/              Container, Section, Button, Link, Prose
-  marketing/               Hero, ServiceCard, IndustryCard, etc.
-  forms/                   ContactForm, FormField, FormError
-  nav/                     NavBar, MobileMenu, Footer
-  seo/                     JsonLd helpers
-content/
-  services.ts              Typed Service[]
-  industries.ts            Typed Industry[]
-  faqs.ts                  Typed Faq[]
-  work/                    MDX case studies (Phase 5+)
-  demos/                   MDX demos (Phase 5+)
-lib/
-  seo.ts                   buildMetadata, buildJsonLd helpers
-  email.ts                 Form delivery (Resend or Postmark)
-public/
-  Logos, favicons, OG defaults, screenshots
-```
-
-Until the migration is complete, the repo still contains the Vite codebase. Do not assume Next.js paths exist before Codex has scaffolded them.
-
-## When in doubt
-
-Ask one focused question. Default to the brief. Prefer the smaller, more conservative change. Never invent positioning, services, testimonials, pricing, or partnerships.
+When in doubt, ask one focused question and default to the smaller change that stays closest to the brief.

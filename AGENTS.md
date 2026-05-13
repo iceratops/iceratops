@@ -1,116 +1,127 @@
 # AGENTS.md
 
-Conventions and ownership for AI agents (Codex, Claude, ChatGPT) working in this repo.
+Lean operating guide for AI agents working in this repo. Keep this file focused on workflow, commands, and safe context discovery. Product strategy, positioning, services, voice, CTA rules, and information architecture live in `WEBSITE_BRIEF.md`.
 
-## Repo overview
+## Current Repo
 
-Iceratops marketing website. Founder-led web and AI automation studio in Pflugerville, TX. The rebuild migrates the existing Vite + React Router SPA to a Next.js App Router site while preserving the brand identity.
+Iceratops marketing website for a founder-led web and AI automation studio in Pflugerville, TX.
 
-Authoritative direction lives in `WEBSITE_BRIEF.md`. Read it before substantive work.
-
-## Stack (target)
+Current stack:
 
 - Next.js 15 App Router
+- React 19
 - TypeScript
 - Tailwind CSS
-- React 18+
-- MDX for case studies and demos
-- Server actions for the contact form
-- Biome for lint and formatting (replaces ESLint and Prettier)
-- Resend or Postmark for transactional email
-- Plausible or Netlify Analytics
-- Netlify for hosting (deploy previews and production), via the
-  `@netlify/plugin-nextjs` Next.js runtime
+- Biome for linting and formatting
+- Netlify hosting via `@netlify/plugin-nextjs`
+- pnpm `10.29.1`
 
-The current branch may still be running the legacy Vite stack. Confirm the current state before assuming Next.js paths exist. ESLint and Prettier are not used. Phase 0 of the migration removes their dependencies and installs Biome in their place.
+This is a single-app repo, not a monorepo.
 
-## Agent ownership
+## Source Of Truth
 
-| Area | Owner | Notes |
-| --- | --- | --- |
-| Positioning, services list, tone | Founder + Claude | Codified in `WEBSITE_BRIEF.md`. Codex does not change without approval. |
-| Site architecture, IA, URLs | Claude | Reversible-at-cost decisions land in the brief or CHANGELOG. |
-| Copy direction and content strategy | Claude | Drafted in chat or in `content/*.ts`. |
-| SEO strategy and metadata posture | Claude | Per-page metadata reviewed against the brief. |
-| Component implementation and refactors | Codex | Reusable, typed, accessible. |
-| Pages, layouts, routing | Codex | Follows IA in the brief. |
-| Forms, server actions, integrations | Codex | Validates with Zod, handles errors, never logs PII. |
-| Tests, lint, typecheck, build | Codex | Must pass before merge. |
-| Commits, branches, PRs | Codex | Follows commit conventions below. |
-| Implementation review | Claude | Reads diffs, verifies brief alignment. |
-| `CHANGELOG.md` entries for shipped batches | Codex | Append on merge. |
+- `WEBSITE_BRIEF.md`: canonical product, positioning, content, services, CTA, brand, and IA direction.
+- `CHANGELOG.md`: meaningful shipped batches and recent repo history.
+- `CLAUDE.md`: Claude-specific architecture and content review role.
+- `AGENTS.md`: this operating guide.
 
-### Codex must not
+Do not change positioning, services, tone, pricing direction, CTA strategy, or brand rules unless `WEBSITE_BRIEF.md` is explicitly updated by the founder.
 
-- Change positioning, services, tone, or pricing direction without the founder updating `WEBSITE_BRIEF.md` first.
-- Invent testimonials, clients, logos, case studies, metrics, or partnerships.
-- Use em dashes in any visible website copy.
-- Introduce a competing primary CTA. The single primary CTA is "Free workflow review."
-- Replace the brand visual language. Keep slate-900 to purple-900 gradient, yellow `#fbbf24` accent, Orbitron headings, Inter body, glass cards.
-- Add new top-level documentation files. If guidance is needed, extend an existing doc.
-- Commit secrets, real customer data, or unredacted draft client work.
+## Repo Map
 
-### Claude must not
+- `app/`: Next.js App Router pages, metadata routes, global CSS.
+- `components/`: layout, nav, marketing, and primitive UI components.
+- `lib/`: shared helpers such as SEO and class utilities.
+- `public/`: static images, favicons, logos, manifests.
+- `scripts/`: repo validation scripts, including copy lint.
+- `docs/`: legal/compliance docs. Review only when the task asks for them.
 
-- Bulk-edit the codebase. Recommend changes and let Codex execute.
-- Open PRs or push branches without an explicit ask.
-- Create doc sprawl. New top-level `*.md` files require a real reason.
+Generated, dependency, or local-heavy paths to avoid unless directly relevant:
 
-## Build, lint, typecheck
+- `.next/`
+- `node_modules/`
+- `.pnpm-store/`
+- `.claude/worktrees/`
+- `tsconfig.tsbuildinfo`
+- `dist/`, `out/`, `.netlify/` if present
 
-Until the Next.js migration lands, the legacy Vite scripts still apply. Use whichever set matches the current `package.json`.
+## Commands
 
-Vite (legacy, current):
+Use pnpm.
 
 ```bash
-npm install
-npm run dev
-npm run build
-npm run lint           # currently runs lint:copy only (em-dash check)
-npm run lint:copy      # em-dash check on its own
+pnpm install
+pnpm run dev
+pnpm run build
+pnpm run start
+pnpm run lint
+pnpm run lint:copy
+pnpm run format
+pnpm run typecheck
 ```
 
-Next.js + Biome (target, post Phase 0):
+Command meanings:
+
+- `pnpm run dev`: start Next dev server.
+- `pnpm run build`: production Next build.
+- `pnpm run start`: serve a built Next app.
+- `pnpm run lint`: `biome check .` plus copy lint.
+- `pnpm run lint:copy`: checks website source for em dashes.
+- `pnpm run format`: apply Biome formatting.
+- `pnpm run typecheck`: `tsc --noEmit`.
+
+No test script currently exists. Do not report tests as run unless a test command is added or the user asks for a specific manual check.
+
+## Validation
+
+For user-visible code changes, run before handoff when feasible:
 
 ```bash
-npm install
-npm run dev            # next dev
-npm run build          # next build
-npm run start          # next start
-npm run lint           # biome check + lint:copy
-npm run lint:copy      # em-dash check on its own
-npm run format         # biome format --write
-npm run typecheck      # tsc --noEmit
+pnpm run lint
+pnpm run typecheck
+pnpm run build
 ```
 
-All of `lint`, `typecheck`, and `build` must pass before merge. CI runs them on every PR.
+For docs-only instruction changes, a focused diff/readback is usually enough. Run heavier checks only if the doc change affects commands, generated source, or validation behavior.
 
-## Em dash CI rule
+The copy lint scans `.ts`, `.tsx`, and `.mdx` files in source/content paths for em dashes. Top-level Markdown docs are intentionally excluded, but website copy should still avoid em dashes.
 
-The em dash rule is enforced in lint via `scripts/check-em-dashes.mjs`. The check scans `.ts`, `.tsx`, and `.mdx` files in `src/`, `app/`, `components/`, and `content/`, including untracked-but-not-ignored files. Any match fails the build. Top-level `*.md` docs are intentionally excluded.
+## Context Discipline
 
-Em dashes should never appear in user-facing copy. If source code genuinely needs one (rare), extend `scripts/check-em-dashes.mjs` to honor a documented suppression marker. Reviewers will push back.
+Start with the smallest useful context:
 
-## Quality gates before merge
+- Inspect the relevant file, route, component, symbol, diff, log, or command output first.
+- Prefer `rg`, `rg --files`, focused file reads, and targeted snippets.
+- Avoid broad repo scans unless the task needs them.
+- Do not read full large files when headings, nearby lines, or a narrow search answer the question.
+- Do not copy deep product or architecture content into this file. Link to the owning doc instead.
+- Ignore generated and dependency directories unless debugging their output directly.
 
-For any PR that ships user-visible code:
+Unknown or potentially large command output must be scoped and byte-capped. Prefer:
 
-1. `lint`, `typecheck`, `build` pass.
-2. No em dashes in `app/`, `components/`, `content/`.
-3. No banned hype words (see brief).
-4. No invented social proof or pricing.
-5. New routes have metadata, canonical, and OG image.
-6. New routes appear in `sitemap.ts` if they should be indexed.
-7. Accessibility: forms have labels, images have alt text, focus states are visible, color contrast passes.
-8. Lighthouse target on changed pages: 90+ Performance, 100 Accessibility, 100 Best Practices, 95+ SEO.
-9. `CHANGELOG.md` updated under "Unreleased" if the change is meaningful (see CHANGELOG rules).
-10. Responsive design verified at the viewports listed under "Responsive design requirements."
+```bash
+COMMAND 2>&1 | head -c 4000
+COMMAND 2>&1 | tail -c 4000
+```
 
-## Responsive design requirements
+When using tools that support output limits, set a small output cap first and increase only if needed.
+
+## Implementation Guardrails
+
+- Follow existing Next.js App Router, TypeScript, Tailwind, and component patterns.
+- Keep reusable UI in `components/`; keep shared helpers in `lib/`.
+- Preserve the brand system from `WEBSITE_BRIEF.md`: dark slate-to-purple gradient, yellow `#fbbf24` accent, Orbitron headings, Inter body, glass-card feel.
+- The single primary CTA is "Free workflow review."
+- Do not invent testimonials, clients, logos, case studies, metrics, partnerships, pricing, or customer data.
+- Do not log PII from contact forms or integrations.
+- Do not add new top-level docs unless the user explicitly asks. Prefer updating existing docs.
+- Do not touch `.claude/worktrees/` unless the user specifically asks.
+
+## Responsive Design
 
 The site is mobile-first. Most first impressions come from phones (see `WEBSITE_BRIEF.md` → Primary surface).
 
-Codex implementation rules:
+Implementation rules:
 
 - Build the mobile layout first, then add `sm:`, `md:`, `lg:`, `xl:` Tailwind variants for larger screens. Do not start from a desktop layout and shrink it down.
 - No fixed pixel widths that can break narrow viewports. Use `max-w-*`, `w-full`, percentages, or fluid utilities.
@@ -133,36 +144,18 @@ Required viewport checks before returning a route or component:
 
 At each width verify: no horizontal scroll, header and nav function cleanly, primary CTA is visible and tappable, cards stack as expected, and forms are usable. Manual visual checks in browser devtools are enough for Phase 1B guidance. Note any tradeoffs in the PR description.
 
-## Commit conventions
+## Agent Roles
 
-- Short, imperative subject under 72 characters.
-- Body explains the why, not the what, when not obvious.
-- One logical change per commit when reasonable.
-- Reference page or component name when scoped: `home: tighten hero copy`, `services: add ai-workflow-audit page`, `seo: add LocalBusiness JSON-LD`.
+- Founder plus Claude own positioning, services, tone, content strategy, IA, SEO posture, and changes to `WEBSITE_BRIEF.md`.
+- Codex owns component implementation, routing, refactors, forms, integrations, validation, build health, and changelog entries for shipped batches.
+- Claude reviews implementation against the brief and should not bulk-edit code unless explicitly asked.
 
-Examples:
+## Final Response Expectations
 
-```
-home: replace global hero with Pflugerville positioning
-services: scaffold six service detail pages
-contact: wire server action to Resend
-seo: add per-page OG image route
-chore: enforce em dash lint
-```
+End with:
 
-## Branch and PR conventions
+- What changed, with file paths.
+- Validation run, or why it was not run.
+- Any residual risk, blocker, or follow-up that matters.
 
-- Branches: `feature/<short-name>`, `fix/<short-name>`, `chore/<short-name>`.
-- PR title matches the eventual squash commit subject.
-- PR description: one paragraph on what shipped, one paragraph on why, screenshots for visible changes, a "verified" checklist for the quality gates.
-- Squash merge to `master` (current default branch on this repo).
-
-## Secrets and environment
-
-- Real secrets only in Netlify environment variables or a local `.env.local` (never committed).
-- `.env.example` lists required keys with placeholder values.
-- Never paste real API keys, customer emails, or form submissions into chat or commits.
-
-## When direction is unclear
-
-Do not guess. Ask one focused question, defaulting to the brief. Prefer the smaller change. If the founder is not available, hold the change rather than ship something off-brief.
+Keep the final response concise and concrete. Do not imply unrun checks passed.
