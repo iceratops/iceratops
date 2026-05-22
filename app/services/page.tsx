@@ -3,7 +3,8 @@ import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
   title: 'Services',
-  description: 'Service overview shell for the approved Iceratops offerings.',
+  description:
+    'Explore practical website and AI-assisted workflow services for owner-led businesses.',
   path: '/services',
 })
 

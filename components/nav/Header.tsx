@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { primaryCta, primaryNavItems } from '@/components/nav/navigation'
 import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
+import { primaryCta, primaryNavItems } from '@/content/navigation'
 
 export function Header() {
   return (
@@ -24,10 +24,13 @@ export function Header() {
         </Link>
 
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center lg:justify-end">
-          <nav aria-label="Main navigation" className="flex flex-wrap gap-2">
+          <nav
+            aria-label="Main navigation"
+            className="grid grid-cols-1 gap-2 min-[360px]:grid-cols-2 sm:flex sm:flex-wrap"
+          >
             {primaryNavItems.map((item) => (
               <Link
-                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+                className="rounded-lg px-3 py-2 text-center text-sm font-medium text-slate-200 transition hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
                 href={item.href}
                 key={item.href}
               >

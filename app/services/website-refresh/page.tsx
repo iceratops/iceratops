@@ -3,7 +3,8 @@ import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
   title: 'Website Refresh',
-  description: 'Service route shell for Website Refresh.',
+  description:
+    'Improve your existing website with clearer copy, stronger contact paths, and mobile-first layout.',
   path: '/services/website-refresh',
 })
 

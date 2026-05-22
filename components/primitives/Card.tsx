@@ -16,7 +16,10 @@ export function Card({ className, ...props }: ComponentProps<'div'>) {
 export function CardTitle({ className, ...props }: ComponentProps<'h2'>) {
   return (
     <h2
-      className={cx('font-orbitron text-xl font-semibold leading-tight text-white', className)}
+      className={cx(
+        'font-orbitron break-words text-xl font-semibold leading-tight text-white',
+        className,
+      )}
       {...props}
     />
   )

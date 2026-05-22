@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import { footerNavGroups, primaryCta } from '@/components/nav/navigation'
 import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
+import { footerNavGroups, primaryCta } from '@/content/navigation'
+import { site } from '@/content/site'
 
 export function Footer() {
   return (
@@ -9,15 +10,18 @@ export function Footer() {
       <Container className="grid gap-10 py-10 lg:grid-cols-[1.2fr_2fr]">
         <div>
           <p className="font-orbitron text-lg font-semibold text-white">Iceratops</p>
-          <p className="mt-3 max-w-sm text-sm leading-6 text-slate-300">
-            Founder-led in Pflugerville, TX. Site foundation ready for the rebuild.
-          </p>
+          <p className="mt-3 max-w-sm text-sm leading-6 text-slate-300">{site.footerTagline}</p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href={primaryCta.href} size="sm">
+            <ButtonLink className="w-full sm:w-auto" href={primaryCta.href} size="sm">
               {primaryCta.label}
             </ButtonLink>
-            <ButtonLink href="mailto:hello@iceratops.com" size="sm" variant="secondary">
-              hello@iceratops.com
+            <ButtonLink
+              className="w-full sm:w-auto"
+              href={`mailto:${site.contact.email}`}
+              size="sm"
+              variant="secondary"
+            >
+              {site.contact.email}
             </ButtonLink>
           </div>
         </div>

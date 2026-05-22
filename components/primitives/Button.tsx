@@ -6,7 +6,7 @@ type ButtonVariant = 'primary' | 'secondary' | 'ghost'
 type ButtonSize = 'sm' | 'md'
 
 const baseClasses =
-  'inline-flex min-h-11 items-center justify-center rounded-lg border px-5 py-3 text-center text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60'
+  'inline-flex min-h-11 max-w-full items-center justify-center rounded-lg border px-5 py-3 text-center text-sm font-semibold leading-5 whitespace-normal transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-60'
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:

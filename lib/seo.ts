@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
+import { site } from '@/content/site'
 
 export const siteConfig = {
-  name: 'Iceratops',
-  url: 'https://iceratops.com',
-  description: 'Founder-led web and AI automation studio in Pflugerville, TX.',
+  name: site.name,
+  url: site.url,
+  description: site.shortDescription,
   ogImage: '/android-chrome-512x512.png',
 } as const
 

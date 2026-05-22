@@ -3,7 +3,8 @@ import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
   title: 'Use Cases',
-  description: 'Use case shell for future approved scenarios.',
+  description:
+    'See common ways Iceratops helps service teams, venues, studios, creators, and consultants.',
   path: '/use-cases',
 })
 

@@ -6,6 +6,13 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Phase 1B content and homepage
+- Added typed content modules for site constants, navigation, services, use cases, and process steps.
+- Replaced the placeholder homepage with nine content-driven marketing sections and shared CTA wiring.
+- Added the `/contact` form UI shell with visible labels, service radio options, and a mailto fallback only.
+- Polished route metadata for home, contact, about, services, use cases, and existing service detail pages.
+- Validated with `pnpm install`, `pnpm run lint`, `pnpm run typecheck`, `pnpm run build`, and local viewport checks.
+
 ### Phase 1A site foundation
 - Added the shared marketing site shell with header, footer, primary navigation, footer navigation, and the Free workflow review CTA path.
 - Added reusable button, card, container, section, and route shell primitives for the Next.js App Router rebuild.
