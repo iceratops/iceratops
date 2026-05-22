@@ -1,5 +1,5 @@
+import { ServiceCardGrid } from '@/components/marketing/services/ServiceCardGrid'
 import { ButtonLink } from '@/components/primitives/Button'
-import { Card, CardText, CardTitle } from '@/components/primitives/Card'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { secondaryCta } from '@/content/navigation'
@@ -17,22 +17,7 @@ export function ServicesOverview() {
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">{homePage.services.description}</p>
         </div>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <Card className="flex flex-col" key={service.slug}>
-              <CardTitle>{service.name}</CardTitle>
-              <CardText className="text-amber-100">{service.outcome}</CardText>
-              <p className="mt-4 text-sm leading-6 text-slate-300">{service.summary}</p>
-              <ul className="mt-5 space-y-2 pl-5 text-sm leading-6 text-slate-300">
-                {service.highlights.map((highlight) => (
-                  <li className="list-disc" key={highlight}>
-                    {highlight}
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          ))}
-        </div>
+        <ServiceCardGrid services={services} />
         <div className="mt-8">
           <ButtonLink className="w-full sm:w-auto" href={secondaryCta.href} variant="secondary">
             {homePage.services.ctaLabel}

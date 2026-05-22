@@ -132,6 +132,50 @@ export const contactPage = {
     'We are finishing the secure submission flow. To start your free workflow review today, email hello@iceratops.com. We reply within one business day.',
 } as const
 
+export const servicesPage = {
+  eyebrow: 'Services',
+  title: 'Services for websites, inquiries, bookings, and admin work.',
+  description:
+    'Start with the workflow that needs help first. We build practical websites and human-reviewed AI-assisted systems that fit the business you already run.',
+  secondaryCta: {
+    href: '/use-cases',
+    label: 'See use cases',
+  },
+  notDoBullets: [
+    'We do not run fully autonomous AI.',
+    'We do not sell tools before we understand the workflow.',
+    'We do not promise pricing before a review.',
+  ] as const,
+  closingCta: {
+    title: 'Start with a free workflow review.',
+    reassurance: 'We reply within one business day.',
+    emailFallbackLabel: 'Email hello@iceratops.com',
+  },
+} as const
+
+export const useCasesPage = {
+  eyebrow: 'Use cases',
+  title: 'Use cases for owner-led teams.',
+  description:
+    'See where Iceratops usually helps first. We start with the workflow, then choose the service that fits.',
+  secondaryCta: {
+    href: '/services',
+    label: 'View services',
+  },
+  notDoBullets: [
+    'We do not claim client results we do not have.',
+    'We do not force a generic industry package.',
+    'We do not replace people with AI.',
+  ] as const,
+  closingCta: {
+    title: 'Start with a free workflow review.',
+    reassurance: 'We reply within one business day.',
+    emailFallbackLabel: 'Email hello@iceratops.com',
+  },
+} as const
+
 export type Site = typeof site
 export type HomePageContent = typeof homePage
 export type ContactPageContent = typeof contactPage
+export type ServicesPageContent = typeof servicesPage
+export type UseCasesPageContent = typeof useCasesPage

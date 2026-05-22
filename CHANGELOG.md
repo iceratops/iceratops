@@ -6,6 +6,13 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Phase 1C services and use cases pages
+- Replaced the `/services` placeholder with a content-driven overview page showing all six services.
+- Replaced the `/use-cases` placeholder with a content-driven overview page showing all six use cases.
+- Added four shared service and use-case card/grid components for overview pages and homepage previews.
+- Refactored the homepage services and use-case previews to use the shared card/grid components.
+- Validated with `pnpm install`, `pnpm run lint`, `pnpm run typecheck`, and `pnpm run build`.
+
 ### Phase 1B content and homepage
 - Added typed content modules for site constants, navigation, services, use cases, and process steps.
 - Replaced the placeholder homepage with nine content-driven marketing sections and shared CTA wiring.
