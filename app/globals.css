@@ -26,7 +26,6 @@ body {
   background:
     radial-gradient(circle at top left, rgba(251, 191, 36, 0.12), transparent 34rem),
     linear-gradient(135deg, #0f172a 0%, #581c87 52%, #0f172a 100%);
-  background-attachment: fixed;
   color: #f8fafc;
   font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
