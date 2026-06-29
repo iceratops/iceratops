@@ -2,11 +2,11 @@ import type { ReactNode } from 'react'
 import { Footer } from '@/components/nav/Footer'
 import { Header } from '@/components/nav/Header'
 
-type SiteShellProps = {
+type SiteLayoutProps = {
   children: ReactNode
 }
 
-export function SiteShell({ children }: SiteShellProps) {
+export function SiteLayout({ children }: SiteLayoutProps) {
   return (
     <div className="flex min-h-screen flex-col">
       <a

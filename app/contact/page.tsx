@@ -16,10 +16,7 @@ export default function ContactPage() {
     <Section className="pb-16 pt-10 sm:pb-20 sm:pt-14 lg:pt-16">
       <Container size="narrow">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold tracking-wide text-amber-300">
-            {contactPage.eyebrow}
-          </p>
-          <h1 className="font-orbitron mt-4 break-words text-2xl font-bold leading-tight text-white min-[390px]:text-3xl sm:text-4xl lg:text-5xl">
+          <h1 className="font-orbitron break-words text-2xl font-bold leading-tight text-white min-[390px]:text-3xl sm:text-4xl lg:text-5xl">
             {contactPage.title}
           </h1>
           <p className="mt-5 text-base leading-7 text-slate-200 sm:text-lg">

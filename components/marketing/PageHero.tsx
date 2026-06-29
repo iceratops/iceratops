@@ -15,7 +15,7 @@ type PageHeroProps = {
   /** Optional substring of `title` to render in the gold gradient accent. */
   highlight?: string
   description: string
-  primaryAction?: HeroCta
+  primaryAction?: HeroCta | null
   secondaryAction?: HeroCta
   note?: string
   children?: ReactNode
@@ -52,20 +52,24 @@ export function PageHero({
           <p className="mt-5 max-w-2xl text-base leading-7 text-slate-200 sm:text-lg">
             {description}
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink className="w-full sm:w-auto" href={primaryAction.href}>
-              {primaryAction.label}
-            </ButtonLink>
-            {secondaryAction && (
-              <ButtonLink
-                className="w-full sm:w-auto"
-                href={secondaryAction.href}
-                variant="secondary"
-              >
-                {secondaryAction.label}
-              </ButtonLink>
-            )}
-          </div>
+          {(primaryAction || secondaryAction) && (
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              {primaryAction && (
+                <ButtonLink className="w-full sm:w-auto" href={primaryAction.href}>
+                  {primaryAction.label}
+                </ButtonLink>
+              )}
+              {secondaryAction && (
+                <ButtonLink
+                  className="w-full sm:w-auto"
+                  href={secondaryAction.href}
+                  variant="secondary"
+                >
+                  {secondaryAction.label}
+                </ButtonLink>
+              )}
+            </div>
+          )}
           {note && <p className="mt-4 text-sm leading-6 text-slate-300">{note}</p>}
           {children}
         </div>

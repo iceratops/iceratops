@@ -3,7 +3,7 @@ import { Card } from '@/components/primitives/Card'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { primaryCta } from '@/content/navigation'
-import { homePage, site } from '@/content/site'
+import { homePage } from '@/content/site'
 
 export function FinalCta() {
   return (
@@ -20,13 +20,6 @@ export function FinalCta() {
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <ButtonLink className="w-full sm:w-auto" href={primaryCta.href}>
               {primaryCta.label}
-            </ButtonLink>
-            <ButtonLink
-              className="w-full sm:w-auto"
-              href={`mailto:${site.contact.email}`}
-              variant="secondary"
-            >
-              {homePage.finalCta.emailFallbackLabel}
             </ButtonLink>
           </div>
         </Card>

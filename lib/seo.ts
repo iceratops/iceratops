@@ -11,22 +11,8 @@ export const siteConfig = {
 export const publicRoutes = [
   { path: '/', label: 'Home' },
   { path: '/services', label: 'Services' },
-  { path: '/services/ai-workflow-audit', label: 'AI Workflow Audit' },
-  { path: '/services/website-refresh', label: 'Website Refresh' },
-  { path: '/services/modern-website', label: 'Modern Website Build' },
-  { path: '/services/inquiry-follow-up-systems', label: 'Inquiry and Follow-Up System' },
-  { path: '/services/booking-requests', label: 'Booking or Request Workflow' },
-  { path: '/services/admin-automation', label: 'Admin Automation Sprint' },
-  { path: '/services/local-growth-system', label: 'Local Growth System' },
-  { path: '/services/website-rescue-sprint', label: 'Website Rescue Sprint' },
-  { path: '/process', label: 'Process' },
-  { path: '/use-cases', label: 'Use Cases' },
   { path: '/about', label: 'About' },
   { path: '/contact', label: 'Contact' },
-  { path: '/case-studies', label: 'Case Studies' },
-  { path: '/demos', label: 'Demos' },
-  { path: '/resources', label: 'Resources' },
-  { path: '/resources/website-audit-checklist', label: 'Website Audit Checklist' },
 ] as const
 
 export type PublicRoute = (typeof publicRoutes)[number]['path']

@@ -17,7 +17,7 @@ export default function ContactSuccessPage() {
     <Section className="pb-16 pt-16 sm:pb-20 sm:pt-20">
       <Container size="narrow">
         <Card className="text-center">
-          <CardTitle>{contactPage.success.title}</CardTitle>
+          <CardTitle as="h1">{contactPage.success.title}</CardTitle>
           <CardText className="mx-auto mt-4 max-w-xl">{contactPage.success.description}</CardText>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <ButtonLink className="w-full sm:w-auto" href="/">

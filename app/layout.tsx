@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { SiteShell } from '@/components/layout/SiteShell'
+import { SiteLayout } from '@/components/layout/SiteLayout'
 import { LocalBusinessJsonLd } from '@/components/seo/LocalBusinessJsonLd'
 import { buildMetadata } from '@/lib/seo'
 import './globals.css'
@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <LocalBusinessJsonLd />
-        <SiteShell>{children}</SiteShell>
+        <SiteLayout>{children}</SiteLayout>
       </body>
     </html>
   )

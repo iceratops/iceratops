@@ -13,9 +13,9 @@ export function Card({ className, ...props }: ComponentProps<'div'>) {
   )
 }
 
-type CardTitleProps = ComponentProps<'h2'> & {
-  /** Heading level. Use h3 when the card sits beneath a section h2. */
-  as?: 'h2' | 'h3'
+type CardTitleProps = ComponentProps<'h1'> & {
+  /** Heading level. Use h1 for a page title and h3 beneath a section h2. */
+  as?: 'h1' | 'h2' | 'h3'
 }
 
 export function CardTitle({ className, as: Tag = 'h2', ...props }: CardTitleProps) {

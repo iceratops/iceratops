@@ -5,10 +5,10 @@ import { type FormEvent, useState } from 'react'
 import { Button } from '@/components/primitives/Button'
 import { site } from '@/content/site'
 
-type Status = 'idle' | 'submitting' | 'error'
+type SubmitState = 'idle' | 'submitting' | 'error'
 
 const fieldClasses =
-  'mt-2 w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white placeholder:text-slate-500 focus:border-amber-300/60 focus:outline-none focus:ring-2 focus:ring-amber-300/40'
+  'mt-2 w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white focus:border-amber-300/60 focus:outline-none focus:ring-2 focus:ring-amber-300/40'
 const labelClasses = 'block text-sm font-semibold text-white'
 
 function encode(data: Record<string, string>) {
@@ -19,7 +19,7 @@ function encode(data: Record<string, string>) {
 
 export function ContactForm() {
   const router = useRouter()
-  const [status, setStatus] = useState<Status>('idle')
+  const [submitState, setSubmitState] = useState<SubmitState>('idle')
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -30,7 +30,7 @@ export function ContactForm() {
       payload[key] = typeof value === 'string' ? value : ''
     })
 
-    setStatus('submitting')
+    setSubmitState('submitting')
     try {
       const response = await fetch('/__forms.html', {
         method: 'POST',
@@ -38,11 +38,11 @@ export function ContactForm() {
         body: encode(payload),
       })
       if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`)
+        throw new Error('Request failed')
       }
       router.push('/contact/success')
     } catch {
-      setStatus('error')
+      setSubmitState('error')
     }
   }
 
@@ -112,12 +112,12 @@ export function ContactForm() {
       </div>
 
       <div>
-        <Button className="w-full sm:w-auto" disabled={status === 'submitting'} type="submit">
-          {status === 'submitting' ? 'Sending...' : 'Send request'}
+        <Button className="w-full sm:w-auto" disabled={submitState === 'submitting'} type="submit">
+          {submitState === 'submitting' ? 'Sending...' : 'Send request'}
         </Button>
       </div>
 
-      {status === 'error' && (
+      {submitState === 'error' && (
         <p className="text-sm leading-6 text-amber-200" role="alert">
           Something went wrong sending your note. Please email{' '}
           <a

@@ -4,7 +4,7 @@ export type NavItem = {
 }
 
 export const primaryCta = {
-  href: '/contact?ref=workflow-review',
+  href: '/contact',
   label: 'Free workflow review',
 } as const satisfies NavItem
 

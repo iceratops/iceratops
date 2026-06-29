@@ -79,12 +79,10 @@ export const homePage = {
     title: 'Start with a free workflow review.',
     description:
       'Tell us what you want cleaned up. We reply within one business day with a clear next step.',
-    emailFallbackLabel: 'Email hello@iceratops.com',
   },
 } as const
 
 export const contactPage = {
-  eyebrow: 'Contact',
   title: 'Request a free workflow review.',
   description: "Tell us what you want cleaned up. We'll reply within one business day.",
   success: {
@@ -95,34 +93,12 @@ export const contactPage = {
 
 export const servicesPage = {
   eyebrow: 'Services',
-  title: 'Services for websites, inquiries, bookings, and admin work.',
+  title: 'Services for websites and simple workflows.',
   description:
     'Start with the workflow that needs help first. We build clean websites and simple, human-reviewed workflows that fit the business you already run.',
   closingCta: {
     title: 'Start with a free workflow review.',
     reassurance: 'We reply within one business day.',
-    emailFallbackLabel: 'Email hello@iceratops.com',
-  },
-} as const
-
-export const useCasesPage = {
-  eyebrow: 'Use cases',
-  title: 'Use cases for owner-led teams.',
-  description:
-    'See where Iceratops usually helps first. We start with the workflow, then choose the service that fits.',
-  secondaryCta: {
-    href: '/services',
-    label: 'View services',
-  },
-  notDoBullets: [
-    'We do not force a one-size-fits-all package.',
-    'We do not replace your team with AI.',
-    'We do not start building before the workflow is clear.',
-  ] as const,
-  closingCta: {
-    title: 'Start with a free workflow review.',
-    reassurance: 'We reply within one business day.',
-    emailFallbackLabel: 'Email hello@iceratops.com',
   },
 } as const
 
@@ -131,13 +107,6 @@ export const servicesHowWeWork = {
   title: 'Start with the workflow, not the tool.',
   description:
     'Every project starts with a free workflow review. We find the cleanest first step, build a small scoped pilot, then hand you a documented system you own.',
-} as const
-
-export const servicesPackages = {
-  eyebrow: 'Packages',
-  title: 'Prefer to start from a package?',
-  description:
-    'When a single service is not quite the shape of the problem, these two packages cover the most common needs for local businesses.',
 } as const
 
 export const aboutPage = {
@@ -171,30 +140,8 @@ export const aboutPage = {
   ] as const,
 } as const
 
-export const demosPage = {
-  eyebrow: 'Example builds',
-  title: 'Example builds by Iceratops.',
-  description:
-    'Example local-service website concepts by Iceratops. They show how we structure services, service areas, and a clear inquiry path.',
-} as const
-
-export const resourcesPage = {
-  eyebrow: 'Resources',
-  title: 'Practical guides for owner-led businesses.',
-  description: 'Short, useful resources you can act on today. No sign-up, no fluff.',
-} as const
-
-export const caseStudiesPage = {
-  eyebrow: 'Client stories',
-  title: 'Client stories.',
-  description:
-    'We share client stories here as projects ship and owners are happy to feature their work.',
-  meantimeTitle: 'In the meantime',
-} as const
-
 export type Site = typeof site
 export type HomePageContent = typeof homePage
 export type ContactPageContent = typeof contactPage
 export type ServicesPageContent = typeof servicesPage
-export type UseCasesPageContent = typeof useCasesPage
 export type AboutPageContent = typeof aboutPage

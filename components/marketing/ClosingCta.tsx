@@ -24,13 +24,6 @@ export function ClosingCta({
             <ButtonLink className="w-full sm:w-auto" href={primaryCta.href}>
               {primaryCta.label}
             </ButtonLink>
-            <ButtonLink
-              className="w-full sm:w-auto"
-              href={`mailto:${site.contact.email}`}
-              variant="secondary"
-            >
-              Email {site.contact.email}
-            </ButtonLink>
           </div>
         </Card>
       </Container>

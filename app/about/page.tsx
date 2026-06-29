@@ -1,5 +1,4 @@
 import { CheckList } from '@/components/marketing/CheckList'
-import { ClosingCta } from '@/components/marketing/ClosingCta'
 import { PageHero } from '@/components/marketing/PageHero'
 import { SectionHeading } from '@/components/marketing/SectionHeading'
 import { Card, CardText, CardTitle } from '@/components/primitives/Card'
@@ -20,7 +19,7 @@ export default function AboutPage() {
       <PageHero
         description={aboutPage.description}
         eyebrow={aboutPage.eyebrow}
-        secondaryAction={{ href: '/services', label: 'View services' }}
+        primaryAction={null}
         title={aboutPage.title}
       />
 
@@ -62,8 +61,6 @@ export default function AboutPage() {
           </div>
         </Container>
       </Section>
-
-      <ClosingCta />
     </>
   )
 }
