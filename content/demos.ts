@@ -11,7 +11,7 @@ export const demos = [
     name: 'Austin Drainage and Lawn Leveling',
     category: 'Home services',
     summary:
-      'A sample site for a fictional drainage and lawn leveling business, showing services, service areas, and a clear inquiry path.',
+      'An example local-service website concept for a drainage and lawn leveling business, showing services, service areas, and a clear inquiry path.',
   },
 ] as const satisfies readonly DemoSummary[]
 
@@ -40,7 +40,6 @@ export type DemoSite = {
     items: readonly DemoFeature[]
   }
   serviceAreas: readonly string[]
-  exampleReviews: readonly { quote: string; name: string }[]
   inquiry: {
     title: string
     description: string
@@ -52,9 +51,9 @@ export const demoSites: Record<string, DemoSite> = {
     slug: 'austin-drainage-lawn-leveling',
     businessName: 'Austin Drainage and Lawn Leveling',
     eyebrow: 'Home services',
-    tagline: 'Fix the water. Level the yard. Keep your foundation safe.',
+    tagline: 'Fix the water. Level the yard. Help protect your foundation.',
     heroDescription:
-      'A fictional drainage and lawn leveling company serving the greater Austin area. This is an example site built to show what Iceratops can build for a local service business.',
+      'An example local-service website concept for a drainage and lawn leveling company in the Austin area. Built by Iceratops to show how we structure a site for this kind of business.',
     services: [
       {
         title: 'Yard drainage',
@@ -72,7 +71,7 @@ export const demoSites: Record<string, DemoSite> = {
     drainage: {
       title: 'Drainage solutions',
       intro:
-        'Standing water and soggy spots usually point to a drainage problem. We find the cause and route water away for good.',
+        'Standing water and soggy spots usually point to a drainage problem. We find the cause and route water away from problem areas.',
       items: [
         {
           title: 'French drains',
@@ -110,17 +109,6 @@ export const demoSites: Record<string, DemoSite> = {
       ],
     },
     serviceAreas: ['Pflugerville', 'Austin', 'Round Rock', 'Hutto', 'Cedar Park', 'Georgetown'],
-    exampleReviews: [
-      {
-        quote:
-          'They found where the water was pooling and fixed it in a day. The backyard finally drains.',
-        name: 'Example homeowner, Pflugerville',
-      },
-      {
-        quote: 'Our lawn was full of ruts. After leveling it is smooth and easy to mow again.',
-        name: 'Example homeowner, Round Rock',
-      },
-    ],
     inquiry: {
       title: 'Request a free yard assessment',
       description:

@@ -65,7 +65,7 @@ export const useCases = [
     slug: 'admin-bottlenecks',
     name: 'Small teams with admin bottlenecks',
     summary:
-      'Small teams stuck on repeat data entry, updates, and copy-paste work that quietly eats the week.',
+      'Small teams stuck on repeat data entry, updates, and copy-paste work that slows the week.',
     services: [
       { slug: 'admin-automation', label: 'Admin Automation Sprint' },
       { slug: 'ai-workflow-audit', label: 'AI Workflow Audit' },

@@ -3,11 +3,11 @@ export type ServiceAreaCity = string
 export const site = {
   name: 'Iceratops',
   url: 'https://iceratops.com',
-  shortDescription: 'Founder-led web and AI automation studio in Pflugerville, TX.',
+  shortDescription: 'Founder-led web and workflow studio in Pflugerville, TX.',
   longDescription:
-    'We build modern websites and practical, human-reviewed AI-assisted workflows for owner-led businesses.',
+    'We build clean websites and simple inquiry and follow-up workflows for small businesses.',
   footerTagline:
-    'Founder-led in Pflugerville, TX. Practical websites and human-reviewed AI-assisted workflows for busy owners.',
+    'Founder-led in Pflugerville, TX. Clean websites and simple inquiry and follow-up workflows for small businesses.',
   city: 'Pflugerville',
   state: 'Texas',
   stateAbbr: 'TX',
@@ -37,28 +37,28 @@ export const site = {
 export const homePage = {
   hero: {
     eyebrow: 'Pflugerville, TX | Founder-led',
-    heading: 'Iceratops builds websites and practical AI workflows',
-    highlightedPhrase: 'practical AI workflows',
+    heading: 'Clean websites and simple inquiry workflows',
+    highlightedPhrase: 'inquiry workflows',
     description:
-      'We help owner-led businesses capture inquiries, reply faster, and reduce repetitive admin work with human-reviewed systems.',
+      'Iceratops builds modern websites and simple inquiry and follow-up systems for small businesses, so you capture more leads and reply faster. A person stays in the loop.',
   },
-  problems: {
-    eyebrow: 'Why it matters',
-    title: 'Busy teams need cleaner paths for the work they already do.',
+  whatWeDo: {
+    eyebrow: 'What we do',
+    title: 'Websites and workflows that fit a small business.',
     description:
-      'If this is your week, you are not alone. Small workflow fixes can make the whole business feel calmer.',
+      'We keep the work focused on what moves your business: a clear website, a simple way to capture inquiries, and less repetitive admin.',
     items: [
       {
-        title: 'Missed inquiries',
-        text: 'Good leads land in inboxes, texts, and DMs, then get hard to track.',
+        title: 'Modern websites',
+        text: 'Fast, clear sites that show your services and make it easy to get in touch.',
       },
       {
-        title: 'Repeating admin',
-        text: 'The same small tasks come back every week, even when they should be simple.',
+        title: 'Inquiry and follow-up',
+        text: 'Capture leads from forms, texts, and DMs in one place, and reply before they go cold.',
       },
       {
-        title: 'An outdated website',
-        text: 'Your site may no longer match your services, forms, or customer questions.',
+        title: 'Less repetitive admin',
+        text: 'Simple, human-reviewed automation that takes routine tasks off your plate.',
       },
     ] as const,
   },
@@ -66,86 +66,71 @@ export const homePage = {
     eyebrow: 'Services',
     title: 'Start with the workflow that needs help first.',
     description:
-      'Each service is scoped around a real business task, not a tool list. We keep the work useful and easy to own.',
+      'Each service is scoped around a real business task, not a tool list. Start small and keep what we build.',
     ctaLabel: 'See all services',
-  },
-  humanInLoop: {
-    eyebrow: 'Human in the loop',
-    title: 'AI helps with drafts, not final decisions.',
-    description:
-      'AI can help with drafts, summaries, and reminders. We keep each step visible so your team decides what goes out.',
-    reassurances: [
-      'You see every reply before it goes out.',
-      'AI removes busywork, not your team.',
-      'Nothing autonomous without your permission.',
-    ] as const,
-  },
-  local: {
-    eyebrow: 'Local and remote',
-    title: 'Based in Pflugerville, built for practical owners.',
-    description:
-      'Iceratops is based in Pflugerville, Texas. We work with businesses around Austin that need a practical web and workflow partner.',
-    remote:
-      'We also work remotely with businesses across the U.S. and globally when the fit is clear.',
-  },
-  useCases: {
-    eyebrow: 'Use cases',
-    title: 'Built around the way small teams already sell and serve.',
-    description:
-      'These are common starting points. The free workflow review helps us find the cleanest first step for your business.',
-    ctaLabel: 'See all use cases',
   },
   process: {
     eyebrow: 'Process',
     title: 'A simple path from review to handoff.',
     description:
-      'We start small, show work early, and leave you with a documented system you can understand.',
+      'Four clear steps. We start small, show work early, and leave you with a system you understand.',
   },
-  trust: {
-    eyebrow: 'Trust',
-    title: 'Clear work, clear ownership.',
+  whyIceratops: {
+    eyebrow: 'Why Iceratops',
+    title: 'A founder you can actually reach.',
     description:
-      'We build trust with plain process, honest limits, and practical handoff. No fake proof, no mystery systems.',
-    notDoTitle: 'What we do not do',
-    notDoText: 'We do not run fully autonomous AI. We do not claim clients we do not have.',
+      'You work directly with the person building your site and workflows, in plain language, start to finish.',
+    points: [
+      {
+        title: 'Founder-led',
+        text: 'You work directly with the person doing the work, with no account layers in between.',
+      },
+      {
+        title: 'Human-reviewed AI',
+        text: 'AI helps with drafts and routine steps. A person approves what goes out.',
+      },
+      {
+        title: 'Yours to keep',
+        text: 'Everything we build is documented and handed off, so you own it.',
+      },
+      {
+        title: 'Local and remote',
+        text: 'Based in Pflugerville, working across the Austin area and with remote clients.',
+      },
+    ] as const,
   },
   finalCta: {
     eyebrow: 'Ready when you are',
     title: 'Start with a free workflow review.',
     description:
-      'Tell us what is slowing your team down. We will reply within one business day with a clear next step.',
+      'Tell us what you want cleaned up. We reply within one business day with a clear next step.',
     emailFallbackLabel: 'Email hello@iceratops.com',
   },
 } as const
 
 export const contactPage = {
   eyebrow: 'Contact',
-  title: 'Start your free workflow review.',
+  title: 'Request a free workflow review.',
   description:
-    'Tell us what is slowing your team down. We will reply within one business day with a clear next step.',
-  formTitle: 'Workflow review request',
-  helpLabel: "What you'd like help with",
-  unsureLabel: 'Not sure yet',
-  businessLabel: 'Tell us about your business',
-  preferredContactLabel: 'Preferred way to be contacted',
-  submissionNote:
-    'We are finishing the secure submission flow. To start your free workflow review today, email hello@iceratops.com. We reply within one business day.',
+    'Tell us what you want cleaned up, and we will reply with the best next step. Prefer email? Reach us directly at hello@iceratops.com.',
+  formNote: 'We reply within one business day.',
+  success: {
+    eyebrow: 'Thank you',
+    title: 'Thanks, we have your note.',
+    description:
+      'We reply within one business day with a clear next step. If it is urgent, email hello@iceratops.com.',
+  },
 } as const
 
 export const servicesPage = {
   eyebrow: 'Services',
   title: 'Services for websites, inquiries, bookings, and admin work.',
   description:
-    'Start with the workflow that needs help first. We build practical websites and human-reviewed AI-assisted systems that fit the business you already run.',
+    'Start with the workflow that needs help first. We build clean websites and simple, human-reviewed workflows that fit the business you already run.',
   secondaryCta: {
-    href: '/use-cases',
-    label: 'See use cases',
+    href: '/process',
+    label: 'See our process',
   },
-  notDoBullets: [
-    'We do not run fully autonomous AI.',
-    'We do not sell tools before we understand the workflow.',
-    'We do not promise pricing before a review.',
-  ] as const,
   closingCta: {
     title: 'Start with a free workflow review.',
     reassurance: 'We reply within one business day.',
@@ -163,9 +148,9 @@ export const useCasesPage = {
     label: 'View services',
   },
   notDoBullets: [
-    'We do not claim client results we do not have.',
-    'We do not force a generic industry package.',
-    'We do not replace people with AI.',
+    'We do not force a one-size-fits-all package.',
+    'We do not replace your team with AI.',
+    'We do not start building before the workflow is clear.',
   ] as const,
   closingCta: {
     title: 'Start with a free workflow review.',
@@ -182,7 +167,7 @@ export const servicesHowWeWork = {
 } as const
 
 export const servicesPackages = {
-  eyebrow: 'Productized packages',
+  eyebrow: 'Packages',
   title: 'Prefer to start from a package?',
   description:
     'When a single service is not quite the shape of the problem, these two packages cover the most common needs for local businesses.',
@@ -192,10 +177,10 @@ export const aboutPage = {
   eyebrow: 'About',
   title: 'A founder-led studio in Pflugerville, TX.',
   description:
-    'Iceratops is a small, founder-led studio. We build practical websites and human-reviewed AI-assisted workflows for owner-led businesses, in the Austin area and remotely.',
+    'Iceratops is a small, founder-led studio. We build clean websites and simple, human-reviewed workflows for owner-led businesses, in the Austin area and remotely.',
   story: [
     'We work the way a good local partner should. We learn how your business runs, fix the workflow that hurts most, and explain every step in plain language.',
-    'We use AI where it removes busywork, like drafting replies or summarizing requests. A person always reviews the work before it reaches your customers. No mystery systems, no autonomous AI making calls on its own.',
+    'We use AI where it removes busywork, like drafting replies or summarizing requests. A person always reviews the work before it reaches your customers. Every system we build is documented, so you can see how it runs.',
     'When a project ends, you own everything we build, with documentation so you or anyone you bring in later can run it.',
   ] as const,
   valuesTitle: 'How we operate',
@@ -220,12 +205,10 @@ export const aboutPage = {
 } as const
 
 export const demosPage = {
-  eyebrow: 'Demos',
-  title: 'Examples of what we can build.',
+  eyebrow: 'Example builds',
+  title: 'Example builds by Iceratops.',
   description:
-    'These demos show the kind of website and inquiry flow we build for local businesses. They are illustrative examples, not real client work.',
-  disclaimer:
-    'Every demo is fictional and for illustration only. Business names, services, and reviews shown are examples, not real customers.',
+    'Example local-service website concepts by Iceratops. They show how we structure services, service areas, and a clear inquiry path.',
 } as const
 
 export const resourcesPage = {
@@ -235,10 +218,10 @@ export const resourcesPage = {
 } as const
 
 export const caseStudiesPage = {
-  eyebrow: 'Case studies',
-  title: 'Selected client stories are coming soon.',
+  eyebrow: 'Client stories',
+  title: 'Client stories.',
   description:
-    'We are early, and we will not invent results we do not have. As projects ship and owners are glad to share, real stories will live here.',
+    'We share client stories here as projects ship and owners are happy to feature their work.',
   meantimeTitle: 'In the meantime',
 } as const
 

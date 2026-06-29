@@ -10,7 +10,7 @@ export const services = [
   {
     slug: 'ai-workflow-audit',
     name: 'AI Workflow Audit',
-    outcome: 'See where AI can quietly remove busywork from your week.',
+    outcome: 'See where AI can take repetitive tasks off your plate.',
     summary:
       'We walk your current inquiry, booking, and admin flows and show where AI can help and where it should stay out.',
     highlights: [
@@ -70,7 +70,7 @@ export const services = [
   {
     slug: 'admin-automation',
     name: 'Admin Automation Sprint',
-    outcome: 'Quietly reduce repetitive admin work.',
+    outcome: 'Reduce repetitive admin work.',
     summary:
       'A short sprint removes small repetitive tasks from your week, with documentation so you stay in control of every step.',
     highlights: [

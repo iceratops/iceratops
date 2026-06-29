@@ -6,6 +6,17 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Emergency credibility cleanup
+- Simplified global navigation to Services, Process, About, Contact, and reduced the footer to those four links plus the hello@iceratops.com email.
+- Added a `/process` page and standardized the process to four steps: Review, Plan, Build, Handoff.
+- Replaced the contact email shell with a working Netlify Forms submission (static form definition in `public/__forms.html`, honeypot, and a `/contact/success` thank-you page), with a visible email fallback under the form and in the footer.
+- Shortened the homepage to six sections: Hero, What we do, Services, Process, Why Iceratops, CTA. Removed the problem, human-in-loop, local, use-cases preview, and defensive trust sections.
+- Removed defensive, shame-based, and internal or roadmap copy across the site. Renamed the demo pattern to Example builds with calm, honest framing. Removed the "What we do not do" section from the services overview and replaced fake-proof exclusions on detail pages with real scope items.
+- Unlinked Demos, Case Studies, Resources, Use Cases, and packages from global navigation and footer. Those pages remain reachable but are not pointed at until they are strong enough to help sales.
+- Toned down the background gradient, glow, and card shadows for a calmer, more editorial feel.
+- Validated with `pnpm run lint`, `pnpm run lint:copy`, `pnpm run typecheck`, and `pnpm run build`, plus local viewport checks.
+- Follow-up: confirm Netlify Forms submission and the thank-you redirect on a Netlify deploy.
+
 ### Phase 1C services and use cases pages
 - Replaced the `/services` placeholder with a content-driven overview page showing all six services.
 - Replaced the `/use-cases` placeholder with a content-driven overview page showing all six use cases.

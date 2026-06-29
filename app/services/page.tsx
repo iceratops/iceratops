@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { CheckList } from '@/components/marketing/CheckList'
 import { ClosingCta } from '@/components/marketing/ClosingCta'
 import { PageHero } from '@/components/marketing/PageHero'
 import { SectionHeading } from '@/components/marketing/SectionHeading'
@@ -36,7 +35,7 @@ export default function ServicesPage() {
             eyebrow={servicesHowWeWork.eyebrow}
             title={servicesHowWeWork.title}
           />
-          <ol className="mt-8 grid gap-5 md:grid-cols-3">
+          <ol className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step) => (
               <li key={step.step}>
                 <Card className="h-full">
@@ -94,15 +93,6 @@ export default function ServicesPage() {
               </Link>
             ))}
           </div>
-        </Container>
-      </Section>
-
-      <Section className="py-8 sm:py-10">
-        <Container>
-          <Card>
-            <CardTitle className="text-lg">What we do not do</CardTitle>
-            <CheckList className="mt-5" items={servicesPage.notDoBullets} tone="cross" />
-          </Card>
         </Container>
       </Section>
 

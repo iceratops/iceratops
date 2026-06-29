@@ -24,15 +24,6 @@ export default function DemosPage() {
         title={demosPage.title}
       />
 
-      <Section className="py-6 sm:py-8">
-        <Container>
-          <div className="rounded-xl border border-amber-300/30 bg-amber-300/10 p-5">
-            <p className="text-sm font-semibold text-amber-200">Illustrative examples only</p>
-            <p className="mt-2 text-sm leading-6 text-amber-50">{demosPage.disclaimer}</p>
-          </div>
-        </Container>
-      </Section>
-
       <Section className="py-8 sm:py-10 lg:py-12">
         <Container>
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -49,7 +40,7 @@ export default function DemosPage() {
                   <CardTitle className="mt-4 text-lg">{demo.name}</CardTitle>
                   <CardText>{demo.summary}</CardText>
                   <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-amber-300">
-                    View demo
+                    View example build
                     <span
                       aria-hidden="true"
                       className="transition-transform group-hover:translate-x-0.5"

@@ -15,7 +15,7 @@ export function ProcessSection() {
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">{homePage.process.description}</p>
         </div>
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((step) => (
             <Card key={step.step}>
               <div className="flex h-10 w-10 items-center justify-center rounded-full border border-amber-300 bg-amber-300 text-sm font-bold text-slate-950">

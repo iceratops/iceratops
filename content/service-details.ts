@@ -27,7 +27,7 @@ export const serviceDetails = [
     eyebrow: 'Service',
     name: 'AI Workflow Audit',
     summary:
-      'We map how inquiries, bookings, and admin work move through your business today, then show where AI can quietly help and where it should stay out.',
+      'We map how inquiries, bookings, and admin work move through your business today, then show where AI can help and where it should stay out.',
     whoFor: [
       'Owners who feel buried in repeat tasks but are not sure what to fix first',
       'Teams curious about AI who want a practical plan, not hype',
@@ -84,7 +84,7 @@ export const serviceDetails = [
     ],
     notIncluded: [
       'No forced platform migration',
-      'No invented reviews or stock team photos',
+      'No custom photography or new brand assets',
       'No full rebuild unless the refresh is not enough',
     ],
     process: [
@@ -123,7 +123,7 @@ export const serviceDetails = [
     notIncluded: [
       'No brand or logo design from scratch',
       'No ongoing ad management',
-      'No fake metrics or borrowed case studies',
+      'No e-commerce store setup in this pass',
     ],
     process: [
       {
@@ -211,7 +211,7 @@ export const serviceDetails = [
     eyebrow: 'Service',
     name: 'Admin Automation Sprint',
     summary:
-      'A short, scoped sprint that quietly removes small repetitive tasks from your week, with documentation so you stay in control of every step.',
+      'A short, scoped sprint that removes small repetitive tasks from your week, with documentation so you stay in control of every step.',
     whoFor: [
       'Owners doing the same copy-paste tasks every week',
       'Small teams stuck on manual data entry and updates',
@@ -266,7 +266,7 @@ export const serviceDetails = [
     ],
     notIncluded: [
       'No ongoing ad management',
-      'No fake reviews, logos, or metrics',
+      'No social media management',
       'No autonomous AI running your business',
     ],
     process: [
@@ -288,7 +288,7 @@ export const serviceDetails = [
     summary:
       'An entry package for businesses with an outdated, confusing, slow, or weak-on-mobile website. A focused sprint to make your site clear and trustworthy again.',
     whoFor: [
-      'Owners embarrassed to send people to their current site',
+      'Owners whose site no longer reflects the quality of their work',
       'Businesses whose site is slow or hard to use on a phone',
       'Anyone who needs a quick, honest fix before a bigger rebuild',
     ],
@@ -306,7 +306,7 @@ export const serviceDetails = [
     notIncluded: [
       'No full ground-up rebuild in this package',
       'No brand or logo design from scratch',
-      'No invented testimonials or stock team photos',
+      'No new photography or brand assets',
     ],
     process: [
       { name: 'Triage', detail: 'We find the pages and problems hurting you most right now.' },

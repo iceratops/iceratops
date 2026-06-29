@@ -1,6 +1,5 @@
 import { CheckList } from '@/components/marketing/CheckList'
-import { ContactFormShell } from '@/components/marketing/ContactFormShell'
-import { ButtonLink } from '@/components/primitives/Button'
+import { ContactForm } from '@/components/marketing/ContactForm'
 import { Card, CardText, CardTitle } from '@/components/primitives/Card'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
@@ -9,7 +8,7 @@ import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
   title: 'Contact',
-  description: 'Start a free workflow review for your website, inquiry flow, or admin workflow.',
+  description: 'Request a free workflow review for your website, inquiry flow, or admin workflow.',
   path: '/contact',
 })
 
@@ -36,24 +35,25 @@ export default function ContactPage() {
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_1fr] lg:items-start">
-          <ContactFormShell />
+          <Card>
+            <CardTitle>Request a free workflow review</CardTitle>
+            <CardText className="mb-7">
+              Tell us a little about your business and what you want cleaned up.
+            </CardText>
+            <ContactForm />
+            <p className="mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-slate-400">
+              Prefer email? Write to{' '}
+              <a
+                className="font-semibold text-amber-200 underline underline-offset-4"
+                href={`mailto:${site.contact.email}?subject=${site.contact.reviewSubject}`}
+              >
+                {site.contact.email}
+              </a>{' '}
+              and we will reply within one business day.
+            </p>
+          </Card>
 
           <div className="flex flex-col gap-6">
-            <Card>
-              <CardTitle className="text-lg">Prefer email?</CardTitle>
-              <CardText>
-                You can skip the form and reach us directly. {site.contact.responseCommitment}
-              </CardText>
-              <div className="mt-5">
-                <ButtonLink
-                  className="w-full"
-                  href={`mailto:${site.contact.email}?subject=${site.contact.reviewSubject}`}
-                >
-                  Email {site.contact.email}
-                </ButtonLink>
-              </div>
-            </Card>
-
             <Card>
               <CardTitle className="text-lg">What happens next</CardTitle>
               <CheckList className="mt-5" items={nextSteps} tone="dot" />

@@ -158,6 +158,8 @@ The site has one primary CTA across every page: **Free workflow review**.
 
 Do not introduce additional primary CTAs ("Book a call," "Buy now," "Schedule demo"). The funnel is intentionally narrow.
 
+Global navigation is limited to four items: Services, Process, About, Contact. The footer mirrors these four plus the `hello@iceratops.com` email. Demos, Case Studies, Resources, Use Cases, and packages stay reachable but are not linked in the global nav or footer until they are strong enough to help sales.
+
 ## Information architecture (canonical)
 
 ```
@@ -169,6 +171,7 @@ Do not introduce additional primary CTAs ("Book a call," "Buy now," "Schedule de
 /services/inquiry-follow-up
 /services/booking-requests
 /services/admin-automation
+/process                          Process (Review, Plan, Build, Handoff)
 /industries
 /industries/[slug]
 /about

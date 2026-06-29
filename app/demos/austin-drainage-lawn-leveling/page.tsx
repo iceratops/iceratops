@@ -12,7 +12,7 @@ const demo = demoSites['austin-drainage-lawn-leveling']
 export const metadata = buildMetadata({
   title: 'Demo: Austin Drainage and Lawn Leveling',
   description:
-    'An illustrative, fictional sample site showing what Iceratops can build for a local home services business.',
+    'An example local-service website concept by Iceratops, for a home services business in the Austin area.',
   path: '/demos/austin-drainage-lawn-leveling',
   noIndex: true,
 })
@@ -36,13 +36,13 @@ export default function AustinDrainageDemoPage() {
       <div className="border-b border-amber-300/30 bg-amber-300/10">
         <Container className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm font-semibold text-amber-100">
-            Illustrative example. This is a fictional business, not a real Iceratops client.
+            Example build. An example local-service website concept by Iceratops.
           </p>
           <Link
             className="text-sm font-semibold text-amber-200 underline-offset-4 hover:underline"
             href="/demos"
           >
-            Back to demos
+            Back to example builds
           </Link>
         </Container>
       </div>
@@ -112,34 +112,11 @@ export default function AustinDrainageDemoPage() {
         </Container>
       </Section>
 
-      <Section className="py-8 sm:py-10">
-        <Container>
-          <h2 className="font-orbitron text-xl font-bold text-white sm:text-2xl">
-            Example reviews
-          </h2>
-          <p className="mt-2 text-sm text-slate-400">
-            These reviews are fictional and shown only to illustrate layout.
-          </p>
-          <div className="mt-6 grid gap-5 md:grid-cols-2">
-            {demo.exampleReviews.map((review) => (
-              <Card className="h-full" key={review.name}>
-                <p className="text-base leading-7 text-slate-200">&ldquo;{review.quote}&rdquo;</p>
-                <p className="mt-4 text-sm font-semibold text-amber-200">{review.name}</p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
       <Section className="py-8 sm:py-10" id="inquiry">
         <Container size="narrow">
           <Card className="text-center">
             <CardTitle>{demo.inquiry.title}</CardTitle>
             <CardText className="mx-auto max-w-xl">{demo.inquiry.description}</CardText>
-            <p className="mt-4 text-xs text-slate-400">
-              This is an example inquiry section. In a real build, this would capture the request
-              and start the follow-up workflow.
-            </p>
           </Card>
         </Container>
       </Section>
@@ -149,8 +126,8 @@ export default function AustinDrainageDemoPage() {
           <Card className="border-amber-300/30 text-center">
             <CardTitle>Want a site like this for your business?</CardTitle>
             <CardText className="mx-auto max-w-xl">
-              This demo is illustrative. We build real, mobile-first sites and inquiry flows for
-              owner-led businesses. Start with a free workflow review.
+              We build mobile-first sites and inquiry flows for owner-led businesses. Start with a
+              free workflow review.
             </CardText>
             <div className="mt-8">
               <ButtonLink className="w-full sm:w-auto" href={primaryCta.href}>

@@ -17,8 +17,8 @@ export const metadata = buildMetadata({
 const meantimeLinks = [
   {
     href: '/demos',
-    title: 'See illustrative demos',
-    text: 'Browse fictional sample sites that show what we build for local businesses.',
+    title: 'See example builds',
+    text: 'Browse example local-service website concepts that show how we design for local businesses.',
   },
   {
     href: '/resources/website-audit-checklist',
@@ -38,7 +38,7 @@ export default function CaseStudiesPage() {
       <PageHero
         description={caseStudiesPage.description}
         eyebrow={caseStudiesPage.eyebrow}
-        secondaryAction={{ href: '/demos', label: 'View demos' }}
+        secondaryAction={{ href: '/demos', label: 'View example builds' }}
         title={caseStudiesPage.title}
       />
 

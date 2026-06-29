@@ -8,22 +8,29 @@ export type ProcessStep = {
 export const processSteps = [
   {
     step: 1,
-    name: 'Free workflow review',
-    summary: 'A short call to see where we can actually help.',
+    name: 'Review',
+    summary: 'A short, free workflow review.',
     detail:
-      'We look at how inquiries, bookings, or admin work today and say plainly whether we are a fit. No pressure.',
+      'We look at how your website, inquiries, and admin work today, and say plainly where we can help. No pressure.',
   },
   {
     step: 2,
-    name: 'Pilot project',
-    summary: 'A small, scoped project with a clear timeline.',
+    name: 'Plan',
+    summary: 'A clear scope and timeline.',
     detail:
-      'We agree on one outcome, a fixed scope, and a real timeline. You see working drafts early and stay in the loop.',
+      'We agree on one outcome, a fixed scope, and a real timeline, so you know what you are getting before we start.',
   },
   {
     step: 3,
-    name: 'Handoff with documentation',
-    summary: 'You keep what we build, fully documented.',
+    name: 'Build',
+    summary: 'Work you can see early.',
+    detail:
+      'We build in small steps and show working drafts as we go, so nothing is a surprise and you stay in the loop.',
+  },
+  {
+    step: 4,
+    name: 'Handoff',
+    summary: 'A documented system you own.',
     detail:
       'Everything we build is yours. We write down how it works so you, or anyone you bring in later, can run it.',
   },

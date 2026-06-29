@@ -19,6 +19,7 @@ export const publicRoutes = [
   { path: '/services/admin-automation', label: 'Admin Automation Sprint' },
   { path: '/services/local-growth-system', label: 'Local Growth System' },
   { path: '/services/website-rescue-sprint', label: 'Website Rescue Sprint' },
+  { path: '/process', label: 'Process' },
   { path: '/use-cases', label: 'Use Cases' },
   { path: '/about', label: 'About' },
   { path: '/contact', label: 'Contact' },

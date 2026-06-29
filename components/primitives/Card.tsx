@@ -5,7 +5,7 @@ export function Card({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cx(
-        'rounded-xl border border-white/10 bg-white/[0.035] p-6 shadow-lg shadow-slate-950/10 backdrop-blur-md transition-colors hover:border-white/15',
+        'rounded-xl border border-white/10 bg-white/[0.035] p-6 shadow-sm shadow-slate-950/10 backdrop-blur transition-colors hover:border-white/15',
         className,
       )}
       {...props}
