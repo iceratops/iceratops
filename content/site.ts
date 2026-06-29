@@ -62,13 +62,6 @@ export const homePage = {
       },
     ] as const,
   },
-  services: {
-    eyebrow: 'Services',
-    title: 'Start with the workflow that needs help first.',
-    description:
-      'Each service is scoped around a real business task, not a tool list. Start small and keep what we build.',
-    ctaLabel: 'See all services',
-  },
   process: {
     eyebrow: 'Process',
     title: 'A simple path from review to handoff.',
@@ -80,24 +73,6 @@ export const homePage = {
     title: 'A founder you can actually reach.',
     description:
       'You work directly with the person building your site and workflows, in plain language, start to finish.',
-    points: [
-      {
-        title: 'Founder-led',
-        text: 'You work directly with the person doing the work, with no account layers in between.',
-      },
-      {
-        title: 'Human-reviewed AI',
-        text: 'AI helps with drafts and routine steps. A person approves what goes out.',
-      },
-      {
-        title: 'Yours to keep',
-        text: 'Everything we build is documented and handed off, so you own it.',
-      },
-      {
-        title: 'Local and remote',
-        text: 'Based in Pflugerville, working across the Austin area and with remote clients.',
-      },
-    ] as const,
   },
   finalCta: {
     eyebrow: 'Ready when you are',
@@ -111,14 +86,10 @@ export const homePage = {
 export const contactPage = {
   eyebrow: 'Contact',
   title: 'Request a free workflow review.',
-  description:
-    'Tell us what you want cleaned up, and we will reply with the best next step. Prefer email? Reach us directly at hello@iceratops.com.',
-  formNote: 'We reply within one business day.',
+  description: "Tell us what you want cleaned up. We'll reply within one business day.",
   success: {
-    eyebrow: 'Thank you',
-    title: 'Thanks, we have your note.',
-    description:
-      'We reply within one business day with a clear next step. If it is urgent, email hello@iceratops.com.',
+    title: 'Thanks, we received your request.',
+    description: "We'll reply within one business day.",
   },
 } as const
 
@@ -127,10 +98,6 @@ export const servicesPage = {
   title: 'Services for websites, inquiries, bookings, and admin work.',
   description:
     'Start with the workflow that needs help first. We build clean websites and simple, human-reviewed workflows that fit the business you already run.',
-  secondaryCta: {
-    href: '/process',
-    label: 'See our process',
-  },
   closingCta: {
     title: 'Start with a free workflow review.',
     reassurance: 'We reply within one business day.',

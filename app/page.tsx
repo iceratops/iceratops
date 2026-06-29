@@ -1,7 +1,6 @@
 import { FinalCta } from '@/components/marketing/home/FinalCta'
 import { Hero } from '@/components/marketing/home/Hero'
 import { ProcessSection } from '@/components/marketing/home/ProcessSection'
-import { ServicesOverview } from '@/components/marketing/home/ServicesOverview'
 import { WhatWeDo } from '@/components/marketing/home/WhatWeDo'
 import { WhyIceratops } from '@/components/marketing/home/WhyIceratops'
 import { buildMetadata } from '@/lib/seo'
@@ -19,7 +18,6 @@ export default function Home() {
     <>
       <Hero />
       <WhatWeDo />
-      <ServicesOverview />
       <ProcessSection />
       <WhyIceratops />
       <FinalCta />

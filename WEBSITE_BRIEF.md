@@ -158,7 +158,11 @@ The site has one primary CTA across every page: **Free workflow review**.
 
 Do not introduce additional primary CTAs ("Book a call," "Buy now," "Schedule demo"). The funnel is intentionally narrow.
 
-Global navigation is limited to four items: Services, Process, About, Contact. The footer mirrors these four plus the `hello@iceratops.com` email. Demos, Case Studies, Resources, Use Cases, and packages stay reachable but are not linked in the global nav or footer until they are strong enough to help sales.
+Global navigation is limited to three items: Services, About, Contact. The footer mirrors these three plus the `hello@iceratops.com` email. Process is a supporting section, not a top-level destination: the process narrative lives on the homepage and the standalone `/process` page stays reachable, but neither is linked in the global nav or footer. Demos, Case Studies, Resources, Use Cases, and packages also stay reachable but are not linked in the global nav or footer until they are strong enough to help sales.
+
+The homepage is a front door that previews the business, not a directory that restates other pages. It carries five sections only: hero, a three-card "what we help with" preview, a short three-to-four-step "how it works", a brief founder-led trust section, and the final CTA. It does not duplicate the full services grid (that lives on `/services`), the founder story or "How we operate" values grid (those live on `/about`), or use-case detail. The homepage founder-led trust section is a short narrative (eyebrow, title, one paragraph), not a card grid; the four-value grid belongs to `/about`.
+
+Do not duplicate the full Review, Plan, Build, Handoff process module across nearby pages. The homepage shows a short version (step names and one-line summaries only); the full module with per-step detail lives on `/process`. `/services` leads with the offers and refers to the process only as a brief narrative lower on the page.
 
 ## Information architecture (canonical)
 
@@ -171,7 +175,7 @@ Global navigation is limited to four items: Services, Process, About, Contact. T
 /services/inquiry-follow-up
 /services/booking-requests
 /services/admin-automation
-/process                          Process (Review, Plan, Build, Handoff)
+/process                          Process (Review, Plan, Build, Handoff) — reachable, not in nav
 /industries
 /industries/[slug]
 /about

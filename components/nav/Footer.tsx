@@ -1,7 +1,6 @@
 import Link from 'next/link'
-import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
-import { primaryCta, primaryNavItems } from '@/content/navigation'
+import { primaryNavItems } from '@/content/navigation'
 import { site } from '@/content/site'
 
 export function Footer() {
@@ -11,19 +10,12 @@ export function Footer() {
         <div>
           <p className="font-orbitron text-lg font-semibold text-white">Iceratops</p>
           <p className="mt-3 max-w-sm text-sm leading-6 text-slate-300">{site.footerTagline}</p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink className="w-full sm:w-auto" href={primaryCta.href} size="sm">
-              {primaryCta.label}
-            </ButtonLink>
-            <ButtonLink
-              className="w-full sm:w-auto"
-              href={`mailto:${site.contact.email}`}
-              size="sm"
-              variant="secondary"
-            >
-              {site.contact.email}
-            </ButtonLink>
-          </div>
+          <a
+            className="mt-4 inline-block text-sm text-slate-400 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+            href={`mailto:${site.contact.email}`}
+          >
+            {site.contact.email}
+          </a>
         </div>
 
         <nav aria-label="Footer navigation" className="sm:justify-self-end">
@@ -38,14 +30,6 @@ export function Footer() {
                 </Link>
               </li>
             ))}
-            <li>
-              <a
-                className="text-sm text-slate-300 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
-                href={`mailto:${site.contact.email}`}
-              >
-                {site.contact.email}
-              </a>
-            </li>
           </ul>
         </nav>
       </Container>

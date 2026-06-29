@@ -22,6 +22,7 @@ export function Header() {
   }, [])
 
   const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href))
+  const hideCta = pathname.startsWith('/contact')
 
   return (
     <header
@@ -64,9 +65,11 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <ButtonLink className="ml-2" href={primaryCta.href} size="sm">
-            {primaryCta.label}
-          </ButtonLink>
+          {!hideCta && (
+            <ButtonLink className="ml-2" href={primaryCta.href} size="sm">
+              {primaryCta.label}
+            </ButtonLink>
+          )}
         </nav>
 
         <button
@@ -113,13 +116,15 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <ButtonLink
-              className="mt-3 w-full"
-              href={primaryCta.href}
-              onClick={() => setOpen(false)}
-            >
-              {primaryCta.label}
-            </ButtonLink>
+            {!hideCta && (
+              <ButtonLink
+                className="mt-3 w-full"
+                href={primaryCta.href}
+                onClick={() => setOpen(false)}
+              >
+                {primaryCta.label}
+              </ButtonLink>
+            )}
           </Container>
         </nav>
       )}

@@ -15,7 +15,6 @@ export const secondaryCta = {
 
 export const primaryNavItems = [
   { href: '/services', label: 'Services' },
-  { href: '/process', label: 'Process' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ] as const satisfies readonly NavItem[]

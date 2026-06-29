@@ -23,7 +23,6 @@ export function ProcessSection() {
               </div>
               <CardTitle className="mt-5">{step.name}</CardTitle>
               <CardText>{step.summary}</CardText>
-              <p className="mt-4 text-sm leading-6 text-slate-300">{step.detail}</p>
             </Card>
           ))}
         </div>

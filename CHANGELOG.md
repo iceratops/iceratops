@@ -6,6 +6,19 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Simplify the homepage into a front door
+- Cut the homepage to five sections: hero, three-card "what we help with", short "how it works", brief founder-led trust, final CTA.
+- Removed the homepage Services overview section (full service grid plus "See all services" CTA) so the homepage no longer duplicates `/services`. Deleted the now-unused `ServicesOverview` component and the unused `homePage.services` content.
+- Trimmed the homepage process section to step names and one-line summaries; the full Review, Plan, Build, Handoff detail stays on `/process`.
+- Reduced the homepage founder-led trust section to a short narrative and removed its four-card grid, which duplicated the `/about` "How we operate" values. Dropped the now-unused `homePage.whyIceratops.points` content. The values grid stays on `/about`.
+- Updated `WEBSITE_BRIEF.md` with the homepage scope and the short-vs-full process rule.
+
+### Demote Process from global navigation
+- Removed Process from the global nav and footer. Nav is now three items: Services, About, Contact. The `/process` page stays reachable and in the sitemap but is no longer linked from nav.
+- Reordered `/services` to lead with the offers (services grid, then packages). Removed the duplicated four-step process card module from the top of the page and the hero "See our process" CTA.
+- Kept process on `/services` only as a brief "How we work" narrative placed lower on the page, so the full Review, Plan, Build, Handoff module is not duplicated across nearby pages or made to feel circular.
+- Updated `WEBSITE_BRIEF.md` navigation and information-architecture rules to match.
+
 ### Emergency credibility cleanup
 - Simplified global navigation to Services, Process, About, Contact, and reduced the footer to those four links plus the hello@iceratops.com email.
 - Added a `/process` page and standardized the process to four steps: Review, Plan, Build, Handoff.

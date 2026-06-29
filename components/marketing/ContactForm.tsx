@@ -111,11 +111,10 @@ export function ContactForm() {
         <textarea className={fieldClasses} id="message" name="message" required rows={5} />
       </div>
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+      <div>
         <Button className="w-full sm:w-auto" disabled={status === 'submitting'} type="submit">
-          {status === 'submitting' ? 'Sending...' : 'Request a free workflow review'}
+          {status === 'submitting' ? 'Sending...' : 'Send request'}
         </Button>
-        <p className="text-sm text-slate-400">{site.contact.responseCommitment}</p>
       </div>
 
       {status === 'error' && (

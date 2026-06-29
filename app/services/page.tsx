@@ -6,7 +6,6 @@ import { ServiceCardGrid } from '@/components/marketing/services/ServiceCardGrid
 import { Card, CardText, CardTitle } from '@/components/primitives/Card'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
-import { processSteps } from '@/content/process'
 import { packages } from '@/content/service-details'
 import { services } from '@/content/services'
 import { servicesHowWeWork, servicesPackages, servicesPage } from '@/content/site'
@@ -24,32 +23,8 @@ export default function ServicesPage() {
       <PageHero
         description={servicesPage.description}
         eyebrow={servicesPage.eyebrow}
-        secondaryAction={servicesPage.secondaryCta}
         title={servicesPage.title}
       />
-
-      <Section className="py-8 sm:py-10">
-        <Container>
-          <SectionHeading
-            description={servicesHowWeWork.description}
-            eyebrow={servicesHowWeWork.eyebrow}
-            title={servicesHowWeWork.title}
-          />
-          <ol className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step) => (
-              <li key={step.step}>
-                <Card className="h-full">
-                  <span className="font-orbitron text-sm font-semibold text-amber-300">
-                    Step {step.step}
-                  </span>
-                  <p className="mt-3 font-orbitron text-lg font-semibold text-white">{step.name}</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">{step.detail}</p>
-                </Card>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </Section>
 
       <Section className="py-8 sm:py-10 lg:py-12">
         <Container>
@@ -93,6 +68,16 @@ export default function ServicesPage() {
               </Link>
             ))}
           </div>
+        </Container>
+      </Section>
+
+      <Section className="py-8 sm:py-10">
+        <Container>
+          <SectionHeading
+            description={servicesHowWeWork.description}
+            eyebrow={servicesHowWeWork.eyebrow}
+            title={servicesHowWeWork.title}
+          />
         </Container>
       </Section>
 
