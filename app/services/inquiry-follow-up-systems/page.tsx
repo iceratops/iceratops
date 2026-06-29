@@ -1,20 +1,15 @@
-import { RouteShell } from '@/components/marketing/RouteShell'
+import { ServiceDetailPage } from '@/components/marketing/ServiceDetailPage'
+import { serviceDetailMap } from '@/content/service-details'
 import { buildMetadata } from '@/lib/seo'
 
+const detail = serviceDetailMap['inquiry-follow-up-systems']
+
 export const metadata = buildMetadata({
-  title: 'Inquiry and Follow-Up System',
-  description:
-    'Catch inquiries, draft follow-ups for review, and keep warm leads from going quiet.',
+  title: detail.name,
+  description: detail.summary,
   path: '/services/inquiry-follow-up-systems',
 })
 
 export default function InquiryFollowUpSystemsPage() {
-  return (
-    <RouteShell
-      description="Service route shell for Inquiry and Follow-Up System."
-      eyebrow="Service"
-      path="/services/inquiry-follow-up-systems"
-      title="Inquiry and Follow-Up System"
-    />
-  )
+  return <ServiceDetailPage detail={detail} />
 }

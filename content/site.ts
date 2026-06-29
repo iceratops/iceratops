@@ -174,8 +174,77 @@ export const useCasesPage = {
   },
 } as const
 
+export const servicesHowWeWork = {
+  eyebrow: 'How we work',
+  title: 'Start with the workflow, not the tool.',
+  description:
+    'Every project starts with a free workflow review. We find the cleanest first step, build a small scoped pilot, then hand you a documented system you own.',
+} as const
+
+export const servicesPackages = {
+  eyebrow: 'Productized packages',
+  title: 'Prefer to start from a package?',
+  description:
+    'When a single service is not quite the shape of the problem, these two packages cover the most common needs for local businesses.',
+} as const
+
+export const aboutPage = {
+  eyebrow: 'About',
+  title: 'A founder-led studio in Pflugerville, TX.',
+  description:
+    'Iceratops is a small, founder-led studio. We build practical websites and human-reviewed AI-assisted workflows for owner-led businesses, in the Austin area and remotely.',
+  story: [
+    'We work the way a good local partner should. We learn how your business runs, fix the workflow that hurts most, and explain every step in plain language.',
+    'We use AI where it removes busywork, like drafting replies or summarizing requests. A person always reviews the work before it reaches your customers. No mystery systems, no autonomous AI making calls on its own.',
+    'When a project ends, you own everything we build, with documentation so you or anyone you bring in later can run it.',
+  ] as const,
+  valuesTitle: 'How we operate',
+  values: [
+    {
+      title: 'Founder-led',
+      text: 'You work directly with the person doing the work, with no account layers in between.',
+    },
+    {
+      title: 'Human-reviewed AI',
+      text: 'AI helps with drafts and busywork. A person approves what goes out the door.',
+    },
+    {
+      title: 'Clear ownership',
+      text: 'Everything we build is yours, documented, with a clean handoff at the end.',
+    },
+    {
+      title: 'Local and remote',
+      text: 'Based in Pflugerville, working across the Austin area and with remote clients.',
+    },
+  ] as const,
+} as const
+
+export const demosPage = {
+  eyebrow: 'Demos',
+  title: 'Examples of what we can build.',
+  description:
+    'These demos show the kind of website and inquiry flow we build for local businesses. They are illustrative examples, not real client work.',
+  disclaimer:
+    'Every demo is fictional and for illustration only. Business names, services, and reviews shown are examples, not real customers.',
+} as const
+
+export const resourcesPage = {
+  eyebrow: 'Resources',
+  title: 'Practical guides for owner-led businesses.',
+  description: 'Short, useful resources you can act on today. No sign-up, no fluff.',
+} as const
+
+export const caseStudiesPage = {
+  eyebrow: 'Case studies',
+  title: 'Selected client stories are coming soon.',
+  description:
+    'We are early, and we will not invent results we do not have. As projects ship and owners are glad to share, real stories will live here.',
+  meantimeTitle: 'In the meantime',
+} as const
+
 export type Site = typeof site
 export type HomePageContent = typeof homePage
 export type ContactPageContent = typeof contactPage
 export type ServicesPageContent = typeof servicesPage
 export type UseCasesPageContent = typeof useCasesPage
+export type AboutPageContent = typeof aboutPage

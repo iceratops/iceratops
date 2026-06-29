@@ -5,7 +5,7 @@ export function Card({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cx(
-        'rounded-lg border border-white/15 bg-white/[0.08] p-6 shadow-2xl shadow-slate-950/20 backdrop-blur-xl',
+        'rounded-xl border border-white/10 bg-white/[0.035] p-6 shadow-lg shadow-slate-950/10 backdrop-blur-md transition-colors hover:border-white/15',
         className,
       )}
       {...props}
@@ -13,9 +13,14 @@ export function Card({ className, ...props }: ComponentProps<'div'>) {
   )
 }
 
-export function CardTitle({ className, ...props }: ComponentProps<'h2'>) {
+type CardTitleProps = ComponentProps<'h2'> & {
+  /** Heading level. Use h3 when the card sits beneath a section h2. */
+  as?: 'h2' | 'h3'
+}
+
+export function CardTitle({ className, as: Tag = 'h2', ...props }: CardTitleProps) {
   return (
-    <h2
+    <Tag
       className={cx(
         'font-orbitron break-words text-xl font-semibold leading-tight text-white',
         className,

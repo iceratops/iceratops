@@ -1,7 +1,10 @@
+import { CheckList } from '@/components/marketing/CheckList'
 import { ContactFormShell } from '@/components/marketing/ContactFormShell'
+import { ButtonLink } from '@/components/primitives/Button'
+import { Card, CardText, CardTitle } from '@/components/primitives/Card'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
-import { contactPage } from '@/content/site'
+import { contactPage, site } from '@/content/site'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
@@ -10,12 +13,20 @@ export const metadata = buildMetadata({
   path: '/contact',
 })
 
+const nextSteps = [
+  'You send a short note about your business.',
+  'We reply within one business day.',
+  'We book a short, free workflow review to find the best first step.',
+]
+
 export default function ContactPage() {
   return (
-    <Section className="py-12 sm:py-16 lg:py-20">
+    <Section className="pb-16 pt-10 sm:pb-20 sm:pt-14 lg:pt-16">
       <Container>
-        <div className="mb-8 max-w-3xl">
-          <p className="text-sm font-semibold text-amber-300">{contactPage.eyebrow}</p>
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold tracking-wide text-amber-300">
+            {contactPage.eyebrow}
+          </p>
           <h1 className="font-orbitron mt-4 break-words text-2xl font-bold leading-tight text-white min-[390px]:text-3xl sm:text-4xl lg:text-5xl">
             {contactPage.title}
           </h1>
@@ -23,7 +34,37 @@ export default function ContactPage() {
             {contactPage.description}
           </p>
         </div>
-        <ContactFormShell />
+
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1.6fr_1fr] lg:items-start">
+          <ContactFormShell />
+
+          <div className="flex flex-col gap-6">
+            <Card>
+              <CardTitle className="text-lg">Prefer email?</CardTitle>
+              <CardText>
+                You can skip the form and reach us directly. {site.contact.responseCommitment}
+              </CardText>
+              <div className="mt-5">
+                <ButtonLink
+                  className="w-full"
+                  href={`mailto:${site.contact.email}?subject=${site.contact.reviewSubject}`}
+                >
+                  Email {site.contact.email}
+                </ButtonLink>
+              </div>
+            </Card>
+
+            <Card>
+              <CardTitle className="text-lg">What happens next</CardTitle>
+              <CheckList className="mt-5" items={nextSteps} tone="dot" />
+            </Card>
+
+            <Card>
+              <CardTitle className="text-lg">What you can count on</CardTitle>
+              <CheckList className="mt-5" items={site.commitments} tone="check" />
+            </Card>
+          </div>
+        </div>
       </Container>
     </Section>
   )

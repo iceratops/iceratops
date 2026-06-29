@@ -44,7 +44,7 @@ export const services = [
     ],
   },
   {
-    slug: 'inquiry-follow-up',
+    slug: 'inquiry-follow-up-systems',
     name: 'Inquiry and Follow-Up System',
     outcome: 'Catch every inquiry and follow up before the lead goes cold.',
     summary:

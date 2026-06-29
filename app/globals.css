@@ -7,8 +7,8 @@
 :root {
   --accent-gold: #fbbf24;
   --dark-bg: #0f172a;
-  --glass-bg: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -26,7 +26,8 @@ body {
   background:
     radial-gradient(circle at top left, rgba(251, 191, 36, 0.12), transparent 34rem),
     linear-gradient(135deg, #0f172a 0%, #581c87 52%, #0f172a 100%);
-  color: #fff;
+  background-attachment: fixed;
+  color: #f8fafc;
   font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -38,24 +39,27 @@ a {
 }
 
 ::selection {
-  background: rgba(251, 191, 36, 0.32);
+  background: rgba(251, 191, 36, 0.28);
   color: #fff;
 }
 
 .font-orbitron {
   font-family: Orbitron, monospace;
+  letter-spacing: -0.01em;
 }
 
 .glass-card {
   border: 1px solid var(--glass-border);
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--glass-bg);
-  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.35);
-  backdrop-filter: blur(20px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 12px 36px rgba(2, 6, 23, 0.22);
+  backdrop-filter: blur(16px);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+  background: linear-gradient(120deg, #fde68a, #fbbf24, #f59e0b);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }

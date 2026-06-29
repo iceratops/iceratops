@@ -8,3 +8,5 @@ tsconfig.tsbuildinfo
 .env*.local
 # Local Netlify folder
 .netlify
+# Claude Code local config and worktrees
+.claude/

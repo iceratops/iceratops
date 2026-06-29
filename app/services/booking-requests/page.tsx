@@ -2,14 +2,14 @@ import { ServiceDetailPage } from '@/components/marketing/ServiceDetailPage'
 import { serviceDetailMap } from '@/content/service-details'
 import { buildMetadata } from '@/lib/seo'
 
-const detail = serviceDetailMap['ai-workflow-audit']
+const detail = serviceDetailMap['booking-requests']
 
 export const metadata = buildMetadata({
   title: detail.name,
   description: detail.summary,
-  path: '/services/ai-workflow-audit',
+  path: '/services/booking-requests',
 })
 
-export default function AiWorkflowAuditPage() {
+export default function BookingRequestsPage() {
   return <ServiceDetailPage detail={detail} />
 }
