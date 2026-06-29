@@ -10,3 +10,10 @@ tsconfig.tsbuildinfo
 .netlify
 # Claude Code local config and worktrees
 .claude/
+# design-sync (staged scripts, build output, machine state — durable inputs under .design-sync/ stay tracked)
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
+.design-sync/assets/

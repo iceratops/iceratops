@@ -1,0 +1,39 @@
+{
+  "projectId": "c3e3e516-8f6f-49f2-9cee-96d350e4f06b",
+  "pkg": "iceratops-website",
+  "globalName": "Iceratops",
+  "shape": "package",
+  "srcDir": "components",
+  "tsconfig": ".design-sync/tsconfig.build.json",
+  "cssEntry": ".design-sync/assets/styles.css",
+  "guidelinesGlob": [],
+  "readmeHeader": ".design-sync/conventions.md",
+  "buildCmd": "npx tailwindcss -i app/globals.css -o .design-sync/assets/styles.css -c .design-sync/tailwind.config.mjs",
+  "overrides": {
+    "PageHero": { "cardMode": "column" },
+    "ClosingCta": { "cardMode": "column" },
+    "Section": { "cardMode": "column" }
+  },
+  "componentSrcMap": {
+    "Button": "components/primitives/Button.tsx",
+    "Card": "components/primitives/Card.tsx",
+    "Container": "components/primitives/Container.tsx",
+    "Section": "components/primitives/Section.tsx",
+    "SectionHeading": "components/marketing/SectionHeading.tsx",
+    "CheckList": "components/marketing/CheckList.tsx",
+    "PageHero": "components/marketing/PageHero.tsx",
+    "ClosingCta": "components/marketing/ClosingCta.tsx",
+    "ContactForm": "components/marketing/ContactForm.tsx"
+  },
+  "dtsPropsFor": {
+    "Button": "/** Visual style. */\n  variant?: 'primary' | 'secondary' | 'ghost';\n  /** Height and padding preset. */\n  size?: 'sm' | 'md';\n  className?: string;\n  children?: React.ReactNode;\n  disabled?: boolean;\n  type?: 'button' | 'submit' | 'reset';\n  onClick?: React.MouseEventHandler<HTMLButtonElement>;\n  /** Also accepts all standard <button> attributes. A ButtonLink export with the same variant/size renders an anchor instead. */",
+    "Card": "className?: string;\n  children?: React.ReactNode;\n  /** Also accepts standard <div> attributes. Compose with the CardTitle and CardText exports for the heading and body text. */",
+    "Container": "/** Max-width preset. */\n  size?: 'default' | 'wide' | 'narrow';\n  className?: string;\n  children?: React.ReactNode;",
+    "Section": "/** Small label above the title. */\n  eyebrow?: string;\n  /** Section heading. */\n  title?: string;\n  /** Supporting paragraph under the title. */\n  description?: string;\n  className?: string;\n  children?: React.ReactNode;",
+    "SectionHeading": "eyebrow?: string;\n  title?: string;\n  description?: string;\n  className?: string;",
+    "CheckList": "/** List entries. */\n  items: readonly string[];\n  /** Marker style: check (included), cross (excluded), dot (neutral). */\n  tone?: 'check' | 'cross' | 'dot';\n  className?: string;",
+    "PageHero": "eyebrow: string;\n  title: string;\n  /** Substring of `title` to render in the gold gradient accent. */\n  highlight?: string;\n  description: string;\n  /** Primary CTA link. Pass null to hide; defaults to the site primary CTA. */\n  primaryAction?: { href: string; label: string } | null;\n  /** Optional secondary CTA link. */\n  secondaryAction?: { href: string; label: string };\n  note?: string;\n  children?: React.ReactNode;",
+    "ClosingCta": "/** Heading. Defaults to \"Start with a free workflow review.\" */\n  title?: string;\n  /** Reassurance line under the heading. Defaults to the site response commitment. */\n  reassurance?: string;",
+    "ContactForm": "// No props. Renders the full contact request form (name, email, optional business, message) with built-in submit handling."
+  }
+}
