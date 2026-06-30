@@ -26,7 +26,11 @@ export function Excluded() {
   return (
     <div style={surface}>
       <CheckList
-        items={['No long lock-in contracts', 'No mystery account managers', 'No undocumented black boxes']}
+        items={[
+          'No long lock-in contracts',
+          'No mystery account managers',
+          'No undocumented black boxes',
+        ]}
         tone="cross"
       />
     </div>

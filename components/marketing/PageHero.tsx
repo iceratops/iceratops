@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Eyebrow } from '@/components/marketing/Eyebrow'
 import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
@@ -34,11 +35,11 @@ export function PageHero({
   const [start, end] = highlight ? title.split(highlight) : [title, '']
 
   return (
-    <Section className="pb-10 pt-10 sm:pb-12 sm:pt-14 lg:pt-16">
+    <Section className="pb-10 pt-12 sm:pb-12 sm:pt-16 lg:pt-20">
       <Container>
         <div className="max-w-3xl">
-          <p className="text-sm font-semibold tracking-wide text-amber-300">{eyebrow}</p>
-          <h1 className="font-orbitron mt-4 break-words text-2xl font-bold leading-tight text-white min-[390px]:text-3xl sm:text-4xl lg:text-5xl">
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h1 className="font-orbitron mt-4 break-words text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
             {highlight ? (
               <>
                 {start}

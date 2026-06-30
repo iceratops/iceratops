@@ -14,7 +14,13 @@ export function WithHeader() {
         title="Websites and workflows that fit a small business."
         description="We keep the work focused on what moves your business: a clear website, a simple way to capture inquiries, and less repetitive admin."
       >
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: 16,
+          }}
+        >
           <Card>
             <CardTitle as="h3">Modern websites</CardTitle>
             <CardText>Fast, clear sites that make it easy to get in touch.</CardText>
@@ -34,7 +40,8 @@ export function ContentOnly() {
     <div style={surface}>
       <Section>
         <p style={{ color: '#cbd5e1', fontSize: 14, lineHeight: 1.7, margin: 0 }}>
-          A Section with no header props is just vertical rhythm (py-14 to py-20) around whatever you nest inside it.
+          A Section with no header props is just vertical rhythm (py-14 to py-20) around whatever
+          you nest inside it.
         </p>
       </Section>
     </div>

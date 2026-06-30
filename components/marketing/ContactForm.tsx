@@ -8,7 +8,7 @@ import { site } from '@/content/site'
 type SubmitState = 'idle' | 'submitting' | 'error'
 
 const fieldClasses =
-  'mt-2 w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white focus:border-amber-300/60 focus:outline-none focus:ring-2 focus:ring-amber-300/40'
+  'mt-2 w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white transition-colors placeholder:text-slate-500 hover:border-white/25 focus:border-amber-300/60 focus:outline-none focus:ring-2 focus:ring-amber-300/40'
 const labelClasses = 'block text-sm font-semibold text-white'
 
 function encode(data: Record<string, string>) {

@@ -2,6 +2,7 @@ import { ClosingCta } from '@/components/marketing/ClosingCta'
 import { PageHero } from '@/components/marketing/PageHero'
 import { SectionHeading } from '@/components/marketing/SectionHeading'
 import { ServiceCardGrid } from '@/components/marketing/services/ServiceCardGrid'
+import { WorkflowDiagram } from '@/components/marketing/visuals/WorkflowDiagram'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { services } from '@/content/services'
@@ -30,13 +31,15 @@ export default function ServicesPage() {
         </Container>
       </Section>
 
-      <Section className="py-8 sm:py-10">
-        <Container>
+      <Section surface="panel">
+        <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <SectionHeading
+            className="max-w-md"
             description={servicesHowWeWork.description}
             eyebrow={servicesHowWeWork.eyebrow}
             title={servicesHowWeWork.title}
           />
+          <WorkflowDiagram />
         </Container>
       </Section>
 

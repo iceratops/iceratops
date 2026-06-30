@@ -37,10 +37,10 @@ export const site = {
 export const homePage = {
   hero: {
     eyebrow: 'Pflugerville, TX | Founder-led',
-    heading: 'Clean websites and simple inquiry workflows',
-    highlightedPhrase: 'inquiry workflows',
+    heading: 'Clean websites and AI-assisted inquiry workflows',
+    highlightedPhrase: 'AI-assisted inquiry workflows',
     description:
-      'Iceratops builds modern websites and simple inquiry and follow-up systems for small businesses, so you capture more leads and reply faster. A person stays in the loop.',
+      'We build modern websites and AI-assisted inquiry and follow-up systems for small businesses. AI drafts replies and sorts requests, you approve them, and leads hear back fast.',
   },
   whatWeDo: {
     eyebrow: 'What we do',
@@ -54,16 +54,16 @@ export const homePage = {
       },
       {
         title: 'Inquiry and follow-up',
-        text: 'Capture leads from forms, texts, and DMs in one place, and reply before they go cold.',
+        text: 'Capture leads from forms, texts, and DMs. AI drafts a reply in your voice, you approve it, and no one waits.',
       },
       {
         title: 'Less repetitive admin',
-        text: 'Simple, human-reviewed automation that takes routine tasks off your plate.',
+        text: 'AI takes routine admin off your plate, like sorting requests and updating trackers, while you stay in control.',
       },
     ] as const,
   },
   process: {
-    eyebrow: 'Process',
+    eyebrow: 'How it works',
     title: 'A simple path from review to handoff.',
     description:
       'Four clear steps. We start small, show work early, and leave you with a system you understand.',

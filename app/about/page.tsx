@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { CheckList } from '@/components/marketing/CheckList'
 import { PageHero } from '@/components/marketing/PageHero'
 import { SectionHeading } from '@/components/marketing/SectionHeading'
@@ -34,11 +35,23 @@ export default function AboutPage() {
               ))}
             </div>
             <Card className="h-full">
-              <CardTitle className="text-lg">Based in Pflugerville, TX</CardTitle>
-              <CardText>
+              <div className="border-b border-white/10 pb-5">
+                <Image
+                  alt="Iceratops"
+                  className="h-16 w-auto"
+                  height={144}
+                  src="/iceratops_logo.svg"
+                  width={350}
+                />
+                <p className="font-orbitron mt-4 text-base font-semibold leading-snug text-white">
+                  Based in Pflugerville, TX
+                </p>
+                <p className="mt-1.5 text-xs text-slate-400">Austin area and remote</p>
+              </div>
+              <p className="mt-5 text-sm leading-6 text-slate-300">
                 We work across the Austin area, including {site.serviceArea.slice(1, 6).join(', ')},
                 and with remote clients across the U.S.
-              </CardText>
+              </p>
               <p className="mt-6 text-sm font-semibold text-white">What you can count on</p>
               <CheckList className="mt-4" items={site.commitments} tone="check" />
             </Card>
@@ -46,15 +59,13 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section className="py-8 sm:py-10">
+      <Section className="py-8 pb-16 sm:py-10 sm:pb-24">
         <Container>
           <SectionHeading eyebrow="How we operate" title={aboutPage.valuesTitle} />
           <div className="mt-8 grid gap-5 sm:grid-cols-2">
             {aboutPage.values.map((value) => (
               <Card className="h-full" key={value.title}>
-                <CardTitle as="h3" className="text-lg">
-                  {value.title}
-                </CardTitle>
+                <CardTitle as="h3">{value.title}</CardTitle>
                 <CardText>{value.text}</CardText>
               </Card>
             ))}

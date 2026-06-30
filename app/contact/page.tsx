@@ -1,5 +1,4 @@
 import { ContactForm } from '@/components/marketing/ContactForm'
-import { Card } from '@/components/primitives/Card'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { contactPage, site } from '@/content/site'
@@ -13,10 +12,10 @@ export const metadata = buildMetadata({
 
 export default function ContactPage() {
   return (
-    <Section className="pb-16 pt-10 sm:pb-20 sm:pt-14 lg:pt-16">
+    <Section className="pb-16 pt-12 sm:pb-24 sm:pt-16 lg:pt-20">
       <Container size="narrow">
         <div className="max-w-2xl">
-          <h1 className="font-orbitron break-words text-2xl font-bold leading-tight text-white min-[390px]:text-3xl sm:text-4xl lg:text-5xl">
+          <h1 className="font-orbitron break-words text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
             {contactPage.title}
           </h1>
           <p className="mt-5 text-base leading-7 text-slate-200 sm:text-lg">
@@ -24,7 +23,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <Card className="mt-10">
+        <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur sm:p-8">
           <ContactForm />
           <p className="mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-slate-400">
             Prefer email?{' '}
@@ -35,7 +34,7 @@ export default function ContactPage() {
               {site.contact.email}
             </a>
           </p>
-        </Card>
+        </div>
       </Container>
     </Section>
   )

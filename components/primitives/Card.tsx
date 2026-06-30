@@ -5,7 +5,7 @@ export function Card({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cx(
-        'rounded-xl border border-white/10 bg-white/[0.035] p-6 shadow-sm shadow-slate-950/10 backdrop-blur transition-colors hover:border-white/15',
+        'rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur transition-colors hover:border-white/20 sm:p-7',
         className,
       )}
       {...props}
@@ -22,7 +22,7 @@ export function CardTitle({ className, as: Tag = 'h2', ...props }: CardTitleProp
   return (
     <Tag
       className={cx(
-        'font-orbitron break-words text-xl font-semibold leading-tight text-white',
+        'font-orbitron break-words text-lg font-semibold leading-snug text-white',
         className,
       )}
       {...props}
@@ -31,5 +31,5 @@ export function CardTitle({ className, as: Tag = 'h2', ...props }: CardTitleProp
 }
 
 export function CardText({ className, ...props }: ComponentProps<'p'>) {
-  return <p className={cx('mt-3 text-sm leading-6 text-slate-300', className)} {...props} />
+  return <p className={cx('mt-2.5 text-sm leading-6 text-slate-300', className)} {...props} />
 }

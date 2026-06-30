@@ -8,17 +8,27 @@ type ServiceCardProps = {
 export function ServiceCard({ service }: ServiceCardProps) {
   return (
     <Card className="flex h-full flex-col">
-      <p className="border-l-2 border-amber-400 pl-3 text-sm font-semibold leading-6 text-amber-100">
+      <p className="border-l-2 border-amber-400/70 pl-3 text-sm font-semibold leading-6 text-amber-100">
         {service.outcome}
       </p>
       <CardTitle as="h3" className="mt-4">
         {service.name}
       </CardTitle>
       <CardText>{service.summary}</CardText>
-      <ul className="mt-5 space-y-2 pl-5 text-sm leading-6 text-slate-300">
+      <ul className="mt-5 space-y-2.5 border-t border-white/[0.06] pt-5">
         {service.highlights.map((highlight) => (
-          <li className="list-disc" key={highlight}>
-            {highlight}
+          <li className="flex gap-2.5 text-sm leading-6 text-slate-300" key={highlight}>
+            <svg
+              aria-hidden="true"
+              className="mt-0.5 h-4 w-4 flex-none text-amber-300"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span>{highlight}</span>
           </li>
         ))}
       </ul>

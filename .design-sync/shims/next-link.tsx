@@ -2,7 +2,7 @@
 // context to render; outside Next (preview cards, the design agent's runtime)
 // that context is absent. Components in this DS only use Link to render a
 // styled anchor, so the shim is a faithful stand-in for that use.
-import * as React from 'react'
+import type * as React from 'react'
 
 type LinkProps = Omit<React.ComponentProps<'a'>, 'href'> & {
   href: string | { pathname?: string }

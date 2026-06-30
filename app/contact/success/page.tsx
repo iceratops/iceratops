@@ -1,5 +1,4 @@
 import { ButtonLink } from '@/components/primitives/Button'
-import { Card, CardText, CardTitle } from '@/components/primitives/Card'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { contactPage } from '@/content/site'
@@ -14,11 +13,27 @@ export const metadata = buildMetadata({
 
 export default function ContactSuccessPage() {
   return (
-    <Section className="pb-16 pt-16 sm:pb-20 sm:pt-20">
+    <Section className="pb-20 pt-16 sm:pb-28 sm:pt-24">
       <Container size="narrow">
-        <Card className="text-center">
-          <CardTitle as="h1">{contactPage.success.title}</CardTitle>
-          <CardText className="mx-auto mt-4 max-w-xl">{contactPage.success.description}</CardText>
+        <div className="mx-auto max-w-lg rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center backdrop-blur sm:p-12">
+          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-amber-300/30 bg-amber-300/[0.12] text-amber-300">
+            <svg
+              aria-hidden="true"
+              className="h-7 w-7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          <h1 className="font-orbitron mt-6 break-words text-2xl font-bold leading-snug text-white sm:text-3xl">
+            {contactPage.success.title}
+          </h1>
+          <p className="mx-auto mt-4 max-w-md text-base leading-7 text-slate-300">
+            {contactPage.success.description}
+          </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <ButtonLink className="w-full sm:w-auto" href="/">
               Back to home
@@ -27,7 +42,7 @@ export default function ContactSuccessPage() {
               View services
             </ButtonLink>
           </div>
-        </Card>
+        </div>
       </Container>
     </Section>
   )

@@ -13,7 +13,9 @@ export function Default() {
     <div style={surface}>
       <Card>
         <CardTitle as="h3">Modern websites</CardTitle>
-        <CardText>Fast, clear sites that show your services and make it easy to get in touch.</CardText>
+        <CardText>
+          Fast, clear sites that show your services and make it easy to get in touch.
+        </CardText>
       </Card>
     </div>
   )
@@ -39,13 +41,28 @@ export function WithAction() {
 
 export function Grid() {
   const items = [
-    { title: 'Modern websites', text: 'Fast, clear sites that show your services and make it easy to get in touch.' },
-    { title: 'Inquiry and follow-up', text: 'Capture leads from forms, texts, and DMs in one place, and reply before they go cold.' },
-    { title: 'Less repetitive admin', text: 'Simple, human-reviewed automation that takes routine tasks off your plate.' },
+    {
+      title: 'Modern websites',
+      text: 'Fast, clear sites that show your services and make it easy to get in touch.',
+    },
+    {
+      title: 'Inquiry and follow-up',
+      text: 'Capture leads from forms, texts, and DMs in one place, and reply before they go cold.',
+    },
+    {
+      title: 'Less repetitive admin',
+      text: 'Simple, human-reviewed automation that takes routine tasks off your plate.',
+    },
   ]
   return (
     <div style={surface}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: 16,
+        }}
+      >
         {items.map((it) => (
           <Card key={it.title}>
             <CardTitle as="h3">{it.title}</CardTitle>

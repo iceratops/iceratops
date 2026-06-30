@@ -8,7 +8,12 @@ const surface: React.CSSProperties = {
   padding: 24,
   borderRadius: 12,
 }
-const row: React.CSSProperties = { display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }
+const row: React.CSSProperties = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: 12,
+  alignItems: 'center',
+}
 
 export function Variants() {
   return (

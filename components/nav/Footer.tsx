@@ -1,40 +1,45 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/primitives/Container'
 import { primaryNavItems } from '@/content/navigation'
 import { site } from '@/content/site'
 
+const linkClasses =
+  'transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300'
+
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-slate-950/70">
-      <Container className="grid gap-10 py-12 sm:grid-cols-[1.2fr_1fr] sm:items-start">
-        <div>
-          <p className="font-orbitron text-lg font-semibold text-white">Iceratops</p>
-          <p className="mt-3 max-w-sm text-sm leading-6 text-slate-300">{site.footerTagline}</p>
+    <footer className="border-t border-white/[0.07] bg-slate-950/40">
+      <Container className="flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between">
+        <div className="max-w-sm">
+          <Image
+            alt="Iceratops"
+            className="h-6 w-auto"
+            height={144}
+            src="/iceratops_text_logo.svg"
+            width={350}
+          />
+          <p className="mt-2 text-sm leading-6 text-slate-400">{site.footerTagline}</p>
+        </div>
+        <nav
+          aria-label="Footer navigation"
+          className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-400"
+        >
+          {primaryNavItems.map((item) => (
+            <Link className={linkClasses} href={item.href} key={item.href}>
+              {item.label}
+            </Link>
+          ))}
           <a
-            className="mt-4 inline-block text-sm text-slate-400 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+            className="transition hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
             href={`mailto:${site.contact.email}`}
           >
             {site.contact.email}
           </a>
-        </div>
-
-        <nav aria-label="Footer navigation" className="sm:justify-self-end">
-          <ul className="flex flex-col gap-3 sm:items-end">
-            {primaryNavItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  className="text-sm text-slate-300 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
-                  href={item.href}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </nav>
       </Container>
-      <Container className="border-t border-white/10 py-5">
-        <p className="text-sm text-slate-400">
+      <Container className="border-t border-white/[0.07] py-5">
+        <p className="text-xs text-slate-500">
           Copyright {new Date().getFullYear()} Iceratops. All rights reserved.
         </p>
       </Container>

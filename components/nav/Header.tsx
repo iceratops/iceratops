@@ -27,10 +27,10 @@ export function Header() {
   return (
     <header
       className={cx(
-        'sticky top-0 z-50 backdrop-blur-md transition-colors duration-300',
+        'sticky top-0 z-50 backdrop-blur-xl transition-colors duration-300',
         scrolled || open
           ? 'border-b border-white/10 bg-slate-950/70'
-          : 'border-b border-transparent bg-slate-950/20',
+          : 'border-b border-transparent bg-slate-950/30',
       )}
     >
       <Container className="flex h-16 items-center justify-between gap-4">

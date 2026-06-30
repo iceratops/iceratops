@@ -1,3 +1,4 @@
+import { Eyebrow } from '@/components/marketing/Eyebrow'
 import { cx } from '@/lib/classes'
 
 type SectionHeadingProps = {
@@ -10,9 +11,9 @@ type SectionHeadingProps = {
 export function SectionHeading({ eyebrow, title, description, className }: SectionHeadingProps) {
   return (
     <div className={cx('max-w-3xl', className)}>
-      {eyebrow && <p className="text-sm font-semibold tracking-wide text-amber-300">{eyebrow}</p>}
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       {title && (
-        <h2 className="font-orbitron mt-3 break-words text-xl font-bold leading-tight text-white min-[390px]:text-2xl sm:text-3xl">
+        <h2 className="font-orbitron mt-4 break-words text-2xl font-bold leading-tight text-white sm:text-3xl">
           {title}
         </h2>
       )}

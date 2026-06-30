@@ -19,7 +19,9 @@ export function Default() {
   return (
     <div style={surface}>
       <Container>
-        <div style={inner}>Default container (max-w-6xl). Centers page content with responsive side gutters.</div>
+        <div style={inner}>
+          Default container (max-w-6xl). Centers page content with responsive side gutters.
+        </div>
       </Container>
     </div>
   )
@@ -29,7 +31,9 @@ export function Narrow() {
   return (
     <div style={surface}>
       <Container size="narrow">
-        <div style={inner}>Narrow container (max-w-4xl). For focused, reading-width sections like a closing CTA.</div>
+        <div style={inner}>
+          Narrow container (max-w-4xl). For focused, reading-width sections like a closing CTA.
+        </div>
       </Container>
     </div>
   )
