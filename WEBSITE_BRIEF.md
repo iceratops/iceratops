@@ -123,12 +123,12 @@ These rules apply to all visible website copy.
 
 The site builds trust through the following, not through invented social proof.
 
-- Real founder name, photo, and Pflugerville location across the site
+- Studio-level, anonymous credibility and the Pflugerville location across the site. Founder-led and builder-led framing only. Do not add the founder's personal name, photo, social links, biography, or employer history, and do not make the founder personally searchable. Trust comes from direct access to the person mapping and building the system, clean requirements, practical workflow design, and a simple handoff.
 - Transparent process: workflow review, pilot, handoff
 - Specific timelines and deliverables on service pages
 - Honest stack and capability descriptions
 - Visible "what we do not do" callouts on industry and service pages
-- "We reply within one business day" commitment on Contact
+- "We reply within one business day" commitment on the Free workflow review page
 - "No long contracts to start" stated clearly
 - "Everything we build is yours, with documentation" stated clearly
 - LocalBusiness JSON-LD with real Pflugerville and service area
@@ -151,14 +151,14 @@ The rebuild improves typography rhythm, copy clarity, and conversion architectur
 
 The site has one primary CTA across every page: **Free workflow review**.
 
-- Primary CTA label: "Get a free workflow review" or "Book a workflow review"
-- Primary CTA target: `/contact?ref=workflow-review`
+- Primary CTA label: "Free workflow review" (also acceptable: "Get a free workflow review" or "Book a workflow review")
+- Primary CTA target: `/free-workflow-review` (the former `/contact` path 301-redirects here). On the Free workflow review page itself, the header CTA stays visible and scrolls to the form (`#workflow-review-form`) instead of disappearing.
 - Secondary CTA: "See how we help" or "View services"
 - Tertiary fallback: `hello@iceratops.com` mailto, always visible in footer
 
 Do not introduce additional primary CTAs ("Book a call," "Buy now," "Schedule demo"). The funnel is intentionally narrow.
 
-Global navigation is limited to three items: Services, About, Contact. The footer mirrors these three plus the `hello@iceratops.com` email. Process is a supporting section, not a top-level destination: the process narrative lives on the homepage and the standalone `/process` page stays reachable, but neither is linked in the global nav or footer. Demos, Case Studies, Resources, Use Cases, and packages also stay reachable but are not linked in the global nav or footer until they are strong enough to help sales.
+Global navigation is limited to two destinations plus the Free workflow review CTA: Services, About, and the CTA. Contact is not a navigation destination; the single conversion path is the Free workflow review CTA, and this is identical on desktop and in the mobile drawer (one shared nav source, no Contact item in either). The footer mirrors Services and About plus a Free workflow review link and the `hello@iceratops.com` email. Process is a supporting section, not a top-level destination: the process narrative lives on the homepage and the standalone `/process` page stays reachable, but neither is linked in the global nav or footer. Demos, Case Studies, Resources, Use Cases, and packages also stay reachable but are not linked in the global nav or footer until they are strong enough to help sales.
 
 The homepage is a front door that previews the business, not a directory that restates other pages. It carries five sections only: hero, a three-card "what we help with" preview, a short three-to-four-step "how it works", a brief founder-led trust section, and the final CTA. It does not duplicate the full services grid (that lives on `/services`), the founder story or "How we operate" values grid (those live on `/about`), or use-case detail. The homepage founder-led trust section is a short narrative (eyebrow, title, one paragraph), not a card grid; the four-value grid belongs to `/about`.
 
@@ -179,7 +179,7 @@ Do not duplicate the full Review, Plan, Build, Handoff process module across nea
 /industries
 /industries/[slug]
 /about
-/contact
+/free-workflow-review            Free workflow review (conversion form; former /contact redirects here)
 /work                            Case studies (placeholder shell)
 /work/[slug]
 /demos                           Demos (placeholder shell)

@@ -3,11 +3,16 @@ import type { Service } from '@/content/services'
 
 type ServiceCardProps = {
   service: Service
+  /** Position in the grid, used to stagger the scroll-reveal animation. */
+  index?: number
 }
 
-export function ServiceCard({ service }: ServiceCardProps) {
+export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
   return (
-    <Card className="flex h-full flex-col">
+    <Card
+      className="reveal flex h-full flex-col"
+      style={{ transitionDelay: `${(index % 3) * 90}ms` }}
+    >
       <p className="border-l-2 border-amber-400/70 pl-3 text-sm font-semibold leading-6 text-amber-100">
         {service.outcome}
       </p>

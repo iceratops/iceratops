@@ -40,7 +40,7 @@ export function ContactForm() {
       if (!response.ok) {
         throw new Error('Request failed')
       }
-      router.push('/contact/success')
+      router.push('/free-workflow-review/success')
     } catch {
       setSubmitState('error')
     }
@@ -48,7 +48,7 @@ export function ContactForm() {
 
   return (
     <form
-      action="/contact/success"
+      action="/free-workflow-review/success"
       className="space-y-5"
       data-netlify="true"
       method="POST"
@@ -57,11 +57,11 @@ export function ContactForm() {
       onSubmit={handleSubmit}
     >
       <input type="hidden" name="form-name" value="contact" />
-      <p className="hidden">
-        <label>
-          Do not fill this out if you are human: <input name="bot-field" />
-        </label>
-      </p>
+      {/* Spam honeypot: hidden from humans and assistive tech, only bots fill it. */}
+      <div aria-hidden="true" className="hidden">
+        <label htmlFor="bot-field">Leave this field empty</label>
+        <input autoComplete="off" id="bot-field" name="bot-field" tabIndex={-1} />
+      </div>
 
       <div>
         <label className={labelClasses} htmlFor="name">

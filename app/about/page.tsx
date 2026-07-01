@@ -27,14 +27,14 @@ export default function AboutPage() {
       <Section className="py-8 sm:py-10">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-            <div className="max-w-2xl space-y-5">
+            <div className="reveal max-w-2xl space-y-5">
               {aboutPage.story.map((paragraph) => (
                 <p className="text-base leading-7 text-slate-200" key={paragraph.slice(0, 24)}>
                   {paragraph}
                 </p>
               ))}
             </div>
-            <Card className="h-full">
+            <Card className="reveal h-full" style={{ transitionDelay: '120ms' }}>
               <div className="border-b border-white/10 pb-5">
                 <Image
                   alt="Iceratops"
@@ -61,10 +61,18 @@ export default function AboutPage() {
 
       <Section className="py-8 pb-16 sm:py-10 sm:pb-24">
         <Container>
-          <SectionHeading eyebrow="How we operate" title={aboutPage.valuesTitle} />
+          <SectionHeading
+            className="reveal"
+            eyebrow="How we operate"
+            title={aboutPage.valuesTitle}
+          />
           <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            {aboutPage.values.map((value) => (
-              <Card className="h-full" key={value.title}>
+            {aboutPage.values.map((value, index) => (
+              <Card
+                className="reveal h-full"
+                key={value.title}
+                style={{ transitionDelay: `${(index % 2) * 90}ms` }}
+              >
                 <CardTitle as="h3">{value.title}</CardTitle>
                 <CardText>{value.text}</CardText>
               </Card>

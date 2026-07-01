@@ -13,6 +13,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <noscript>
+          {/* Keep reveal-animated content visible when JavaScript is disabled. */}
+          <style>{'.reveal{opacity:1 !important;transform:none !important}'}</style>
+        </noscript>
+      </head>
       <body>
         <LocalBusinessJsonLd />
         <SiteLayout>{children}</SiteLayout>

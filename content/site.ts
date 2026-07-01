@@ -4,8 +4,6 @@ export const site = {
   name: 'Iceratops',
   url: 'https://iceratops.com',
   shortDescription: 'Founder-led web and workflow studio in Pflugerville, TX.',
-  longDescription:
-    'We build clean websites and simple inquiry and follow-up workflows for small businesses.',
   footerTagline:
     'Founder-led in Pflugerville, TX. Clean websites and simple inquiry and follow-up workflows for small businesses.',
   city: 'Pflugerville',
@@ -34,60 +32,12 @@ export const site = {
   ] as const,
 } as const
 
-export const homePage = {
-  hero: {
-    eyebrow: 'Pflugerville, TX | Founder-led',
-    heading: 'Clean websites and AI-assisted inquiry workflows',
-    highlightedPhrase: 'AI-assisted inquiry workflows',
-    description:
-      'We build modern websites and AI-assisted inquiry and follow-up systems for small businesses. AI drafts replies and sorts requests, you approve them, and leads hear back fast.',
-  },
-  whatWeDo: {
-    eyebrow: 'What we do',
-    title: 'Websites and workflows that fit a small business.',
-    description:
-      'We keep the work focused on what moves your business: a clear website, a simple way to capture inquiries, and less repetitive admin.',
-    items: [
-      {
-        title: 'Modern websites',
-        text: 'Fast, clear sites that show your services and make it easy to get in touch.',
-      },
-      {
-        title: 'Inquiry and follow-up',
-        text: 'Capture leads from forms, texts, and DMs. AI drafts a reply in your voice, you approve it, and no one waits.',
-      },
-      {
-        title: 'Less repetitive admin',
-        text: 'AI takes routine admin off your plate, like sorting requests and updating trackers, while you stay in control.',
-      },
-    ] as const,
-  },
-  process: {
-    eyebrow: 'How it works',
-    title: 'A simple path from review to handoff.',
-    description:
-      'Four clear steps. We start small, show work early, and leave you with a system you understand.',
-  },
-  whyIceratops: {
-    eyebrow: 'Why Iceratops',
-    title: 'A founder you can actually reach.',
-    description:
-      'You work directly with the person building your site and workflows, in plain language, start to finish.',
-  },
-  finalCta: {
-    eyebrow: 'Ready when you are',
-    title: 'Start with a free workflow review.',
-    description:
-      'Tell us what you want cleaned up. We reply within one business day with a clear next step.',
-  },
-} as const
-
 export const contactPage = {
   title: 'Request a free workflow review.',
   description: "Tell us what you want cleaned up. We'll reply within one business day.",
   success: {
-    title: 'Thanks, we received your request.',
-    description: "We'll reply within one business day.",
+    title: 'Thanks, your workflow review request is in.',
+    description: "We'll reply within one business day with a clear, no-pressure next step.",
   },
 } as const
 
@@ -98,7 +48,6 @@ export const servicesPage = {
     'Start with the workflow that needs help first. We build clean websites and simple, human-reviewed workflows that fit the business you already run.',
   closingCta: {
     title: 'Start with a free workflow review.',
-    reassurance: 'We reply within one business day.',
   },
 } as const
 
@@ -139,9 +88,3 @@ export const aboutPage = {
     },
   ] as const,
 } as const
-
-export type Site = typeof site
-export type HomePageContent = typeof homePage
-export type ContactPageContent = typeof contactPage
-export type ServicesPageContent = typeof servicesPage
-export type AboutPageContent = typeof aboutPage

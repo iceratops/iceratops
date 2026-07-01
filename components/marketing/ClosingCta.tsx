@@ -16,7 +16,7 @@ export function ClosingCta({
   return (
     <Section className="pb-16 pt-10 sm:pb-24">
       <Container size="narrow">
-        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center backdrop-blur sm:p-10">
+        <div className="reveal rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center backdrop-blur sm:p-10">
           <h2 className="font-orbitron break-words text-2xl font-bold leading-snug text-white sm:text-3xl">
             {title}
           </h2>

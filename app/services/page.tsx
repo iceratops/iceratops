@@ -21,25 +21,27 @@ export default function ServicesPage() {
       <PageHero
         description={servicesPage.description}
         eyebrow={servicesPage.eyebrow}
+        primaryAction={null}
         title={servicesPage.title}
       />
 
       <Section className="py-8 sm:py-10 lg:py-12">
         <Container>
-          <SectionHeading eyebrow="Services" title="Six ways we usually help" />
-          <ServiceCardGrid className="mt-8" services={services} />
+          <ServiceCardGrid services={services} />
         </Container>
       </Section>
 
       <Section surface="panel">
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <SectionHeading
-            className="max-w-md"
+            className="reveal max-w-md"
             description={servicesHowWeWork.description}
             eyebrow={servicesHowWeWork.eyebrow}
             title={servicesHowWeWork.title}
           />
-          <WorkflowDiagram />
+          <div className="reveal" style={{ transitionDelay: '120ms' }}>
+            <WorkflowDiagram />
+          </div>
         </Container>
       </Section>
 

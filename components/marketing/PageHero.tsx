@@ -37,7 +37,7 @@ export function PageHero({
   return (
     <Section className="pb-10 pt-12 sm:pb-12 sm:pt-16 lg:pt-20">
       <Container>
-        <div className="max-w-3xl">
+        <div className="reveal max-w-3xl">
           <Eyebrow>{eyebrow}</Eyebrow>
           <h1 className="font-orbitron mt-4 break-words text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
             {highlight ? (

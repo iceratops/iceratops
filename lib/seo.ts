@@ -9,10 +9,10 @@ export const siteConfig = {
 } as const
 
 export const publicRoutes = [
-  { path: '/', label: 'Home' },
-  { path: '/services', label: 'Services' },
-  { path: '/about', label: 'About' },
-  { path: '/contact', label: 'Contact' },
+  { path: '/' },
+  { path: '/services' },
+  { path: '/about' },
+  { path: '/free-workflow-review' },
 ] as const
 
 export type PublicRoute = (typeof publicRoutes)[number]['path']
@@ -51,6 +51,15 @@ export function buildMetadata({
           template: `%s | ${siteConfig.name}`,
         },
     description,
+    manifest: '/site.webmanifest',
+    icons: {
+      icon: [
+        { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+        { url: '/favicon.ico' },
+      ],
+      apple: '/apple-touch-icon.png',
+    },
     alternates: {
       canonical,
     },

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/primitives/Container'
-import { primaryNavItems } from '@/content/navigation'
+import { headerNavItems, primaryCta } from '@/content/navigation'
 import { site } from '@/content/site'
 
 const linkClasses =
@@ -25,11 +25,14 @@ export function Footer() {
           aria-label="Footer navigation"
           className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-400"
         >
-          {primaryNavItems.map((item) => (
+          {headerNavItems.map((item) => (
             <Link className={linkClasses} href={item.href} key={item.href}>
               {item.label}
             </Link>
           ))}
+          <Link className={linkClasses} href={primaryCta.href}>
+            {primaryCta.label}
+          </Link>
           <a
             className="transition hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
             href={`mailto:${site.contact.email}`}

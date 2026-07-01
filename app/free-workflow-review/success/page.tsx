@@ -5,17 +5,17 @@ import { contactPage } from '@/content/site'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
-  title: 'Thank you',
-  description: 'Thanks for reaching out to Iceratops. We reply within one business day.',
-  path: '/contact/success',
+  title: 'Free Workflow Review',
+  description: 'Thanks for requesting a free workflow review. We reply within one business day.',
+  path: '/free-workflow-review/success',
   noIndex: true,
 })
 
-export default function ContactSuccessPage() {
+export default function FreeWorkflowReviewSuccessPage() {
   return (
     <Section className="pb-20 pt-16 sm:pb-28 sm:pt-24">
       <Container size="narrow">
-        <div className="mx-auto max-w-lg rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center backdrop-blur sm:p-12">
+        <div className="reveal mx-auto max-w-lg rounded-2xl border border-white/10 bg-white/[0.03] p-8 text-center backdrop-blur sm:p-12">
           <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-amber-300/30 bg-amber-300/[0.12] text-amber-300">
             <svg
               aria-hidden="true"

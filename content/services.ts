@@ -69,16 +69,14 @@ export const services = [
   },
   {
     slug: 'admin-automation',
-    name: 'Admin Automation Sprint',
+    name: 'Admin Automation',
     outcome: 'Reduce repetitive admin work.',
     summary:
-      'A short sprint removes small repetitive tasks from your week, with documentation so you stay in control of every step.',
+      'A short project removes small, repetitive tasks from your week, with documentation so you stay in control of every step.',
     highlights: [
-      'Two-week scoped sprint',
+      'Done in about two weeks',
       'Automation you can read and edit',
       'Documented handoff at the end',
     ],
   },
 ] as const satisfies readonly Service[]
-
-export type ServiceItem = (typeof services)[number]

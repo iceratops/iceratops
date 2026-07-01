@@ -6,8 +6,11 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
-import { primaryCta, primaryNavItems } from '@/content/navigation'
+import { headerNavItems, primaryCta } from '@/content/navigation'
 import { cx } from '@/lib/classes'
+
+/** Anchor on the Free workflow review page the in-page CTA scrolls to. */
+const FORM_ANCHOR = '#workflow-review-form'
 
 export function Header() {
   const pathname = usePathname()
@@ -21,8 +24,23 @@ export function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Close the drawer on Escape, and return focus to the toggle button.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [open])
+
   const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href))
-  const hideCta = pathname.startsWith('/contact')
+
+  // The CTA never disappears. On the form page itself it scrolls to the form
+  // instead of navigating away; everywhere else (including the success page) it
+  // links to the form route. Same behaviour on desktop and mobile.
+  const onFormPage = pathname === primaryCta.href
+  const ctaHref = onFormPage ? FORM_ANCHOR : primaryCta.href
 
   return (
     <header
@@ -50,7 +68,7 @@ export function Header() {
         </Link>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex">
-          {primaryNavItems.map((item) => (
+          {headerNavItems.map((item) => (
             <Link
               aria-current={isActive(item.href) ? 'page' : undefined}
               className={cx(
@@ -65,11 +83,9 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          {!hideCta && (
-            <ButtonLink className="ml-2" href={primaryCta.href} size="sm">
-              {primaryCta.label}
-            </ButtonLink>
-          )}
+          <ButtonLink className="ml-2" href={ctaHref} size="sm">
+            {primaryCta.label}
+          </ButtonLink>
         </nav>
 
         <button
@@ -97,10 +113,33 @@ export function Header() {
         </button>
       </Container>
 
-      {open && (
-        <nav aria-label="Mobile navigation" className="lg:hidden" id="mobile-nav">
+      {/* Backdrop: gently fades the page behind the open drawer. */}
+      <button
+        aria-hidden="true"
+        className={cx(
+          'fixed inset-x-0 bottom-0 top-16 z-40 cursor-default bg-slate-950/60 backdrop-blur-sm transition-opacity duration-300 motion-reduce:transition-none lg:hidden',
+          open ? 'opacity-100' : 'pointer-events-none opacity-0',
+        )}
+        onClick={() => setOpen(false)}
+        tabIndex={-1}
+        type="button"
+      />
+
+      {/* Drawer: animates height + opacity open and closed via a CSS grid trick. */}
+      <div
+        className={cx(
+          'relative z-50 grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none lg:hidden',
+          open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
+        )}
+      >
+        <nav
+          aria-label="Mobile navigation"
+          className="min-h-0 overflow-hidden bg-slate-950/70"
+          id="mobile-nav"
+          inert={!open || undefined}
+        >
           <Container className="flex flex-col gap-1 pb-5 pt-1">
-            {primaryNavItems.map((item) => (
+            {headerNavItems.map((item) => (
               <Link
                 aria-current={isActive(item.href) ? 'page' : undefined}
                 className={cx(
@@ -116,18 +155,12 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            {!hideCta && (
-              <ButtonLink
-                className="mt-3 w-full"
-                href={primaryCta.href}
-                onClick={() => setOpen(false)}
-              >
-                {primaryCta.label}
-              </ButtonLink>
-            )}
+            <ButtonLink className="mt-3 w-full" href={ctaHref} onClick={() => setOpen(false)}>
+              {primaryCta.label}
+            </ButtonLink>
           </Container>
         </nav>
-      )}
+      </div>
     </header>
   )
 }

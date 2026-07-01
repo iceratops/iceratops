@@ -6,6 +6,57 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Cohesion refinement pass (navigation, motion, conversion route)
+
+Targeted fixes after reviewing the Polish Preview build, keeping the approved visual direction, homepage structure, flagship offer, privacy posture, and cleanup discipline.
+
+#### Navigation and CTA
+- Collapsed nav to one shared source (`headerNavItems`): desktop header and mobile drawer now show the same intent, Services and About plus the Free workflow review CTA. Contact is no longer a nav item anywhere (removed from the mobile drawer and the footer). The footer now lists Services, About, a Free workflow review link, and the email.
+- The header CTA no longer disappears on the conversion page. On the form page it stays visible and scrolls to the form (`#workflow-review-form`) instead of navigating away; same behavior on desktop and mobile.
+- The mobile drawer now opens and closes with a smooth height-and-opacity transition plus a fading backdrop, closes on link click and on Escape, uses `inert` while collapsed, and respects reduced motion.
+
+#### Conversion route
+- Renamed the contact route to the conversion-framed `/free-workflow-review` (plus `/free-workflow-review/success`). `/contact` and `/contact/success` 301-redirect to the new paths. The Netlify form name stays `contact` internally (form mechanic). Public labels, headings, and metadata now read Free workflow review, and the success copy acknowledges the workflow review request.
+- Hardened the spam honeypot: hidden from humans and assistive tech (`aria-hidden`, `tabIndex={-1}`, `autoComplete="off"`), with neutral label text.
+
+#### Motion and ambient polish
+- Promoted the homepage twinkle and glow to a shared `AmbientBackground` rendered once at the shell level, so every route carries the same starfield and drifting glow (removed the hero-local copy). Added an `app/template.tsx` page-entrance transition so navigations fade and lift in consistently. Extended scroll reveals to the Services, About, and Free workflow review pages. All of it respects `prefers-reduced-motion`.
+
+#### Inquiry channel copy
+- Broadened the demo and hero language so the shown platforms read as examples, not the full scope. The demo labels its tabs "Sample channels (+ WhatsApp, Instagram, Google, and more)" and names the broader set (website forms, calls, texts, email, WhatsApp, Instagram, Facebook, Google Business Profile, booking tools, and more), framed as "we map the places your real requests already come from."
+
+### Implement the Iceratops Polish Preview design
+
+Implemented the approved `Iceratops Polish Preview.dc.html` Claude Design project as the production marketing site. The Claude Design preview is the visual and copy source of truth for this batch.
+
+#### Pages
+- Rebuilt the homepage as ten faithful sections: hero (capture command center visual), what we build, before and after, flagship offer (the Website + Follow-Up System), human-reviewed AI, an interactive how-it-works demo, a five-step process (Review, Map, Build, Test, Handoff), founder-led trust, pricing anchors, and a final CTA.
+- Trimmed the `/services` page to match the design: removed the extra "Six ways we usually help" heading so the hero leads straight into the service grid, and dropped the hero CTA button.
+- Kept `/about`, `/contact`, and `/contact/success` as-is; they already matched the new design language.
+
+#### Components
+- Added home sections: `Hero` (rewritten), `WhatWeBuild`, `BeforeAfter`, `FlagshipOffer`, `HumanReviewedAi`, `InquiryDemo` (interactive client component), `ProcessSteps`, `FounderLed`, `Pricing`, and a rewritten `FinalCta`.
+- Added `RevealOnScroll`, a small client controller that fades sections in on scroll, respects `prefers-reduced-motion`, re-scans on navigation, and has a noscript fallback so content is always visible.
+- Removed the now-unused `WhatWeDo`, `ProcessSection`, `WhyIceratops`, and `HeroPreview` components.
+
+#### Content and positioning
+- Used the approved flagship offer (the Website + Follow-Up System) and pricing anchors from the design: from $5,000 for the system; Website Refresh from $1,500; Modern Website Build from $3,500; Admin and Workflow Automation from $2,500; ongoing support from $300 per month. No fixed prices on the homepage hero, in line with the brief.
+- Aligned the Admin Automation service entry to the design copy. Removed the unused `homePage` content object, `content/process.ts`, and dead content fields and type aliases.
+- Kept credibility studio-level and anonymous: no founder name, photo, social links, or biography. No invented testimonials, clients, logos, metrics, or case studies.
+
+#### Navigation
+- Split nav sources: the desktop header shows Services and About plus the Free workflow review CTA; the footer and mobile drawer keep Services, About, Contact, and the email.
+
+#### SEO
+- Refreshed the homepage title and description to the new positioning and wired favicons and the web manifest into metadata. Updated `site.webmanifest` to drop stale naming.
+
+#### Design system
+- Added scroll-reveal and interactive-demo motion utilities to `globals.css`, all gated behind `prefers-reduced-motion`.
+
+#### Build, lint, deploy
+- Validated with `pnpm run lint`, `pnpm run lint:copy`, `pnpm run typecheck`, and `pnpm run build`, plus desktop and mobile (390px) preview checks.
+- Removed unused public assets: `linktree.svg`, `thevillageforher-preview.svg`, and the legacy `browserconfig.xml` and `mstile-150x150.png` tile pair.
+
 ### Simplify the homepage into a front door
 - Cut the homepage to five sections: hero, three-card "what we help with", short "how it works", brief founder-led trust, final CTA.
 - Removed the homepage Services overview section (full service grid plus "See all services" CTA) so the homepage no longer duplicates `/services`. Deleted the now-unused `ServicesOverview` component and the unused `homePage.services` content.

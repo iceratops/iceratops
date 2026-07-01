@@ -1,5 +1,5 @@
 {
-    "name": "Iceratops - AI Automation & Professional Web Design",
+    "name": "Iceratops",
     "short_name": "Iceratops",
     "icons": [
         {
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#fbb040",
-    "background_color": "#0f0f23",
+    "theme_color": "#fbbf24",
+    "background_color": "#0f172a",
     "display": "standalone"
 }
