@@ -114,10 +114,12 @@ These rules apply to all visible website copy.
 
 ## Pricing direction
 
-- Do not lead with fixed pricing on the homepage.
-- Use phrases like "Free workflow review," "Pilot projects available," and "Custom quote after workflow review."
-- Pricing can be softened on individual service pages, but never specific dollar figures on the homepage or services overview.
-- Pricing on the site can be revisited once real case studies and examples exist.
+- Do not lead with fixed pricing in the homepage hero. The hero sells the outcome and the free review.
+- Use phrases like "Free workflow review," "Starts at," "From," and "Quoted after a short review."
+- The approved "from" anchors (per the shipped Polish Preview design pass, see CHANGELOG): Website + Follow-Up System from $5,000; Website Refresh from $1,500; Modern Website Build from $3,500; Admin and Workflow Automation from $2,500; ongoing support from $300 per month. These may appear in the homepage flagship and pricing sections only, always framed as starting points quoted after a review.
+- No dollar figures on the services overview page.
+- Exact quotes always come after the free workflow review; never promise a fixed total on the site.
+- Revisit pricing presentation once real case studies and examples exist.
 
 ## Trust without fakery
 

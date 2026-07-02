@@ -15,6 +15,10 @@ export function RevealOnScroll() {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: pathname is only a trigger to re-scan reveal targets after navigation.
   useEffect(() => {
+    // Tell the inline head script the app bundle is alive, so it does not
+    // flip the `reveal-off` failure fallback.
+    ;(window as Window & { __revealReady?: boolean }).__revealReady = true
+
     const els = Array.from(document.querySelectorAll<HTMLElement>('.reveal:not([data-rev])'))
     if (els.length === 0) return
 

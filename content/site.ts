@@ -1,5 +1,3 @@
-export type ServiceAreaCity = string
-
 export const site = {
   name: 'Iceratops',
   url: 'https://iceratops.com',
@@ -7,7 +5,6 @@ export const site = {
   footerTagline:
     'Founder-led in Pflugerville, TX. Clean websites and simple inquiry and follow-up workflows for small businesses.',
   city: 'Pflugerville',
-  state: 'Texas',
   stateAbbr: 'TX',
   serviceArea: [
     'Pflugerville',
@@ -18,7 +15,7 @@ export const site = {
     'Georgetown',
     'Leander',
     'Manor',
-  ] as readonly ServiceAreaCity[],
+  ] as readonly string[],
   contact: {
     email: 'hello@iceratops.com',
     responseCommitment: 'We reply within one business day.',
@@ -65,7 +62,7 @@ export const aboutPage = {
     'Iceratops is a small, founder-led studio. We build clean websites and simple, human-reviewed workflows for owner-led businesses, in the Austin area and remotely.',
   story: [
     'We work the way a good local partner should. We learn how your business runs, fix the workflow that hurts most, and explain every step in plain language.',
-    'We use AI where it removes busywork, like drafting replies or summarizing requests. A person always reviews the work before it reaches your customers. Every system we build is documented, so you can see how it runs.',
+    'We use AI where it removes busywork, like drafting replies or summarizing requests. You set the rules, and a person reviews anything that matters before it reaches your customers. Every system we build is documented, so you can see how it runs.',
     'When a project ends, you own everything we build, with documentation so you or anyone you bring in later can run it.',
   ] as const,
   valuesTitle: 'How we operate',
@@ -76,7 +73,7 @@ export const aboutPage = {
     },
     {
       title: 'Human-reviewed AI',
-      text: 'AI helps with drafts and busywork. A person approves what goes out the door.',
+      text: 'AI helps with drafts and busywork. A person approves anything that matters before it goes out the door.',
     },
     {
       title: 'Clear ownership',

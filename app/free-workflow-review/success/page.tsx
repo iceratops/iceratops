@@ -5,7 +5,7 @@ import { contactPage } from '@/content/site'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
-  title: 'Free Workflow Review',
+  title: 'Request received',
   description: 'Thanks for requesting a free workflow review. We reply within one business day.',
   path: '/free-workflow-review/success',
   noIndex: true,

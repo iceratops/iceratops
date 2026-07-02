@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { ComponentProps } from 'react'
 import { cx } from '@/lib/classes'
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost'
+type ButtonVariant = 'primary' | 'secondary'
 type ButtonSize = 'sm' | 'md'
 
 const baseClasses =
@@ -13,11 +13,10 @@ const variantClasses: Record<ButtonVariant, string> = {
     'border-amber-400 bg-amber-400 text-slate-950 hover:bg-amber-300 focus-visible:outline-amber-300',
   secondary:
     'border-white/15 bg-white/5 text-white hover:border-amber-300/50 hover:text-amber-100 focus-visible:outline-amber-300',
-  ghost:
-    'border-transparent bg-transparent text-slate-200 hover:bg-white/10 hover:text-white focus-visible:outline-amber-300',
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
+  // `sm` is 40px tall, below the ~44px touch target: desktop-only surfaces.
   sm: 'min-h-10 px-4 py-2 text-sm',
   md: 'min-h-11 px-5 py-3 text-sm',
 }

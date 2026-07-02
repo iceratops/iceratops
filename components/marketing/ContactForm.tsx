@@ -47,8 +47,12 @@ export function ContactForm() {
   }
 
   return (
+    // The no-JS fallback posts to the static /__forms.html so Netlify still
+    // intercepts and records the submission (POSTs to Next-rendered routes
+    // bypass form handling); the static form's own action then redirects to
+    // the success page. With JS, handleSubmit posts and routes client-side.
     <form
-      action="/free-workflow-review/success"
+      action="/__forms.html"
       className="space-y-5"
       data-netlify="true"
       method="POST"

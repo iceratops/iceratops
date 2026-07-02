@@ -60,9 +60,9 @@ export function buildMetadata({
       ],
       apple: '/apple-touch-icon.png',
     },
-    alternates: {
-      canonical,
-    },
+    // A self-referential canonical on a noindex page sends mixed signals, so
+    // it is omitted there.
+    ...(noIndex ? {} : { alternates: { canonical } }),
     openGraph: {
       title: pageTitle,
       description,
@@ -84,7 +84,10 @@ export function buildMetadata({
       follow: !noIndex,
     },
     twitter: {
-      card: 'summary_large_image',
+      // The only share image is the square 512px logo; 'summary' is the card
+      // type that renders square images correctly. Switch to
+      // 'summary_large_image' once a real 1200x630 OG image exists.
+      card: 'summary',
       title: pageTitle,
       description,
       images: [imageUrl],

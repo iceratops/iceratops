@@ -338,12 +338,15 @@ function ThreadLine({
   )
 }
 
+// Comfortable tap height on phones, compact on larger screens.
 const dockClass = (active: boolean) =>
-  `flex items-center justify-center gap-1 rounded-lg px-1.5 py-1.5 text-[11px] font-semibold transition ${active ? 'bg-white/15 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`
+  `flex min-h-11 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-xs font-semibold transition sm:min-h-0 sm:gap-1 sm:px-1.5 sm:py-1.5 sm:text-[11px] ${active ? 'bg-white/15 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`
 
 export function InquiryDemo() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [reduce, setReduce] = useState(false)
+  const [inView, setInView] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
   const inputs = {
     web: useRef<HTMLTextAreaElement>(null),
     fb: useRef<HTMLTextAreaElement>(null),
@@ -359,12 +362,27 @@ export function InquiryDemo() {
     }
   }, [])
 
+  // Only run the auto-advance loop while the demo is on screen, so it never
+  // burns battery or competes with scrolling elsewhere on the page.
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setInView(true)
+      return
+    }
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
+      rootMargin: '80px',
+    })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: state.arm restarts the interval after each manual interaction.
   useEffect(() => {
-    if (reduce) return
+    if (reduce || !inView) return
     const id = window.setInterval(() => dispatch({ type: 'tick' }), 2400)
     return () => window.clearInterval(id)
-  }, [reduce, state.arm])
+  }, [reduce, inView, state.arm])
 
   const select = (ch: Ch) => () => dispatch({ type: 'select', ch, stage: reduce ? 3 : 0 })
   const send = (ch: Ch) => () => {
@@ -379,7 +397,7 @@ export function InquiryDemo() {
   const bookOn = state.stage >= 3
 
   return (
-    <section className="py-14 sm:py-16 lg:py-20">
+    <section className="py-14 sm:py-16 lg:py-20" ref={sectionRef}>
       <Container>
         <div className="max-w-2xl">
           <Eyebrow>How it works</Eyebrow>
@@ -393,8 +411,11 @@ export function InquiryDemo() {
           </p>
         </div>
 
+        {/* min-w-0 on both columns: grid items default to min-width:auto, and
+            the carousel track's intrinsic width would otherwise force the
+            card (and the page) wider than the viewport. */}
         <div className="mt-9 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+          <div className="flex min-w-0 flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
             <div className="flex items-center justify-between gap-3">
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
                 <span className="font-orbitron text-sm text-amber-300">1</span>A lead reaches out
@@ -406,7 +427,7 @@ export function InquiryDemo() {
 
             <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-slate-950/60">
               <div
-                className="flex transition-transform duration-500 ease-out"
+                className="flex transition-transform duration-500 ease-out motion-reduce:transition-none"
                 style={{ transform: trackTransform }}
               >
                 {/* WEBSITE */}
@@ -420,12 +441,12 @@ export function InquiryDemo() {
                     <div className="flex items-end gap-1 px-2 pt-2">
                       <span className="flex items-center gap-1.5 rounded-t-lg bg-white px-2.5 py-1.5 text-[10px] font-medium text-slate-700">
                         <span className="h-2.5 w-2.5 rounded-sm bg-[#0d9488]" />
-                        Lone Star Plumbing
+                        Acme Plumbing Co.
                       </span>
                     </div>
                     <div className="bg-white px-2 py-1.5">
                       <div className="truncate rounded-md bg-[#f1f3f4] px-2.5 py-1 text-[10px] text-slate-500">
-                        lonestarplumbing.com
+                        acmeplumbing.example
                       </div>
                     </div>
                   </div>
@@ -434,7 +455,7 @@ export function InquiryDemo() {
                     style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}
                   >
                     <p className="text-[11px] font-bold tracking-wide text-[#0f766e]">
-                      LONE STAR PLUMBING
+                      ACME PLUMBING CO.
                     </p>
                     <p className="mt-1 text-[15px] font-extrabold leading-snug text-slate-900">
                       24/7 emergency plumbing in Austin
@@ -442,17 +463,19 @@ export function InquiryDemo() {
                     <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
                       <p className="text-[11px] font-semibold text-slate-700">Request a quote</p>
                       <input
-                        className="mt-2 w-full rounded border border-slate-300 bg-white px-2 py-1.5 text-[11px] text-slate-700 outline-none focus:border-[#0d9488]"
+                        aria-label="Sample name"
+                        className="mt-2 w-full rounded border border-slate-300 bg-white px-2 py-1.5 text-base text-slate-700 outline-none focus:border-[#0d9488] sm:text-[11px]"
                         defaultValue="Sam Rivera"
                       />
                       <textarea
-                        className="mt-1.5 w-full resize-none rounded border border-slate-300 bg-white px-2 py-1.5 text-[11px] leading-4 text-slate-700 outline-none focus:border-[#0d9488]"
+                        aria-label="Sample website message"
+                        className="mt-1.5 w-full resize-none rounded border border-slate-300 bg-white px-2 py-1.5 text-base leading-5 text-slate-700 outline-none focus:border-[#0d9488] sm:text-[11px] sm:leading-4"
                         defaultValue="Any availability next week for a bathroom remodel quote?"
                         ref={inputs.web}
                         rows={2}
                       />
                       <button
-                        className="mt-2 w-full rounded-md bg-[#0d9488] py-1.5 text-[11px] font-semibold text-white transition hover:bg-[#0f766e]"
+                        className="mt-2 w-full rounded-md bg-[#0d9488] py-2.5 text-[13px] font-semibold text-white transition hover:bg-[#0f766e] sm:py-1.5 sm:text-[11px]"
                         onClick={send('web')}
                         type="button"
                       >
@@ -480,7 +503,7 @@ export function InquiryDemo() {
                     </div>
                     <div className="bg-white px-2 py-1.5">
                       <div className="truncate rounded-md bg-[#f1f3f4] px-2.5 py-1 text-[10px] text-slate-500">
-                        facebook.com/lonestarplumbing
+                        facebook.com/acmeplumbingco
                       </div>
                     </div>
                   </div>
@@ -496,23 +519,24 @@ export function InquiryDemo() {
                     <div className="px-3 pb-3.5">
                       <div className="flex items-center gap-2">
                         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0d9488] text-[11px] font-bold text-white">
-                          LS
+                          AP
                         </span>
                         <div>
-                          <p className="text-[12px] font-bold text-slate-900">Lone Star Plumbing</p>
+                          <p className="text-[12px] font-bold text-slate-900">Acme Plumbing Co.</p>
                           <p className="text-[10px] text-slate-500">Plumber · Austin, TX</p>
                         </div>
                       </div>
                       <div className="mt-3 rounded-lg bg-[#f0f2f5] p-2.5">
                         <p className="text-[10px] font-semibold text-slate-600">Messenger</p>
                         <textarea
-                          className="mt-1.5 w-full resize-none rounded-2xl border border-slate-200 bg-white px-2.5 py-1.5 text-[11px] leading-4 text-slate-700 outline-none focus:border-[#1877f2]"
+                          aria-label="Sample Facebook message"
+                          className="mt-1.5 w-full resize-none rounded-2xl border border-slate-200 bg-white px-2.5 py-1.5 text-base leading-5 text-slate-700 outline-none focus:border-[#1877f2] sm:text-[11px] sm:leading-4"
                           defaultValue="Roughly what does a water heater replacement run?"
                           ref={inputs.fb}
                           rows={2}
                         />
                         <button
-                          className="mt-2 w-full rounded-full bg-[#1877f2] py-1.5 text-[11px] font-semibold text-white transition hover:bg-[#166fe0]"
+                          className="mt-2 w-full rounded-full bg-[#1877f2] py-2.5 text-[13px] font-semibold text-white transition hover:bg-[#166fe0] sm:py-1.5 sm:text-[11px]"
                           onClick={send('fb')}
                           type="button"
                         >
@@ -543,19 +567,20 @@ export function InquiryDemo() {
                     style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}
                   >
                     <div className="border-b border-slate-200 pb-1.5 text-[11px]">
-                      <span className="text-slate-400">To</span> hello@lonestarplumbing.com
+                      <span className="text-slate-400">To</span> hello@acmeplumbing.example
                     </div>
                     <div className="border-b border-slate-200 py-1.5 text-[11px]">
                       <span className="text-slate-400">Subject</span> Quote request
                     </div>
                     <textarea
-                      className="mt-2 w-full resize-none rounded border border-slate-200 bg-white px-2 py-1.5 text-[11px] leading-4 text-slate-700 outline-none focus:border-[#2563eb]"
+                      aria-label="Sample email message"
+                      className="mt-2 w-full resize-none rounded border border-slate-200 bg-white px-2 py-1.5 text-base leading-5 text-slate-700 outline-none focus:border-[#2563eb] sm:text-[11px] sm:leading-4"
                       defaultValue="Need a quote to replace a water heater. When could someone visit?"
                       ref={inputs.email}
                       rows={3}
                     />
                     <button
-                      className="mt-2 rounded-md bg-[#2563eb] px-5 py-1.5 text-[11px] font-semibold text-white transition hover:bg-[#1d4ed8]"
+                      className="mt-2 rounded-md bg-[#2563eb] px-5 py-2.5 text-[13px] font-semibold text-white transition hover:bg-[#1d4ed8] sm:py-1.5 sm:text-[11px]"
                       onClick={send('email')}
                       type="button"
                     >
@@ -570,10 +595,10 @@ export function InquiryDemo() {
                     <span className="text-[16px] leading-none text-[#0a84ff]">&lsaquo;</span>
                     <div className="flex flex-col items-center">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#0d9488] text-[9px] font-bold text-white">
-                        LS
+                        AP
                       </span>
                       <span className="mt-0.5 text-[10px] font-semibold text-slate-700">
-                        Lone Star Plumbing
+                        Acme Plumbing Co.
                       </span>
                     </div>
                     <span className="flex h-4 w-4 items-center justify-center rounded-full border border-[#0a84ff] text-[9px] font-bold leading-none text-[#0a84ff]">
@@ -589,13 +614,14 @@ export function InquiryDemo() {
                     </p>
                     <div className="mt-3 flex items-center gap-1.5 rounded-full border border-slate-300 bg-white py-1 pl-3 pr-1">
                       <input
-                        className="min-w-0 flex-1 bg-transparent text-[11px] text-slate-700 outline-none"
+                        aria-label="Sample text message"
+                        className="min-w-0 flex-1 bg-transparent text-base text-slate-700 outline-none sm:text-[11px]"
                         defaultValue="Any chance you could look at a leaking kitchen faucet this week?"
                         ref={inputs.sms}
                       />
                       <button
                         aria-label="Send text"
-                        className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-[#0a84ff] text-white transition hover:bg-[#0070e0]"
+                        className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-[#0a84ff] text-white transition hover:bg-[#0070e0] sm:h-6 sm:w-6"
                         onClick={send('sms')}
                         type="button"
                       >
@@ -621,15 +647,16 @@ export function InquiryDemo() {
             </div>
 
             <div className="mt-4 flex items-center justify-between gap-2 px-1">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
                 Sample channels
               </span>
-              <span className="text-[10px] font-medium text-slate-500">
+              <span className="text-[11px] font-medium text-slate-500">
                 + WhatsApp, Instagram, Google, and more
               </span>
             </div>
-            <div className="mt-2 grid grid-cols-4 gap-1 rounded-xl border border-white/10 bg-slate-950/40 p-1.5">
+            <div className="mt-2 grid grid-cols-2 gap-1 rounded-xl border border-white/10 bg-slate-950/40 p-1.5 sm:grid-cols-4">
               <button
+                aria-pressed={state.src === 'web'}
                 className={dockClass(state.src === 'web')}
                 onClick={select('web')}
                 type="button"
@@ -638,6 +665,7 @@ export function InquiryDemo() {
                 Website
               </button>
               <button
+                aria-pressed={state.src === 'fb'}
                 className={dockClass(state.src === 'fb')}
                 onClick={select('fb')}
                 type="button"
@@ -648,6 +676,7 @@ export function InquiryDemo() {
                 Facebook
               </button>
               <button
+                aria-pressed={state.src === 'email'}
                 className={dockClass(state.src === 'email')}
                 onClick={select('email')}
                 type="button"
@@ -656,6 +685,7 @@ export function InquiryDemo() {
                 Email
               </button>
               <button
+                aria-pressed={state.src === 'sms'}
                 className={dockClass(state.src === 'sms')}
                 onClick={select('sms')}
                 type="button"
@@ -676,11 +706,8 @@ export function InquiryDemo() {
             </p>
           </div>
 
-          <div className="grid gap-5">
-            <div
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6"
-              style={{ transitionDelay: '90ms' }}
-            >
+          <div className="grid min-w-0 gap-5">
+            <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
               <div className="flex items-center justify-between gap-3">
                 <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
                   <span className="font-orbitron text-sm text-amber-300">2</span>One organized inbox
@@ -711,10 +738,7 @@ export function InquiryDemo() {
               </div>
             </div>
 
-            <div
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6"
-              style={{ transitionDelay: '160ms' }}
-            >
+            <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
               <div className="flex items-center justify-between gap-3">
                 <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
                   <span className="font-orbitron text-sm text-amber-300">3</span>From new to booked
@@ -741,7 +765,7 @@ export function InquiryDemo() {
                         />
                         <span
                           style={{
-                            fontSize: '9.5px',
+                            fontSize: '10.5px',
                             fontWeight: 600,
                             letterSpacing: '.02em',
                             color: lit ? '#fde68a' : '#64748b',
@@ -817,19 +841,13 @@ export function InquiryDemo() {
                 Catch every &ldquo;are you available?&rdquo; text and turn it into a booked visit.
               </p>
             </div>
-            <div
-              className="rounded-xl border border-white/10 bg-white/[0.03] p-5"
-              style={{ transitionDelay: '90ms' }}
-            >
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
               <h3 className="text-sm font-semibold text-white">Salons &amp; studios</h3>
               <p className="mt-1.5 text-sm leading-6 text-slate-400">
                 Reply to booking DMs in minutes and fill last-minute openings.
               </p>
             </div>
-            <div
-              className="rounded-xl border border-white/10 bg-white/[0.03] p-5"
-              style={{ transitionDelay: '180ms' }}
-            >
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
               <h3 className="text-sm font-semibold text-white">Trades &amp; contractors</h3>
               <p className="mt-1.5 text-sm leading-6 text-slate-400">
                 Quote requests organized, followed up, and never lost in a full inbox.

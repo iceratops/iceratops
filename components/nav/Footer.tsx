@@ -4,8 +4,10 @@ import { Container } from '@/components/primitives/Container'
 import { headerNavItems, primaryCta } from '@/content/navigation'
 import { site } from '@/content/site'
 
+// py-1.5 pads each link's tap area toward the ~44px touch guideline without
+// changing the visual rhythm.
 const linkClasses =
-  'transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300'
+  'inline-flex py-1.5 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300'
 
 export function Footer() {
   return (
@@ -16,6 +18,9 @@ export function Footer() {
             alt="Iceratops"
             className="h-6 w-auto"
             height={144}
+            // Same asset the header already preloads; on short pages the
+            // footer is above the fold and Next flags it as LCP without this.
+            priority
             src="/iceratops_text_logo.svg"
             width={350}
           />
@@ -23,7 +28,7 @@ export function Footer() {
         </div>
         <nav
           aria-label="Footer navigation"
-          className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-400"
+          className="flex flex-wrap items-center gap-x-6 gap-y-1 text-sm text-slate-400"
         >
           {headerNavItems.map((item) => (
             <Link className={linkClasses} href={item.href} key={item.href}>
@@ -34,7 +39,7 @@ export function Footer() {
             {primaryCta.label}
           </Link>
           <a
-            className="transition hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+            className="inline-flex py-1.5 transition hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
             href={`mailto:${site.contact.email}`}
           >
             {site.contact.email}

@@ -3,19 +3,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
-import { headerNavItems, primaryCta } from '@/content/navigation'
+import { headerNavItems, primaryCta, workflowReviewFormId } from '@/content/navigation'
 import { cx } from '@/lib/classes'
-
-/** Anchor on the Free workflow review page the in-page CTA scrolls to. */
-const FORM_ANCHOR = '#workflow-review-form'
 
 export function Header() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -28,19 +26,56 @@ export function Header() {
   useEffect(() => {
     if (!open) return
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false)
+      if (event.key === 'Escape') {
+        setOpen(false)
+        toggleRef.current?.focus()
+      }
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
-  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href))
+  // Close the drawer on any navigation, including the logo link, which lives
+  // outside the drawer and would otherwise leave it hanging open.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: pathname is only a trigger to close the drawer after navigation.
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
+
+  // Keep the page from scrolling behind the open drawer's backdrop.
+  useEffect(() => {
+    if (!open) return
+    const previous = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previous
+    }
+  }, [open])
+
+  // If the viewport grows past the desktop breakpoint while the drawer is
+  // open, close it so the scroll lock cannot outlive the hidden drawer.
+  useEffect(() => {
+    if (!open) return
+    const query = window.matchMedia('(min-width: 1024px)')
+    const onChange = () => {
+      if (query.matches) setOpen(false)
+    }
+    onChange()
+    query.addEventListener('change', onChange)
+    return () => query.removeEventListener('change', onChange)
+  }, [open])
+
+  // Exact matches only: the site has no nested public routes, and prefix
+  // matching would wrongly highlight parents if any are ever added. Trailing
+  // slashes are normalized so a trailingSlash config change cannot break this.
+  const normalizedPath = pathname.length > 1 ? pathname.replace(/\/$/, '') : pathname
+  const isActive = (href: string) => normalizedPath === href
 
   // The CTA never disappears. On the form page itself it scrolls to the form
   // instead of navigating away; everywhere else (including the success page) it
   // links to the form route. Same behaviour on desktop and mobile.
-  const onFormPage = pathname === primaryCta.href
-  const ctaHref = onFormPage ? FORM_ANCHOR : primaryCta.href
+  const onFormPage = normalizedPath === primaryCta.href
+  const ctaHref = onFormPage ? `#${workflowReviewFormId}` : primaryCta.href
 
   return (
     <header
@@ -92,8 +127,9 @@ export function Header() {
           aria-controls="mobile-nav"
           aria-expanded={open}
           aria-label={open ? 'Close menu' : 'Open menu'}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-slate-200 transition-colors hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-slate-200 transition-colors hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 lg:hidden"
           onClick={() => setOpen((value) => !value)}
+          ref={toggleRef}
           type="button"
         >
           <svg
@@ -120,7 +156,10 @@ export function Header() {
           'fixed inset-x-0 bottom-0 top-16 z-40 cursor-default bg-slate-950/60 backdrop-blur-sm transition-opacity duration-300 motion-reduce:transition-none lg:hidden',
           open ? 'opacity-100' : 'pointer-events-none opacity-0',
         )}
-        onClick={() => setOpen(false)}
+        onClick={() => {
+          setOpen(false)
+          toggleRef.current?.focus()
+        }}
         tabIndex={-1}
         type="button"
       />

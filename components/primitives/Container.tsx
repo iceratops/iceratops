@@ -1,11 +1,10 @@
 import type { ComponentProps } from 'react'
 import { cx } from '@/lib/classes'
 
-type ContainerSize = 'default' | 'wide' | 'narrow'
+type ContainerSize = 'default' | 'narrow'
 
 const sizeClasses: Record<ContainerSize, string> = {
   default: 'max-w-6xl',
-  wide: 'max-w-7xl',
   narrow: 'max-w-4xl',
 }
 
