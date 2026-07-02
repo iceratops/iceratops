@@ -110,7 +110,7 @@ export function ContactForm() {
 
       <div>
         <label className={labelClasses} htmlFor="message">
-          What do you want cleaned up?
+          What do you want to build?
         </label>
         <textarea className={fieldClasses} id="message" name="message" required rows={5} />
       </div>

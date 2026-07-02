@@ -26,9 +26,10 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at top left, rgba(251, 191, 36, 0.06), transparent 26rem),
-    linear-gradient(160deg, #0f172a 0%, #2a1a4a 58%, #0f172a 100%);
+  /* The page gradient lives on the fixed .ambient-backdrop layer (not here) so
+     the starfield paints above it. A background on <body> is opaque and would
+     cover the negative z-index ambient layer nested under it. */
+  background: transparent;
   color: #f8fafc;
   font-family: var(--font-inter), Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -56,14 +57,22 @@ a {
   -webkit-text-fill-color: transparent;
 }
 
+/* Fixed, viewport-clipped decorative backdrop: page gradient behind the glows
+   and starfield. Sits below all content via `-z-10` in AmbientBackground. */
+.ambient-backdrop {
+  background:
+    radial-gradient(circle at top left, rgba(251, 191, 36, 0.06), transparent 26rem),
+    linear-gradient(160deg, #0f172a 0%, #2a1a4a 58%, #0f172a 100%);
+}
+
 @keyframes scTwinkle {
   0%,
   100% {
-    opacity: 0.12;
+    opacity: 0.18;
     transform: scale(0.8);
   }
   50% {
-    opacity: 0.7;
+    opacity: 0.85;
     transform: scale(1.15);
   }
 }

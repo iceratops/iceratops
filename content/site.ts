@@ -31,7 +31,7 @@ export const site = {
 
 export const contactPage = {
   title: 'Request a free workflow review.',
-  description: "Tell us what you want cleaned up. We'll reply within one business day.",
+  description: "Tell us what you want to build. We'll reply within one business day.",
   success: {
     title: 'Thanks, your workflow review request is in.',
     description: "We'll reply within one business day with a clear, no-pressure next step.",
