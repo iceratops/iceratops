@@ -21,7 +21,6 @@ export default function ServicesPage() {
       <PageHero
         description={servicesPage.description}
         eyebrow={servicesPage.eyebrow}
-        primaryAction={null}
         title={servicesPage.title}
       />
 

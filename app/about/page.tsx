@@ -20,7 +20,6 @@ export default function AboutPage() {
       <PageHero
         description={aboutPage.description}
         eyebrow={aboutPage.eyebrow}
-        primaryAction={null}
         title={aboutPage.title}
       />
 
@@ -53,7 +52,7 @@ export default function AboutPage() {
                 and with remote clients across the U.S.
               </p>
               <p className="mt-6 text-sm font-semibold text-white">What you can count on</p>
-              <CheckList className="mt-4" items={site.commitments} tone="check" />
+              <CheckList className="mt-4" items={site.commitments} />
             </Card>
           </div>
         </Container>

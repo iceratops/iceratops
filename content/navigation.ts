@@ -13,6 +13,12 @@ export const primaryCta = {
 } as const satisfies NavItem
 
 /**
+ * Anchor id of the form card on the Free workflow review page. Shared so the
+ * header CTA's in-page scroll target and the form's id cannot drift apart.
+ */
+export const workflowReviewFormId = 'workflow-review-form'
+
+/**
  * The one nav list. Desktop header and the mobile drawer both render this, so
  * their intent is identical: two destinations plus the Free workflow review
  * CTA. Contact is not a nav destination; the CTA carries the conversion path.

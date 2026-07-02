@@ -11,7 +11,7 @@ import { WhatWeBuild } from '@/components/marketing/home/WhatWeBuild'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
-  title: 'Iceratops',
+  title: 'Iceratops | Web & Workflow Studio in Pflugerville, TX',
   description:
     'A clean website and a human-reviewed system that captures every inquiry, replies fast, and follows up until it books. Founder-led, for small businesses in Pflugerville, Austin, and beyond.',
   path: '/',

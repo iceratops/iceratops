@@ -1,14 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --accent-gold: #fbbf24;
   --dark-bg: #0f172a;
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -19,6 +14,14 @@ html {
   background: var(--dark-bg);
 }
 
+/* Anchor CTAs (header CTA on the form page, "See pricing") glide instead of
+   jumping. Guarded so reduced-motion users keep instant jumps. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   min-height: 100vh;
   margin: 0;
@@ -27,7 +30,7 @@ body {
     radial-gradient(circle at top left, rgba(251, 191, 36, 0.06), transparent 26rem),
     linear-gradient(160deg, #0f172a 0%, #2a1a4a 58%, #0f172a 100%);
   color: #f8fafc;
-  font-family: Inter, sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -43,18 +46,8 @@ a {
 }
 
 .font-orbitron {
-  font-family: Orbitron, monospace;
+  font-family: var(--font-orbitron), Orbitron, monospace;
   letter-spacing: -0.01em;
-}
-
-.glass-card {
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  background: var(--glass-bg);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.03) inset,
-    0 8px 24px rgba(2, 6, 23, 0.12);
-  backdrop-filter: blur(12px);
 }
 
 .gradient-text {
@@ -116,18 +109,30 @@ a {
   animation: pageEnter 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
-/* Scroll reveal */
+/* Scroll reveal. Content is visible by default; the hidden starting state is
+   scoped to `html.js` (set by an inline script in the document head) so pages
+   never render blank when JavaScript is disabled. `reveal-off` is the escape
+   hatch the same script flips if the app bundle fails to run. */
 .reveal {
-  opacity: 0;
-  transform: translateY(22px);
   transition:
     opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.reveal.is-in {
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+html.js .reveal.is-in {
   opacity: 1;
   transform: none;
+}
+
+html.js.reveal-off .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 
 /* Interactive inquiry demo */
@@ -202,7 +207,8 @@ a {
     animation: none;
   }
 
-  .reveal {
+  .reveal,
+  html.js .reveal {
     opacity: 1;
     transform: none;
     transition: none;

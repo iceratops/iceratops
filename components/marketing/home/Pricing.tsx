@@ -70,7 +70,7 @@ export function Pricing() {
         <div className="reveal mt-8 flex flex-col gap-4 rounded-2xl border border-amber-300/25 bg-amber-300/[0.05] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
           <div>
             <p className="font-orbitron text-lg font-semibold text-white">
-              Free Workflow Review{' '}
+              Free workflow review{' '}
               <span className="ml-1.5 rounded-full bg-amber-300/15 px-2.5 py-0.5 align-middle text-xs font-semibold text-amber-200">
                 Free
               </span>
@@ -80,7 +80,7 @@ export function Pricing() {
               sold.
             </p>
           </div>
-          <ButtonLink className="flex-none whitespace-nowrap" href={primaryCta.href}>
+          <ButtonLink className="flex-none" href={primaryCta.href}>
             Book the review
           </ButtonLink>
         </div>
@@ -92,7 +92,7 @@ export function Pricing() {
                 Website + Follow-Up System
               </p>
               <span className="flex-none rounded-full border border-amber-300/40 bg-amber-300/15 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-200">
-                Most chosen
+                Flagship
               </span>
             </div>
             <p className="font-orbitron mt-3 text-3xl font-bold text-white">From $5,000</p>

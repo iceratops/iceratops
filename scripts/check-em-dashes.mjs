@@ -9,16 +9,16 @@
  * found. Top-level *.md docs (this script, README, brief, etc.) are
  * intentionally not scanned — they are documentation, not website copy.
  *
- * If a future feature genuinely requires an em dash in source code, suppress
- * with an explicit eslint-disable line and a justification comment, then
- * extend this script to honor it.
+ * If a future feature genuinely requires an em dash in source code, add a
+ * justification comment and extend this script with an explicit allowlist
+ * entry for that line.
  */
 
 import { execSync } from 'node:child_process'
 import { readFileSync, statSync } from 'node:fs'
 import { relative } from 'node:path'
 
-const SCAN_DIRS = ['src', 'app', 'components', 'content']
+const SCAN_DIRS = ['app', 'components', 'content', 'lib']
 const SCAN_EXTS = ['.ts', '.tsx', '.mdx']
 const EM_DASH = '—'
 

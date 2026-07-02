@@ -1,6 +1,7 @@
 import { ContactForm } from '@/components/marketing/ContactForm'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
+import { workflowReviewFormId } from '@/content/navigation'
 import { contactPage, site } from '@/content/site'
 import { buildMetadata } from '@/lib/seo'
 
@@ -25,7 +26,7 @@ export default function FreeWorkflowReviewPage() {
 
         <div
           className="reveal mt-10 scroll-mt-24 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur sm:p-8"
-          id="workflow-review-form"
+          id={workflowReviewFormId}
         >
           <ContactForm />
           <p className="mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-slate-400">

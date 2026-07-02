@@ -6,6 +6,32 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Production-readiness pass (architecture, mobile UX, cleanup)
+
+Full architecture verification and mobile UX repair ahead of deploy. Keeps the approved visual direction and offer; fixes structural and responsive defects.
+
+#### Mobile UX
+- Fixed real horizontal overflow on the homepage: grid items containing truncated or carousel content (`InquiryDemo` columns and cards, `BeforeAfter` cards) now carry `min-w-0` so their intrinsic width can no longer push the page wider than the viewport. Verified zero overflow at 320/360/375/390/414/430 on all five routes.
+- Demo mock inputs render at 16px on phones (11px kept from `sm:` up) so iOS Safari no longer auto-zooms on focus. Channel dock is a 2x2 grid with 44px tap targets on phones (compact 4-across from `sm:` up); mock send buttons got taller phone tap areas; tiny demo captions bumped to readable sizes; demo inputs and dock buttons got `aria-label`/`aria-pressed`.
+- Header: menu toggle enlarged to 44px, drawer closes on any route change (including the logo link) and on crossing the desktop breakpoint, body scroll locks while the drawer is open, Escape and backdrop dismissal return focus to the toggle. Active-nav matching is exact instead of `startsWith`. Footer links gained padded tap areas.
+- The demo's auto-advance interval now pauses while the section is off screen.
+
+#### Motion and performance
+- Fonts moved from a render-blocking Google Fonts CSS `@import` to self-hosted `next/font` (also removes the only third-party runtime request).
+- Reveal animation is now JS-failure safe: the hidden starting state applies only under `html.js` (set by an inline head script), and a 3s fallback shows everything if the bundle never runs. The old noscript-only hack was replaced.
+- Smooth anchor scrolling behind `prefers-reduced-motion: no-preference`; the demo carousel slide honors reduced motion.
+
+#### Architecture and cleanup
+- Shared `workflowReviewFormId` constant so the header CTA anchor and the form card id cannot drift.
+- No-JS form fallback now posts to the static `/__forms.html` (Netlify intercepts it; its form action redirects to the success page). Previously no-JS submissions were silently dropped.
+- SEO: twitter card downgraded to `summary` to match the square logo image, canonical omitted on noindex pages, success page retitled "Request received", sitemap no longer stamps `lastModified` on every build, home title now carries the studio descriptor and locality.
+- Baseline security headers added in `netlify.toml` (nosniff, frame deny, referrer policy, permissions policy).
+- Dead code removed: `.glass-card` CSS and unused CSS variables, all unused Tailwind theme extensions, `Section` header props, `PageHero` CTA machinery, `Button` ghost variant, `Container` wide size, `CheckList` tones, `Eyebrow` centered variant, `site.state`, `ServiceAreaCity`; em-dash script scan list corrected.
+
+#### Content
+- "Most chosen" pricing badge replaced with "Flagship" (no invented popularity claims). Demo business renamed to the clearly fictional "Acme Plumbing Co." with a reserved `.example` domain.
+- Human-review copy reconciled to one tiered posture site-wide: AI handles routine busywork, a person approves anything that matters. `WEBSITE_BRIEF.md` pricing direction updated to record the already-approved homepage "from" pricing anchors.
+
 ### Cohesion refinement pass (navigation, motion, conversion route)
 
 Targeted fixes after reviewing the Polish Preview build, keeping the approved visual direction, homepage structure, flagship offer, privacy posture, and cleanup discipline.

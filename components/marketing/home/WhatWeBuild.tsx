@@ -21,7 +21,7 @@ const cards = [
   },
   {
     title: 'Inquiry capture & follow-up',
-    text: 'Every form, text, call, and DM lands in one place. AI drafts a reply in your voice, you approve it, and no lead waits.',
+    text: 'Every form, text, call, and DM lands in one place. AI drafts a reply in your voice, you approve what matters, and no lead waits.',
     icon: (
       <svg
         aria-hidden="true"

@@ -107,7 +107,7 @@ export function BeforeAfter() {
           </p>
         </div>
         <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-[1fr_auto_1fr]">
-          <div className="reveal flex flex-col rounded-2xl border border-white/10 bg-slate-950/40 p-6 sm:p-7">
+          <div className="reveal flex min-w-0 flex-col rounded-2xl border border-white/10 bg-slate-950/40 p-6 sm:p-7">
             <div className="flex items-center gap-2.5">
               <span className="rounded-full border border-rose-400/30 bg-rose-400/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-rose-300">
                 Before
@@ -151,7 +151,7 @@ export function BeforeAfter() {
             </span>
           </div>
 
-          <div className="flex flex-col rounded-2xl border border-amber-300/25 bg-amber-300/[0.04] p-6 sm:p-7">
+          <div className="flex min-w-0 flex-col rounded-2xl border border-amber-300/25 bg-amber-300/[0.04] p-6 sm:p-7">
             <div className="flex items-center gap-2.5">
               <span className="rounded-full border border-amber-300/40 bg-amber-300/15 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-amber-200">
                 After
