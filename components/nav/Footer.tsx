@@ -38,6 +38,9 @@ export function Footer() {
           <Link className={linkClasses} href={primaryCta.href}>
             {primaryCta.label}
           </Link>
+          <Link className={linkClasses} href="/privacy">
+            Privacy
+          </Link>
           <a
             className="inline-flex py-1.5 transition hover:text-amber-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
             href={`mailto:${site.contact.email}`}
@@ -47,7 +50,7 @@ export function Footer() {
         </nav>
       </Container>
       <Container className="border-t border-white/[0.07] py-5">
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-slate-400">
           Copyright {new Date().getFullYear()} Iceratops. All rights reserved.
         </p>
       </Container>

@@ -26,7 +26,7 @@ Most first impressions will come from mobile browsers. Visitors land here from I
 
 - Design every page mobile-first. Layout, copy hierarchy, and CTA placement work on a small screen first, then scale up.
 - The primary CTA (Free workflow review) is visible and tappable without zoom on a 375px viewport.
-- Local trust cues (Pflugerville, founder name, "we reply within one business day") are visible quickly, not buried below a tall hero.
+- Local trust cues (Pflugerville, founder-led studio, "we reply within one business day") are visible quickly, not buried below a tall hero.
 - Hero sections stay compact on mobile, never full-height.
 - Cards stack cleanly. Side-by-side grids only on tablet and up.
 - Text blocks stay short and readable. No dense paragraphs on small screens.
@@ -116,7 +116,7 @@ These rules apply to all visible website copy.
 
 - Do not lead with fixed pricing in the homepage hero. The hero sells the outcome and the free review.
 - Use phrases like "Free workflow review," "Starts at," "From," and "Quoted after a short review."
-- The approved "from" anchors (per the shipped Polish Preview design pass, see CHANGELOG): Website + Follow-Up System from $5,000; Website Refresh from $1,500; Modern Website Build from $3,500; Admin and Workflow Automation from $2,500; ongoing support from $300 per month. These may appear in the homepage flagship and pricing sections only, always framed as starting points quoted after a review.
+- The approved "from" anchors (per the shipped Polish Preview design pass, see CHANGELOG): Website + Follow-Up System from $5,000; Website Refresh from $1,500; Modern Website Build from $3,500; Admin Automation Sprint from $2,500; ongoing support from $300 per month. These appear in the homepage pricing section only, always framed as starting points quoted after a review.
 - No dollar figures on the services overview page.
 - Exact quotes always come after the free workflow review; never promise a fixed total on the site.
 - Revisit pricing presentation once real case studies and examples exist.
@@ -126,15 +126,15 @@ These rules apply to all visible website copy.
 The site builds trust through the following, not through invented social proof.
 
 - Studio-level, anonymous credibility and the Pflugerville location across the site. Founder-led and builder-led framing only. Do not add the founder's personal name, photo, social links, biography, or employer history, and do not make the founder personally searchable. Trust comes from direct access to the person mapping and building the system, clean requirements, practical workflow design, and a simple handoff.
-- Transparent process: workflow review, pilot, handoff
-- Specific timelines and deliverables on service pages
+- Transparent process: Review, Plan, Build, Handoff
+- Clear deliverables and realistic scope cues on the services overview
 - Honest stack and capability descriptions
-- Visible "what we do not do" callouts on industry and service pages
+- Service descriptions that set honest boundaries without defensive copy
 - "We reply within one business day" commitment on the Free workflow review page
 - "No long contracts to start" stated clearly
 - "Everything we build is yours, with documentation" stated clearly
 - LocalBusiness JSON-LD with real Pflugerville and service area
-- A real `/work` page that says "in progress, more coming as projects ship" until at least one case study is live
+- A plain-language privacy notice that reflects the site's actual form practices
 
 ## Brand identity
 
@@ -153,43 +153,33 @@ The rebuild improves typography rhythm, copy clarity, and conversion architectur
 
 The site has one primary CTA across every page: **Free workflow review**.
 
-- Primary CTA label: "Free workflow review" (also acceptable: "Get a free workflow review" or "Book a workflow review")
-- Primary CTA target: `/free-workflow-review` (the former `/contact` path 301-redirects here). On the Free workflow review page itself, the header CTA stays visible and scrolls to the form (`#workflow-review-form`) instead of disappearing.
-- Secondary CTA: "See how we help" or "View services"
+- Primary CTA label: "Free workflow review" (also acceptable: "Get a free workflow review" or "Request a free workflow review")
+- Primary CTA target: `/free-workflow-review` (the former `/contact` path permanently redirects here). On the Free workflow review page itself, the header CTA stays visible and scrolls to the form (`#workflow-review-form`) instead of disappearing.
+- Secondary CTA: "View the example" or "View services"
 - Tertiary fallback: `hello@iceratops.com` mailto, always visible in footer
 
 Do not introduce additional primary CTAs ("Book a call," "Buy now," "Schedule demo"). The funnel is intentionally narrow.
 
-Global navigation is limited to two destinations plus the Free workflow review CTA: Services, About, and the CTA. Contact is not a navigation destination; the single conversion path is the Free workflow review CTA, and this is identical on desktop and in the mobile drawer (one shared nav source, no Contact item in either). The footer mirrors Services and About plus a Free workflow review link and the `hello@iceratops.com` email. Process is a supporting section, not a top-level destination: the process narrative lives on the homepage and the standalone `/process` page stays reachable, but neither is linked in the global nav or footer. Demos, Case Studies, Resources, Use Cases, and packages also stay reachable but are not linked in the global nav or footer until they are strong enough to help sales.
+Global navigation is limited to two destinations plus the Free workflow review CTA: Services, About, and the CTA. Contact is not a navigation destination. Desktop navigation includes all three; on mobile, the CTA stays visible in the header while the drawer contains the shared Services and About links. The footer mirrors Services and About plus Free workflow review, Privacy, and the `hello@iceratops.com` email. Process and the interactive example are supporting homepage sections, not top-level destinations.
 
-The homepage is a front door that previews the business, not a directory that restates other pages. It carries five sections only: hero, a three-card "what we help with" preview, a short three-to-four-step "how it works", a brief founder-led trust section, and the final CTA. It does not duplicate the full services grid (that lives on `/services`), the founder story or "How we operate" values grid (those live on `/about`), or use-case detail. The homepage founder-led trust section is a short narrative (eyebrow, title, one paragraph), not a card grid; the four-value grid belongs to `/about`.
+The homepage is a front door that previews the business, not a directory that restates other pages. Each section has one job: hero, a three-card "what we build" preview, one interactive example, a short four-step process, a brief founder-led trust section, starting price context, and the final CTA. It does not duplicate the full services grid (that lives on `/services`) or the full About story. The homepage founder-led trust section is a short narrative (eyebrow, title, one paragraph), not a card grid.
 
-Do not duplicate the full Review, Plan, Build, Handoff process module across nearby pages. The homepage shows a short version (step names and one-line summaries only); the full module with per-step detail lives on `/process`. `/services` leads with the offers and refers to the process only as a brief narrative lower on the page.
+Do not duplicate the Review, Plan, Build, Handoff process module across nearby pages. The homepage shows the short version with step names and one-line summaries only. `/services` leads with the offers and refers to the process only as a brief narrative lower on the page.
 
 ## Information architecture (canonical)
 
 ```
 /                                Home
 /services                        Services overview
-/services/ai-workflow-audit
-/services/website-refresh
-/services/modern-website
-/services/inquiry-follow-up
-/services/booking-requests
-/services/admin-automation
-/process                          Process (Review, Plan, Build, Handoff) — reachable, not in nav
-/industries
-/industries/[slug]
 /about
-/free-workflow-review            Free workflow review (conversion form; former /contact redirects here)
-/work                            Case studies (placeholder shell)
-/work/[slug]
-/demos                           Demos (placeholder shell)
-/demos/[slug]
-/resources                       Optional, placeholder shell
-/resources/[slug]
-/privacy   /terms   /cookies
+/free-workflow-review            Free workflow review and conversion form
+/free-workflow-review/success    Noindex confirmation route
+/privacy                         Plain-language privacy notice
+/contact                         Permanent redirect to /free-workflow-review
+/contact/success                 Permanent redirect to /free-workflow-review/success
 ```
+
+Do not publish placeholder service-detail, process, industry, work, demo, resource, terms, or cookie routes merely to fill the sitemap. Add a route only when it has a unique customer purpose and content strong enough to support a sales conversation. Until then, those paths should return the branded 404 rather than expose stale shells.
 
 ## Out of scope at launch
 

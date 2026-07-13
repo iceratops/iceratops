@@ -59,8 +59,8 @@ const CHANNELS: Record<
 
 const STATUS = [
   { label: 'New', note: 'Just landed in your inbox' },
-  { label: 'Replied', note: 'AI reply sent in your voice' },
-  { label: 'Follow-up', note: 'Gentle nudge sent automatically' },
+  { label: 'Replied', note: 'Draft reviewed and sent' },
+  { label: 'Follow-up', note: 'Approved reminder sent' },
   { label: 'Booked', note: 'On your calendar' },
 ]
 
@@ -311,7 +311,7 @@ function ThreadLine({
           fontWeight: 600,
           textTransform: 'uppercase',
           letterSpacing: '.06em',
-          color: on ? labelColor : '#475569',
+          color: on ? labelColor : '#94a3b8',
           transition: 'color .4s',
         }}
       >
@@ -327,7 +327,7 @@ function ThreadLine({
           WebkitBoxOrient: 'vertical',
           fontSize: '12px',
           lineHeight: 1.45,
-          color: on ? '#cbd5e1' : '#64748b',
+          color: on ? '#cbd5e1' : '#94a3b8',
           fontStyle: on ? 'normal' : 'italic',
           transition: 'color .4s',
         }}
@@ -340,12 +340,14 @@ function ThreadLine({
 
 // Comfortable tap height on phones, compact on larger screens.
 const dockClass = (active: boolean) =>
-  `flex min-h-11 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-xs font-semibold transition sm:min-h-0 sm:gap-1 sm:px-1.5 sm:py-1.5 sm:text-[11px] ${active ? 'bg-white/15 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`
+  `flex min-h-11 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-xs font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 sm:min-h-0 sm:gap-1 sm:px-1.5 sm:py-1.5 sm:text-[11px] ${active ? 'bg-white/15 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`
 
 export function InquiryDemo() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [reduce, setReduce] = useState(false)
   const [inView, setInView] = useState(false)
+  const [playing, setPlaying] = useState(true)
+  const [announcement, setAnnouncement] = useState('')
   const sectionRef = useRef<HTMLElement>(null)
   const inputs = {
     web: useRef<HTMLTextAreaElement>(null),
@@ -358,6 +360,7 @@ export function InquiryDemo() {
     if (typeof window.matchMedia !== 'function') return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setReduce(true)
+      setPlaying(false)
       dispatch({ type: 'reduced' })
     }
   }, [])
@@ -379,15 +382,31 @@ export function InquiryDemo() {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: state.arm restarts the interval after each manual interaction.
   useEffect(() => {
-    if (reduce || !inView) return
+    if (reduce || !inView || !playing) return
     const id = window.setInterval(() => dispatch({ type: 'tick' }), 2400)
     return () => window.clearInterval(id)
-  }, [reduce, inView, state.arm])
+  }, [reduce, inView, playing, state.arm])
 
-  const select = (ch: Ch) => () => dispatch({ type: 'select', ch, stage: reduce ? 3 : 0 })
+  const select = (ch: Ch) => () => {
+    setPlaying(false)
+    setAnnouncement(`${CHANNELS[ch].label} sample selected. Example paused.`)
+    dispatch({ type: 'select', ch, stage: reduce ? 3 : 0 })
+  }
   const send = (ch: Ch) => () => {
+    setPlaying(false)
+    setAnnouncement(`${CHANNELS[ch].label} sample message added. Example paused.`)
     const value = inputs[ch].current?.value?.trim() ?? ''
     dispatch({ type: 'send', ch, msg: value || null, stage: reduce ? 3 : 0 })
+  }
+  const togglePlaying = () => {
+    const nextPlaying = !playing
+    setPlaying(nextPlaying)
+    setAnnouncement(nextPlaying ? 'Example playing.' : 'Example paused.')
+  }
+  const pauseForInteraction = () => {
+    if (!playing) return
+    setPlaying(false)
+    setAnnouncement('Example paused while you interact with a sample message.')
   }
 
   const active = CHANNELS[state.activeCh]
@@ -397,17 +416,20 @@ export function InquiryDemo() {
   const bookOn = state.stage >= 3
 
   return (
-    <section className="py-14 sm:py-16 lg:py-20" ref={sectionRef}>
+    <section className="scroll-mt-24 py-14 sm:py-16 lg:py-20" id="example" ref={sectionRef}>
       <Container>
+        <p aria-live="polite" className="sr-only">
+          {announcement}
+        </p>
         <div className="max-w-2xl">
-          <Eyebrow>How it works</Eyebrow>
+          <Eyebrow>Working example</Eyebrow>
           <h2 className="font-orbitron mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl">
-            Watch a lead go from message to booked.
+            See a sample inquiry move through the workflow.
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
-            Pick one of the sample channels below, send a message, and follow it through one inbox
-            to a booked job. Real inquiries show up in lots of places; these are just a few. Go
-            ahead and try it. <span className="text-slate-500">Sample data, for illustration.</span>
+            Pick a sample channel, send a message, and follow it through an organized inbox, a draft
+            reply, and a booking step. Real workflows use the channels and approval rules that fit
+            the business. <span className="text-slate-400">Sample data, for illustration.</span>
           </p>
         </div>
 
@@ -420,12 +442,21 @@ export function InquiryDemo() {
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
                 <span className="font-orbitron text-sm text-amber-300">1</span>A lead reaches out
               </p>
-              <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-semibold text-slate-300">
-                Try it
-              </span>
+              <button
+                className="inline-flex min-h-11 items-center rounded-lg border border-white/10 bg-white/5 px-3 text-xs font-semibold text-slate-200 transition hover:border-amber-300/40 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 disabled:cursor-not-allowed disabled:text-slate-400 sm:min-h-9"
+                disabled={reduce}
+                onClick={togglePlaying}
+                type="button"
+              >
+                {reduce ? 'Motion off' : playing ? 'Pause example' : 'Play example'}
+              </button>
             </div>
 
-            <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-slate-950/60">
+            <div
+              className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-slate-950/60"
+              onFocusCapture={pauseForInteraction}
+              onInputCapture={pauseForInteraction}
+            >
               <div
                 className="flex transition-transform duration-500 ease-out motion-reduce:transition-none"
                 style={{ transform: trackTransform }}
@@ -445,7 +476,7 @@ export function InquiryDemo() {
                       </span>
                     </div>
                     <div className="bg-white px-2 py-1.5">
-                      <div className="truncate rounded-md bg-[#f1f3f4] px-2.5 py-1 text-[10px] text-slate-500">
+                      <div className="truncate rounded-md bg-[#f1f3f4] px-2.5 py-1 text-[10px] text-slate-600">
                         acmeplumbing.example
                       </div>
                     </div>
@@ -464,18 +495,18 @@ export function InquiryDemo() {
                       <p className="text-[11px] font-semibold text-slate-700">Request a quote</p>
                       <input
                         aria-label="Sample name"
-                        className="mt-2 w-full rounded border border-slate-300 bg-white px-2 py-1.5 text-base text-slate-700 outline-none focus:border-[#0d9488] sm:text-[11px]"
+                        className="mt-2 w-full rounded border border-slate-300 bg-white px-2 py-1.5 text-base text-slate-700 outline-none focus:border-[#0d9488] focus-visible:ring-2 focus-visible:ring-[#0d9488] focus-visible:ring-offset-2 sm:text-[11px]"
                         defaultValue="Sam Rivera"
                       />
                       <textarea
                         aria-label="Sample website message"
-                        className="mt-1.5 w-full resize-none rounded border border-slate-300 bg-white px-2 py-1.5 text-base leading-5 text-slate-700 outline-none focus:border-[#0d9488] sm:text-[11px] sm:leading-4"
+                        className="mt-1.5 w-full resize-none rounded border border-slate-300 bg-white px-2 py-1.5 text-base leading-5 text-slate-700 outline-none focus:border-[#0d9488] focus-visible:ring-2 focus-visible:ring-[#0d9488] focus-visible:ring-offset-2 sm:text-[11px] sm:leading-4"
                         defaultValue="Any availability next week for a bathroom remodel quote?"
                         ref={inputs.web}
                         rows={2}
                       />
                       <button
-                        className="mt-2 w-full rounded-md bg-[#0d9488] py-2.5 text-[13px] font-semibold text-white transition hover:bg-[#0f766e] sm:py-1.5 sm:text-[11px]"
+                        className="mt-2 w-full rounded-md bg-[#0f766e] py-2.5 text-[13px] font-semibold text-white transition hover:bg-[#115e59] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0f766e] sm:py-1.5 sm:text-[11px]"
                         onClick={send('web')}
                         type="button"
                       >
@@ -502,7 +533,7 @@ export function InquiryDemo() {
                       </span>
                     </div>
                     <div className="bg-white px-2 py-1.5">
-                      <div className="truncate rounded-md bg-[#f1f3f4] px-2.5 py-1 text-[10px] text-slate-500">
+                      <div className="truncate rounded-md bg-[#f1f3f4] px-2.5 py-1 text-[10px] text-slate-600">
                         facebook.com/acmeplumbingco
                       </div>
                     </div>
@@ -518,25 +549,25 @@ export function InquiryDemo() {
                     </div>
                     <div className="px-3 pb-3.5">
                       <div className="flex items-center gap-2">
-                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0d9488] text-[11px] font-bold text-white">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0f766e] text-[11px] font-bold text-white">
                           AP
                         </span>
                         <div>
                           <p className="text-[12px] font-bold text-slate-900">Acme Plumbing Co.</p>
-                          <p className="text-[10px] text-slate-500">Plumber · Austin, TX</p>
+                          <p className="text-[10px] text-slate-600">Plumber · Austin, TX</p>
                         </div>
                       </div>
                       <div className="mt-3 rounded-lg bg-[#f0f2f5] p-2.5">
                         <p className="text-[10px] font-semibold text-slate-600">Messenger</p>
                         <textarea
                           aria-label="Sample Facebook message"
-                          className="mt-1.5 w-full resize-none rounded-2xl border border-slate-200 bg-white px-2.5 py-1.5 text-base leading-5 text-slate-700 outline-none focus:border-[#1877f2] sm:text-[11px] sm:leading-4"
+                          className="mt-1.5 w-full resize-none rounded-2xl border border-slate-200 bg-white px-2.5 py-1.5 text-base leading-5 text-slate-700 outline-none focus:border-[#1877f2] focus-visible:ring-2 focus-visible:ring-[#1877f2] focus-visible:ring-offset-2 sm:text-[11px] sm:leading-4"
                           defaultValue="Roughly what does a water heater replacement run?"
                           ref={inputs.fb}
                           rows={2}
                         />
                         <button
-                          className="mt-2 w-full rounded-full bg-[#1877f2] py-2.5 text-[13px] font-semibold text-white transition hover:bg-[#166fe0] sm:py-1.5 sm:text-[11px]"
+                          className="mt-2 w-full rounded-full bg-[#1d4ed8] py-2.5 text-[13px] font-semibold text-white transition hover:bg-[#1e40af] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d4ed8] sm:py-1.5 sm:text-[11px]"
                           onClick={send('fb')}
                           type="button"
                         >
@@ -557,7 +588,7 @@ export function InquiryDemo() {
                       <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
                       <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
                       <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-                      <span className="ml-2 text-[10px] font-semibold text-slate-500">
+                      <span className="ml-2 text-[10px] font-semibold text-slate-600">
                         New Message
                       </span>
                     </div>
@@ -567,20 +598,20 @@ export function InquiryDemo() {
                     style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}
                   >
                     <div className="border-b border-slate-200 pb-1.5 text-[11px]">
-                      <span className="text-slate-400">To</span> hello@acmeplumbing.example
+                      <span className="text-slate-600">To</span> hello@acmeplumbing.example
                     </div>
                     <div className="border-b border-slate-200 py-1.5 text-[11px]">
-                      <span className="text-slate-400">Subject</span> Quote request
+                      <span className="text-slate-600">Subject</span> Quote request
                     </div>
                     <textarea
                       aria-label="Sample email message"
-                      className="mt-2 w-full resize-none rounded border border-slate-200 bg-white px-2 py-1.5 text-base leading-5 text-slate-700 outline-none focus:border-[#2563eb] sm:text-[11px] sm:leading-4"
+                      className="mt-2 w-full resize-none rounded border border-slate-200 bg-white px-2 py-1.5 text-base leading-5 text-slate-700 outline-none focus:border-[#2563eb] focus-visible:ring-2 focus-visible:ring-[#2563eb] focus-visible:ring-offset-2 sm:text-[11px] sm:leading-4"
                       defaultValue="Need a quote to replace a water heater. When could someone visit?"
                       ref={inputs.email}
                       rows={3}
                     />
                     <button
-                      className="mt-2 rounded-md bg-[#2563eb] px-5 py-2.5 text-[13px] font-semibold text-white transition hover:bg-[#1d4ed8] sm:py-1.5 sm:text-[11px]"
+                      className="mt-2 rounded-md bg-[#2563eb] px-5 py-2.5 text-[13px] font-semibold text-white transition hover:bg-[#1d4ed8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2563eb] sm:py-1.5 sm:text-[11px]"
                       onClick={send('email')}
                       type="button"
                     >
@@ -594,7 +625,7 @@ export function InquiryDemo() {
                   <div className="flex items-center justify-between border-b border-slate-200 bg-[#f6f6f6] px-3 py-2">
                     <span className="text-[16px] leading-none text-[#0a84ff]">&lsaquo;</span>
                     <div className="flex flex-col items-center">
-                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#0d9488] text-[9px] font-bold text-white">
+                      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#0f766e] text-[9px] font-bold text-white">
                         AP
                       </span>
                       <span className="mt-0.5 text-[10px] font-semibold text-slate-700">
@@ -609,19 +640,19 @@ export function InquiryDemo() {
                     className="bg-white px-3 pb-3 pt-3 text-slate-800"
                     style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}
                   >
-                    <p className="text-center text-[9px] font-medium uppercase tracking-wide text-slate-400">
+                    <p className="text-center text-[9px] font-medium uppercase tracking-wide text-slate-600">
                       Text message · Today 9:41 AM
                     </p>
                     <div className="mt-3 flex items-center gap-1.5 rounded-full border border-slate-300 bg-white py-1 pl-3 pr-1">
                       <input
                         aria-label="Sample text message"
-                        className="min-w-0 flex-1 bg-transparent text-base text-slate-700 outline-none sm:text-[11px]"
+                        className="min-w-0 flex-1 rounded bg-transparent text-base text-slate-700 outline-none focus-visible:ring-2 focus-visible:ring-[#0a84ff] sm:text-[11px]"
                         defaultValue="Any chance you could look at a leaking kitchen faucet this week?"
                         ref={inputs.sms}
                       />
                       <button
                         aria-label="Send text"
-                        className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-[#0a84ff] text-white transition hover:bg-[#0070e0] sm:h-6 sm:w-6"
+                        className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-[#0a84ff] text-white transition hover:bg-[#0070e0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0a84ff] sm:h-6 sm:w-6"
                         onClick={send('sms')}
                         type="button"
                       >
@@ -647,10 +678,10 @@ export function InquiryDemo() {
             </div>
 
             <div className="mt-4 flex items-center justify-between gap-2 px-1">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
                 Sample channels
               </span>
-              <span className="text-[11px] font-medium text-slate-500">
+              <span className="text-[11px] font-medium text-slate-400">
                 + WhatsApp, Instagram, Google, and more
               </span>
             </div>
@@ -743,7 +774,7 @@ export function InquiryDemo() {
                 <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
                   <span className="font-orbitron text-sm text-amber-300">3</span>From new to booked
                 </p>
-                <span className="max-w-[45%] truncate text-[10px] font-medium text-slate-500">
+                <span className="max-w-[45%] truncate text-[10px] font-medium text-slate-400">
                   {focusLabel}
                 </span>
               </div>
@@ -768,7 +799,7 @@ export function InquiryDemo() {
                             fontSize: '10.5px',
                             fontWeight: 600,
                             letterSpacing: '.02em',
-                            color: lit ? '#fde68a' : '#64748b',
+                            color: lit ? '#fde68a' : '#94a3b8',
                             transition: 'color .4s',
                           }}
                         >
@@ -787,23 +818,23 @@ export function InquiryDemo() {
                   <ThreadLine
                     body={shownMsg}
                     label={`Incoming · ${active.label}`}
-                    labelColor="#64748b"
+                    labelColor="#94a3b8"
                     on
                     placeholder=""
                   />
                   <ThreadLine
                     body={active.reply}
-                    label="AI reply · in your voice"
+                    label="AI draft · ready for review"
                     labelColor="#6ee7b7"
                     on={state.stage >= 1}
                     placeholder="Drafting a reply that sounds like you…"
                   />
                   <ThreadLine
                     body={active.follow}
-                    label="Follow-up · automatic"
+                    label="Approved follow-up"
                     labelColor="#fbbf24"
                     on={state.stage >= 2}
-                    placeholder="A gentle nudge will go out if it stays quiet…"
+                    placeholder="A reminder can go out after approval…"
                   />
                   <div className="flex h-[26px] items-center">
                     <span
@@ -816,7 +847,7 @@ export function InquiryDemo() {
                         fontSize: '10px',
                         fontWeight: 700,
                         background: bookOn ? 'rgba(252,211,77,0.18)' : 'rgba(255,255,255,0.04)',
-                        color: bookOn ? '#fde68a' : '#64748b',
+                        color: bookOn ? '#fde68a' : '#94a3b8',
                         fontStyle: bookOn ? 'normal' : 'italic',
                         transition: 'background .4s, color .4s',
                       }}
@@ -834,23 +865,23 @@ export function InquiryDemo() {
           <p className="text-sm font-semibold text-slate-300">
             What this could look like for your business
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
             <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
               <h3 className="text-sm font-semibold text-white">Home services</h3>
               <p className="mt-1.5 text-sm leading-6 text-slate-400">
-                Catch every &ldquo;are you available?&rdquo; text and turn it into a booked visit.
+                Keep availability questions visible and easier to move toward a booked visit.
               </p>
             </div>
             <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
               <h3 className="text-sm font-semibold text-white">Salons &amp; studios</h3>
               <p className="mt-1.5 text-sm leading-6 text-slate-400">
-                Reply to booking DMs in minutes and fill last-minute openings.
+                Keep booking DMs organized and make last-minute openings easier to share.
               </p>
             </div>
             <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
               <h3 className="text-sm font-semibold text-white">Trades &amp; contractors</h3>
               <p className="mt-1.5 text-sm leading-6 text-slate-400">
-                Quote requests organized, followed up, and never lost in a full inbox.
+                Keep quote requests organized with a clear follow-up status.
               </p>
             </div>
           </div>

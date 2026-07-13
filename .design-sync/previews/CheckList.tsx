@@ -6,7 +6,7 @@ const surface: React.CSSProperties = {
   borderRadius: 12,
 }
 
-export function Included() {
+export function Commitments() {
   return (
     <div style={surface}>
       <CheckList
@@ -16,33 +16,20 @@ export function Included() {
           'A human stays in the loop for AI-assisted work.',
           'We explain the workflow before we build it.',
         ]}
-        tone="check"
       />
     </div>
   )
 }
 
-export function Excluded() {
+export function WorkflowReview() {
   return (
     <div style={surface}>
       <CheckList
         items={[
-          'No long lock-in contracts',
-          'No mystery account managers',
-          'No undocumented black boxes',
+          'A plain-English first recommendation.',
+          'Likely scope and an honest fit check.',
+          'A suggested call only when it would help.',
         ]}
-        tone="cross"
-      />
-    </div>
-  )
-}
-
-export function Neutral() {
-  return (
-    <div style={surface}>
-      <CheckList
-        items={['Free workflow review', 'Small scoped pilot', 'Documented handoff you own']}
-        tone="dot"
       />
     </div>
   )

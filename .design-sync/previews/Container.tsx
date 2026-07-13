@@ -38,13 +38,3 @@ export function Narrow() {
     </div>
   )
 }
-
-export function Wide() {
-  return (
-    <div style={surface}>
-      <Container size="wide">
-        <div style={inner}>Wide container (max-w-7xl). For full-bleed grids and dense layouts.</div>
-      </Container>
-    </div>
-  )
-}

@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Orbitron } from 'next/font/google'
 import { SiteLayout } from '@/components/layout/SiteLayout'
 import { LocalBusinessJsonLd } from '@/components/seo/LocalBusinessJsonLd'
-import { buildMetadata } from '@/lib/seo'
+import { siteConfig } from '@/lib/seo'
 import './globals.css'
 
 // Self-hosted via next/font: no render-blocking Google Fonts request and no
@@ -19,7 +19,27 @@ const orbitron = Orbitron({
   variable: '--font-orbitron',
 })
 
-export const metadata: Metadata = buildMetadata()
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  manifest: '/site.webmanifest',
+  icons: {
+    icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon.ico' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+}
+export const viewport: Viewport = {
+  colorScheme: 'dark',
+  themeColor: '#0f172a',
+}
 
 export default function RootLayout({
   children,
@@ -37,11 +57,9 @@ export default function RootLayout({
     >
       <head>
         {/*
-         * Reveal-animation safety. The hidden starting state of `.reveal` only
-         * applies under `html.js`, so content is visible by default with JS
-         * disabled. If JS is enabled but the app bundle never runs (blocked or
-         * failed chunk), the timeout flips on `reveal-off` and shows everything.
-         * RevealOnScroll sets `__revealReady` once it mounts.
+         * Reveal-animation safety. JavaScript adds only a small vertical offset,
+         * never an invisible state. If the app bundle fails, the timeout removes
+         * that offset; RevealOnScroll cancels the fallback once it mounts.
          */}
         <script
           // biome-ignore lint/security/noDangerouslySetInnerHtml: static, inline, no user input.

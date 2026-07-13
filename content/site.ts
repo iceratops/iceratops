@@ -31,10 +31,26 @@ export const site = {
 
 export const contactPage = {
   title: 'Request a free workflow review.',
-  description: "Tell us what you want to build. We'll reply within one business day.",
+  description:
+    "Tell us where inquiries, follow-up, or repetitive admin work gets stuck. We'll reply within one business day.",
+  reviewDetails: [
+    {
+      title: 'What we review',
+      text: 'Your website, inquiry flow, follow-up, or one repetitive admin workflow.',
+    },
+    {
+      title: 'What you receive',
+      text: 'A plain-English first recommendation, likely scope, and an honest fit check.',
+    },
+    {
+      title: 'What happens next',
+      text: 'We reply within one business day. If a short call would help, we will suggest one. No pressure and no tools sold.',
+    },
+  ] as const,
   success: {
     title: 'Thanks, your workflow review request is in.',
-    description: "We'll reply within one business day with a clear, no-pressure next step.",
+    description:
+      "We'll review what you shared and reply within one business day. If a short call would help, we will include that option in the email.",
   },
 } as const
 
@@ -59,29 +75,9 @@ export const aboutPage = {
   eyebrow: 'About',
   title: 'A founder-led studio in Pflugerville, TX.',
   description:
-    'Iceratops is a small, founder-led studio. We build clean websites and simple, human-reviewed workflows for owner-led businesses, in the Austin area and remotely.',
+    'Iceratops is a small, founder-led studio. We build clean websites and simple, human-reviewed workflows for owner-led businesses in the Austin area and remotely.',
   story: [
-    'We work the way a good local partner should. We learn how your business runs, fix the workflow that hurts most, and explain every step in plain language.',
-    'We use AI where it removes busywork, like drafting replies or summarizing requests. You set the rules, and a person reviews anything that matters before it reaches your customers. Every system we build is documented, so you can see how it runs.',
-    'When a project ends, you own everything we build, with documentation so you or anyone you bring in later can run it.',
-  ] as const,
-  valuesTitle: 'How we operate',
-  values: [
-    {
-      title: 'Founder-led',
-      text: 'You work directly with the person doing the work, with no account layers in between.',
-    },
-    {
-      title: 'Human-reviewed AI',
-      text: 'AI helps with drafts and busywork. A person approves anything that matters before it goes out the door.',
-    },
-    {
-      title: 'Clear ownership',
-      text: 'Everything we build is yours, documented, with a clean handoff at the end.',
-    },
-    {
-      title: 'Local and remote',
-      text: 'Based in Pflugerville, working across the Austin area and with remote clients.',
-    },
+    'You work directly with the person mapping and building the system. We learn how the business runs, focus on the workflow that hurts most, and explain each step in plain language.',
+    'AI can help with routine work such as drafting replies or summarizing requests. You set the rules, and a person can review anything sensitive, unusual, or tied to a price or promise. The finished work is documented and yours to keep.',
   ] as const,
 } as const

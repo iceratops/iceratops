@@ -18,8 +18,8 @@ export function CustomCopy() {
   return (
     <div style={surface}>
       <ClosingCta
-        title="Ready to clean up your inquiry workflow?"
-        reassurance="Tell us what you want cleaned up. We reply within one business day with a clear next step."
+        title="Ready to simplify the workflow that keeps getting stuck?"
+        reassurance="Tell us where inquiries, follow-up, or repetitive admin work gets stuck. We reply within one business day."
       />
     </div>
   )

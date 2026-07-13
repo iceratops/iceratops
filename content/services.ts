@@ -36,7 +36,7 @@ export const services = [
     name: 'Modern Website Build',
     outcome: 'A new website that earns trust on the first scroll.',
     summary:
-      'A modern, mobile-first site built around your real services, with a conversion path a busy local owner can keep up with.',
+      'A modern, mobile-first site built around your real services, with a clear way for customers to reach out.',
     highlights: [
       'Mobile-first responsive design',
       'Copy written for your audience',
@@ -46,9 +46,9 @@ export const services = [
   {
     slug: 'inquiry-follow-up-systems',
     name: 'Inquiry and Follow-Up System',
-    outcome: 'Catch every inquiry and follow up before the lead goes cold.',
+    outcome: 'Bring inquiries into one view and keep follow-up moving.',
     summary:
-      'AI-assisted drafts, a simple tracker, and a human review step help every reply still sound like you.',
+      'AI-assisted drafts, a simple tracker, and a human review step help replies sound like you.',
     highlights: [
       'AI-drafted replies you approve before send',
       'Lightweight tracker for new leads',
@@ -69,12 +69,12 @@ export const services = [
   },
   {
     slug: 'admin-automation',
-    name: 'Admin Automation',
+    name: 'Admin Automation Sprint',
     outcome: 'Reduce repetitive admin work.',
     summary:
       'A short project removes small, repetitive tasks from your week, with documentation so you stay in control of every step.',
     highlights: [
-      'Done in about two weeks',
+      'Typical scope: about two weeks',
       'Automation you can read and edit',
       'Documented handoff at the end',
     ],

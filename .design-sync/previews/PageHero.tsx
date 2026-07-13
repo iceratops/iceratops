@@ -10,26 +10,21 @@ export function Default() {
   return (
     <div style={surface}>
       <PageHero
-        eyebrow="Pflugerville, TX | Founder-led"
-        title="Clean websites and simple inquiry workflows"
-        highlight="inquiry workflows"
-        description="Iceratops builds modern websites and simple inquiry and follow-up systems for small businesses, so you capture more leads and reply faster. A person stays in the loop."
-        primaryAction={{ href: '/contact', label: 'Free workflow review' }}
-        secondaryAction={{ href: '/services', label: 'See how we help' }}
-        note="We reply within one business day."
+        eyebrow="Services"
+        title="Services for websites and simple workflows."
+        description="Start with the workflow that needs help first. We build clean websites and simple, human-reviewed workflows that fit the business you already run."
       />
     </div>
   )
 }
 
-export function NoHighlightSingleCta() {
+export function About() {
   return (
     <div style={surface}>
       <PageHero
         eyebrow="About"
         title="A founder-led studio in Pflugerville, TX."
-        description="Iceratops is a small, founder-led studio. We build clean websites and simple, human-reviewed workflows for owner-led businesses, in the Austin area and remotely."
-        primaryAction={{ href: '/contact', label: 'Free workflow review' }}
+        description="Iceratops is a small, founder-led studio. We build clean websites and simple, human-reviewed workflows for owner-led businesses in the Austin area and remotely."
       />
     </div>
   )

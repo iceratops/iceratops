@@ -7,8 +7,8 @@ import { useEffect } from 'react'
  * Adds the `is-in` class to elements marked with `reveal` as they scroll into
  * view, driving the subtle fade-and-rise animation defined in globals.css.
  * Respects prefers-reduced-motion (everything is shown immediately) and
- * re-scans on route changes so each page animates its own content. A noscript
- * fallback in the document head keeps content visible when JavaScript is off.
+ * re-scans on route changes so each page animates its own content. The CSS
+ * starting state never hides content before hydration or when JavaScript fails.
  */
 export function RevealOnScroll() {
   const pathname = usePathname()

@@ -4,12 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "packageManager": "pnpm@10.29.1",
+  "pnpm": {
+    "overrides": {
+      "postcss": "8.5.14"
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check . && pnpm run lint:copy",
     "lint:copy": "node scripts/check-em-dashes.mjs",
+    "validate:site": "node scripts/check-site.mjs",
     "format": "biome format --write .",
     "typecheck": "tsc --noEmit"
   },

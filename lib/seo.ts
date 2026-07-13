@@ -13,6 +13,7 @@ export const publicRoutes = [
   { path: '/services' },
   { path: '/about' },
   { path: '/free-workflow-review' },
+  { path: '/privacy' },
 ] as const
 
 export type PublicRoute = (typeof publicRoutes)[number]['path']
@@ -41,7 +42,6 @@ export function buildMetadata({
   const imageUrl = absoluteUrl(siteConfig.ogImage)
 
   return {
-    metadataBase: new URL(siteConfig.url),
     title: title
       ? absoluteTitle
         ? { absolute: title }
@@ -51,18 +51,9 @@ export function buildMetadata({
           template: `%s | ${siteConfig.name}`,
         },
     description,
-    manifest: '/site.webmanifest',
-    icons: {
-      icon: [
-        { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-        { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-        { url: '/favicon.ico' },
-      ],
-      apple: '/apple-touch-icon.png',
-    },
     // A self-referential canonical on a noindex page sends mixed signals, so
     // it is omitted there.
-    ...(noIndex ? {} : { alternates: { canonical } }),
+    alternates: noIndex ? null : { canonical },
     openGraph: {
       title: pageTitle,
       description,

@@ -20,12 +20,12 @@ export function Hero() {
             Pflugerville, TX &middot; Founder-led
           </p>
           <h1 className="font-orbitron mt-6 text-[2rem]/[1.18] font-bold text-white sm:text-[2.6rem]/[1.14] lg:text-[3.1rem]/[1.12]">
-            Stop losing jobs to inquiries you <span className="gradient-text">never get to</span>
+            Turn scattered inquiries into <span className="gradient-text">booked work</span>
           </h1>
           <p className="mt-6 max-w-lg text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
-            Forms, calls, texts, email, social DMs, and more. Your leads arrive everywhere and slip
-            through the cracks. We build a clean website and a simple, human-reviewed system that
-            captures every inquiry, replies fast, and follows up until it turns into a booking.
+            Iceratops builds clean websites and practical follow-up systems for small businesses.
+            Bring forms, calls, texts, email, and social messages into a clearer process, then use
+            human-reviewed AI to draft replies and keep follow-up visible.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ButtonLink className="w-full sm:w-auto" href={primaryCta.href}>
@@ -33,9 +33,9 @@ export function Hero() {
             </ButtonLink>
             <a
               className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-amber-300/50 hover:text-amber-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
-              href="#before-after"
+              href="#example"
             >
-              See how it works
+              View the example
             </a>
           </div>
           <p className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-400">

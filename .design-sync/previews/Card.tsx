@@ -1,6 +1,6 @@
 import { ButtonLink, Card, CardText, CardTitle } from 'iceratops-website'
 
-// Brand dark surface — see Button.tsx note. Cards use light text on translucent
+// Brand dark surface. Cards use light text on translucent
 // fills, so they only read correctly on the app's dark background.
 const surface: React.CSSProperties = {
   background: 'linear-gradient(160deg,#0f172a 0%,#2a1a4a 58%,#0f172a 100%)',
@@ -14,7 +14,8 @@ export function Default() {
       <Card>
         <CardTitle as="h3">Modern websites</CardTitle>
         <CardText>
-          Fast, clear sites that show your services and make it easy to get in touch.
+          Fast, clear sites built around your real services, with contact paths a busy owner can
+          keep up with.
         </CardText>
       </Card>
     </div>
@@ -25,13 +26,13 @@ export function WithAction() {
   return (
     <div style={surface}>
       <Card>
-        <CardTitle as="h3">Inquiry and follow-up</CardTitle>
+        <CardTitle as="h3">Inquiry capture &amp; follow-up</CardTitle>
         <CardText>
-          Capture leads from forms, texts, and DMs in one place, and reply before they go cold.
+          Bring forms, texts, calls, DMs, and other request channels into a workflow you can see.
         </CardText>
         <div style={{ marginTop: 20 }}>
           <ButtonLink href="/services" variant="secondary">
-            See how we help
+            View services
           </ButtonLink>
         </div>
       </Card>
@@ -43,15 +44,15 @@ export function Grid() {
   const items = [
     {
       title: 'Modern websites',
-      text: 'Fast, clear sites that show your services and make it easy to get in touch.',
+      text: 'Fast, clear sites built around your real services, with contact paths a busy owner can keep up with.',
     },
     {
-      title: 'Inquiry and follow-up',
-      text: 'Capture leads from forms, texts, and DMs in one place, and reply before they go cold.',
+      title: 'Inquiry capture & follow-up',
+      text: 'Bring forms, texts, calls, DMs, and other request channels into a workflow you can see.',
     },
     {
-      title: 'Less repetitive admin',
-      text: 'Simple, human-reviewed automation that takes routine tasks off your plate.',
+      title: 'Less scattered admin',
+      text: 'Sort requests, update trackers, and send reminders with rules you understand and control.',
     },
   ]
   return (

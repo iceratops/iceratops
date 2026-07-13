@@ -21,7 +21,7 @@ const cards = [
   },
   {
     title: 'Inquiry capture & follow-up',
-    text: 'Every form, text, call, and DM lands in one place. AI drafts a reply in your voice, you approve what matters, and no lead waits.',
+    text: 'Bring forms, texts, calls, DMs, and other request channels into a workflow you can see. AI can draft routine replies while you control approvals.',
     icon: (
       <svg
         aria-hidden="true"
@@ -38,7 +38,7 @@ const cards = [
   },
   {
     title: 'Less scattered admin',
-    text: 'Requests sorted, trackers updated, reminders sent. The repetitive work handled, with you in control.',
+    text: 'Sort requests, update trackers, and send reminders with rules you understand and control.',
     icon: (
       <svg
         aria-hidden="true"
@@ -65,12 +65,11 @@ export function WhatWeBuild() {
         <div className="reveal max-w-2xl">
           <Eyebrow>What we build</Eyebrow>
           <h2 className="font-orbitron mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl">
-            A website that brings leads in, and a system that never drops them.
+            A clear website, organized inquiries, and less repetitive admin.
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
-            Two things, done properly: a clear site that makes people reach out, and a simple,
-            human-reviewed workflow that captures every request and follows up until it turns into
-            work.
+            We connect the parts that help a customer find you, reach out, and get a useful
+            response. The result is a practical setup your team can understand and own.
           </p>
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-3">

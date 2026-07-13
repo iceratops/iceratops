@@ -1,4 +1,4 @@
-import { Card, CardText, CardTitle, Section } from 'iceratops-website'
+import { Card, CardText, CardTitle, Container, Section, SectionHeading } from 'iceratops-website'
 
 const surface: React.CSSProperties = {
   background: 'linear-gradient(160deg,#0f172a 0%,#2a1a4a 58%,#0f172a 100%)',
@@ -6,30 +6,36 @@ const surface: React.CSSProperties = {
   borderRadius: 12,
 }
 
-export function WithHeader() {
+export function WithHeading() {
   return (
     <div style={surface}>
-      <Section
-        eyebrow="What we do"
-        title="Websites and workflows that fit a small business."
-        description="We keep the work focused on what moves your business: a clear website, a simple way to capture inquiries, and less repetitive admin."
-      >
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: 16,
-          }}
-        >
-          <Card>
-            <CardTitle as="h3">Modern websites</CardTitle>
-            <CardText>Fast, clear sites that make it easy to get in touch.</CardText>
-          </Card>
-          <Card>
-            <CardTitle as="h3">Inquiry and follow-up</CardTitle>
-            <CardText>Capture leads in one place and reply before they go cold.</CardText>
-          </Card>
-        </div>
+      <Section surface="panel">
+        <Container>
+          <SectionHeading
+            eyebrow="What we build"
+            title="A clear website, organized inquiries, and less repetitive admin."
+            description="We connect the parts that help a customer find you, reach out, and get a useful response."
+          />
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: 16,
+              marginTop: 40,
+            }}
+          >
+            <Card>
+              <CardTitle as="h3">Modern websites</CardTitle>
+              <CardText>
+                Fast, clear sites built around your real services and contact paths.
+              </CardText>
+            </Card>
+            <Card>
+              <CardTitle as="h3">Inquiry capture &amp; follow-up</CardTitle>
+              <CardText>Bring request channels into a workflow you can see.</CardText>
+            </Card>
+          </div>
+        </Container>
       </Section>
     </div>
   )
@@ -40,8 +46,8 @@ export function ContentOnly() {
     <div style={surface}>
       <Section>
         <p style={{ color: '#cbd5e1', fontSize: 14, lineHeight: 1.7, margin: 0 }}>
-          A Section with no header props is just vertical rhythm (py-14 to py-20) around whatever
-          you nest inside it.
+          A plain Section provides responsive vertical rhythm around its children. Compose it with
+          Container and SectionHeading when the content needs a heading.
         </p>
       </Section>
     </div>
