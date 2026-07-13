@@ -75,7 +75,7 @@ Underlying capabilities the studio provides across these offerings:
 - Customer intake systems
 - Admin automation
 - CRM and tracker setup
-- AI-drafted replies for human review
+- AI-drafted replies sent through owner-approved rules
 - Workflow documentation and handoff
 
 ## Outcome-focused messaging
@@ -105,7 +105,7 @@ These rules apply to all visible website copy.
 
 1. **No em dashes** anywhere in website copy. Replace with commas, periods, semicolons, "and", or rewrites. Repo lint enforces this.
 2. **No exaggerated AI claims.** Do not say AI runs the business, replaces teams, or operates fully autonomously.
-3. **AI replaces tasks, not people.** Always frame AI as removing busywork while keeping a human in the loop.
+3. **AI replaces tasks, not people.** Always frame AI as removing busywork while keeping the owner in control through approved rules and human review for sensitive, unusual, price-related, or promise-related replies.
 4. **No fake social proof.** Never invent testimonials, clients, logos, case studies, partnerships, or metrics. No stock photo team grids. No AI-generated headshots presented as clients.
 5. **No banned hype words.** Avoid: revolutionize, cutting-edge, world-class, bleeding-edge, unleash, unlock potential, synergy, leverage (as a verb), game-changing, next-generation, empowering the future.
 6. **Plain language at a sixth-grade reading level.**

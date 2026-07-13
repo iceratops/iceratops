@@ -6,6 +6,22 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Sequential homepage inquiry story
+
+Replaced the dense multi-surface inquiry demo with one contained story that moves from customer question to scheduled service without changing the rest of the homepage.
+
+#### Components and interaction
+- Added an explicit eight-scene, 25-second sequence for composing, sending, inbox arrival, an approved reply, customer confirmation, calendar booking, technician handoff, and the final outcome. Slowed the type-on effect and delayed the blinking cursor until the message is complete so every scene has time to register. The service-state progress animation now reaches its complete state and holds before the final payoff.
+- Added a compact Inquiry, Reply, Confirmed, and Service progress track plus subtle Pause, Resume, and Replay controls.
+- Kept AI behavior bounded by an approved response rule and made the fictional business's control over automatic sending explicit.
+- Aligned the Services workflow and offer copy with that model: AI drafts and sends routine replies through owner-approved rules, while sensitive or unusual replies can still receive human review.
+
+#### Accessibility, motion, and mobile
+- Added stage-level viewport gating, browser-tab and window visibility pausing, remaining-time preservation, and complete observer, listener, and timeout cleanup.
+- Added a same-height four-card server fallback that also becomes the static `prefers-reduced-motion` experience, plus a stable screen-reader transcript and native keyboard controls.
+- Rebuilt the stage mobile-first with compact progress dots, 44px controls, 16px control text, and no internal horizontal scrolling.
+- Kept the production content security policy strict while allowing the Next.js development runtime needed for the animated example to hydrate during local previews.
+
 ### Customer-readiness audit and consolidation
 
 Comprehensive route, content, conversion, accessibility, privacy, and production-surface cleanup that preserves the existing Iceratops visual identity.

@@ -68,8 +68,8 @@ const check = (
 
 const steps: readonly Step[] = [
   { title: 'Inquiry', detail: 'Form, text, or DM', icon: inbox },
-  { title: 'AI draft', detail: 'You review it', icon: spark },
-  { title: 'You reply', detail: 'Sounds like you', icon: send },
+  { title: 'AI drafts', detail: 'Using your rules', icon: spark },
+  { title: 'AI sends', detail: 'Routine replies', icon: send },
   { title: 'Booked', detail: 'Call, tour, or order', icon: check, accent: true },
 ]
 

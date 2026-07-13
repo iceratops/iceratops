@@ -58,7 +58,7 @@ export const servicesPage = {
   eyebrow: 'Services',
   title: 'Services for websites and simple workflows.',
   description:
-    'Start with the workflow that needs help first. We build clean websites and simple, human-reviewed workflows that fit the business you already run.',
+    'Start with the workflow that needs help first. We build clean websites and simple, owner-controlled workflows that fit the business you already run.',
   closingCta: {
     title: 'Start with a free workflow review.',
   },

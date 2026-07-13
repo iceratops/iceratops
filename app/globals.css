@@ -141,44 +141,12 @@ html.js.reveal-off .reveal {
   transition: none;
 }
 
-/* Interactive inquiry demo */
-@keyframes ioBlink {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes ioPulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-@keyframes ioGlow {
-  0%,
-  15%,
-  72%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
-  }
-  40%,
-  52% {
-    box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.2);
-  }
-}
-
-@keyframes ioRow {
+/* Sequential inquiry story. React advances only at scene boundaries; CSS owns
+   the small transform and opacity treatments within each scene. */
+@keyframes ioStoryEnter {
   from {
     opacity: 0;
-    transform: translateY(-7px);
+    transform: translateY(14px) scale(0.988);
   }
   to {
     opacity: 1;
@@ -186,29 +154,284 @@ html.js.reveal-off .reveal {
   }
 }
 
-.io-blink {
-  animation: ioBlink 2.2s ease-in-out infinite;
+@keyframes ioStoryExit {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.992);
+  }
 }
 
-.io-pulse {
-  animation: ioPulse 2.6s ease-in-out infinite;
+@keyframes ioWordIn {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
 }
 
-.io-glow {
-  animation: ioGlow 6.5s ease-in-out infinite;
+@keyframes ioCursorBlink {
+  0% {
+    opacity: 0;
+  }
+  1%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
-.io-row {
-  animation: ioRow 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+@keyframes ioSendPress {
+  0%,
+  82%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 10px 28px rgba(251, 191, 36, 0.1);
+  }
+  90% {
+    transform: scale(0.96);
+    box-shadow: 0 0 0 5px rgba(251, 191, 36, 0.14);
+  }
+}
+
+@keyframes ioFlightPath {
+  from {
+    opacity: 0.2;
+    transform: scaleX(0.05);
+  }
+  to {
+    opacity: 0.8;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ioMessageFlight {
+  0% {
+    opacity: 1;
+    transform: translate(-68%, -110%) scale(1);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.72;
+    transform: translate(-8%, 12%) scale(0.78);
+  }
+}
+
+@keyframes ioCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ioToastIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ioCalendarSelect {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(251, 191, 36, 0.13);
+    transform: scale(1.025);
+  }
+}
+
+@keyframes ioServiceProgress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes ioPayoffIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.io-story-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+
+.io-story-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(52px);
+  opacity: 0.17;
+  pointer-events: none;
+}
+
+.io-story-orb-one {
+  top: -4rem;
+  right: 8%;
+  width: 15rem;
+  height: 15rem;
+  background: #7c3aed;
+}
+
+.io-story-orb-two {
+  bottom: -6rem;
+  left: 8%;
+  width: 14rem;
+  height: 14rem;
+  background: #fbbf24;
+}
+
+.io-story-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.io-typing-word {
+  display: inline-block;
+  margin-right: 0.28em;
+}
+
+.io-story-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.15em;
+  margin-left: 2px;
+  vertical-align: -0.18em;
+  background: #fbbf24;
+  opacity: 0;
+}
+
+.io-flight-path {
+  transform-origin: left center;
+}
+
+.io-flight-bubble {
+  transform: translate(-8%, 12%) scale(0.78);
+}
+
+.io-service-progress {
+  width: 100%;
+}
+
+.io-story-stage[data-has-started="true"] .io-story-layer-enter {
+  animation: ioStoryEnter 0.65s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.io-story-stage[data-has-started="true"] .io-story-layer-exit {
+  animation: ioStoryExit 0.5s ease-out both;
+}
+
+.io-story-stage[data-has-started="true"] .io-typing-word {
+  animation: ioWordIn 0.3s ease-out both;
+  animation-delay: var(--io-word-delay);
+}
+
+.io-story-stage[data-has-started="true"] .io-story-cursor {
+  animation: ioCursorBlink 0.95s var(--io-cursor-delay) steps(1, end) infinite both;
+}
+
+.io-story-stage[data-has-started="true"] .io-compose-send {
+  animation: ioSendPress 4.9s ease-out both;
+}
+
+.io-story-stage[data-has-started="true"] .io-flight-path {
+  animation: ioFlightPath 1.15s ease-out both;
+}
+
+.io-story-stage[data-has-started="true"] .io-flight-bubble {
+  animation: ioMessageFlight 1.25s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.io-story-stage[data-has-started="true"] .io-inbox-row {
+  animation: ioCardIn 0.5s ease-out both;
+}
+
+.io-story-stage[data-has-started="true"] .io-notification-toast {
+  animation: ioToastIn 0.55s 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.io-story-stage[data-has-started="true"] .io-reply-bubble,
+.io-story-stage[data-has-started="true"] .io-customer-reply,
+.io-story-stage[data-has-started="true"] .io-service-status {
+  animation: ioCardIn 0.55s 0.32s ease-out both;
+}
+
+.io-story-stage[data-has-started="true"] .io-trust-label,
+.io-story-stage[data-has-started="true"] .io-confirmation-card,
+.io-story-stage[data-has-started="true"] .io-technician-avatar {
+  animation: ioCardIn 0.55s 0.9s ease-out both;
+}
+
+.io-story-stage[data-has-started="true"] .io-reply-received {
+  animation: ioCardIn 0.5s 0.35s ease-out both;
+}
+
+.io-story-stage[data-has-started="true"] .io-calendar-selected {
+  animation: ioCalendarSelect 0.85s 0.35s ease-out both;
+}
+
+.io-story-stage[data-has-started="true"] .io-service-progress {
+  animation: ioServiceProgress 1.75s 0.55s ease-out both;
+}
+
+.io-story-stage[data-has-started="true"] .io-payoff {
+  animation: ioPayoffIn 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.io-story-stage[data-has-started="true"][data-player-state="paused"] *,
+.io-story-stage[data-has-started="true"][data-player-state="paused"] *::before,
+.io-story-stage[data-has-started="true"][data-player-state="paused"] *::after {
+  animation-play-state: paused;
+}
+
+@media (min-width: 640px) {
+  .io-story-layer {
+    padding: 1.5rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-twinkle,
   .hero-glow,
-  .io-blink,
-  .io-pulse,
-  .io-glow,
-  .io-row,
   .page-enter {
     animation: none;
   }
