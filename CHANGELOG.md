@@ -24,7 +24,7 @@ Comprehensive route, content, conversion, accessibility, privacy, and production
 - Added a pause control and interaction-aware auto-pause to the interactive demo, strengthened small-text contrast, corrected Services heading levels, trapped focus inside the open mobile drawer, and kept the primary CTA visible in the mobile header.
 - Added a no-JavaScript mobile navigation fallback and made scroll-reveal content fully visible before hydration or if the client bundle fails.
 - Added a branded, noindex 404 and removed inherited canonicals from noindex utility pages by separating global and route metadata ownership.
-- Added first-party security headers to both Next-rendered routes and Netlify static assets, removed the `X-Powered-By` header, served the manifest with the correct media type, and aligned browser theme color with the dark visual identity.
+- Added security headers to both Next-rendered routes and Netlify static assets, kept scripts and connections first-party, allowed only Netlify's app origin to frame its deploy-preview review drawer, removed the `X-Powered-By` header, served the manifest with the correct media type, and aligned browser theme color with the dark visual identity.
 
 #### Validation and cleanup
 - Removed three verified-dead homepage components and added a no-dependency `validate:site` check for route inventory, internal links, redirects, metadata, the Netlify form contract, and response headers.
