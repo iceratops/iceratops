@@ -18,7 +18,7 @@ Comprehensive route, content, conversion, accessibility, privacy, and production
 #### Forms and privacy
 - Expanded the Free workflow review page to explain what is reviewed, what the customer receives, what happens next, and the one-business-day response window.
 - Added clearer form guidance, an announced busy state, consistent submit copy, a visible privacy notice, and an explicit email fallback when JavaScript is unavailable. The online submit control waits for hydration because Netlify's current Next.js runtime requires AJAX form submission.
-- Added a public `/privacy` route based on the site's actual Netlify Forms flow and linked it from the form and footer. Live form receipt still requires a safe deploy test with an approved test email.
+- Added a public `/privacy` route based on the site's actual Netlify Forms flow and linked it from the form and footer. Production form receipt and the success redirect were verified on July 13, 2026 with one clearly marked test submission.
 
 #### Accessibility, SEO, and security
 - Added a pause control and interaction-aware auto-pause to the interactive demo, strengthened small-text contrast, corrected Services heading levels, trapped focus inside the open mobile drawer, and kept the primary CTA visible in the mobile header.
