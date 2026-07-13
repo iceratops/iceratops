@@ -17,16 +17,10 @@ export function FinalCta() {
             Tell us what&rsquo;s slipping through the cracks. We&rsquo;ll reply within one business
             day with a clear, no-pressure next step.
           </p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="mt-8 flex justify-center">
             <ButtonLink className="w-full sm:w-auto" href={primaryCta.href}>
               {primaryCta.label}
             </ButtonLink>
-            <a
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-amber-300/50 hover:text-amber-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 sm:w-auto"
-              href="#pricing"
-            >
-              See pricing
-            </a>
           </div>
         </div>
       </Container>

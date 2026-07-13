@@ -34,7 +34,7 @@ Do not change positioning, services, tone, pricing direction, CTA strategy, or b
 - `lib/`: shared helpers such as SEO and class utilities.
 - `public/`: static images, favicons, logos, manifests.
 - `scripts/`: repo validation scripts, including copy lint.
-- `docs/`: legal/compliance docs. Review only when the task asks for them.
+- `docs/`: retained project documentation when present. Review only when the task asks for it.
 
 Generated, dependency, or local-heavy paths to avoid unless directly relevant:
 

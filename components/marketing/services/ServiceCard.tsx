@@ -16,7 +16,7 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
       <p className="border-l-2 border-amber-400/70 pl-3 text-sm font-semibold leading-6 text-amber-100">
         {service.outcome}
       </p>
-      <CardTitle as="h3" className="mt-4">
+      <CardTitle as="h2" className="mt-4">
         {service.name}
       </CardTitle>
       <CardText>{service.summary}</CardText>

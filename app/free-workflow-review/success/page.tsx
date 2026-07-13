@@ -35,7 +35,7 @@ export default function FreeWorkflowReviewSuccessPage() {
             {contactPage.success.description}
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <ButtonLink className="w-full sm:w-auto" href="/">
+            <ButtonLink className="w-full sm:w-auto" href="/" variant="secondary">
               Back to home
             </ButtonLink>
             <ButtonLink className="w-full sm:w-auto" href="/services" variant="secondary">

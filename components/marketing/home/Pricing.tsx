@@ -1,7 +1,5 @@
 import { Eyebrow } from '@/components/marketing/Eyebrow'
-import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
-import { primaryCta } from '@/content/navigation'
 
 const flagshipPoints = [
   'Website or refresh',
@@ -22,7 +20,7 @@ const startingPoints = [
     price: '$3,500',
   },
   {
-    title: 'Admin & Workflow Automation',
+    title: 'Admin Automation Sprint',
     text: 'Remove repetitive admin from your week.',
     price: '$2,500',
   },
@@ -62,30 +60,12 @@ export function Pricing() {
             Clear starting points. Quoted after a short review.
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
-            Most projects are quoted after a short review, because every business has different
-            pages, workflows, tools, and follow-up needs. Here&rsquo;s where things typically start.
+            These starting points help you judge fit. The final quote follows a short review of the
+            pages, workflow, tools, and approval steps involved.
           </p>
         </div>
 
-        <div className="reveal mt-8 flex flex-col gap-4 rounded-2xl border border-amber-300/25 bg-amber-300/[0.05] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
-          <div>
-            <p className="font-orbitron text-lg font-semibold text-white">
-              Free workflow review{' '}
-              <span className="ml-1.5 rounded-full bg-amber-300/15 px-2.5 py-0.5 align-middle text-xs font-semibold text-amber-200">
-                Free
-              </span>
-            </p>
-            <p className="mt-1.5 text-sm leading-6 text-slate-300">
-              A short call to map your inquiry flow and find the first win. No pressure, no tools
-              sold.
-            </p>
-          </div>
-          <ButtonLink className="flex-none" href={primaryCta.href}>
-            Book the review
-          </ButtonLink>
-        </div>
-
-        <div className="mt-5 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="mt-10 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="reveal flex flex-col rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-300/[0.08] to-white/[0.02] p-6 sm:p-7">
             <div className="flex items-center justify-between gap-3">
               <p className="font-orbitron text-lg font-semibold text-white">
@@ -108,9 +88,6 @@ export function Pricing() {
                 </li>
               ))}
             </ul>
-            <div className="mt-6 flex">
-              <ButtonLink href={primaryCta.href}>Start with a free review</ButtonLink>
-            </div>
           </div>
 
           <div className="reveal grid content-start gap-3" style={{ transitionDelay: '120ms' }}>
@@ -124,7 +101,7 @@ export function Pricing() {
                   <p className="mt-1 text-sm leading-6 text-slate-400">{item.text}</p>
                 </div>
                 <p className="font-orbitron flex-none text-right text-base font-bold text-amber-200">
-                  <span className="block text-[10px] font-medium uppercase tracking-wider text-slate-500">
+                  <span className="block text-[10px] font-medium uppercase tracking-wider text-slate-400">
                     from
                   </span>
                   {item.price}

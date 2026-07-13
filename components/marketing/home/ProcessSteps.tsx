@@ -7,16 +7,12 @@ const steps = [
     text: 'A short, free workflow review. We see how inquiries and admin work today and say plainly where we can help.',
   },
   {
-    name: 'Map',
-    text: 'We map your inquiry-to-booking flow and agree on one outcome, a fixed scope, and a real timeline.',
+    name: 'Plan',
+    text: 'We map one useful outcome, the approval rules, a clear scope, and a realistic timeline.',
   },
   {
     name: 'Build',
-    text: 'We build the site and follow-up system in small steps, showing working drafts as we go.',
-  },
-  {
-    name: 'Test',
-    text: 'We test with real inquiries and tune the AI drafts to sound like you before anything goes live.',
+    text: 'We build and test in small steps, showing working drafts before anything goes live.',
   },
   {
     name: 'Handoff',
@@ -27,7 +23,10 @@ const steps = [
 
 export function ProcessSteps() {
   return (
-    <section className="relative border-y border-white/[0.06] bg-white/[0.02] py-14 sm:py-16 lg:py-20">
+    <section
+      className="relative scroll-mt-24 border-y border-white/[0.06] bg-white/[0.02] py-14 sm:py-16 lg:py-20"
+      id="process"
+    >
       <Container>
         <div className="reveal max-w-2xl">
           <Eyebrow>How we work</Eyebrow>
@@ -39,7 +38,7 @@ export function ProcessSteps() {
             and own.
           </p>
         </div>
-        <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => (
             <li
               className={`reveal relative rounded-2xl border p-6 ${step.accent ? 'border-amber-300/25 bg-amber-300/[0.05]' : 'border-white/10 bg-white/[0.03]'}`}

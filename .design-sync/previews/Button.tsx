@@ -1,8 +1,7 @@
 import { Button, ButtonLink } from 'iceratops-website'
 
-// Iceratops components are built for the site's dark app background (shipped via
-// the styles.css body rule). Preview cards render on white, so each cell wraps
-// its content in the brand surface to match how the components actually appear.
+// Iceratops components are built for the site's dark ambient backdrop. Preview
+// cards render on white, so each cell supplies the equivalent brand surface.
 const surface: React.CSSProperties = {
   background: 'linear-gradient(160deg,#0f172a 0%,#2a1a4a 58%,#0f172a 100%)',
   padding: 24,
@@ -20,8 +19,7 @@ export function Variants() {
     <div style={surface}>
       <div style={row}>
         <Button variant="primary">Free workflow review</Button>
-        <Button variant="secondary">See how we help</Button>
-        <Button variant="ghost">Learn more</Button>
+        <Button variant="secondary">View services</Button>
       </div>
     </div>
   )
@@ -55,9 +53,9 @@ export function AsLink() {
   return (
     <div style={surface}>
       <div style={row}>
-        <ButtonLink href="/contact">Free workflow review</ButtonLink>
+        <ButtonLink href="/free-workflow-review">Free workflow review</ButtonLink>
         <ButtonLink href="/services" variant="secondary">
-          See how we help
+          View services
         </ButtonLink>
       </div>
     </div>

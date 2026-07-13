@@ -118,10 +118,8 @@ a {
   animation: pageEnter 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
-/* Scroll reveal. Content is visible by default; the hidden starting state is
-   scoped to `html.js` (set by an inline script in the document head) so pages
-   never render blank when JavaScript is disabled. `reveal-off` is the escape
-   hatch the same script flips if the app bundle fails to run. */
+/* Scroll reveal. Content remains fully visible before hydration and when the
+   app bundle fails; JavaScript only adds a small vertical motion treatment. */
 .reveal {
   transition:
     opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
@@ -129,7 +127,6 @@ a {
 }
 
 html.js .reveal {
-  opacity: 0;
   transform: translateY(22px);
 }
 

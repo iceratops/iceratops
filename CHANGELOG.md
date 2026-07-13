@@ -6,6 +6,32 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Customer-readiness audit and consolidation
+
+Comprehensive route, content, conversion, accessibility, privacy, and production-surface cleanup that preserves the existing Iceratops visual identity.
+
+#### Content and conversion
+- Reduced the homepage from ten sections to seven distinct jobs. Removed the duplicate Before and After, Flagship Offer, and Human Reviewed AI sections while retaining the interactive example, pricing context, process, founder-led trust, and primary CTA.
+- Replaced absolute outcome promises with practical capability language, aligned the four-step process to Review, Plan, Build, and Handoff, and standardized conversion labels around the Free workflow review.
+- Tightened About to one studio story plus concrete commitments. Renamed the approved Admin Automation Sprint consistently.
+
+#### Forms and privacy
+- Expanded the Free workflow review page to explain what is reviewed, what the customer receives, what happens next, and the one-business-day response window.
+- Added clearer form guidance, an announced busy state, consistent submit copy, a visible privacy notice, and an explicit email fallback when JavaScript is unavailable. The online submit control waits for hydration because Netlify's current Next.js runtime requires AJAX form submission.
+- Added a public `/privacy` route based on the site's actual Netlify Forms flow and linked it from the form and footer. Live form receipt still requires a safe deploy test with an approved test email.
+
+#### Accessibility, SEO, and security
+- Added a pause control and interaction-aware auto-pause to the interactive demo, strengthened small-text contrast, corrected Services heading levels, trapped focus inside the open mobile drawer, and kept the primary CTA visible in the mobile header.
+- Added a no-JavaScript mobile navigation fallback and made scroll-reveal content fully visible before hydration or if the client bundle fails.
+- Added a branded, noindex 404 and removed inherited canonicals from noindex utility pages by separating global and route metadata ownership.
+- Added first-party security headers to both Next-rendered routes and Netlify static assets, removed the `X-Powered-By` header, served the manifest with the correct media type, and aligned browser theme color with the dark visual identity.
+
+#### Validation and cleanup
+- Removed three verified-dead homepage components and added a no-dependency `validate:site` check for route inventory, internal links, redirects, metadata, the Netlify form contract, and response headers.
+- Removed two abandoned legal/compliance templates that contained placeholders and false Google Analytics and UK regulator assumptions.
+- Pinned the transitive PostCSS runtime to patched version 8.5.14 after the production dependency audit found a moderate advisory in Next.js's older bundled version.
+- Reconciled `WEBSITE_BRIEF.md` with the intentionally small public route surface so obsolete placeholder routes are not treated as launch requirements.
+
 ### Production-readiness pass (architecture, mobile UX, cleanup)
 
 Full architecture verification and mobile UX repair ahead of deploy. Keeps the approved visual direction and offer; fixes structural and responsive defects.
@@ -18,12 +44,12 @@ Full architecture verification and mobile UX repair ahead of deploy. Keeps the a
 
 #### Motion and performance
 - Fonts moved from a render-blocking Google Fonts CSS `@import` to self-hosted `next/font` (also removes the only third-party runtime request).
-- Reveal animation is now JS-failure safe: the hidden starting state applies only under `html.js` (set by an inline head script), and a 3s fallback shows everything if the bundle never runs. The old noscript-only hack was replaced.
+- Reveal animation is JS-failure safe: content remains fully visible before hydration, JavaScript adds only a small vertical offset, and a 3s fallback removes that offset if the bundle never runs.
 - Smooth anchor scrolling behind `prefers-reduced-motion: no-preference`; the demo carousel slide honors reduced motion.
 
 #### Architecture and cleanup
 - Shared `workflowReviewFormId` constant so the header CTA anchor and the form card id cannot drift.
-- No-JS form fallback now posts to the static `/__forms.html` (Netlify intercepts it; its form action redirects to the success page). Previously no-JS submissions were silently dropped.
+- Added a static `/__forms.html` detector for Netlify form discovery. The later customer-readiness audit replaced its unsupported no-JavaScript full-page submission claim with an explicit email fallback because the current Next.js runtime requires AJAX submission.
 - SEO: twitter card downgraded to `summary` to match the square logo image, canonical omitted on noindex pages, success page retitled "Request received", sitemap no longer stamps `lastModified` on every build, home title now carries the studio descriptor and locality.
 - Baseline security headers added in `netlify.toml` (nosniff, frame deny, referrer policy, permissions policy).
 - Dead code removed: `.glass-card` CSS and unused CSS variables, all unused Tailwind theme extensions, `Section` header props, `PageHero` CTA machinery, `Button` ghost variant, `Container` wide size, `CheckList` tones, `Eyebrow` centered variant, `site.state`, `ServiceAreaCity`; em-dash script scan list corrected.

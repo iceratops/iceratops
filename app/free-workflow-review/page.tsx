@@ -24,6 +24,19 @@ export default function FreeWorkflowReviewPage() {
           </p>
         </div>
 
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {contactPage.reviewDetails.map((item, index) => (
+            <div
+              className="reveal rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+              key={item.title}
+              style={{ transitionDelay: `${index * 80}ms` }}
+            >
+              <h2 className="font-orbitron text-sm font-semibold text-white">{item.title}</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-300">{item.text}</p>
+            </div>
+          ))}
+        </div>
+
         <div
           className="reveal mt-10 scroll-mt-24 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur sm:p-8"
           id={workflowReviewFormId}

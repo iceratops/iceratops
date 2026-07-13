@@ -1,14 +1,15 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useEffect, useState } from 'react'
 import { Button } from '@/components/primitives/Button'
 import { site } from '@/content/site'
 
 type SubmitState = 'idle' | 'submitting' | 'error'
 
 const fieldClasses =
-  'mt-2 w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white transition-colors placeholder:text-slate-500 hover:border-white/25 focus:border-amber-300/60 focus:outline-none focus:ring-2 focus:ring-amber-300/40'
+  'mt-2 w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-base text-white transition-colors placeholder:text-slate-400 hover:border-white/25 focus:border-amber-300/60 focus:outline-none focus:ring-2 focus:ring-amber-300/40'
 const labelClasses = 'block text-sm font-semibold text-white'
 
 function encode(data: Record<string, string>) {
@@ -19,7 +20,12 @@ function encode(data: Record<string, string>) {
 
 export function ContactForm() {
   const router = useRouter()
+  const [isInteractive, setIsInteractive] = useState(false)
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
+
+  useEffect(() => {
+    setIsInteractive(true)
+  }, [])
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -47,12 +53,12 @@ export function ContactForm() {
   }
 
   return (
-    // The no-JS fallback posts to the static /__forms.html so Netlify still
-    // intercepts and records the submission (POSTs to Next-rendered routes
-    // bypass form handling); the static form's own action then redirects to
-    // the success page. With JS, handleSubmit posts and routes client-side.
+    // Netlify's Next.js runtime requires this submission to use AJAX. Keep the
+    // submit control disabled until hydration so the form cannot imply a
+    // supported full-page fallback; the noscript message provides email instead.
     <form
       action="/__forms.html"
+      aria-busy={submitState === 'submitting'}
       className="space-y-5"
       data-netlify="true"
       method="POST"
@@ -110,14 +116,49 @@ export function ContactForm() {
 
       <div>
         <label className={labelClasses} htmlFor="message">
-          What do you want to build?
+          Where is work getting stuck?
         </label>
-        <textarea className={fieldClasses} id="message" name="message" required rows={5} />
+        <p className="mt-1 text-sm leading-6 text-slate-400" id="message-help">
+          Share the current process, what gets missed, and the outcome you want.
+        </p>
+        <textarea
+          aria-describedby="message-help"
+          className={fieldClasses}
+          id="message"
+          name="message"
+          required
+          rows={5}
+        />
       </div>
 
+      <p className="text-sm leading-6 text-slate-400">
+        We use these details to review your request and reply. Read the{' '}
+        <Link className="font-semibold text-amber-200 underline underline-offset-4" href="/privacy">
+          privacy notice
+        </Link>
+        .
+      </p>
+
+      <noscript>
+        <p className="text-sm leading-6 text-amber-200">
+          JavaScript is required to submit this form online. Email{' '}
+          <a
+            className="font-semibold underline underline-offset-4"
+            href={`mailto:${site.contact.email}?subject=${site.contact.reviewSubject}`}
+          >
+            {site.contact.email}
+          </a>{' '}
+          instead.
+        </p>
+      </noscript>
+
       <div>
-        <Button className="w-full sm:w-auto" disabled={submitState === 'submitting'} type="submit">
-          {submitState === 'submitting' ? 'Sending...' : 'Send request'}
+        <Button
+          className="w-full sm:w-auto"
+          disabled={!isInteractive || submitState === 'submitting'}
+          type="submit"
+        >
+          {submitState === 'submitting' ? 'Sending...' : 'Request free workflow review'}
         </Button>
       </div>
 

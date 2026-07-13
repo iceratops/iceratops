@@ -11,9 +11,15 @@ import { cx } from '@/lib/classes'
 
 export function Header() {
   const pathname = usePathname()
+  const [isInteractive, setIsInteractive] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const mobileNavRef = useRef<HTMLElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    setIsInteractive(true)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -22,17 +28,40 @@ export function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close the drawer on Escape, and return focus to the toggle button.
+  // Move focus into the open drawer, keep keyboard focus inside it, and return
+  // focus to the toggle when Escape closes it.
   useEffect(() => {
     if (!open) return
+    const nav = mobileNavRef.current
+    const focusable = Array.from(
+      nav?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? [],
+    )
+    if (focusable.length === 0) return
+
+    const focusFrame = window.requestAnimationFrame(() => focusable[0]?.focus())
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setOpen(false)
         toggleRef.current?.focus()
+        return
+      }
+      if (event.key !== 'Tab') return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last?.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first?.focus()
       }
     }
     document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
+    return () => {
+      window.cancelAnimationFrame(focusFrame)
+      document.removeEventListener('keydown', onKey)
+    }
   }, [open])
 
   // Close the drawer on any navigation, including the logo link, which lives
@@ -93,8 +122,16 @@ export function Header() {
           href="/"
         >
           <Image
+            alt=""
+            className="h-11 w-11 sm:hidden"
+            height={48}
+            priority
+            src="/iceratops_logo.svg"
+            width={48}
+          />
+          <Image
             alt="Iceratops"
-            className="h-auto w-40 sm:w-44"
+            className="hidden h-auto w-44 sm:block"
             height={48}
             priority
             src="/iceratops_text_logo.svg"
@@ -123,11 +160,19 @@ export function Header() {
           </ButtonLink>
         </nav>
 
+        <ButtonLink className="min-h-11 px-3 py-2 text-xs lg:hidden" href={ctaHref} size="sm">
+          {primaryCta.label}
+        </ButtonLink>
+
         <button
           aria-controls="mobile-nav"
           aria-expanded={open}
           aria-label={open ? 'Close menu' : 'Open menu'}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-slate-200 transition-colors hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 lg:hidden"
+          className={cx(
+            'inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-slate-200 transition-colors hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 lg:hidden',
+            !isInteractive && 'invisible',
+          )}
+          disabled={!isInteractive}
           onClick={() => setOpen((value) => !value)}
           ref={toggleRef}
           type="button"
@@ -148,6 +193,25 @@ export function Header() {
           </svg>
         </button>
       </Container>
+
+      <noscript>
+        <nav
+          aria-label="Navigation without JavaScript"
+          className="border-t border-white/10 bg-slate-950/90 lg:hidden"
+        >
+          <Container className="flex flex-wrap items-center gap-x-5 gap-y-2 py-3 text-sm font-semibold text-slate-200">
+            {headerNavItems.map((item) => (
+              <Link
+                className="py-2 underline-offset-4 hover:underline"
+                href={item.href}
+                key={item.href}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </Container>
+        </nav>
+      </noscript>
 
       {/* Backdrop: gently fades the page behind the open drawer. */}
       <button
@@ -176,6 +240,7 @@ export function Header() {
           className="min-h-0 overflow-hidden bg-slate-950/70"
           id="mobile-nav"
           inert={!open || undefined}
+          ref={mobileNavRef}
         >
           <Container className="flex flex-col gap-1 pb-5 pt-1">
             {headerNavItems.map((item) => (
@@ -194,9 +259,6 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <ButtonLink className="mt-3 w-full" href={ctaHref} onClick={() => setOpen(false)}>
-              {primaryCta.label}
-            </ButtonLink>
           </Container>
         </nav>
       </div>

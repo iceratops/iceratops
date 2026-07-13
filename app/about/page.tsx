@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import { CheckList } from '@/components/marketing/CheckList'
 import { PageHero } from '@/components/marketing/PageHero'
-import { SectionHeading } from '@/components/marketing/SectionHeading'
-import { Card, CardText, CardTitle } from '@/components/primitives/Card'
+import { Card } from '@/components/primitives/Card'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { aboutPage, site } from '@/content/site'
@@ -23,7 +22,7 @@ export default function AboutPage() {
         title={aboutPage.title}
       />
 
-      <Section className="py-8 sm:py-10">
+      <Section className="pb-16 pt-8 sm:pb-24 sm:pt-10">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
             <div className="reveal max-w-2xl space-y-5">
@@ -48,34 +47,12 @@ export default function AboutPage() {
                 <p className="mt-1.5 text-xs text-slate-400">Austin area and remote</p>
               </div>
               <p className="mt-5 text-sm leading-6 text-slate-300">
-                We work across the Austin area, including {site.serviceArea.slice(1, 6).join(', ')},
-                and with remote clients across the U.S.
+                Available across the Austin area, including{' '}
+                {site.serviceArea.slice(1, 6).join(', ')}, and remotely across the U.S.
               </p>
               <p className="mt-6 text-sm font-semibold text-white">What you can count on</p>
               <CheckList className="mt-4" items={site.commitments} />
             </Card>
-          </div>
-        </Container>
-      </Section>
-
-      <Section className="py-8 pb-16 sm:py-10 sm:pb-24">
-        <Container>
-          <SectionHeading
-            className="reveal"
-            eyebrow="How we operate"
-            title={aboutPage.valuesTitle}
-          />
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            {aboutPage.values.map((value, index) => (
-              <Card
-                className="reveal h-full"
-                key={value.title}
-                style={{ transitionDelay: `${(index % 2) * 90}ms` }}
-              >
-                <CardTitle as="h3">{value.title}</CardTitle>
-                <CardText>{value.text}</CardText>
-              </Card>
-            ))}
           </div>
         </Container>
       </Section>

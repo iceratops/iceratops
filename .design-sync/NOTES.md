@@ -24,31 +24,32 @@ page-specific sections (`home/*`, `services/*`, `Header`, `Footer`, `SiteLayout`
   paths plugin — then the Next shims don't apply and you get the `process` crash above.
 - **CSS** is Tailwind v3, compiled by `cfg.buildCmd` to `.design-sync/assets/styles.css`
   (`cfg.cssEntry`). Re-run buildCmd after adding components or previews. The output
-  carries the dark `body` background + the custom layer (`.font-orbitron`,
-  `.glass-card`, `.gradient-text`). `assets/` is gitignored — a fresh clone must run
+  carries the dark HTML base, the ambient backdrop class, and the custom layer
+  (`.font-orbitron`, `.gradient-text`). `assets/` is gitignored — a fresh clone must run
   buildCmd before the converter.
 - **`dtsPropsFor` is hand-written.** There is no dist `.d.ts`, and the source prop
   types are non-exported inline aliases, so auto-extraction produced
   `[key: string]: unknown`. The real contracts live in `cfg.dtsPropsFor`. Keep them in
   sync when component props change.
-- **`guidelinesGlob: []`** on purpose — `docs/` holds compliance docs
-  (data-breach-response, data-processing-register), not design guidance.
+- **`guidelinesGlob: []`** on purpose — no design guidance is maintained under
+  `docs/`; product and brand direction live in `WEBSITE_BRIEF.md`.
 - Run the converter **from the repo root** (a one-time playwright install `cd`'d into
   `.ds-sync`; the shell cwd can drift).
 
 ## Dark-theme previews
 
 Components use light text on translucent fills and only read correctly on the dark
-app background (shipped to real designs via the `styles.css` `body` rule). Preview
-cards render on white, so every `.design-sync/previews/<Name>.tsx` wraps its content
-in the brand surface gradient. Layout glue uses inline styles (no Tailwind classes),
-so previews add nothing to the Tailwind purge set.
+app background. Production supplies the gradient through `AmbientBackground`, which
+is outside the synced subset. Preview cards render on white, so every
+`.design-sync/previews/<Name>.tsx` wraps its content in the brand surface gradient.
+Layout glue uses inline styles (no Tailwind classes), so previews add nothing to the
+Tailwind purge set.
 
 ## Known render warns
 
-- **Orbitron + Inter load via a remote Google Fonts `@import`** (`[FONT_REMOTE]`). The
-  offline render check can't fetch them, so display titles fall back to a system font
-  in the local screenshots. They load correctly in claude.ai/design. Not a defect.
+- **Font fidelity:** the app self-hosts Orbitron and Inter through `next/font`, but the
+  standalone design-sync CSS does not run Next's font loader. Offline previews may
+  therefore use their system fallbacks. This does not affect the production app.
 
 ## Re-sync risks (watch-list)
 
