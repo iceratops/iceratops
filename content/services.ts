@@ -48,9 +48,9 @@ export const services = [
     name: 'Inquiry and Follow-Up System',
     outcome: 'Bring inquiries into one view and keep follow-up moving.',
     summary:
-      'AI-assisted drafts, a simple tracker, and a human review step help replies sound like you.',
+      'AI drafts and sends routine replies through rules you approve. A simple tracker keeps follow-up visible.',
     highlights: [
-      'AI-drafted replies you approve before send',
+      'AI-drafted replies sent through approved rules',
       'Lightweight tracker for new leads',
       'Reminders so warm leads do not go quiet',
     ],
