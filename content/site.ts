@@ -1,25 +1,20 @@
 export const site = {
   name: 'Iceratops',
   url: 'https://iceratops.com',
-  shortDescription: 'Founder-led web and workflow studio in Pflugerville, TX.',
+  shortDescription:
+    'Iceratops builds custom software, digital platforms, modern websites, workflow automation, and AI-assisted systems for organizations in the U.S. and worldwide.',
   footerTagline:
-    'Founder-led in Pflugerville, TX. Clean websites and simple inquiry and follow-up workflows for small businesses.',
-  city: 'Pflugerville',
-  stateAbbr: 'TX',
-  serviceArea: [
-    'Pflugerville',
-    'Austin',
-    'Round Rock',
-    'Hutto',
-    'Cedar Park',
-    'Georgetown',
-    'Leander',
-    'Manor',
-  ] as readonly string[],
+    'Texas-founded and founder-led. Practical software, websites, automation, and connected systems for clients worldwide.',
+  origin: {
+    city: 'Pflugerville',
+    state: 'Texas',
+    country: 'United States',
+  },
+  availability: 'Working with clients in the United States, Saudi Arabia, and worldwide.',
   contact: {
     email: 'hello@iceratops.com',
     responseCommitment: 'We reply within one business day.',
-    reviewSubject: 'Free%20workflow%20review',
+    projectSubject: 'Project%20inquiry',
   },
   commitments: [
     'No long contracts to start.',
@@ -30,37 +25,37 @@ export const site = {
 } as const
 
 export const contactPage = {
-  title: 'Request a free workflow review.',
+  title: 'Start a conversation.',
   description:
-    "Tell us where inquiries, follow-up, or repetitive admin work gets stuck. We'll reply within one business day.",
+    "Tell us what you are trying to build or improve. We'll reply within one business day with a practical next step.",
   reviewDetails: [
     {
-      title: 'What we review',
-      text: 'Your website, inquiry flow, follow-up, or one repetitive admin workflow.',
+      title: 'What to share',
+      text: 'The product, website, workflow, or connected system you want to build or improve.',
     },
     {
       title: 'What you receive',
-      text: 'A plain-English first recommendation, likely scope, and an honest fit check.',
+      text: 'A plain-English first recommendation, likely scope, and an honest fit check. A free workflow review is available when that is the right starting point.',
     },
     {
       title: 'What happens next',
-      text: 'We reply within one business day. If a short call would help, we will suggest one. No pressure and no tools sold.',
+      text: 'We reply within one business day. If a short call or technical review would help, we will suggest one. Defined projects and custom engagements are scoped separately.',
     },
   ] as const,
   success: {
-    title: 'Thanks, your workflow review request is in.',
+    title: 'Thanks, your project inquiry is in.',
     description:
-      "We'll review what you shared and reply within one business day. If a short call would help, we will include that option in the email.",
+      "We'll review what you shared and reply within one business day with a practical next step.",
   },
 } as const
 
 export const servicesPage = {
-  eyebrow: 'Services',
-  title: 'Services for websites and simple workflows.',
+  eyebrow: 'Capabilities',
+  title: 'Technology services built around real operational needs.',
   description:
-    'Start with the workflow that needs help first. We build clean websites and simple, owner-controlled workflows that fit the business you already run.',
+    'From focused website and automation projects to custom software and connected platforms, Iceratops builds systems that fit how your organization works.',
   closingCta: {
-    title: 'Start with a free workflow review.',
+    title: 'Let us talk about what you need to build.',
   },
 } as const
 
@@ -68,16 +63,18 @@ export const servicesHowWeWork = {
   eyebrow: 'How we work',
   title: 'Start with the workflow, not the tool.',
   description:
-    'Every project starts with a free workflow review. We find the cleanest first step, build a small scoped pilot, then hand you a documented system you own.',
+    'We define the operational need, build in small testable stages, and show working drafts early. The finished system is documented, maintainable, and yours to keep.',
 } as const
 
 export const aboutPage = {
   eyebrow: 'About',
-  title: 'A founder-led studio in Pflugerville, TX.',
+  title: 'A founder-led technology company built for practical execution.',
   description:
-    'Iceratops is a small, founder-led studio. We build clean websites and simple, human-reviewed workflows for owner-led businesses in the Austin area and remotely.',
+    'Iceratops combines software-engineering depth with practical business understanding for organizations in the United States and worldwide.',
   story: [
-    'You work directly with the person mapping and building the system. We learn how the business runs, focus on the workflow that hurts most, and explain each step in plain language.',
-    'AI can help with routine work such as drafting replies or summarizing requests. You set the rules, and a person can review anything sensitive, unusual, or tied to a price or promise. The finished work is documented and yours to keep.',
+    'Clients work directly with the person designing and building the system. That keeps requirements clear, decisions close to the work, and technical tradeoffs easy to understand.',
+    'The work draws on software engineering, cloud infrastructure, security, automation, and large-scale technical delivery. Each project is shaped around a real operational need, then built and tested in understandable stages.',
+    'Systems are documented and designed to remain maintainable after handoff. AI is used selectively, with human review for judgment, pricing, commitments, or sensitive decisions.',
+    'Iceratops was founded in Pflugerville, Texas, and is available to work with clients internationally.',
   ] as const,
 } as const

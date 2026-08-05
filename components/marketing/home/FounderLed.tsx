@@ -11,10 +11,10 @@ export function FounderLed() {
             Founder-led, without the agency runaround.
           </h2>
           <p className="mt-5 text-lg leading-8 text-slate-200">
-            Iceratops is a small, hands-on studio for owners who want a cleaner website and a better
-            way to handle inquiries. You work directly with the person mapping the workflow and
-            building the system. Decisions stay clear, the setup stays practical, and the handoff is
-            easy to understand.
+            You work directly with the person shaping the requirements and building the system. That
+            direct connection works for focused website projects and larger technical engagements
+            alike. Decisions stay clear, working drafts arrive early, and the finished system comes
+            with documentation your team can use.
           </p>
         </div>
       </Container>

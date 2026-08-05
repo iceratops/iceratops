@@ -11,7 +11,7 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
   return (
     <Card
       className="reveal flex h-full flex-col"
-      style={{ transitionDelay: `${(index % 3) * 90}ms` }}
+      style={{ transitionDelay: `${(index % 4) * 90}ms` }}
     >
       <p className="border-l-2 border-amber-400/70 pl-3 text-sm font-semibold leading-6 text-amber-100">
         {service.outcome}

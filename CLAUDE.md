@@ -4,7 +4,7 @@ Claude-specific guide for this repo. Keep this file focused on Claude's role and
 
 ## Repo Context
 
-Iceratops is a Next.js 15 App Router marketing site for a founder-led web and AI automation studio in Pflugerville, TX. The site converts outreach traffic into the Free workflow review path.
+Iceratops is a Next.js 15 App Router marketing site for a Texas-founded, founder-led technology company serving clients in the United States and worldwide. The site converts qualified traffic into the project inquiry path.
 
 ## Read Order
 
@@ -52,10 +52,10 @@ Claude should not:
 
 Do not restate the full brief here. The high-signal reminders are:
 
-- One primary CTA: Free workflow review.
+- One primary CTA: Start a project.
 - No invented social proof, clients, logos, partnerships, metrics, case studies, pricing, or testimonials.
 - No exaggerated AI claims.
 - No em dashes in website copy.
-- Pflugerville is the local personality; remote capability is reach.
+- Texas is the company origin; global availability is the primary reach statement.
 
 When in doubt, ask one focused question and default to the smaller change that stays closest to the brief.

@@ -189,6 +189,51 @@ async function checkInternalLinks() {
   }
 }
 
+async function checkWorkingDemoLinks() {
+  const demoRoutes = ['/', '/services']
+  const configuredUrl = process.env.WORKING_DEMO_URL?.trim()
+  let expectedUrl
+
+  if (configuredUrl) {
+    try {
+      const url = new URL(configuredUrl)
+      const isSecure = url.protocol === 'https:'
+      const isLocal =
+        url.protocol === 'http:' && ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname)
+      if ((!isSecure && !isLocal) || url.username || url.password) {
+        recordFailure(`WORKING_DEMO_URL is not a safe absolute URL: ${configuredUrl}`)
+        return
+      }
+      expectedUrl = url.toString()
+    } catch {
+      recordFailure(`WORKING_DEMO_URL is not an absolute URL: ${configuredUrl}`)
+      return
+    }
+  }
+
+  for (const path of demoRoutes) {
+    const page = await loadPage(path)
+    const links = (page.html.match(/<a\b[^>]*>/gi) ?? []).filter((tag) =>
+      hasAttribute(tag, 'data-working-demo-cta'),
+    )
+
+    const expectedCount = expectedUrl ? 1 : 0
+    if (links.length !== expectedCount) {
+      recordFailure(
+        `${path} renders ${links.length} working-demo links, expected ${expectedCount} for this validation mode`,
+      )
+      continue
+    }
+
+    if (expectedUrl) {
+      const href = findAttribute(links[0], 'href')?.replaceAll('&amp;', '&')
+      if (href !== expectedUrl) {
+        recordFailure(`${path} working-demo link is ${href ?? 'missing'}, expected ${expectedUrl}`)
+      }
+    }
+  }
+}
+
 async function checkUtilityRoutes() {
   for (const [source, destination] of [
     ['/contact', '/free-workflow-review'],
@@ -217,9 +262,18 @@ async function checkUtilityRoutes() {
   const review = await loadPage('/free-workflow-review')
   const detector = await request('/__forms.html')
   const detectorSource = await readFile('public/__forms.html', 'utf8')
-  const expectedFields = ['bot-field', 'business', 'email', 'form-name', 'message', 'name']
+  const expectedFields = [
+    'bot-field',
+    'business',
+    'email',
+    'form-name',
+    'message',
+    'name',
+    'region',
+    'website',
+  ]
   for (const [label, html, expectedAction, isDetectorSource] of [
-    ['review form', review.html, '/__forms.html', false],
+    ['project inquiry form', review.html, '/__forms.html', false],
     ['served Netlify detector form', detector.html, undefined, false],
     ['source Netlify detector form', detectorSource, undefined, true],
   ]) {
@@ -260,10 +314,10 @@ async function checkUtilityRoutes() {
     }
   }
   if (!review.html.includes('JavaScript is required to submit this form online')) {
-    recordFailure('review form lacks its no-JavaScript email fallback')
+    recordFailure('project inquiry form lacks its no-JavaScript email fallback')
   }
   if (!/<button\b[^>]*\bdisabled(?:="")?[^>]*\btype="submit"/.test(review.html)) {
-    recordFailure('review form submit control is enabled before hydration')
+    recordFailure('project inquiry form submit control is enabled before hydration')
   }
 
   const home = await loadPage('/')
@@ -281,12 +335,12 @@ async function checkUtilityRoutes() {
       findAttribute(tag, 'href') === '/free-workflow-review' &&
       findAttribute(tag, 'class')?.includes('lg:hidden'),
   )
-  if (!mobileCta) recordFailure('home lacks a visible mobile workflow-review CTA')
+  if (!mobileCta) recordFailure('home lacks a visible mobile project CTA')
   const conversionLinks = headerLinks.filter(
     (tag) => findAttribute(tag, 'href') === '/free-workflow-review',
   )
   if (conversionLinks.length !== 2) {
-    recordFailure(`home header renders ${conversionLinks.length} workflow-review CTAs, expected 2`)
+    recordFailure(`home header renders ${conversionLinks.length} project CTAs, expected 2`)
   }
   const menuToggle = header
     .match(/<button\b[^>]*>/gi)
@@ -321,6 +375,7 @@ async function checkHeaders() {
 try {
   await checkPublicRoutes()
   await checkInternalLinks()
+  await checkWorkingDemoLinks()
   await checkUtilityRoutes()
   await checkHeaders()
 } catch (error) {

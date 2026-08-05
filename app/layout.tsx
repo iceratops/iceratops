@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Orbitron } from 'next/font/google'
 import { SiteLayout } from '@/components/layout/SiteLayout'
-import { LocalBusinessJsonLd } from '@/components/seo/LocalBusinessJsonLd'
+import { OrganizationJsonLd } from '@/components/seo/OrganizationJsonLd'
 import { siteConfig } from '@/lib/seo'
 import './globals.css'
 
@@ -70,7 +70,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <LocalBusinessJsonLd />
+        <OrganizationJsonLd />
         <SiteLayout>{children}</SiteLayout>
       </body>
     </html>

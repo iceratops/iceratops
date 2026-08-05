@@ -17,15 +17,15 @@ export function Hero() {
             width={156}
           />
           <p className="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-semibold tracking-wide text-amber-200">
-            Pflugerville, TX &middot; Founder-led
+            Texas-founded &middot; Working globally &middot; Founder-led
           </p>
           <h1 className="font-orbitron mt-6 text-[2rem]/[1.18] font-bold text-white sm:text-[2.6rem]/[1.14] lg:text-[3.1rem]/[1.12]">
-            Turn scattered inquiries into <span className="gradient-text">booked work</span>
+            Build better <span className="gradient-text">digital systems.</span>
           </h1>
           <p className="mt-6 max-w-lg text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
-            Iceratops builds clean websites and practical follow-up systems for small businesses.
-            Bring forms, calls, texts, email, and social messages into a clearer process, then use
-            human-reviewed AI to draft replies and keep follow-up visible.
+            Iceratops designs and builds custom software, digital platforms, modern websites,
+            workflow automation, and AI-assisted systems for organizations in the United States and
+            worldwide.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ButtonLink className="w-full sm:w-auto" href={primaryCta.href}>
@@ -33,9 +33,9 @@ export function Hero() {
             </ButtonLink>
             <a
               className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-amber-300/50 hover:text-amber-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
-              href="#example"
+              href="/services"
             >
-              View the example
+              Explore capabilities
             </a>
           </div>
           <p className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-400">
@@ -43,7 +43,8 @@ export function Hero() {
               aria-hidden="true"
               className="inline-block h-1.5 w-1.5 rounded-full bg-amber-300"
             />
-            Free review &middot; no long contracts &middot; reply within one business day.
+            Direct founder access &middot; documented systems &middot; reply within one business
+            day.
           </p>
         </div>
 
@@ -60,7 +61,7 @@ function HeroVisual() {
       className="reveal relative mx-auto hidden w-full max-w-md pb-10 md:mr-0 md:block"
       style={{ transitionDelay: '140ms' }}
     >
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 shadow-2xl shadow-slate-950/40 backdrop-blur">
+      <div className="hero-flow-site overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 shadow-2xl shadow-slate-950/40 backdrop-blur">
         <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.04] px-4 py-3">
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
@@ -82,11 +83,33 @@ function HeroVisual() {
             <div className="h-4 w-4/5 rounded bg-white/25" />
             <div className="h-4 w-3/5 rounded bg-white/15" />
           </div>
-          <div className="h-9 w-36 rounded-lg bg-amber-400" />
+          <div className="hero-flow-source h-9 w-36 rounded-lg bg-amber-400" />
         </div>
       </div>
 
-      <div className="absolute -bottom-2 -right-3 w-64 rounded-xl border border-white/10 bg-slate-950/90 p-4 shadow-xl shadow-slate-950/50 backdrop-blur sm:-right-6">
+      <svg
+        aria-hidden="true"
+        className="hero-flow-connector pointer-events-none absolute left-[9.75rem] top-[7.25rem] z-10 hidden h-16 w-20 overflow-visible text-amber-300 lg:block"
+        fill="none"
+        viewBox="0 0 80 64"
+      >
+        <path
+          className="hero-flow-path"
+          d="M4 56C38 56 42 8 76 8"
+          pathLength="100"
+          stroke="currentColor"
+          strokeLinecap="round"
+        />
+        <path
+          className="hero-flow-signal"
+          d="M4 56C38 56 42 8 76 8"
+          pathLength="100"
+          stroke="currentColor"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      <div className="hero-flow-inbox absolute -bottom-2 -right-3 z-20 w-64 rounded-xl border border-white/10 bg-slate-950/90 p-4 shadow-xl shadow-slate-950/50 backdrop-blur sm:-right-6">
         <div className="flex items-center justify-between">
           <p className="text-xs font-semibold text-white">Today&rsquo;s inquiries</p>
           <span className="rounded-full bg-amber-300/15 px-2 py-0.5 text-[10px] font-semibold text-amber-200">
@@ -94,7 +117,7 @@ function HeroVisual() {
           </span>
         </div>
         <div className="mt-3 space-y-2">
-          <div className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/[0.04] px-2.5 py-2">
+          <div className="hero-flow-step hero-flow-step-one flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/[0.04] px-2.5 py-2">
             <span className="flex h-6 w-6 flex-none items-center justify-center rounded-md bg-amber-300/[0.12] text-amber-300">
               <svg
                 aria-hidden="true"
@@ -116,7 +139,7 @@ function HeroVisual() {
               New
             </span>
           </div>
-          <div className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/[0.04] px-2.5 py-2">
+          <div className="hero-flow-step hero-flow-step-two flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/[0.04] px-2.5 py-2">
             <span className="flex h-6 w-6 flex-none items-center justify-center rounded-md bg-amber-300/[0.12] text-amber-300">
               <svg
                 aria-hidden="true"
@@ -141,7 +164,7 @@ function HeroVisual() {
               Replied
             </span>
           </div>
-          <div className="flex items-center gap-2.5 rounded-lg border border-amber-300/20 bg-amber-300/[0.06] px-2.5 py-2">
+          <div className="hero-flow-step hero-flow-step-three flex items-center gap-2.5 rounded-lg border border-amber-300/20 bg-amber-300/[0.06] px-2.5 py-2">
             <span className="flex h-6 w-6 flex-none items-center justify-center rounded-md bg-amber-300/15 text-amber-300">
               <svg
                 aria-hidden="true"

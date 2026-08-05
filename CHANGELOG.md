@@ -6,6 +6,32 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Global technology positioning
+
+- Repositioned Iceratops as a Texas-founded, founder-led technology company available to clients in the United States, Saudi Arabia, and worldwide.
+- Expanded visible capabilities to custom software and digital products, websites and digital experiences, workflow automation and AI, and systems and integrations.
+- Reframed the global CTA around starting a project while retaining the free workflow review as an optional entry point on the existing inquiry route.
+- Separated transparent defined-project starting prices from custom engagements that require an initial technical review.
+- Updated About, contact, privacy, footer, metadata, and Organization JSON-LD to match the new positioning without claiming an international office or legal presence.
+
+### Reference-led hero motion
+
+- Turned the homepage hero mockup into a restrained website-to-inquiry-to-booked signal flow, adapting the reference document's ordered transformation idea without adding a canvas sequence or animation dependency.
+- Kept the effect decorative, tablet-and-desktop only, and fully static when reduced motion is preferred.
+
+### Conversion bridge and working-demo readiness
+
+Added the final conversion-focused offer and intake updates without changing the site structure or visual system.
+
+#### Content and conversion
+- Added a neutral One-Workflow Pilot offer at $1,250 while preserving the $5,000 flagship treatment and the approved premium pricing anchors.
+- Added restrained anonymous founder credibility on About and conditional pilot language on Services and the Free workflow review page.
+- Added conditional secondary working-demo links near the homepage example and Services workflow section. The links stay hidden until a safe `WORKING_DEMO_URL` is configured at build time.
+
+#### Forms and privacy
+- Added an optional website URL field to the Netlify workflow-review form contract and updated the privacy disclosure.
+- Extended the site validation check to cover the new field and require consistent working-demo links across both configured surfaces.
+
 ### Sequential homepage inquiry story
 
 Replaced the dense multi-surface inquiry demo with one contained story that moves from customer question to scheduled service without changing the rest of the homepage.

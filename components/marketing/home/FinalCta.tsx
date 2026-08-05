@@ -11,11 +11,11 @@ export function FinalCta() {
             Ready when you are
           </p>
           <h2 className="font-orbitron mx-auto mt-4 max-w-2xl text-2xl font-bold leading-snug text-white sm:text-3xl">
-            Start with a free workflow review.
+            Let us talk about what you need to build.
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-slate-300">
-            Tell us what&rsquo;s slipping through the cracks. We&rsquo;ll reply within one business
-            day with a clear, no-pressure next step.
+            Share the product, website, workflow, or system you want to improve. We&rsquo;ll reply
+            within one business day with a clear, no-pressure next step.
           </p>
           <div className="mt-8 flex justify-center">
             <ButtonLink className="w-full sm:w-auto" href={primaryCta.href}>

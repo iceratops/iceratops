@@ -9,21 +9,22 @@ export type NavItem = {
  */
 export const primaryCta = {
   href: '/free-workflow-review',
-  label: 'Free workflow review',
+  label: 'Start a project',
 } as const satisfies NavItem
 
 /**
- * Anchor id of the form card on the Free workflow review page. Shared so the
+ * Anchor id of the form card on the project inquiry page. Shared so the
  * header CTA's in-page scroll target and the form's id cannot drift apart.
  */
 export const workflowReviewFormId = 'workflow-review-form'
 
 /**
  * The one nav list. Desktop header and the mobile drawer both render this, so
- * their intent is identical: two destinations plus the Free workflow review
- * CTA. Contact is not a nav destination; the CTA carries the conversion path.
+ * their intent is identical: three destinations plus the project CTA. Contact
+ * is not a nav destination; the CTA carries the conversion path.
  */
 export const headerNavItems = [
-  { href: '/services', label: 'Services' },
+  { href: '/services', label: 'Capabilities' },
+  { href: '/#process', label: 'Approach' },
   { href: '/about', label: 'About' },
 ] as const satisfies readonly NavItem[]

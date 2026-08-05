@@ -103,7 +103,7 @@ export function ContactForm() {
 
       <div>
         <label className={labelClasses} htmlFor="business">
-          Business name <span className="font-normal text-slate-400">(optional)</span>
+          Company or organization <span className="font-normal text-slate-400">(optional)</span>
         </label>
         <input
           autoComplete="organization"
@@ -115,11 +115,31 @@ export function ContactForm() {
       </div>
 
       <div>
+        <label className={labelClasses} htmlFor="region">
+          Country or region <span className="font-normal text-slate-400">(optional)</span>
+        </label>
+        <input
+          autoComplete="country-name"
+          className={fieldClasses}
+          id="region"
+          name="region"
+          type="text"
+        />
+      </div>
+
+      <div>
+        <label className={labelClasses} htmlFor="website">
+          Website URL <span className="font-normal text-slate-400">(optional)</span>
+        </label>
+        <input autoComplete="url" className={fieldClasses} id="website" name="website" type="url" />
+      </div>
+
+      <div>
         <label className={labelClasses} htmlFor="message">
-          Where is work getting stuck?
+          What are you trying to build or improve?
         </label>
         <p className="mt-1 text-sm leading-6 text-slate-400" id="message-help">
-          Share the current process, what gets missed, and the outcome you want.
+          Share the current situation, the outcome you want, and any important constraints.
         </p>
         <textarea
           aria-describedby="message-help"
@@ -144,7 +164,7 @@ export function ContactForm() {
           JavaScript is required to submit this form online. Email{' '}
           <a
             className="font-semibold underline underline-offset-4"
-            href={`mailto:${site.contact.email}?subject=${site.contact.reviewSubject}`}
+            href={`mailto:${site.contact.email}?subject=${site.contact.projectSubject}`}
           >
             {site.contact.email}
           </a>{' '}
@@ -158,7 +178,7 @@ export function ContactForm() {
           disabled={!isInteractive || submitState === 'submitting'}
           type="submit"
         >
-          {submitState === 'submitting' ? 'Sending...' : 'Request free workflow review'}
+          {submitState === 'submitting' ? 'Sending...' : 'Send project inquiry'}
         </Button>
       </div>
 

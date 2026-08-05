@@ -8,75 +8,51 @@ export type Service = {
 
 export const services = [
   {
-    slug: 'ai-workflow-audit',
-    name: 'AI Workflow Audit',
-    outcome: 'See where AI can take repetitive tasks off your plate.',
+    slug: 'custom-software-digital-products',
+    name: 'Custom Software & Digital Products',
+    outcome: 'Build the focused software your organization actually needs.',
     summary:
-      'We walk your current inquiry, booking, and admin flows and show where AI can help and where it should stay out.',
+      'Purpose-built applications and platforms for customer, operational, and product needs, scoped around a clear outcome.',
     highlights: [
-      'Plain-English map of your workflows',
-      'Two or three concrete AI-assisted fixes',
-      'No tools sold during the audit',
+      'Web applications and internal tools',
+      'Customer and operational platforms',
+      'Product prototypes and focused MVPs',
     ],
   },
   {
-    slug: 'website-refresh',
-    name: 'Website Refresh',
-    outcome: 'Tighten your existing site without starting over.',
+    slug: 'websites-digital-experiences',
+    name: 'Websites & Digital Experiences',
+    outcome: 'Create a clear, credible experience on every screen.',
     summary:
-      'Keep what works and fix the rest. We refresh copy, layout, and mobile feel so your site matches the business you run today.',
+      'Modern websites and front ends built to communicate clearly, support useful inquiry paths, and stay maintainable.',
     highlights: [
-      'Mobile-first redesign on your current platform',
-      'Clearer copy and stronger contact paths',
-      'Faster pages and cleaner forms',
+      'Responsive websites and redesigns',
+      'Conversion and inquiry paths',
+      'Accessible, maintainable front ends',
     ],
   },
   {
-    slug: 'modern-website',
-    name: 'Modern Website Build',
-    outcome: 'A new website that earns trust on the first scroll.',
+    slug: 'workflow-automation-ai',
+    name: 'Workflow Automation & AI',
+    outcome: 'Reduce repetitive work without removing human judgment.',
     summary:
-      'A modern, mobile-first site built around your real services, with a clear way for customers to reach out.',
+      'Practical automation and AI-assisted systems that make requests, routine administration, and handoffs easier to manage.',
     highlights: [
-      'Mobile-first responsive design',
-      'Copy written for your audience',
-      'Lead capture wired in from day one',
+      'Inquiry and request workflows',
+      'AI-assisted responses with human controls',
+      'Process visibility and documented handoffs',
     ],
   },
   {
-    slug: 'inquiry-follow-up-systems',
-    name: 'Inquiry and Follow-Up System',
-    outcome: 'Bring inquiries into one view and keep follow-up moving.',
+    slug: 'systems-integrations',
+    name: 'Systems & Integrations',
+    outcome: 'Connect fragmented tools and data into a clearer system.',
     summary:
-      'AI drafts and sends routine replies through rules you approve. A simple tracker keeps follow-up visible.',
+      'Integrations and cloud-connected applications that move information reliably between the platforms your team uses.',
     highlights: [
-      'AI-drafted replies sent through approved rules',
-      'Lightweight tracker for new leads',
-      'Reminders so warm leads do not go quiet',
-    ],
-  },
-  {
-    slug: 'booking-requests',
-    name: 'Booking or Request Workflow',
-    outcome: 'Turn booking and request questions into real appointments.',
-    summary:
-      'A booking or request workflow tuned to your service, with clear inputs, useful confirmations, and a clean handoff.',
-    highlights: [
-      'Mobile-friendly request or booking form',
-      'Confirmations that read like a person sent them',
-      'Clean handoff to your calendar or CRM',
-    ],
-  },
-  {
-    slug: 'admin-automation',
-    name: 'Admin Automation Sprint',
-    outcome: 'Reduce repetitive admin work.',
-    summary:
-      'A short project removes small, repetitive tasks from your week, with documentation so you stay in control of every step.',
-    highlights: [
-      'Typical scope: about two weeks',
-      'Automation you can read and edit',
-      'Documented handoff at the end',
+      'API and platform integrations',
+      'Reliable data flows',
+      'Modernization of fragmented processes',
     ],
   },
 ] as const satisfies readonly Service[]

@@ -10,7 +10,7 @@ type ClosingCtaProps = {
 }
 
 export function ClosingCta({
-  title = 'Start with a free workflow review.',
+  title = 'Let us talk about what you need to build.',
   reassurance = site.contact.responseCommitment,
 }: ClosingCtaProps) {
   return (

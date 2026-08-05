@@ -4,7 +4,7 @@ Lean operating guide for AI agents working in this repo. Keep this file focused 
 
 ## Current Repo
 
-Iceratops marketing website for a founder-led web and AI automation studio in Pflugerville, TX.
+Iceratops marketing website for a Texas-founded, founder-led technology and digital systems company serving clients worldwide.
 
 Current stack:
 
@@ -72,6 +72,17 @@ Command meanings:
 
 No test script currently exists. Do not report tests as run unless a test command is added or the user asks for a specific manual check.
 
+## Working Demo Configuration
+
+The optional working-demo links use the build-time `WORKING_DEMO_URL` environment variable.
+
+- For local development, copy `.env.example` to `.env.local` and set an absolute HTTPS URL. HTTP is accepted only for localhost testing.
+- For production, set `WORKING_DEMO_URL=https://demo.iceratops.com/` in the Netlify site environment and trigger a new deploy.
+- Leave the variable unset or blank to hide the links. Invalid or credential-bearing URLs are also hidden.
+
+The homepage and Services links are rendered during the build, so changing the variable requires a rebuild or deploy.
+When running `pnpm run validate:site` against a configured build, pass the same `WORKING_DEMO_URL` value to the validation command.
+
 ## Validation
 
 For user-visible code changes, run before handoff when feasible:
@@ -111,7 +122,7 @@ When using tools that support output limits, set a small output cap first and in
 - Follow existing Next.js App Router, TypeScript, Tailwind, and component patterns.
 - Keep reusable UI in `components/`; keep shared helpers in `lib/`.
 - Preserve the brand system from `WEBSITE_BRIEF.md`: dark slate-to-purple gradient, yellow `#fbbf24` accent, Orbitron headings, Inter body, glass-card feel.
-- The single primary CTA is "Free workflow review."
+- The single primary CTA is "Start a project."
 - Do not invent testimonials, clients, logos, case studies, metrics, partnerships, pricing, or customer data.
 - Do not log PII from contact forms or integrations.
 - Do not add new top-level docs unless the user explicitly asks. Prefer updating existing docs.

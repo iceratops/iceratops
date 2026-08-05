@@ -3,12 +3,12 @@ import { Container } from '@/components/primitives/Container'
 
 const steps = [
   {
-    name: 'Review',
-    text: 'A short, free workflow review. We see how inquiries and admin work today and say plainly where we can help.',
+    name: 'Understand',
+    text: 'We learn the operational need, the people involved, and the outcome that would make the work worthwhile.',
   },
   {
-    name: 'Plan',
-    text: 'We map one useful outcome, the approval rules, a clear scope, and a realistic timeline.',
+    name: 'Scope',
+    text: 'We define a useful first outcome, technical boundaries, a clear scope, and a realistic timeline.',
   },
   {
     name: 'Build',
@@ -31,7 +31,7 @@ export function ProcessSteps() {
         <div className="reveal max-w-2xl">
           <Eyebrow>How we work</Eyebrow>
           <h2 className="font-orbitron mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl">
-            A clear path from first call to handoff.
+            A clear path from first conversation to handoff.
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
             We start small, show working drafts early, and leave you with a system you understand
