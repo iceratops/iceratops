@@ -1,26 +1,33 @@
 import { site } from '@/content/site'
 import { absoluteUrl, siteConfig } from '@/lib/seo'
 
-export function LocalBusinessJsonLd() {
+export function OrganizationJsonLd() {
   const data = {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
+    '@type': 'Organization',
     name: site.name,
     description: site.shortDescription,
     url: siteConfig.url,
     email: site.contact.email,
     image: absoluteUrl(siteConfig.ogImage),
     logo: absoluteUrl('/iceratops_logo.svg'),
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: site.city,
-      addressRegion: site.stateAbbr,
-      addressCountry: 'US',
+    foundingLocation: {
+      '@type': 'Place',
+      name: `${site.origin.state}, ${site.origin.country}`,
     },
-    areaServed: site.serviceArea.map((city) => ({
-      '@type': 'City',
-      name: city,
-    })),
+    areaServed: [
+      { '@type': 'Country', name: 'United States' },
+      { '@type': 'Country', name: 'Saudi Arabia' },
+      { '@type': 'Place', name: 'Worldwide' },
+    ],
+    knowsAbout: [
+      'Custom software',
+      'Digital platforms',
+      'Websites',
+      'Workflow automation',
+      'Artificial intelligence systems',
+      'Systems integration',
+    ],
   }
 
   return (

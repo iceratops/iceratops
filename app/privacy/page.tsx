@@ -13,7 +13,7 @@ export const metadata = buildMetadata({
 const sections = [
   {
     title: 'What we collect',
-    body: 'The free workflow review form asks for your name, email address, an optional business name, and the details you choose to share about your workflow.',
+    body: 'The project inquiry form asks for your name, email address, optional company or organization, country or region, website URL, and the details you choose to share about your project.',
   },
   {
     title: 'How we use it',
@@ -21,7 +21,7 @@ const sections = [
   },
   {
     title: 'Service providers',
-    body: 'This site is hosted on Netlify, and workflow review submissions are processed through Netlify Forms. Service providers may process limited technical data needed to host the site, deliver the form, and keep those services secure.',
+    body: 'This site is hosted on Netlify, and project inquiries are processed through Netlify Forms. Service providers may process limited technical data needed to host the site, deliver the form, and keep those services secure.',
   },
   {
     title: 'Cookies and analytics',
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
       />
       <Section className="pb-16 pt-8 sm:pb-24 sm:pt-10">
         <Container size="narrow">
-          <p className="reveal text-sm text-slate-400">Effective July 13, 2026</p>
+          <p className="reveal text-sm text-slate-400">Effective July 14, 2026</p>
           <div className="mt-8 space-y-8">
             {sections.map((section) => (
               <section className="reveal" key={section.title}>

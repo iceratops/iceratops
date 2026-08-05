@@ -6,21 +6,24 @@ import { Pricing } from '@/components/marketing/home/Pricing'
 import { ProcessSteps } from '@/components/marketing/home/ProcessSteps'
 import { WhatWeBuild } from '@/components/marketing/home/WhatWeBuild'
 import { buildMetadata } from '@/lib/seo'
+import { getWorkingDemoUrl } from '@/lib/working-demo'
 
 export const metadata = buildMetadata({
-  title: 'Iceratops | Web & Workflow Studio in Pflugerville, TX',
+  title: 'Iceratops | Custom Software, Websites & Workflow Automation',
   description:
-    'Clean websites and practical, human-reviewed follow-up systems for small businesses in Pflugerville, Austin, and beyond.',
+    'Iceratops builds custom software, digital platforms, modern websites, workflow automation, and AI-assisted systems for organizations in the U.S. and worldwide.',
   path: '/',
   absoluteTitle: true,
 })
 
 export default function Home() {
+  const workingDemoUrl = getWorkingDemoUrl()
+
   return (
     <>
       <Hero />
       <WhatWeBuild />
-      <InquiryDemo />
+      <InquiryDemo workingDemoUrl={workingDemoUrl} />
       <ProcessSteps />
       <FounderLed />
       <Pricing />

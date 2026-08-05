@@ -1,6 +1,7 @@
 {
     "name": "Iceratops",
     "short_name": "Iceratops",
+    "description": "Custom software, websites, workflow automation, and connected digital systems.",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

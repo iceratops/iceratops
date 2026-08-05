@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
   title: 'Request received',
-  description: 'Thanks for requesting a free workflow review. We reply within one business day.',
+  description: 'Thanks for contacting Iceratops. We reply within one business day.',
   path: '/free-workflow-review/success',
   noIndex: true,
 })
@@ -39,7 +39,7 @@ export default function FreeWorkflowReviewSuccessPage() {
               Back to home
             </ButtonLink>
             <ButtonLink className="w-full sm:w-auto" href="/services" variant="secondary">
-              View services
+              Explore capabilities
             </ButtonLink>
           </div>
         </div>

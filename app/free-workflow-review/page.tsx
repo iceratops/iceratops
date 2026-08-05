@@ -6,8 +6,9 @@ import { contactPage, site } from '@/content/site'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata = buildMetadata({
-  title: 'Free Workflow Review',
-  description: 'Request a free workflow review for your website, inquiry flow, or admin workflow.',
+  title: 'Start a Project',
+  description:
+    'Start a conversation about custom software, a digital platform, website, workflow automation, or systems integration.',
   path: '/free-workflow-review',
 })
 
@@ -46,7 +47,7 @@ export default function FreeWorkflowReviewPage() {
             Prefer email?{' '}
             <a
               className="font-semibold text-amber-200 underline underline-offset-4"
-              href={`mailto:${site.contact.email}?subject=${site.contact.reviewSubject}`}
+              href={`mailto:${site.contact.email}?subject=${site.contact.projectSubject}`}
             >
               {site.contact.email}
             </a>

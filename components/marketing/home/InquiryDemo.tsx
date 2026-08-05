@@ -2,6 +2,7 @@
 
 import { type CSSProperties, useEffect, useReducer, useRef, useState } from 'react'
 import { Eyebrow } from '@/components/marketing/Eyebrow'
+import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
 
 const CUSTOMER_MESSAGE =
@@ -413,7 +414,7 @@ function CalendarScene() {
                   <span className="block sm:inline"> PM</span>
                 </p>
               ) : (
-                <p className="mt-2 text-[11px] text-slate-500">Open</p>
+                <p className="mt-2 text-[11px] text-slate-400">Open</p>
               )}
             </div>
           ))}
@@ -519,7 +520,7 @@ function StorySceneVisual({ id }: { id: SceneId }) {
   }
 }
 
-export function InquiryDemo() {
+export function InquiryDemo({ workingDemoUrl }: { workingDemoUrl?: string }) {
   const [player, dispatch] = useReducer(playerReducer, initialPlayerState)
   const [enhanced, setEnhanced] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -643,13 +644,21 @@ export function InquiryDemo() {
     <section className="scroll-mt-24 py-14 sm:py-16 lg:py-20" id="example">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <Eyebrow>Working example</Eyebrow>
+          <Eyebrow>Example: Service inquiry workflow</Eyebrow>
           <h2 className="font-orbitron mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl lg:text-4xl">
-            From first message to booked job
+            One practical workflow, shown end to end.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-300">
-            See how one inquiry moves from customer question to confirmed service.
+            This demonstration shows how one inquiry can move from a customer question to confirmed
+            service. It is an example, not a client case study.
           </p>
+          {workingDemoUrl ? (
+            <div className="mt-6">
+              <ButtonLink data-working-demo-cta="true" href={workingDemoUrl} variant="secondary">
+                Try the working demo
+              </ButtonLink>
+            </div>
+          ) : null}
         </div>
 
         <ol
@@ -687,7 +696,7 @@ export function InquiryDemo() {
                   />
                 </div>
                 <span
-                  className={`hidden text-xs font-semibold sm:block ${active ? 'text-amber-200' : complete ? 'text-emerald-200' : 'text-slate-500'}`}
+                  className={`hidden text-xs font-semibold sm:block ${active ? 'text-amber-200' : complete ? 'text-emerald-200' : 'text-slate-400'}`}
                 >
                   {phase}
                 </span>

@@ -42,14 +42,11 @@ export default function AboutPage() {
                   width={350}
                 />
                 <p className="font-orbitron mt-4 text-base font-semibold leading-snug text-white">
-                  Based in Pflugerville, TX
+                  Texas-founded. Working worldwide.
                 </p>
-                <p className="mt-1.5 text-xs text-slate-400">Austin area and remote</p>
+                <p className="mt-1.5 text-xs text-slate-400">Founder-led in the United States</p>
               </div>
-              <p className="mt-5 text-sm leading-6 text-slate-300">
-                Available across the Austin area, including{' '}
-                {site.serviceArea.slice(1, 6).join(', ')}, and remotely across the U.S.
-              </p>
+              <p className="mt-5 text-sm leading-6 text-slate-300">{site.availability}</p>
               <p className="mt-6 text-sm font-semibold text-white">What you can count on</p>
               <CheckList className="mt-4" items={site.commitments} />
             </Card>

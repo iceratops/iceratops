@@ -1,36 +1,31 @@
 import { Eyebrow } from '@/components/marketing/Eyebrow'
 import { Container } from '@/components/primitives/Container'
+import { oneWorkflowPilot } from '@/content/pilot'
 
-const flagshipPoints = [
-  'Website or refresh',
-  'Inquiry capture',
-  'AI-assisted follow-up',
-  'Owner handoff & docs',
-]
-
-const startingPoints = [
+const definedProjects = [
   {
     title: 'Website Refresh',
-    text: 'Tighten your current site without starting over.',
+    text: 'Improve an existing site without starting over.',
     price: '$1,500',
   },
   {
     title: 'Modern Website Build',
-    text: 'A new, mobile-first site built around your services.',
+    text: 'Create a new, responsive website around a clear goal.',
     price: '$3,500',
   },
   {
-    title: 'Admin Automation Sprint',
-    text: 'Remove repetitive admin from your week.',
+    title: 'Workflow or Automation Sprint',
+    text: 'Improve one defined operational workflow.',
     price: '$2,500',
   },
-  {
-    title: 'Ongoing support / care plan',
-    text: 'Optional monthly support to keep it all running.',
-    price: '$300',
-    suffix: '/mo',
-  },
-]
+] as const
+
+const customEngagements = [
+  'Custom software',
+  'Digital platform development',
+  'Systems and API integration',
+  'Ongoing technical partnership',
+] as const
 
 function Check() {
   return (
@@ -55,33 +50,34 @@ export function Pricing() {
     >
       <Container>
         <div className="reveal max-w-2xl">
-          <Eyebrow>Pricing</Eyebrow>
+          <Eyebrow>Engagements</Eyebrow>
           <h2 className="font-orbitron mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl">
-            Clear starting points. Quoted after a short review.
+            Clear starting points for defined work. Custom scope for larger systems.
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
-            These starting points help you judge fit. The final quote follows a short review of the
-            pages, workflow, tools, and approval steps involved.
+            Focused projects have transparent starting prices. Custom software, platforms, and
+            integrations are scoped after an initial technical review.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="reveal flex flex-col rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-300/[0.08] to-white/[0.02] p-6 sm:p-7">
-            <div className="flex items-center justify-between gap-3">
-              <p className="font-orbitron text-lg font-semibold text-white">
-                Website + Follow-Up System
+        <div className="reveal mt-8 rounded-2xl border border-white/10 bg-white/[0.025] p-5 sm:p-6">
+          <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">
+                Focused starting point
               </p>
-              <span className="flex-none rounded-full border border-amber-300/40 bg-amber-300/15 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-200">
-                Flagship
-              </span>
+              <h3 className="font-orbitron mt-2 text-lg font-semibold text-white">
+                {oneWorkflowPilot.title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-300">
+                {oneWorkflowPilot.description}
+              </p>
+              <p className="font-orbitron mt-4 text-xl font-bold text-amber-200">
+                From {oneWorkflowPilot.price}
+              </p>
             </div>
-            <p className="font-orbitron mt-3 text-3xl font-bold text-white">From $5,000</p>
-            <p className="mt-2 text-sm leading-6 text-slate-300">
-              The complete system: website, inquiry capture, AI-assisted follow-up, and a clean
-              handoff.
-            </p>
-            <ul className="mt-5 grid gap-2.5 border-t border-white/10 pt-5 sm:grid-cols-2">
-              {flagshipPoints.map((point) => (
+            <ul className="grid gap-2.5 sm:grid-cols-2">
+              {oneWorkflowPilot.scope.map((point) => (
                 <li className="flex gap-2.5 text-sm leading-6 text-slate-300" key={point}>
                   <Check />
                   <span>{point}</span>
@@ -89,32 +85,65 @@ export function Pricing() {
               ))}
             </ul>
           </div>
+          <p className="mt-5 border-t border-white/10 pt-4 text-sm leading-6 text-slate-400">
+            {oneWorkflowPilot.credit}
+          </p>
+        </div>
 
-          <div className="reveal grid content-start gap-3" style={{ transitionDelay: '120ms' }}>
-            {startingPoints.map((item) => (
-              <div
-                className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5"
-                key={item.title}
-              >
-                <div>
-                  <p className="text-sm font-semibold text-white">{item.title}</p>
-                  <p className="mt-1 text-sm leading-6 text-slate-400">{item.text}</p>
+        <div className="mt-5 grid gap-5 lg:grid-cols-2">
+          <div className="reveal rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">
+              Defined projects
+            </p>
+            <div className="mt-3 divide-y divide-white/10">
+              {definedProjects.map((item) => (
+                <div
+                  className="flex flex-col gap-2 py-4 first:pt-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4"
+                  key={item.title}
+                >
+                  <div>
+                    <h3 className="text-sm font-semibold text-white">{item.title}</h3>
+                    <p className="mt-1 text-sm leading-6 text-slate-400">{item.text}</p>
+                  </div>
+                  <p className="font-orbitron flex-none text-sm font-bold text-amber-200">
+                    <span className="mr-1 text-[10px] font-medium uppercase tracking-wider text-slate-400">
+                      from
+                    </span>
+                    {item.price}
+                  </p>
                 </div>
-                <p className="font-orbitron flex-none text-right text-base font-bold text-amber-200">
-                  <span className="block text-[10px] font-medium uppercase tracking-wider text-slate-400">
-                    from
-                  </span>
-                  {item.price}
-                  {item.suffix && (
-                    <span className="text-xs font-medium text-slate-400">{item.suffix}</span>
-                  )}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          <div className="reveal rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-300/[0.08] to-white/[0.02] p-6 sm:p-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-300">
+              Custom engagements
+            </p>
+            <h3 className="font-orbitron mt-3 text-xl font-semibold text-white">
+              Technical work shaped around your requirements.
+            </h3>
+            <p className="mt-3 text-sm leading-6 text-slate-300">
+              Larger systems need enough discovery to set responsible boundaries, dependencies, and
+              delivery stages.
+            </p>
+            <ul className="mt-5 grid gap-2.5 border-t border-white/10 pt-5 sm:grid-cols-2">
+              {customEngagements.map((point) => (
+                <li className="flex gap-2.5 text-sm leading-6 text-slate-300" key={point}>
+                  <Check />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="font-orbitron mt-6 rounded-xl border border-amber-300/20 bg-slate-950/30 px-4 py-3 text-sm font-semibold text-amber-100">
+              Scoped after an initial technical review.
+            </p>
           </div>
         </div>
+
         <p className="reveal mt-6 text-sm leading-6 text-slate-400">
-          No long contracts to start. Everything we build is yours, with documentation.
+          Optional maintenance and support starts at $300 per month. No long contracts to start.
+          Everything we build is yours, with documentation.
         </p>
       </Container>
     </section>

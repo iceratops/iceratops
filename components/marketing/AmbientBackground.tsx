@@ -54,15 +54,9 @@ export function AmbientBackground() {
       aria-hidden="true"
       className="ambient-backdrop pointer-events-none fixed inset-0 -z-10 overflow-hidden"
     >
-      <div className="hero-glow absolute right-[6%] top-[8%] h-72 w-72 rounded-full" />
-      <div
-        className="hero-glow absolute -left-16 top-1/2 h-64 w-64 rounded-full"
-        style={{ animationDelay: '-7s' }}
-      />
-      <div
-        className="hero-glow absolute bottom-[6%] right-1/4 h-56 w-56 rounded-full"
-        style={{ animationDelay: '-3s' }}
-      />
+      <div className="hero-glow hero-glow-north" />
+      <div className="hero-glow hero-glow-west" />
+      <div className="hero-glow hero-glow-south" />
       {stars.map((star) => (
         <span className="hero-twinkle" key={star.id} style={star.style} />
       ))}
