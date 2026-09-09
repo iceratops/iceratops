@@ -6,6 +6,21 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Project inquiry form improvements
+
+- Split first and last names, with last name optional, while preserving the combined name in Netlify submissions for existing integrations.
+- Replaced free-text country entry with a searchable country-and-territory selector with keyboard navigation, and added inline validation, field length limits, and a project-details counter.
+- Added submission timeout and duplicate-submit protection. Local previews validate entries without posting or implying an inquiry was received.
+- Updated the Netlify detector, form-contract validation, and privacy copy to match the fields.
+
+### Broader offers and worldwide availability
+
+- Simplified the hero, footer, About, and metadata around founder-led delivery and worldwide project availability. Kept the factual Texas founding sentence on About and founding-location metadata.
+- Replaced public service prices and detailed pilot terms with focused projects, custom software and systems, and ongoing support.
+- Broadened the hero and Services visuals to applications, integrations, and data. Moved the booking demonstration below the main company story and made it expandable on demand.
+- Replaced blanket ownership promises with clear deliverables, documentation, and agreed ownership and software licensing terms.
+- Updated the founder-approved website brief, retaining the four capability groups and reserving product-specific pricing and pages for concrete ready-made software offerings.
+
 ### Global technology positioning
 
 - Repositioned Iceratops as a Texas-founded, founder-led technology company available to clients in the United States, Saudi Arabia, and worldwide.

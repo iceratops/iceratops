@@ -2,7 +2,7 @@ import { ClosingCta } from '@/components/marketing/ClosingCta'
 import { PageHero } from '@/components/marketing/PageHero'
 import { SectionHeading } from '@/components/marketing/SectionHeading'
 import { ServiceCardGrid } from '@/components/marketing/services/ServiceCardGrid'
-import { WorkflowDiagram } from '@/components/marketing/visuals/WorkflowDiagram'
+import { SystemsDiagram } from '@/components/marketing/visuals/SystemsDiagram'
 import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
@@ -54,7 +54,7 @@ export default function ServicesPage() {
             ) : null}
           </div>
           <div className="reveal" style={{ transitionDelay: '120ms' }}>
-            <WorkflowDiagram />
+            <SystemsDiagram />
           </div>
         </Container>
       </Section>

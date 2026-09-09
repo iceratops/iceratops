@@ -16,12 +16,11 @@ export function Footer() {
         <div className="max-w-sm">
           <Image
             alt="Iceratops"
-            className="h-6 w-auto"
+            className="h-auto w-full max-w-44"
             height={144}
-            // Same asset the header already preloads; on short pages the
-            // footer is above the fold and Next flags it as LCP without this.
+            // On short pages the footer can appear above the fold.
             priority
-            src="/iceratops_text_logo.svg"
+            src="/iceratops_logo.svg"
             width={350}
           />
           <p className="mt-2 text-sm leading-6 text-slate-400">{site.footerTagline}</p>

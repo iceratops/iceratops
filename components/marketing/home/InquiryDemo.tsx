@@ -643,14 +643,162 @@ export function InquiryDemo({ workingDemoUrl }: { workingDemoUrl?: string }) {
   return (
     <section className="scroll-mt-24 py-14 sm:py-16 lg:py-20" id="example">
       <Container>
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="max-w-2xl">
           <Eyebrow>Example: Service inquiry workflow</Eyebrow>
-          <h2 className="font-orbitron mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl lg:text-4xl">
-            One practical workflow, shown end to end.
+          <h2 className="font-orbitron mt-4 text-xl font-bold leading-tight text-white sm:text-2xl">
+            One example of connected systems at work.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-300">
-            This demonstration shows how one inquiry can move from a customer question to confirmed
-            service. It is an example, not a client case study.
+          <p className="mt-4 text-base leading-7 text-slate-300">
+            A service inquiry becomes a scheduled job through approved rules and a clear team
+            handoff. Explore this demonstration using a fictional business.
+          </p>
+        </div>
+
+        <details className="mt-6 rounded-2xl border border-white/10 bg-white/[0.02] p-4 sm:p-6">
+          <summary className="min-h-11 cursor-pointer content-center rounded-lg text-base font-semibold text-amber-200 marker:text-amber-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300">
+            Watch the service workflow
+          </summary>
+          <ol
+            aria-label="Workflow progress"
+            className="mx-auto mt-7 flex max-w-3xl items-start justify-between gap-2"
+          >
+            {PHASES.map((phase, index) => {
+              const active = !showStaticSummary && index === currentPhaseIndex
+              const complete = showStaticSummary || index < currentPhaseIndex
+              return (
+                <li
+                  aria-current={active ? 'step' : undefined}
+                  className="flex min-w-0 flex-1 flex-col items-center gap-2"
+                  key={phase}
+                >
+                  <div className="flex w-full items-center">
+                    <span
+                      className={`h-px flex-1 ${index === 0 ? 'opacity-0' : complete || active ? 'bg-amber-300/70' : 'bg-white/10'}`}
+                    />
+                    <span
+                      className={`flex h-4 w-4 flex-none items-center justify-center rounded-full border transition-colors ${
+                        active
+                          ? 'border-amber-200 bg-amber-300 shadow-[0_0_0_5px_rgba(251,191,36,0.12)]'
+                          : complete
+                            ? 'border-emerald-300/60 bg-emerald-300/80'
+                            : 'border-white/20 bg-slate-900'
+                      }`}
+                    >
+                      <span className="sr-only">
+                        {active ? 'Current: ' : complete ? 'Complete: ' : ''}
+                      </span>
+                    </span>
+                    <span
+                      className={`h-px flex-1 ${index === PHASES.length - 1 ? 'opacity-0' : complete ? 'bg-emerald-300/60' : 'bg-white/10'}`}
+                    />
+                  </div>
+                  <span
+                    className={`hidden text-xs font-semibold sm:block ${active ? 'text-amber-200' : complete ? 'text-emerald-200' : 'text-slate-400'}`}
+                  >
+                    {phase}
+                  </span>
+                  <span className="sr-only sm:hidden">{phase}</span>
+                </li>
+              )
+            })}
+          </ol>
+          <p className="mt-3 text-center text-xs font-semibold uppercase tracking-[0.16em] text-amber-200 sm:hidden">
+            {showStaticSummary ? 'Four-step summary' : currentScene.phase}
+          </p>
+
+          <figure className="mx-auto mt-6 max-w-5xl">
+            <div
+              className="io-story-stage relative h-[35rem] min-w-0 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.025] shadow-2xl shadow-purple-950/30 sm:h-[31rem] md:h-[28rem]"
+              data-cycle={player.cycle}
+              data-enhanced={enhanced}
+              data-has-started={hasStarted}
+              data-in-view={stageInView}
+              data-page-visible={pageVisible}
+              data-player-state={playerState}
+              data-reduced-motion={reducedMotion}
+              data-scene={showStaticSummary ? 'summary' : currentScene.id}
+              data-testid="inquiry-story"
+              ref={stageRef}
+            >
+              <div aria-hidden="true" className="io-story-grid absolute inset-0" />
+              <div aria-hidden="true" className="io-story-orb io-story-orb-one" />
+              <div aria-hidden="true" className="io-story-orb io-story-orb-two" />
+
+              {showStaticSummary ? (
+                <StaticSummaryCards />
+              ) : (
+                <div aria-hidden="true" className="absolute inset-0">
+                  {previousScene ? (
+                    <div
+                      className="io-story-layer io-story-layer-exit"
+                      key={`previous-${player.cycle}-${previousScene.id}`}
+                    >
+                      <StorySceneVisual id={previousScene.id} />
+                    </div>
+                  ) : null}
+                  <div
+                    className="io-story-layer io-story-layer-enter"
+                    key={`current-${player.cycle}-${currentScene.id}`}
+                  >
+                    <StorySceneVisual id={currentScene.id} />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <figcaption className="min-h-6 text-sm leading-6 text-slate-300">
+                <span className="font-semibold text-amber-200">
+                  {showStaticSummary ? 'Summary' : currentScene.phase}:
+                </span>{' '}
+                {showStaticSummary
+                  ? 'A clear four-step path from inquiry to scheduled service.'
+                  : currentScene.caption}
+              </figcaption>
+
+              {enhanced && !showStaticSummary ? (
+                <fieldset className="flex items-center gap-2">
+                  <legend className="sr-only">Animation controls</legend>
+                  <button
+                    aria-label={
+                      player.manuallyPaused ? 'Resume workflow story' : 'Pause workflow story'
+                    }
+                    aria-pressed={player.manuallyPaused}
+                    className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-4 text-base font-semibold text-slate-200 transition hover:border-amber-300/35 hover:bg-white/[0.07] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+                    onClick={togglePause}
+                    type="button"
+                  >
+                    {player.manuallyPaused ? 'Resume' : 'Pause'}
+                  </button>
+                  <button
+                    aria-label="Replay workflow story from the beginning"
+                    className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-4 text-base font-semibold text-slate-200 transition hover:border-amber-300/35 hover:bg-white/[0.07] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+                    onClick={replay}
+                    type="button"
+                  >
+                    Replay
+                  </button>
+                </fieldset>
+              ) : enhanced ? (
+                <span className="text-sm font-semibold text-slate-400">
+                  {reducedMotion ? 'Reduced motion summary' : 'Static workflow summary'}
+                </span>
+              ) : null}
+            </div>
+          </figure>
+
+          <div className="sr-only">
+            <h3>Workflow story transcript</h3>
+            <ol>
+              {STATIC_SUMMARY.map((item) => (
+                <li key={item.title}>
+                  <strong>{item.title}.</strong> {item.detail}
+                </li>
+              ))}
+            </ol>
+          </div>
+          <p aria-live="polite" className="sr-only">
+            {announcement}
           </p>
           {workingDemoUrl ? (
             <div className="mt-6">
@@ -659,150 +807,7 @@ export function InquiryDemo({ workingDemoUrl }: { workingDemoUrl?: string }) {
               </ButtonLink>
             </div>
           ) : null}
-        </div>
-
-        <ol
-          aria-label="Workflow progress"
-          className="mx-auto mt-7 flex max-w-3xl items-start justify-between gap-2"
-        >
-          {PHASES.map((phase, index) => {
-            const active = !showStaticSummary && index === currentPhaseIndex
-            const complete = showStaticSummary || index < currentPhaseIndex
-            return (
-              <li
-                aria-current={active ? 'step' : undefined}
-                className="flex min-w-0 flex-1 flex-col items-center gap-2"
-                key={phase}
-              >
-                <div className="flex w-full items-center">
-                  <span
-                    className={`h-px flex-1 ${index === 0 ? 'opacity-0' : complete || active ? 'bg-amber-300/70' : 'bg-white/10'}`}
-                  />
-                  <span
-                    className={`flex h-4 w-4 flex-none items-center justify-center rounded-full border transition-colors ${
-                      active
-                        ? 'border-amber-200 bg-amber-300 shadow-[0_0_0_5px_rgba(251,191,36,0.12)]'
-                        : complete
-                          ? 'border-emerald-300/60 bg-emerald-300/80'
-                          : 'border-white/20 bg-slate-900'
-                    }`}
-                  >
-                    <span className="sr-only">
-                      {active ? 'Current: ' : complete ? 'Complete: ' : ''}
-                    </span>
-                  </span>
-                  <span
-                    className={`h-px flex-1 ${index === PHASES.length - 1 ? 'opacity-0' : complete ? 'bg-emerald-300/60' : 'bg-white/10'}`}
-                  />
-                </div>
-                <span
-                  className={`hidden text-xs font-semibold sm:block ${active ? 'text-amber-200' : complete ? 'text-emerald-200' : 'text-slate-400'}`}
-                >
-                  {phase}
-                </span>
-                <span className="sr-only sm:hidden">{phase}</span>
-              </li>
-            )
-          })}
-        </ol>
-        <p className="mt-3 text-center text-xs font-semibold uppercase tracking-[0.16em] text-amber-200 sm:hidden">
-          {showStaticSummary ? 'Four-step summary' : currentScene.phase}
-        </p>
-
-        <figure className="mx-auto mt-6 max-w-5xl">
-          <div
-            className="io-story-stage relative h-[35rem] min-w-0 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.025] shadow-2xl shadow-purple-950/30 sm:h-[31rem] md:h-[28rem]"
-            data-cycle={player.cycle}
-            data-enhanced={enhanced}
-            data-has-started={hasStarted}
-            data-in-view={stageInView}
-            data-page-visible={pageVisible}
-            data-player-state={playerState}
-            data-reduced-motion={reducedMotion}
-            data-scene={showStaticSummary ? 'summary' : currentScene.id}
-            data-testid="inquiry-story"
-            ref={stageRef}
-          >
-            <div aria-hidden="true" className="io-story-grid absolute inset-0" />
-            <div aria-hidden="true" className="io-story-orb io-story-orb-one" />
-            <div aria-hidden="true" className="io-story-orb io-story-orb-two" />
-
-            {showStaticSummary ? (
-              <StaticSummaryCards />
-            ) : (
-              <div aria-hidden="true" className="absolute inset-0">
-                {previousScene ? (
-                  <div
-                    className="io-story-layer io-story-layer-exit"
-                    key={`previous-${player.cycle}-${previousScene.id}`}
-                  >
-                    <StorySceneVisual id={previousScene.id} />
-                  </div>
-                ) : null}
-                <div
-                  className="io-story-layer io-story-layer-enter"
-                  key={`current-${player.cycle}-${currentScene.id}`}
-                >
-                  <StorySceneVisual id={currentScene.id} />
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <figcaption className="min-h-6 text-sm leading-6 text-slate-300">
-              <span className="font-semibold text-amber-200">
-                {showStaticSummary ? 'Summary' : currentScene.phase}:
-              </span>{' '}
-              {showStaticSummary
-                ? 'A clear four-step path from inquiry to scheduled service.'
-                : currentScene.caption}
-            </figcaption>
-
-            {enhanced && !showStaticSummary ? (
-              <fieldset className="flex items-center gap-2">
-                <legend className="sr-only">Animation controls</legend>
-                <button
-                  aria-label={
-                    player.manuallyPaused ? 'Resume workflow story' : 'Pause workflow story'
-                  }
-                  aria-pressed={player.manuallyPaused}
-                  className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-4 text-base font-semibold text-slate-200 transition hover:border-amber-300/35 hover:bg-white/[0.07] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
-                  onClick={togglePause}
-                  type="button"
-                >
-                  {player.manuallyPaused ? 'Resume' : 'Pause'}
-                </button>
-                <button
-                  aria-label="Replay workflow story from the beginning"
-                  className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-4 text-base font-semibold text-slate-200 transition hover:border-amber-300/35 hover:bg-white/[0.07] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
-                  onClick={replay}
-                  type="button"
-                >
-                  Replay
-                </button>
-              </fieldset>
-            ) : enhanced ? (
-              <span className="text-sm font-semibold text-slate-400">
-                {reducedMotion ? 'Reduced motion summary' : 'Static workflow summary'}
-              </span>
-            ) : null}
-          </div>
-        </figure>
-
-        <div className="sr-only">
-          <h3>Workflow story transcript</h3>
-          <ol>
-            {STATIC_SUMMARY.map((item) => (
-              <li key={item.title}>
-                <strong>{item.title}.</strong> {item.detail}
-              </li>
-            ))}
-          </ol>
-        </div>
-        <p aria-live="polite" className="sr-only">
-          {announcement}
-        </p>
+        </details>
       </Container>
     </section>
   )

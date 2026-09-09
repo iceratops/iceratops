@@ -42,9 +42,8 @@ export default function AboutPage() {
                   width={350}
                 />
                 <p className="font-orbitron mt-4 text-base font-semibold leading-snug text-white">
-                  Texas-founded. Working worldwide.
+                  Founder-led. Direct from the start.
                 </p>
-                <p className="mt-1.5 text-xs text-slate-400">Founder-led in the United States</p>
               </div>
               <p className="mt-5 text-sm leading-6 text-slate-300">{site.availability}</p>
               <p className="mt-6 text-sm font-semibold text-white">What you can count on</p>

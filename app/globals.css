@@ -14,7 +14,7 @@ html {
   background: var(--dark-bg);
 }
 
-/* Anchor CTAs (header CTA on the form page, "See pricing") glide instead of
+/* Anchor CTAs (header CTA on the form page, "Approach") glide instead of
    jumping. Guarded so reduced-motion users keep instant jumps. */
 @media (prefers-reduced-motion: no-preference) {
   html {

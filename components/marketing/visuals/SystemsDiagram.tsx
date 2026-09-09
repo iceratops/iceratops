@@ -8,7 +8,7 @@ type Step = {
   accent?: boolean
 }
 
-const inbox = (
+const application = (
   <svg
     aria-hidden="true"
     fill="none"
@@ -18,11 +18,11 @@ const inbox = (
     viewBox="0 0 24 24"
     width="18"
   >
-    <path d="M3 7l9 6 9-6" strokeLinecap="round" strokeLinejoin="round" />
     <rect height="14" rx="2" width="18" x="3" y="5" />
+    <path d="M3 10h18M9 10v9" strokeLinecap="round" />
   </svg>
 )
-const spark = (
+const integration = (
   <svg
     aria-hidden="true"
     fill="none"
@@ -32,14 +32,10 @@ const spark = (
     viewBox="0 0 24 24"
     width="18"
   >
-    <path
-      d="M12 3l2 4.5L18 9l-4 1.5L12 15l-2-4.5L6 9l4-1.5z"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
-const send = (
+const data = (
   <svg
     aria-hidden="true"
     fill="none"
@@ -49,7 +45,8 @@ const send = (
     viewBox="0 0 24 24"
     width="18"
   >
-    <path d="M4 12l16-7-7 16-2.5-6.5z" strokeLinecap="round" strokeLinejoin="round" />
+    <rect height="16" rx="2" width="18" x="3" y="4" />
+    <path d="M3 10h18M3 15h18M9 4v16" strokeLinecap="round" />
   </svg>
 )
 const check = (
@@ -67,19 +64,18 @@ const check = (
 )
 
 const steps: readonly Step[] = [
-  { title: 'Inquiry', detail: 'Form, text, or DM', icon: inbox },
-  { title: 'AI drafts', detail: 'Using your rules', icon: spark },
-  { title: 'AI sends', detail: 'Routine replies', icon: send },
-  { title: 'Booked', detail: 'Call, tour, or order', icon: check, accent: true },
+  { title: 'Applications', detail: 'Tools your team uses', icon: application },
+  { title: 'Integrations', detail: 'Platforms working together', icon: integration },
+  { title: 'Data', detail: 'Reliable shared information', icon: data },
+  { title: 'Your team', detail: 'Clear access and controls', icon: check, accent: true },
 ]
 
 /**
- * Branded, illustrative diagram of the inquiry to follow-up flow. Pure CSS,
- * no imagery, aria-hidden. Stacks on mobile, four across on large screens.
+ * The parts of a connected system. Stacks on mobile, two across on larger screens.
  */
-export function WorkflowDiagram({ className }: { className?: string }) {
+export function SystemsDiagram({ className }: { className?: string }) {
   return (
-    <div aria-hidden="true" className={cx('grid gap-3 md:grid-cols-2 lg:grid-cols-4', className)}>
+    <div className={cx('grid gap-3 md:grid-cols-2', className)}>
       {steps.map((step) => (
         <div
           className={cx(
@@ -94,7 +90,7 @@ export function WorkflowDiagram({ className }: { className?: string }) {
             {step.icon}
           </span>
           <p className="mt-3 text-sm font-semibold text-white">{step.title}</p>
-          <p className="mt-1 text-xs leading-5 text-slate-400">{step.detail}</p>
+          <p className="mt-1 text-sm leading-6 text-slate-400">{step.detail}</p>
         </div>
       ))}
     </div>

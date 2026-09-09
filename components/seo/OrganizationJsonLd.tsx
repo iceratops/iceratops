@@ -15,11 +15,7 @@ export function OrganizationJsonLd() {
       '@type': 'Place',
       name: `${site.origin.state}, ${site.origin.country}`,
     },
-    areaServed: [
-      { '@type': 'Country', name: 'United States' },
-      { '@type': 'Country', name: 'Saudi Arabia' },
-      { '@type': 'Place', name: 'Worldwide' },
-    ],
+    areaServed: { '@type': 'Place', name: 'Worldwide' },
     knowsAbout: [
       'Custom software',
       'Digital platforms',

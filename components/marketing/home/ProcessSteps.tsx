@@ -16,7 +16,7 @@ const steps = [
   },
   {
     name: 'Handoff',
-    text: 'You get a documented system you own, plus optional ongoing support.',
+    text: 'Your team gets clear documentation, agreed deliverables, and optional ongoing support.',
     accent: true,
   },
 ]
@@ -34,8 +34,8 @@ export function ProcessSteps() {
             A clear path from first conversation to handoff.
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
-            We start small, show working drafts early, and leave you with a system you understand
-            and own.
+            We start with a clear scope, show working drafts early, and leave your team ready to use
+            and maintain the finished work.
           </p>
         </div>
         <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">

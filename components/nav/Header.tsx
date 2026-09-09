@@ -115,27 +115,19 @@ export function Header() {
           : 'border-b border-transparent bg-slate-950/30',
       )}
     >
-      <Container className="flex h-16 items-center justify-between gap-4">
+      <Container className="flex h-16 items-center justify-between gap-2 sm:gap-4">
         <Link
           aria-label="Iceratops home"
-          className="inline-flex w-fit rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300"
+          className="inline-flex h-11 min-w-0 max-w-44 flex-1 items-center overflow-hidden rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300"
           href="/"
         >
           <Image
-            alt=""
-            className="h-11 w-11 sm:hidden"
-            height={48}
-            priority
-            src="/iceratops_logo.svg"
-            width={48}
-          />
-          <Image
             alt="Iceratops"
-            className="hidden h-auto w-44 sm:block"
-            height={48}
+            className="h-auto w-full"
+            height={144}
             priority
             src="/iceratops_text_logo.svg"
-            width={220}
+            width={350}
           />
         </Link>
 
@@ -160,7 +152,11 @@ export function Header() {
           </ButtonLink>
         </nav>
 
-        <ButtonLink className="min-h-11 px-3 py-2 text-xs lg:hidden" href={ctaHref} size="sm">
+        <ButtonLink
+          className="min-h-11 flex-none px-3 py-2 text-xs lg:hidden"
+          href={ctaHref}
+          size="sm"
+        >
           {primaryCta.label}
         </ButtonLink>
 
@@ -169,7 +165,7 @@ export function Header() {
           aria-expanded={open}
           aria-label={open ? 'Close menu' : 'Open menu'}
           className={cx(
-            'inline-flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 text-slate-200 transition-colors hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 lg:hidden',
+            'inline-flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-white/10 text-slate-200 transition-colors hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 lg:hidden',
             !isInteractive && 'invisible',
           )}
           disabled={!isInteractive}

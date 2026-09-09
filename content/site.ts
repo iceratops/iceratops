@@ -2,15 +2,15 @@ export const site = {
   name: 'Iceratops',
   url: 'https://iceratops.com',
   shortDescription:
-    'Iceratops builds custom software, digital platforms, modern websites, workflow automation, and AI-assisted systems for organizations in the U.S. and worldwide.',
+    'Iceratops builds software, digital products, websites, and connected systems for organizations worldwide.',
   footerTagline:
-    'Texas-founded and founder-led. Practical software, websites, automation, and connected systems for clients worldwide.',
+    'Founder-led software, websites, automation, and connected systems. Available for projects worldwide.',
   origin: {
     city: 'Pflugerville',
     state: 'Texas',
     country: 'United States',
   },
-  availability: 'Working with clients in the United States, Saudi Arabia, and worldwide.',
+  availability: 'Available for projects worldwide.',
   contact: {
     email: 'hello@iceratops.com',
     responseCommitment: 'We reply within one business day.',
@@ -18,9 +18,9 @@ export const site = {
   },
   commitments: [
     'No long contracts to start.',
-    'Everything we build is yours, with documentation.',
+    'Clear deliverables, documentation, and ownership terms.',
     'A human stays in the loop for AI-assisted work.',
-    'We explain the workflow before we build it.',
+    'We explain the approach before we build.',
   ] as const,
 } as const
 
@@ -39,7 +39,7 @@ export const contactPage = {
     },
     {
       title: 'What happens next',
-      text: 'We reply within one business day. If a short call or technical review would help, we will suggest one. Defined projects and custom engagements are scoped separately.',
+      text: 'We reply within one business day. If a short call or technical review would help, we will suggest one. Scope, timing, and cost are agreed before work begins.',
     },
   ] as const,
   success: {
@@ -51,7 +51,7 @@ export const contactPage = {
 
 export const servicesPage = {
   eyebrow: 'Capabilities',
-  title: 'Technology services built around real operational needs.',
+  title: 'Software and systems built around your goals.',
   description:
     'From focused website and automation projects to custom software and connected platforms, Iceratops builds systems that fit how your organization works.',
   closingCta: {
@@ -61,16 +61,16 @@ export const servicesPage = {
 
 export const servicesHowWeWork = {
   eyebrow: 'How we work',
-  title: 'Start with the workflow, not the tool.',
+  title: 'Built to fit your team and your systems.',
   description:
-    'We define the operational need, build in small testable stages, and show working drafts early. The finished system is documented, maintainable, and yours to keep.',
+    'A useful system fits the people who use it and the tools they rely on. We plan for both, with clear deliverables and documentation. Ownership and any software licenses are agreed as part of the project scope.',
 } as const
 
 export const aboutPage = {
   eyebrow: 'About',
   title: 'A founder-led technology company built for practical execution.',
   description:
-    'Iceratops combines software-engineering depth with practical business understanding for organizations in the United States and worldwide.',
+    'Iceratops combines software-engineering depth with practical business understanding. Available for projects worldwide.',
   story: [
     'Clients work directly with the person designing and building the system. That keeps requirements clear, decisions close to the work, and technical tradeoffs easy to understand.',
     'The work draws on software engineering, cloud infrastructure, security, automation, and large-scale technical delivery. Each project is shaped around a real operational need, then built and tested in understandable stages.',

@@ -13,7 +13,7 @@ export const metadata = buildMetadata({
 const sections = [
   {
     title: 'What we collect',
-    body: 'The project inquiry form asks for your name, email address, optional company or organization, country or region, website URL, and the details you choose to share about your project.',
+    body: 'The project inquiry form asks for your first name, email address, and project details. Last name, company or organization, country or region, and website URL are optional.',
   },
   {
     title: 'How we use it',
