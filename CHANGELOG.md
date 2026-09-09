@@ -6,6 +6,13 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Navigation and URL consistency
+
+- Aligned the menu and browser titles around Services (`/services`), Approach (`/approach`), About (`/about`), and Start a project (`/start-a-project`).
+- Replaced the Approach anchor with a dedicated page covering each project stage and its deliverable, translated into all nine languages. The homepage keeps its short overview and links to the full page.
+- Moved the inquiry form and confirmation to `/start-a-project` and `/start-a-project/success`. Removed the old contact redirects and workflow-review routes entirely; both retired route families return 404 in every language at the founder's request.
+- Updated the sitemap to 54 public pages and added checks for navigation labels, active states, and removed URLs.
+
 ### Static website translations
 
 - Added English, Arabic, Urdu, Hindi, Spanish, French, Portuguese, Simplified Chinese, and Traditional Chinese across public pages, metadata, navigation, the inquiry form, confirmation, and the fictional workflow demo. Arabic uses Saudi-oriented wording and the simple selector label العربية.

@@ -13,8 +13,9 @@ export const siteConfig = {
 export const publicRoutes = [
   { path: '/' },
   { path: '/services' },
+  { path: '/approach' },
   { path: '/about' },
-  { path: '/free-workflow-review' },
+  { path: '/start-a-project' },
   { path: '/privacy' },
 ] as const
 

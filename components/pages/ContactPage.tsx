@@ -1,7 +1,7 @@
 import { ContactForm } from '@/components/marketing/ContactForm'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
-import { workflowReviewFormId } from '@/content/navigation'
+import { projectFormId } from '@/content/navigation'
 import { contactPage, site } from '@/content/site'
 import type { Locale } from '@/lib/i18n'
 import { getTranslator } from '@/lib/translations'
@@ -35,7 +35,7 @@ export default function ContactPage({ locale = 'en' }: { locale?: Locale }) {
 
         <div
           className="reveal mt-10 scroll-mt-24 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur sm:p-8"
-          id={workflowReviewFormId}
+          id={projectFormId}
         >
           <ContactForm />
           <p className="mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-slate-400">

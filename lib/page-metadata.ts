@@ -1,4 +1,4 @@
-import { aboutPage, servicesPage, site } from '@/content/site'
+import { aboutPage, approachPage, servicesPage, site } from '@/content/site'
 import type { Locale } from '@/lib/i18n'
 import { buildMetadata } from '@/lib/seo'
 import { getTranslator } from '@/lib/translations'
@@ -12,14 +12,15 @@ const pages: Record<
     description: site.shortDescription,
     absoluteTitle: true,
   },
-  '/services': { title: 'Capabilities', description: servicesPage.description },
+  '/services': { title: 'Services', description: servicesPage.description },
+  '/approach': { title: approachPage.title, description: approachPage.description },
   '/about': { title: 'About', description: aboutPage.description },
-  '/free-workflow-review': {
-    title: 'Start a Project',
+  '/start-a-project': {
+    title: 'Start a project',
     description:
       'Start a conversation about custom software, a digital platform, website, workflow automation, or systems integration.',
   },
-  '/free-workflow-review/success': {
+  '/start-a-project/success': {
     title: 'Request received',
     description: 'Thanks for contacting Iceratops. We reply within one business day.',
     noIndex: true,

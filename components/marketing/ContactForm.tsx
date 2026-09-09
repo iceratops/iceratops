@@ -119,7 +119,7 @@ export function ContactForm() {
       if (!response.ok) {
         throw new Error('Request failed')
       }
-      router.push(localizedPath('/free-workflow-review/success', locale))
+      router.push(localizedPath('/start-a-project/success', locale))
     } catch {
       setSubmitState('error')
     } finally {

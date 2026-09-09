@@ -32,7 +32,7 @@ for (const locale of locales) {
   assert.equal(localizedPath('/#approach', locale), `${prefix || '/'}#approach`)
   assert.equal(localizedPath('mailto:hello@example.com', locale), 'mailto:hello@example.com')
   assert.equal(localizedPath('//example.com/path', locale), '//example.com/path')
-  assert.equal(unlocalizedPath(`${prefix}/free-workflow-review`), '/free-workflow-review')
+  assert.equal(unlocalizedPath(`${prefix}/start-a-project`), '/start-a-project')
   assert.equal(localeInfo[locale].dir, ['ar', 'ur'].includes(locale) ? 'rtl' : 'ltr')
   assert.equal(
     createTranslator(messages)('Use {limit} characters or fewer.', { limit: 100 }),

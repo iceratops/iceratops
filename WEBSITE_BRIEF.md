@@ -164,34 +164,33 @@ The rebuild improves typography rhythm, copy clarity, and conversion architectur
 The site has one primary CTA across every page: **Start a project**.
 
 - Primary CTA label: "Start a project" ("Start a conversation" is acceptable in page headings and closing copy)
-- Primary CTA target: `/free-workflow-review` for continuity with existing inbound links. On that page, the header CTA stays visible and scrolls to the form (`#workflow-review-form`) instead of disappearing. The free workflow review remains available as a specific entry point when it fits the inquiry.
+- Primary CTA target: `/start-a-project`, matching its visible label. On that page, the header CTA stays visible and scrolls to the form (`#project-form`) instead of disappearing. The free workflow review remains available as a specific entry point when it fits the inquiry.
 - Secondary CTA: "Explore capabilities." "Try the working demo" is also allowed near the example and once on Services when a valid working-demo URL is configured.
 - Tertiary fallback: `hello@iceratops.com` mailto, always visible in footer
 
 Do not introduce additional primary CTAs ("Book a call," "Buy now," "Schedule demo"). The funnel is intentionally narrow.
 
-Global navigation contains Capabilities, Approach, About, and the Start a project CTA. Approach links to the homepage process section rather than creating an unnecessary route. On mobile, the CTA stays visible in the header. The footer mirrors the navigation, Privacy, and the `hello@iceratops.com` email.
+Global navigation contains Services (`/services`), Approach (`/approach`), About (`/about`), and the Start a project CTA (`/start-a-project`). Each menu destination has its own page, with a matching English label and URL slug. Approach explains the project stages and what the client receives at each stage. On mobile, the CTA stays visible in the header. The footer mirrors the navigation, Privacy, and the `hello@iceratops.com` email.
 
 The homepage is a front door that previews the business, not a directory that restates other pages. Each section has one job: hero, a four-card capability preview, a short four-step process, a brief founder-led trust section, engagement context, one compact optional workflow example, and the final CTA. It does not duplicate the full services grid (that lives on `/services`) or the full About story. The homepage founder-led trust section is a short narrative (eyebrow, title, one paragraph), not a card grid.
 
 Keep the booking workflow as one specific demonstration, clearly labeled and expandable for visitors who want the detail. It must not dominate the homepage or define the company. The hero and Services visuals should represent broader applications, integrations, and data rather than repeat the inquiry-to-booking story.
 
-Do not duplicate the Understand, Scope, Build, Handoff process module across nearby pages. The homepage shows the short version with step names and one-line summaries only. `/services` leads with the capabilities and refers to the process only as a brief narrative lower on the page.
+Do not duplicate the Understand, Scope, Build, Handoff process module across nearby pages. The homepage shows the short version with step names and one-line summaries only, followed by a link to `/approach`. The Approach page expands each stage with practical detail and its expected deliverable. `/services` leads with the capabilities and refers to the process only as a brief narrative lower on the page.
 
 ## Information architecture (canonical)
 
 ```
 /                                Home
-/services                        Capabilities overview
-/about
-/free-workflow-review            Project inquiry and optional workflow review form
-/free-workflow-review/success    Noindex confirmation route
+/services                        Services overview
+/approach                        Project stages and deliverables
+/about                           About Iceratops
+/start-a-project                 Project inquiry and optional workflow review form
+/start-a-project/success         Noindex confirmation route
 /privacy                         Plain-language privacy notice
-/contact                         Permanent redirect to /free-workflow-review
-/contact/success                 Permanent redirect to /free-workflow-review/success
 ```
 
-English keeps the unprefixed URLs. Translated equivalents use `/ar`, `/ur`, `/hi`, `/es`, `/fr`, `/pt`, `/zh-Hans`, and `/zh-Hant` prefixes, with the same page purpose and translated content. Arabic and Urdu read right to left.
+English keeps the unprefixed URLs. Translated equivalents use `/ar`, `/ur`, `/hi`, `/es`, `/fr`, `/pt`, `/zh-Hans`, and `/zh-Hant` prefixes, with the same page purpose and translated content. Arabic and Urdu read right to left. The English slugs stay consistent across languages; navigation labels and page content are translated. The retired `/contact`, `/free-workflow-review`, and their `/success` paths do not redirect or serve content. They return 404 in every language, as requested by the founder.
 
 Do not publish placeholder service-detail, process, industry, work, demo, resource, terms, or cookie routes merely to fill the sitemap. Add a route only when it has a unique customer purpose and content strong enough to support a sales conversation. Until then, those paths should return the branded 404 rather than expose stale shells.
 

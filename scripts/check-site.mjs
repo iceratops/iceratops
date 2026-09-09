@@ -7,12 +7,12 @@ import { readdir, readFile } from 'node:fs/promises'
  *
  * Run against a built local server (default http://127.0.0.1:3000) or set
  * BASE_URL to a deploy preview/production URL. It checks route inventory,
- * internal links, redirects, metadata, form contracts, and security headers.
+ * internal links, retired URLs, metadata, form contracts, and security headers.
  */
 
 const baseUrl = new URL(process.env.BASE_URL ?? 'http://127.0.0.1:3000')
 const canonicalOrigin = 'https://iceratops.com'
-const baseRoutes = ['/', '/services', '/about', '/free-workflow-review', '/privacy']
+const baseRoutes = ['/', '/services', '/approach', '/about', '/start-a-project', '/privacy']
 const locales = ['en', 'ar', 'ur', 'hi', 'es', 'fr', 'pt', 'zh-Hans', 'zh-Hant']
 const languageTags = ['en', 'ar-SA', 'ur', 'hi', 'es', 'fr', 'pt-BR', 'zh-Hans', 'zh-Hant']
 const localPath = (path, locale) =>
@@ -22,8 +22,8 @@ const expectedPublicRoutes = locales.flatMap((locale) =>
 )
 const expectedAppPageRoutes = [
   ...baseRoutes,
-  '/free-workflow-review/success',
-  ...[...baseRoutes, '/free-workflow-review/success'].map(
+  '/start-a-project/success',
+  ...[...baseRoutes, '/start-a-project/success'].map(
     (path) => `/[locale]${path === '/' ? '' : path}`,
   ),
 ]
@@ -178,7 +178,7 @@ async function checkPublicRoutes() {
 async function checkInternalLinks() {
   const sources = [
     ...expectedPublicRoutes,
-    ...locales.map((locale) => localPath('/free-workflow-review/success', locale)),
+    ...locales.map((locale) => localPath('/start-a-project/success', locale)),
   ]
   for (const source of sources) {
     const page = await loadPage(source)
@@ -254,18 +254,7 @@ async function checkWorkingDemoLinks() {
 }
 
 async function checkUtilityRoutes() {
-  for (const [source, destination] of [
-    ['/contact', '/free-workflow-review'],
-    ['/contact/success', '/free-workflow-review/success'],
-  ]) {
-    const { response } = await request(source, { redirect: 'manual' })
-    const location = response.headers.get('location')
-    if (![301, 308].includes(response.status) || pathFromUrl(location ?? '/') !== destination) {
-      recordFailure(`${source} did not permanently redirect to ${destination}`)
-    }
-  }
-
-  const success = await loadPage('/free-workflow-review/success')
+  const success = await loadPage('/start-a-project/success')
   if (!success.response.ok) recordFailure(`success route returned ${success.response.status}`)
   if (!findMeta(success.html, 'robots')?.includes('noindex')) {
     recordFailure('success route is not noindex')
@@ -278,7 +267,7 @@ async function checkUtilityRoutes() {
   if (!findMeta(missing.html, 'robots')?.includes('noindex')) recordFailure('404 is not noindex')
   if (findCanonical(missing.html)) recordFailure('404 has a canonical URL')
 
-  const review = await loadPage('/free-workflow-review')
+  const review = await loadPage('/start-a-project')
   const detector = await request('/__forms.html')
   const detectorSource = await readFile('public/__forms.html', 'utf8')
   const expectedFields = [
@@ -356,12 +345,12 @@ async function checkUtilityRoutes() {
   const headerLinks = header.match(/<a\b[^>]*>/gi) ?? []
   const mobileCta = headerLinks.find(
     (tag) =>
-      findAttribute(tag, 'href') === '/free-workflow-review' &&
+      findAttribute(tag, 'href') === '/start-a-project' &&
       findAttribute(tag, 'class')?.includes('lg:hidden'),
   )
   if (!mobileCta) recordFailure('home lacks a visible mobile project CTA')
   const conversionLinks = headerLinks.filter(
-    (tag) => findAttribute(tag, 'href') === '/free-workflow-review',
+    (tag) => findAttribute(tag, 'href') === '/start-a-project',
   )
   if (conversionLinks.length !== 2) {
     recordFailure(`home header renders ${conversionLinks.length} project CTAs, expected 2`)
@@ -395,7 +384,7 @@ async function checkLocalizedPages() {
   const english = JSON.parse(await readFile('content/locales/en.json', 'utf8'))
   for (const [index, locale] of locales.entries()) {
     const messages = JSON.parse(await readFile(`content/locales/${locale}.json`, 'utf8'))
-    for (const route of [...baseRoutes, '/free-workflow-review/success']) {
+    for (const route of [...baseRoutes, '/start-a-project/success']) {
       const path = localPath(route, locale)
       const page = await loadPage(path)
       const htmlTag = page.html.match(/<html\b[^>]*>/i)?.[0] ?? ''
@@ -420,6 +409,24 @@ async function checkLocalizedPages() {
         )
           recordFailure(`${path} has an unlocalized internal link: ${href}`)
       }
+      const header = page.html.match(/<header\b[^>]*>[\s\S]*?<\/header>/i)?.[0] ?? ''
+      const navLinks = Array.from(header.matchAll(/(<a\b[^>]*>)([\s\S]*?)<\/a>/gi))
+      for (const [destination, label] of [
+        ['/services', 'Services'],
+        ['/approach', 'Approach'],
+        ['/about', 'About'],
+      ]) {
+        const matches = navLinks.filter(
+          (match) => findAttribute(match[1], 'href') === localPath(destination, locale),
+        )
+        if (!matches.length || matches.some((match) => textContent(match[2]) !== messages[label]))
+          recordFailure(`${path} has inconsistent ${label} navigation`)
+        const current = matches.some((match) => findAttribute(match[1], 'aria-current') === 'page')
+        if (current !== (route === destination))
+          recordFailure(`${path} has the wrong active navigation item for ${label}`)
+      }
+      if (links.some((tag) => findAttribute(tag, 'href')?.includes('#process')))
+        recordFailure(`${path} still links to the removed process anchor`)
       if (route.endsWith('/success')) {
         if (!findMeta(page.html, 'robots')?.includes('noindex') || findCanonical(page.html))
           recordFailure(`${path} must be noindex without a canonical`)
@@ -442,9 +449,9 @@ async function checkLocalizedPages() {
             recordFailure(`${path} retains English copy: ${key}`)
         }
       }
-      if (route === '/free-workflow-review') {
+      if (route === '/start-a-project') {
         const form = findNamedForm(page.html, 'contact')
-        const enForm = findNamedForm((await loadPage('/free-workflow-review')).html, 'contact')
+        const enForm = findNamedForm((await loadPage('/start-a-project')).html, 'contact')
         if (
           !form ||
           JSON.stringify(formFieldNames(form.body)) !== JSON.stringify(formFieldNames(enForm.body))
@@ -456,17 +463,19 @@ async function checkLocalizedPages() {
           recordFailure(`${path} omits the inquiry language`)
       }
     }
-    for (const [oldRoute, newRoute] of [
-      ['/contact', '/free-workflow-review'],
-      ['/contact/success', '/free-workflow-review/success'],
+    for (const oldRoute of [
+      '/contact',
+      '/contact/success',
+      '/free-workflow-review',
+      '/free-workflow-review/success',
     ]) {
-      const redirect = await request(localPath(oldRoute, locale), { redirect: 'manual' })
+      const removed = await request(localPath(oldRoute, locale), { redirect: 'manual' })
       if (
-        redirect.response.status !== 308 ||
-        pathFromUrl(redirect.response.headers.get('location') ?? '/') !==
-          localPath(newRoute, locale)
+        removed.response.status !== 404 ||
+        removed.response.headers.has('location') ||
+        !findMeta(removed.html, 'robots')?.includes('noindex')
       )
-        recordFailure(`${locale} legacy contact redirect fails`)
+        recordFailure(`${locale}${oldRoute} must be removed without a redirect`)
     }
     const missing = await request(localPath('/missing-page-for-validation', locale))
     if (
@@ -519,5 +528,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  `site check: passed (${expectedPublicRoutes.length} public routes, app-page inventory, redirects, links, metadata, form contracts, mobile fallbacks, and headers)`,
+  `site check: passed (${expectedPublicRoutes.length} public routes, app-page inventory, retired URLs, navigation, links, metadata, form contracts, mobile fallbacks, and headers)`,
 )

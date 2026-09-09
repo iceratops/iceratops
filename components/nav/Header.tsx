@@ -7,7 +7,7 @@ import { useI18n } from '@/components/i18n/I18nProvider'
 import Link from '@/components/i18n/LocalizedLink'
 import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
-import { headerNavItems, primaryCta, workflowReviewFormId } from '@/content/navigation'
+import { headerNavItems, primaryCta, projectFormId } from '@/content/navigation'
 import { cx } from '@/lib/classes'
 import { unlocalizedPath } from '@/lib/i18n'
 
@@ -108,7 +108,7 @@ export function Header() {
   // instead of navigating away; everywhere else (including the success page) it
   // links to the form route. Same behaviour on desktop and mobile.
   const onFormPage = normalizedPath === primaryCta.href
-  const ctaHref = onFormPage ? `#${workflowReviewFormId}` : primaryCta.href
+  const ctaHref = onFormPage ? `#${projectFormId}` : primaryCta.href
 
   return (
     <header

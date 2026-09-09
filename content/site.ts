@@ -25,7 +25,7 @@ export const site = {
 } as const
 
 export const contactPage = {
-  title: 'Start a conversation.',
+  title: 'Start a project',
   description:
     "Tell us what you are trying to build or improve. We'll reply within one business day with a practical next step.",
   reviewDetails: [
@@ -50,7 +50,7 @@ export const contactPage = {
 } as const
 
 export const servicesPage = {
-  eyebrow: 'Capabilities',
+  eyebrow: 'Services',
   title: 'Software and systems built around your goals.',
   description:
     'From focused website and automation projects to custom software and connected platforms, Iceratops builds systems that fit how your organization works.',
@@ -64,6 +64,33 @@ export const servicesHowWeWork = {
   title: 'Built to fit your team and your systems.',
   description:
     'A useful system fits the people who use it and the tools they rely on. We plan for both, with clear deliverables and documentation. Ownership and any software licenses are agreed as part of the project scope.',
+} as const
+
+export const approachPage = {
+  title: 'Approach',
+  description: 'A clear path from first conversation to handoff.',
+  steps: [
+    {
+      name: 'Understand',
+      text: 'We talk through your goals, current tools, and the people who will use the system. Together, we identify the problem worth solving and what a useful first outcome looks like.',
+      outcome: 'A shared understanding of the need and the next step.',
+    },
+    {
+      name: 'Scope',
+      text: 'We define the deliverables, integrations, and technical boundaries. Scope, timing, cost, ownership, and software licensing terms are agreed before work begins.',
+      outcome: 'An agreed scope with clear responsibilities and deliverables.',
+    },
+    {
+      name: 'Build',
+      text: 'We share working drafts in small stages so you can give feedback as the system takes shape. We test how it works for your team and with your existing tools before it goes live.',
+      outcome: 'Working software reviewed against the agreed scope.',
+    },
+    {
+      name: 'Handoff',
+      text: 'We walk your team through the finished work and provide documentation for using and maintaining it. If you need ongoing support or further improvements, we agree those next steps together.',
+      outcome: 'A documented handoff and a clear plan for what comes next.',
+    },
+  ],
 } as const
 
 export const aboutPage = {

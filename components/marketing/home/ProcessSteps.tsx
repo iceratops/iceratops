@@ -1,4 +1,5 @@
 import { Eyebrow } from '@/components/marketing/Eyebrow'
+import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
 import type { Locale } from '@/lib/i18n'
 import { getTranslator } from '@/lib/translations'
@@ -26,10 +27,7 @@ const steps = [
 export function ProcessSteps({ locale = 'en' }: { locale?: Locale }) {
   const t = getTranslator(locale)
   return (
-    <section
-      className="relative scroll-mt-24 border-y border-white/[0.06] bg-white/[0.02] py-14 sm:py-16 lg:py-20"
-      id="process"
-    >
+    <section className="relative border-y border-white/[0.06] bg-white/[0.02] py-14 sm:py-16 lg:py-20">
       <Container>
         <div className="reveal max-w-2xl">
           <Eyebrow>{t('How we work')}</Eyebrow>
@@ -61,6 +59,9 @@ export function ProcessSteps({ locale = 'en' }: { locale?: Locale }) {
             </li>
           ))}
         </ol>
+        <ButtonLink className="mt-8" href="/approach" variant="secondary">
+          {t('Explore our approach')}
+        </ButtonLink>
       </Container>
     </section>
   )
