@@ -1,15 +1,18 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import { useI18n } from '@/components/i18n/I18nProvider'
+import Link from '@/components/i18n/LocalizedLink'
 import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
 import { headerNavItems, primaryCta, workflowReviewFormId } from '@/content/navigation'
 import { cx } from '@/lib/classes'
+import { unlocalizedPath } from '@/lib/i18n'
 
 export function Header() {
+  const { t } = useI18n()
   const pathname = usePathname()
   const [isInteractive, setIsInteractive] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -97,7 +100,8 @@ export function Header() {
   // Exact matches only: the site has no nested public routes, and prefix
   // matching would wrongly highlight parents if any are ever added. Trailing
   // slashes are normalized so a trailingSlash config change cannot break this.
-  const normalizedPath = pathname.length > 1 ? pathname.replace(/\/$/, '') : pathname
+  const path = unlocalizedPath(pathname)
+  const normalizedPath = path.length > 1 ? path.replace(/\/$/, '') : path
   const isActive = (href: string) => normalizedPath === href
 
   // The CTA never disappears. On the form page itself it scrolls to the form
@@ -117,7 +121,7 @@ export function Header() {
     >
       <Container className="flex h-16 items-center justify-between gap-2 sm:gap-4">
         <Link
-          aria-label="Iceratops home"
+          aria-label={t('Iceratops home')}
           className="inline-flex h-11 min-w-0 max-w-44 flex-1 items-center overflow-hidden rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300"
           href="/"
         >
@@ -131,7 +135,7 @@ export function Header() {
           />
         </Link>
 
-        <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label={t('Main navigation')} className="hidden items-center gap-1 lg:flex">
           {headerNavItems.map((item) => (
             <Link
               aria-current={isActive(item.href) ? 'page' : undefined}
@@ -144,11 +148,11 @@ export function Header() {
               href={item.href}
               key={item.href}
             >
-              {item.label}
+              {t(item.label)}
             </Link>
           ))}
-          <ButtonLink className="ml-2" href={ctaHref} size="sm">
-            {primaryCta.label}
+          <ButtonLink className="ms-2" href={ctaHref} size="sm">
+            {t(primaryCta.label)}
           </ButtonLink>
         </nav>
 
@@ -157,13 +161,13 @@ export function Header() {
           href={ctaHref}
           size="sm"
         >
-          {primaryCta.label}
+          {t(primaryCta.label)}
         </ButtonLink>
 
         <button
           aria-controls="mobile-nav"
           aria-expanded={open}
-          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-label={t(open ? 'Close menu' : 'Open menu')}
           className={cx(
             'inline-flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-white/10 text-slate-200 transition-colors hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 lg:hidden',
             !isInteractive && 'invisible',
@@ -192,7 +196,7 @@ export function Header() {
 
       <noscript>
         <nav
-          aria-label="Navigation without JavaScript"
+          aria-label={t('Navigation without JavaScript')}
           className="border-t border-white/10 bg-slate-950/90 lg:hidden"
         >
           <Container className="flex flex-wrap items-center gap-x-5 gap-y-2 py-3 text-sm font-semibold text-slate-200">
@@ -202,7 +206,7 @@ export function Header() {
                 href={item.href}
                 key={item.href}
               >
-                {item.label}
+                {t(item.label)}
               </Link>
             ))}
           </Container>
@@ -232,7 +236,7 @@ export function Header() {
         )}
       >
         <nav
-          aria-label="Mobile navigation"
+          aria-label={t('Mobile navigation')}
           className="min-h-0 overflow-hidden bg-slate-950/70"
           id="mobile-nav"
           inert={!open || undefined}
@@ -252,7 +256,7 @@ export function Header() {
                 key={item.href}
                 onClick={() => setOpen(false)}
               >
-                {item.label}
+                {t(item.label)}
               </Link>
             ))}
           </Container>

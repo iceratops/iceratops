@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 import { cx } from '@/lib/classes'
+import type { Locale } from '@/lib/i18n'
+import { getTranslator } from '@/lib/translations'
 
 type Step = {
   title: string
@@ -73,7 +75,14 @@ const steps: readonly Step[] = [
 /**
  * The parts of a connected system. Stacks on mobile, two across on larger screens.
  */
-export function SystemsDiagram({ className }: { className?: string }) {
+export function SystemsDiagram({
+  className,
+  locale = 'en',
+}: {
+  className?: string
+  locale?: Locale
+}) {
+  const t = getTranslator(locale)
   return (
     <div className={cx('grid gap-3 md:grid-cols-2', className)}>
       {steps.map((step) => (
@@ -89,8 +98,8 @@ export function SystemsDiagram({ className }: { className?: string }) {
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-300/[0.12] text-amber-300">
             {step.icon}
           </span>
-          <p className="mt-3 text-sm font-semibold text-white">{step.title}</p>
-          <p className="mt-1 text-sm leading-6 text-slate-400">{step.detail}</p>
+          <p className="mt-3 text-sm font-semibold text-white">{t(step.title)}</p>
+          <p className="mt-1 text-sm leading-6 text-slate-400">{t(step.detail)}</p>
         </div>
       ))}
     </div>

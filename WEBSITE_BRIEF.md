@@ -119,6 +119,7 @@ These rules apply to all visible website copy.
 6. **Plain language at a sixth-grade reading level.**
 7. **Tight sentences.** If a sentence runs over 25 words, split it.
 8. **Location references are intentional.** Lead with worldwide availability. Retain the single factual Pflugerville, Texas, founding sentence on About and accurate founding-location metadata. Do not repeat country lists or Texas-founded badges.
+9. **Language-inclusive service.** Avoid English-only promises such as "plain-English" recommendations. Visitors can write inquiries in their own language and specify a preferred reply language independently of their country. Website translation does not imply native fluency, multilingual calls, or automatic translation of correspondence. Start with English, Arabic, Urdu, Hindi, Spanish, French, Portuguese, Simplified Chinese, and Traditional Chinese. Use full native language names with a globe, without flags or abbreviations. Label Arabic simply العربية and tailor its wording for Saudi readers. Maintain saved translations for all copy, controls, metadata, and form feedback.
 
 ## Pricing direction
 
@@ -189,6 +190,8 @@ Do not duplicate the Understand, Scope, Build, Handoff process module across nea
 /contact                         Permanent redirect to /free-workflow-review
 /contact/success                 Permanent redirect to /free-workflow-review/success
 ```
+
+English keeps the unprefixed URLs. Translated equivalents use `/ar`, `/ur`, `/hi`, `/es`, `/fr`, `/pt`, `/zh-Hans`, and `/zh-Hant` prefixes, with the same page purpose and translated content. Arabic and Urdu read right to left.
 
 Do not publish placeholder service-detail, process, industry, work, demo, resource, terms, or cookie routes merely to fill the sitemap. Add a route only when it has a unique customer purpose and content strong enough to support a sales conversation. Until then, those paths should return the branded 404 rather than expose stale shells.
 

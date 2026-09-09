@@ -1,5 +1,7 @@
 import { Eyebrow } from '@/components/marketing/Eyebrow'
 import { Container } from '@/components/primitives/Container'
+import type { Locale } from '@/lib/i18n'
+import { getTranslator } from '@/lib/translations'
 
 const cards = [
   {
@@ -74,18 +76,20 @@ const cards = [
   },
 ]
 
-export function WhatWeBuild() {
+export function WhatWeBuild({ locale = 'en' }: { locale?: Locale }) {
+  const t = getTranslator(locale)
   return (
     <section className="py-14 sm:py-16 lg:py-20">
       <Container>
         <div className="reveal max-w-2xl">
-          <Eyebrow>What we build</Eyebrow>
+          <Eyebrow>{t('What we build')}</Eyebrow>
           <h2 className="font-orbitron mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl">
-            Technology that supports the way your organization works.
+            {t('Technology that supports the way your organization works.')}
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
-            Iceratops works with founders, operators, and established teams. Engagements range from
-            focused improvements to custom platforms and connected systems.
+            {t(
+              'Iceratops works with founders, operators, and established teams. Engagements range from focused improvements to custom platforms and connected systems.',
+            )}
           </p>
         </div>
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -98,8 +102,10 @@ export function WhatWeBuild() {
               <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-amber-300/25 bg-amber-300/10 text-amber-300">
                 {card.icon}
               </span>
-              <h3 className="font-orbitron mt-5 text-lg font-semibold text-white">{card.title}</h3>
-              <p className="mt-2.5 text-sm leading-6 text-slate-300">{card.text}</p>
+              <h3 className="font-orbitron mt-5 text-lg font-semibold text-white">
+                {t(card.title)}
+              </h3>
+              <p className="mt-2.5 text-sm leading-6 text-slate-300">{t(card.text)}</p>
             </div>
           ))}
         </div>

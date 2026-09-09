@@ -6,6 +6,22 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Static website translations
+
+- Added English, Arabic, Urdu, Hindi, Spanish, French, Portuguese, Simplified Chinese, and Traditional Chinese across public pages, metadata, navigation, the inquiry form, confirmation, and the fictional workflow demo. Arabic uses Saudi-oriented wording and the simple selector label العربية.
+- Added a native-name language selector, saved translation catalogs, static language URLs, reciprocal language metadata, and a 45-page multilingual sitemap. No translation subscription, runtime AI calls, or new package dependencies are required.
+- Added right-to-left Arabic and Urdu layouts, self-hosted script fonts, and wrapping for longer translated copy. Country search displays local names while preserving English names and country codes in submissions.
+- Inquiry forms suggest the current language for written replies and include the site language in the Netlify payload. Replies themselves remain part of the team's operational workflow; the website does not automatically translate correspondence.
+- Added a static multilingual 404 with native-language home links that work without JavaScript. This uses Next.js 15’s experimental `globalNotFound` convention for multiple root layouts.
+- Added catalog, placeholder, routing, rendered-copy, and multilingual form-contract checks. Translations are initial drafts, ready for native-speaker editorial review.
+
+### Multilingual inquiry readiness
+
+- Replaced the remaining English-only recommendation wording and recorded the founder's language-inclusive direction in the website brief.
+- Added an optional preferred written reply language, Unicode-friendly free-text fields, and automatic right-to-left input direction. International email domains are normalized for delivery; Unicode mailbox names still require a different email address.
+- Localized country labels follow the document language while submissions retain the English country name and a stable country code. Country search accepts localized names, English names, and codes.
+- Updated the Netlify form detector, form-contract validation, and privacy disclosure. This initial form-readiness work was followed by the static website translations above. Written correspondence still needs an operational reply workflow.
+
 ### Project inquiry form improvements
 
 - Split first and last names, with last name optional, while preserving the combined name in Netlify submissions for existing integrations.

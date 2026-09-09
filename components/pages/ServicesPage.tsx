@@ -8,29 +8,33 @@ import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { services } from '@/content/services'
 import { servicesHowWeWork, servicesPage } from '@/content/site'
-import { buildMetadata } from '@/lib/seo'
+import type { Locale } from '@/lib/i18n'
+import { getTranslator } from '@/lib/translations'
 import { getWorkingDemoUrl } from '@/lib/working-demo'
 
-export const metadata = buildMetadata({
-  title: 'Capabilities',
-  description: servicesPage.description,
-  path: '/services',
-})
-
-export default function ServicesPage() {
+export default function ServicesPage({ locale = 'en' }: { locale?: Locale }) {
+  const t = getTranslator(locale)
   const workingDemoUrl = getWorkingDemoUrl()
 
   return (
     <>
       <PageHero
-        description={servicesPage.description}
-        eyebrow={servicesPage.eyebrow}
-        title={servicesPage.title}
+        description={t(servicesPage.description)}
+        eyebrow={t(servicesPage.eyebrow)}
+        title={t(servicesPage.title)}
       />
 
       <Section className="py-8 sm:py-10 lg:py-12">
         <Container>
-          <ServiceCardGrid services={services} />
+          <ServiceCardGrid
+            services={services.map((service) => ({
+              ...service,
+              name: t(service.name),
+              outcome: t(service.outcome),
+              summary: t(service.summary),
+              highlights: service.highlights.map((value) => t(value)),
+            }))}
+          />
         </Container>
       </Section>
 
@@ -38,9 +42,9 @@ export default function ServicesPage() {
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="reveal max-w-md">
             <SectionHeading
-              description={servicesHowWeWork.description}
-              eyebrow={servicesHowWeWork.eyebrow}
-              title={servicesHowWeWork.title}
+              description={t(servicesHowWeWork.description)}
+              eyebrow={t(servicesHowWeWork.eyebrow)}
+              title={t(servicesHowWeWork.title)}
             />
             {workingDemoUrl ? (
               <ButtonLink
@@ -49,17 +53,17 @@ export default function ServicesPage() {
                 href={workingDemoUrl}
                 variant="secondary"
               >
-                Try the working demo
+                {t('Try the working demo')}
               </ButtonLink>
             ) : null}
           </div>
           <div className="reveal" style={{ transitionDelay: '120ms' }}>
-            <SystemsDiagram />
+            <SystemsDiagram locale={locale} />
           </div>
         </Container>
       </Section>
 
-      <ClosingCta title={servicesPage.closingCta.title} />
+      <ClosingCta locale={locale} title={t(servicesPage.closingCta.title)} />
     </>
   )
 }

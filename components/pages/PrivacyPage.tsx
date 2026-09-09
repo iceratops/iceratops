@@ -2,18 +2,13 @@ import { PageHero } from '@/components/marketing/PageHero'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { site } from '@/content/site'
-import { buildMetadata } from '@/lib/seo'
-
-export const metadata = buildMetadata({
-  title: 'Privacy',
-  description: 'How Iceratops handles information shared through this website.',
-  path: '/privacy',
-})
+import type { Locale } from '@/lib/i18n'
+import { getTranslator } from '@/lib/translations'
 
 const sections = [
   {
     title: 'What we collect',
-    body: 'The project inquiry form asks for your first name, email address, and project details. Last name, company or organization, country or region, and website URL are optional.',
+    body: 'The project inquiry form asks for your first name, email address, and project details. Last name, company or organization, country or region, preferred reply language, and website URL are optional.',
   },
   {
     title: 'How we use it',
@@ -33,37 +28,53 @@ const sections = [
   },
 ] as const
 
-export default function PrivacyPage() {
+export default function PrivacyPage({ locale = 'en' }: { locale?: Locale }) {
+  const t = getTranslator(locale)
   return (
     <>
       <PageHero
-        description="A plain-language summary of the information this site collects and how it is used."
-        eyebrow="Privacy"
-        title="Your information stays tied to your request."
+        description={t(
+          'A plain-language summary of the information this site collects and how it is used.',
+        )}
+        eyebrow={t('Privacy')}
+        title={t('Your information stays tied to your request.')}
       />
       <Section className="pb-16 pt-8 sm:pb-24 sm:pt-10">
         <Container size="narrow">
-          <p className="reveal text-sm text-slate-400">Effective July 14, 2026</p>
+          <p className="reveal text-sm text-slate-400">{t('Effective September 9, 2026')}</p>
           <div className="mt-8 space-y-8">
             {sections.map((section) => (
               <section className="reveal" key={section.title}>
-                <h2 className="font-orbitron text-lg font-semibold text-white">{section.title}</h2>
-                <p className="mt-3 text-base leading-7 text-slate-300">{section.body}</p>
+                <h2 className="font-orbitron text-lg font-semibold text-white">
+                  {t(section.title)}
+                </h2>
+                <p className="mt-3 text-base leading-7 text-slate-300">
+                  {t(section.body)}
+                  {section.title === 'What we collect' && (
+                    <>
+                      {' '}
+                      {t(
+                        'We also include the selected website language with your inquiry to help route your reply.',
+                      )}
+                    </>
+                  )}
+                </p>
               </section>
             ))}
           </div>
           <section className="reveal mt-10 border-t border-white/10 pt-8">
             <h2 className="font-orbitron text-lg font-semibold text-white">
-              Questions or requests
+              {t('Questions or requests')}
             </h2>
             <p className="mt-3 text-base leading-7 text-slate-300">
-              To ask about information you shared, or to request access, correction, or deletion,
-              email{' '}
+              {t(
+                'To ask about information you shared, or to request access, correction, or deletion, email',
+              )}{' '}
               <a
                 className="font-semibold text-amber-200 underline underline-offset-4"
                 href={`mailto:${site.contact.email}?subject=Privacy%20request`}
               >
-                {site.contact.email}
+                {t(site.contact.email)}
               </a>
               .
             </p>

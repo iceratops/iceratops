@@ -1,5 +1,7 @@
 import { Eyebrow } from '@/components/marketing/Eyebrow'
 import { Container } from '@/components/primitives/Container'
+import type { Locale } from '@/lib/i18n'
+import { getTranslator } from '@/lib/translations'
 
 const steps = [
   {
@@ -21,7 +23,8 @@ const steps = [
   },
 ]
 
-export function ProcessSteps() {
+export function ProcessSteps({ locale = 'en' }: { locale?: Locale }) {
+  const t = getTranslator(locale)
   return (
     <section
       className="relative scroll-mt-24 border-y border-white/[0.06] bg-white/[0.02] py-14 sm:py-16 lg:py-20"
@@ -29,13 +32,14 @@ export function ProcessSteps() {
     >
       <Container>
         <div className="reveal max-w-2xl">
-          <Eyebrow>How we work</Eyebrow>
+          <Eyebrow>{t('How we work')}</Eyebrow>
           <h2 className="font-orbitron mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl">
-            A clear path from first conversation to handoff.
+            {t('A clear path from first conversation to handoff.')}
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
-            We start with a clear scope, show working drafts early, and leave your team ready to use
-            and maintain the finished work.
+            {t(
+              'We start with a clear scope, show working drafts early, and leave your team ready to use and maintain the finished work.',
+            )}
           </p>
         </div>
         <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -50,8 +54,10 @@ export function ProcessSteps() {
               >
                 {index + 1}
               </div>
-              <h3 className="font-orbitron mt-5 text-base font-semibold text-white">{step.name}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-400">{step.text}</p>
+              <h3 className="font-orbitron mt-5 text-base font-semibold text-white">
+                {t(step.name)}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-400">{t(step.text)}</p>
             </li>
           ))}
         </ol>

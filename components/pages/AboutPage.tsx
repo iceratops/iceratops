@@ -5,21 +5,17 @@ import { Card } from '@/components/primitives/Card'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { aboutPage, site } from '@/content/site'
-import { buildMetadata } from '@/lib/seo'
+import type { Locale } from '@/lib/i18n'
+import { getTranslator } from '@/lib/translations'
 
-export const metadata = buildMetadata({
-  title: 'About',
-  description: aboutPage.description,
-  path: '/about',
-})
-
-export default function AboutPage() {
+export default function AboutPage({ locale = 'en' }: { locale?: Locale }) {
+  const t = getTranslator(locale)
   return (
     <>
       <PageHero
-        description={aboutPage.description}
-        eyebrow={aboutPage.eyebrow}
-        title={aboutPage.title}
+        description={t(aboutPage.description)}
+        eyebrow={t(aboutPage.eyebrow)}
+        title={t(aboutPage.title)}
       />
 
       <Section className="pb-16 pt-8 sm:pb-24 sm:pt-10">
@@ -28,7 +24,7 @@ export default function AboutPage() {
             <div className="reveal max-w-2xl space-y-5">
               {aboutPage.story.map((paragraph) => (
                 <p className="text-base leading-7 text-slate-200" key={paragraph.slice(0, 24)}>
-                  {paragraph}
+                  {t(paragraph)}
                 </p>
               ))}
             </div>
@@ -42,12 +38,12 @@ export default function AboutPage() {
                   width={350}
                 />
                 <p className="font-orbitron mt-4 text-base font-semibold leading-snug text-white">
-                  Founder-led. Direct from the start.
+                  {t('Founder-led. Direct from the start.')}
                 </p>
               </div>
-              <p className="mt-5 text-sm leading-6 text-slate-300">{site.availability}</p>
-              <p className="mt-6 text-sm font-semibold text-white">What you can count on</p>
-              <CheckList className="mt-4" items={site.commitments} />
+              <p className="mt-5 text-sm leading-6 text-slate-300">{t(site.availability)}</p>
+              <p className="mt-6 text-sm font-semibold text-white">{t('What you can count on')}</p>
+              <CheckList className="mt-4" items={site.commitments.map((value) => t(value))} />
             </Card>
           </div>
         </Container>

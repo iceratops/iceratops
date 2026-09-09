@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import type { ComponentProps } from 'react'
+import Link from '@/components/i18n/LocalizedLink'
 import { cx } from '@/lib/classes'
 
 type ButtonVariant = 'primary' | 'secondary'

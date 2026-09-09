@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { site } from '@/content/site'
+import { type Locale, localeInfo, locales, localizedPath } from '@/lib/i18n'
+import { getTranslator } from '@/lib/translations'
 
 export const siteConfig = {
   name: site.name,
@@ -24,6 +26,7 @@ type BuildMetadataInput = {
   path?: PublicRoute | string
   noIndex?: boolean
   absoluteTitle?: boolean
+  locale?: Locale
 }
 
 export function absoluteUrl(path = '/') {
@@ -36,8 +39,9 @@ export function buildMetadata({
   path = '/',
   noIndex = false,
   absoluteTitle = false,
+  locale = 'en',
 }: BuildMetadataInput = {}): Metadata {
-  const canonical = absoluteUrl(path)
+  const canonical = absoluteUrl(localizedPath(path, locale))
   const pageTitle = title ?? siteConfig.name
   const imageUrl = absoluteUrl(siteConfig.ogImage)
 
@@ -53,7 +57,18 @@ export function buildMetadata({
     description,
     // A self-referential canonical on a noindex page sends mixed signals, so
     // it is omitted there.
-    alternates: noIndex ? null : { canonical },
+    alternates: noIndex
+      ? null
+      : {
+          canonical,
+          languages: Object.fromEntries([
+            ...locales.map((language) => [
+              localeInfo[language].tag,
+              absoluteUrl(localizedPath(path, language)),
+            ]),
+            ['x-default', absoluteUrl(path)],
+          ]),
+        },
     openGraph: {
       title: pageTitle,
       description,
@@ -64,10 +79,10 @@ export function buildMetadata({
           url: imageUrl,
           width: 512,
           height: 512,
-          alt: 'Iceratops logo',
+          alt: getTranslator(locale)('Iceratops logo'),
         },
       ],
-      locale: 'en_US',
+      locale: localeInfo[locale].og,
       type: 'website',
     },
     robots: {

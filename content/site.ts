@@ -35,7 +35,7 @@ export const contactPage = {
     },
     {
       title: 'What you receive',
-      text: 'A plain-English first recommendation, likely scope, and an honest fit check. A free workflow review is available when that is the right starting point.',
+      text: 'A clear first recommendation, likely scope, and an honest fit check. A free workflow review is available when that is the right starting point.',
     },
     {
       title: 'What happens next',

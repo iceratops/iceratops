@@ -1,12 +1,15 @@
 import { site } from '@/content/site'
+import type { Locale } from '@/lib/i18n'
 import { absoluteUrl, siteConfig } from '@/lib/seo'
+import { getTranslator } from '@/lib/translations'
 
-export function OrganizationJsonLd() {
+export function OrganizationJsonLd({ locale }: { locale: Locale }) {
+  const t = getTranslator(locale)
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: site.name,
-    description: site.shortDescription,
+    description: t(site.shortDescription),
     url: siteConfig.url,
     email: site.contact.email,
     image: absoluteUrl(siteConfig.ogImage),
@@ -15,7 +18,7 @@ export function OrganizationJsonLd() {
       '@type': 'Place',
       name: `${site.origin.state}, ${site.origin.country}`,
     },
-    areaServed: { '@type': 'Place', name: 'Worldwide' },
+    areaServed: { '@type': 'Place', name: t('Worldwide') },
     knowsAbout: [
       'Custom software',
       'Digital platforms',

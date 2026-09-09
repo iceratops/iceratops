@@ -1,19 +1,23 @@
 'use client'
 
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { type FocusEvent, type FormEvent, useEffect, useRef, useState } from 'react'
+import { useI18n } from '@/components/i18n/I18nProvider'
+import Link from '@/components/i18n/LocalizedLink'
 import { CountrySelect } from '@/components/marketing/CountrySelect'
 import { Button } from '@/components/primitives/Button'
+import { countries } from '@/content/countries'
 import { site } from '@/content/site'
 import {
   type ContactErrors,
   type ContactField,
   type ContactValues,
   fieldLimits,
+  normalizeContactEmail,
   validateContact,
   validateContactField,
 } from '@/lib/contact-form'
+import { localeInfo, localizedPath } from '@/lib/i18n'
 
 type SubmitState = 'idle' | 'submitting' | 'error' | 'preview'
 
@@ -28,6 +32,7 @@ function encode(data: Record<string, string>) {
 }
 
 export function ContactForm() {
+  const { locale, t } = useI18n()
   const router = useRouter()
   const [isInteractive, setIsInteractive] = useState(false)
   const [isLocalPreview, setIsLocalPreview] = useState(false)
@@ -49,15 +54,20 @@ export function ContactForm() {
       !(field instanceof HTMLTextAreaElement)
     )
       return
-    if (!Object.hasOwn(fieldLimits, field.name)) return
-    const name = field.name as ContactField
-    setErrors((current) => ({ ...current, [name]: validateContactField(name, field.value) }))
+    const fieldName = field.dataset.contactField ?? field.name
+    if (!Object.hasOwn(fieldLimits, fieldName)) return
+    const name = fieldName as ContactField
+    const value = new FormData(event.currentTarget).get(name)
+    setErrors((current) => ({
+      ...current,
+      [name]: validateContactField(name, String(value ?? '')),
+    }))
   }
 
   function fieldError(name: ContactField) {
     return errors[name] ? (
       <p className="mt-2 text-sm leading-6 text-amber-200" id={`${name}-error`}>
-        {errors[name]}
+        {t(errors[name] ?? '', { limit: fieldLimits[name].toLocaleString(localeInfo[locale].tag) })}
       </p>
     ) : null
   }
@@ -70,12 +80,13 @@ export function ContactForm() {
     const values = Object.fromEntries(
       Object.keys(fieldLimits).map((field) => [field, String(data.get(field) ?? '').trim()]),
     ) as ContactValues
+    values.email = normalizeContactEmail(values.email)
     const validationErrors = validateContact(values)
     setErrors(validationErrors)
     setSubmitState('idle')
     const firstInvalidField = Object.keys(validationErrors)[0]
     if (firstInvalidField) {
-      const input = form.elements.namedItem(firstInvalidField) as HTMLElement | null
+      const input = form.querySelector<HTMLElement>(`#${firstInvalidField}`)
       requestAnimationFrame(() => input?.focus())
       return
     }
@@ -92,6 +103,7 @@ export function ContactForm() {
     Object.assign(payload, values)
     // Preserve the original full-name field for existing Netlify integrations.
     payload.name = [values['first-name'], values['last-name']].filter(Boolean).join(' ')
+    payload['region-code'] = countries.find((country) => country.name === values.region)?.code ?? ''
 
     submittingRef.current = true
     setSubmitState('submitting')
@@ -107,7 +119,7 @@ export function ContactForm() {
       if (!response.ok) {
         throw new Error('Request failed')
       }
-      router.push('/free-workflow-review/success')
+      router.push(localizedPath('/free-workflow-review/success', locale))
     } catch {
       setSubmitState('error')
     } finally {
@@ -137,21 +149,24 @@ export function ContactForm() {
     >
       <input type="hidden" name="form-name" value="contact" />
       <input type="hidden" name="name" />
+      <input type="hidden" name="region-code" />
+      <input type="hidden" name="website-language" value={localeInfo[locale].tag} />
       {/* Spam honeypot: hidden from humans and assistive tech, only bots fill it. */}
       <div aria-hidden="true" className="hidden">
-        <label htmlFor="bot-field">Leave this field empty</label>
+        <label htmlFor="bot-field">{t('Leave this field empty')}</label>
         <input autoComplete="off" id="bot-field" name="bot-field" tabIndex={-1} />
       </div>
 
       <div>
         <label className={labelClasses} htmlFor="first-name">
-          First name
+          {t('First name')}
         </label>
         <input
           aria-describedby={errors['first-name'] ? 'first-name-error' : undefined}
           aria-invalid={Boolean(errors['first-name'])}
           autoComplete="given-name"
           className={fieldClasses}
+          dir="auto"
           id="first-name"
           maxLength={fieldLimits['first-name']}
           name="first-name"
@@ -163,13 +178,14 @@ export function ContactForm() {
 
       <div>
         <label className={labelClasses} htmlFor="last-name">
-          Last name <span className="font-normal text-slate-400">(optional)</span>
+          {t('Last name')} <span className="font-normal text-slate-400">{t('(optional)')}</span>
         </label>
         <input
           aria-describedby={errors['last-name'] ? 'last-name-error' : undefined}
           aria-invalid={Boolean(errors['last-name'])}
           autoComplete="family-name"
           className={fieldClasses}
+          dir="auto"
           id="last-name"
           maxLength={fieldLimits['last-name']}
           name="last-name"
@@ -180,7 +196,7 @@ export function ContactForm() {
 
       <div>
         <label className={labelClasses} htmlFor="email">
-          Email
+          {t('Email')}
         </label>
         <input
           aria-describedby={errors.email ? 'email-error' : undefined}
@@ -188,6 +204,7 @@ export function ContactForm() {
           autoCapitalize="none"
           autoComplete="email"
           className={fieldClasses}
+          dir="ltr"
           id="email"
           maxLength={fieldLimits.email}
           name="email"
@@ -200,13 +217,15 @@ export function ContactForm() {
 
       <div>
         <label className={labelClasses} htmlFor="business">
-          Company or organization <span className="font-normal text-slate-400">(optional)</span>
+          {t('Company or organization')}{' '}
+          <span className="font-normal text-slate-400">{t('(optional)')}</span>
         </label>
         <input
           aria-describedby={errors.business ? 'business-error' : undefined}
           aria-invalid={Boolean(errors.business)}
           autoComplete="organization"
           className={fieldClasses}
+          dir="auto"
           id="business"
           maxLength={fieldLimits.business}
           name="business"
@@ -217,7 +236,8 @@ export function ContactForm() {
 
       <div>
         <label className={labelClasses} htmlFor="region">
-          Country or region <span className="font-normal text-slate-400">(optional)</span>
+          {t('Country or region')}{' '}
+          <span className="font-normal text-slate-400">{t('(optional)')}</span>
         </label>
         <CountrySelect
           className={fieldClasses}
@@ -234,8 +254,33 @@ export function ContactForm() {
       </div>
 
       <div>
+        <label className={labelClasses} htmlFor="preferred-language">
+          {t('Preferred reply language')}{' '}
+          <span className="font-normal text-slate-400">{t('(optional)')}</span>
+        </label>
+        <p className="mt-1 text-sm leading-6 text-slate-400" id="preferred-language-help">
+          {t(
+            'Tell us which language you prefer for our written reply. You can write its name in your own language.',
+          )}
+        </p>
+        <input
+          aria-describedby={`preferred-language-help${errors['preferred-language'] ? ' preferred-language-error' : ''}`}
+          aria-invalid={Boolean(errors['preferred-language'])}
+          autoComplete="language"
+          className={fieldClasses}
+          dir="auto"
+          id="preferred-language"
+          defaultValue={localeInfo[locale].name}
+          maxLength={fieldLimits['preferred-language']}
+          name="preferred-language"
+          type="text"
+        />
+        {fieldError('preferred-language')}
+      </div>
+
+      <div>
         <label className={labelClasses} htmlFor="website">
-          Website URL <span className="font-normal text-slate-400">(optional)</span>
+          {t('Website URL')} <span className="font-normal text-slate-400">{t('(optional)')}</span>
         </label>
         <input
           aria-describedby={errors.website ? 'website-error' : undefined}
@@ -243,6 +288,7 @@ export function ContactForm() {
           autoCapitalize="none"
           autoComplete="url"
           className={fieldClasses}
+          dir="ltr"
           id="website"
           maxLength={fieldLimits.website}
           name="website"
@@ -255,15 +301,18 @@ export function ContactForm() {
 
       <div>
         <label className={labelClasses} htmlFor="message">
-          What are you trying to build or improve?
+          {t('What are you trying to build or improve?')}
         </label>
         <p className="mt-1 text-sm leading-6 text-slate-400" id="message-help">
-          Share the current situation, the outcome you want, and any important constraints.
+          {t(
+            'Write in the language you prefer. Share the current situation, the outcome you want, and any important constraints.',
+          )}
         </p>
         <textarea
           aria-describedby={`message-help message-count${errors.message ? ' message-error' : ''}`}
           aria-invalid={Boolean(errors.message)}
           className={fieldClasses}
+          dir="auto"
           id="message"
           maxLength={fieldLimits.message}
           name="message"
@@ -272,37 +321,37 @@ export function ContactForm() {
           rows={5}
         />
         <p className="mt-2 text-sm text-slate-400" id="message-count">
-          {messageLength.toLocaleString('en-US')} / {fieldLimits.message.toLocaleString('en-US')}{' '}
-          characters
+          {t(messageLength.toLocaleString(localeInfo[locale].tag))} /{' '}
+          {t(fieldLimits.message.toLocaleString(localeInfo[locale].tag))} {t('characters')}
         </p>
         {fieldError('message')}
       </div>
 
       <p className="text-sm leading-6 text-slate-400">
-        We use these details to review your request and reply. Read the{' '}
+        {t('We use these details to review your request and reply. Read the')}{' '}
         <Link className="font-semibold text-amber-200 underline underline-offset-4" href="/privacy">
-          privacy notice
+          {t('privacy notice')}
         </Link>
         .
       </p>
 
       <noscript>
         <p className="text-sm leading-6 text-amber-200">
-          JavaScript is required to submit this form online. Email{' '}
+          {t('JavaScript is required to submit this form online. Email')}{' '}
           <a
             className="font-semibold underline underline-offset-4"
             href={`mailto:${site.contact.email}?subject=${site.contact.projectSubject}`}
           >
-            {site.contact.email}
+            {t(site.contact.email)}
           </a>{' '}
-          instead.
+          {t('instead.')}
         </p>
       </noscript>
 
       <div>
         {isLocalPreview && (
           <p className="mb-3 text-sm leading-6 text-slate-400">
-            Local preview: check your entries here. Inquiries are sent from the live site.
+            {t('Local preview: check your entries here. Inquiries are sent from the live site.')}
           </p>
         )}
         <Button
@@ -310,30 +359,32 @@ export function ContactForm() {
           disabled={!isInteractive || submitState === 'submitting'}
           type="submit"
         >
-          {submitState === 'submitting'
-            ? 'Sending...'
-            : isLocalPreview
-              ? 'Check inquiry'
-              : 'Send project inquiry'}
+          {t(
+            submitState === 'submitting'
+              ? 'Sending...'
+              : isLocalPreview
+                ? 'Check inquiry'
+                : 'Send project inquiry',
+          )}
         </Button>
       </div>
 
       {submitState === 'preview' && (
         <p className="text-sm leading-6 text-amber-200" role="status">
-          Your entries passed validation. This is a local preview, so no inquiry was sent.
+          {t('Your entries passed validation. This is a local preview, so no inquiry was sent.')}
         </p>
       )}
 
       {submitState === 'error' && (
         <p className="text-sm leading-6 text-amber-200" role="alert">
-          Something went wrong sending your note. Please email{' '}
+          {t('Something went wrong sending your note. Please email')}{' '}
           <a
             className="font-semibold underline underline-offset-4"
             href={`mailto:${site.contact.email}`}
           >
-            {site.contact.email}
+            {t(site.contact.email)}
           </a>{' '}
-          and we will reply within one business day.
+          {t('and we will reply within one business day.')}
         </p>
       )}
     </form>

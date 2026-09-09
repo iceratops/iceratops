@@ -3,25 +3,20 @@ import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { workflowReviewFormId } from '@/content/navigation'
 import { contactPage, site } from '@/content/site'
-import { buildMetadata } from '@/lib/seo'
+import type { Locale } from '@/lib/i18n'
+import { getTranslator } from '@/lib/translations'
 
-export const metadata = buildMetadata({
-  title: 'Start a Project',
-  description:
-    'Start a conversation about custom software, a digital platform, website, workflow automation, or systems integration.',
-  path: '/free-workflow-review',
-})
-
-export default function FreeWorkflowReviewPage() {
+export default function ContactPage({ locale = 'en' }: { locale?: Locale }) {
+  const t = getTranslator(locale)
   return (
     <Section className="pb-16 pt-12 sm:pb-24 sm:pt-16 lg:pt-20">
       <Container size="narrow">
         <div className="reveal max-w-2xl">
           <h1 className="font-orbitron break-words text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-            {contactPage.title}
+            {t(contactPage.title)}
           </h1>
           <p className="mt-5 text-base leading-7 text-slate-200 sm:text-lg">
-            {contactPage.description}
+            {t(contactPage.description)}
           </p>
         </div>
 
@@ -32,8 +27,8 @@ export default function FreeWorkflowReviewPage() {
               key={item.title}
               style={{ transitionDelay: `${index * 80}ms` }}
             >
-              <h2 className="font-orbitron text-sm font-semibold text-white">{item.title}</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-300">{item.text}</p>
+              <h2 className="font-orbitron text-sm font-semibold text-white">{t(item.title)}</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-300">{t(item.text)}</p>
             </div>
           ))}
         </div>
@@ -44,12 +39,12 @@ export default function FreeWorkflowReviewPage() {
         >
           <ContactForm />
           <p className="mt-6 border-t border-white/10 pt-5 text-sm leading-6 text-slate-400">
-            Prefer email?{' '}
+            {t('Prefer email?')}{' '}
             <a
               className="font-semibold text-amber-200 underline underline-offset-4"
               href={`mailto:${site.contact.email}?subject=${site.contact.projectSubject}`}
             >
-              {site.contact.email}
+              {t(site.contact.email)}
             </a>
           </p>
         </div>

@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Orbitron } from 'next/font/google'
+import { Inter, Noto_Sans_Arabic, Noto_Sans_Devanagari, Orbitron } from 'next/font/google'
 import { SiteLayout } from '@/components/layout/SiteLayout'
 import { OrganizationJsonLd } from '@/components/seo/OrganizationJsonLd'
 import { siteConfig } from '@/lib/seo'
-import './globals.css'
+import '@/app/globals.css'
+import { I18nProvider } from '@/components/i18n/I18nProvider'
+import { type Locale, localeInfo } from '@/lib/i18n'
+import { getMessages } from '@/lib/translations'
 
 // Self-hosted via next/font: no render-blocking Google Fonts request and no
 // layout shift from late-swapping webfonts.
@@ -18,6 +21,21 @@ const orbitron = Orbitron({
   display: 'swap',
   variable: '--font-orbitron',
 })
+
+const arabic = Noto_Sans_Arabic({
+  subsets: ['arabic'],
+  display: 'swap',
+  variable: '--font-arabic',
+  preload: false,
+})
+const devanagari = Noto_Sans_Devanagari({
+  subsets: ['devanagari'],
+  display: 'swap',
+  variable: '--font-devanagari',
+  preload: false,
+})
+
+export const documentFonts = `${inter.variable} ${orbitron.variable} ${arabic.variable} ${devanagari.variable}`
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -41,20 +59,24 @@ export const viewport: Viewport = {
   themeColor: '#0f172a',
 }
 
-export default function RootLayout({
+export default function RootDocument({
   children,
+  locale,
 }: Readonly<{
   children: React.ReactNode
+  locale: Locale
 }>) {
   return (
     // suppressHydrationWarning: the inline head script intentionally adds a
     // `js` class to <html> before hydration (reveal-animation safety).
     <html
-      className={`${inter.variable} ${orbitron.variable}`}
+      className={documentFonts}
       data-scroll-behavior="smooth"
-      lang="en"
+      lang={localeInfo[locale].tag}
+      dir={localeInfo[locale].dir}
       suppressHydrationWarning
     >
+      {/* biome-ignore lint/style/noHeadElement: This component renders the App Router root document. */}
       <head>
         {/*
          * Reveal-animation safety. JavaScript adds only a small vertical offset,
@@ -70,8 +92,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <OrganizationJsonLd />
-        <SiteLayout>{children}</SiteLayout>
+        <OrganizationJsonLd locale={locale} />
+        <I18nProvider locale={locale} messages={getMessages(locale)}>
+          <SiteLayout locale={locale}>{children}</SiteLayout>
+        </I18nProvider>
       </body>
     </html>
   )

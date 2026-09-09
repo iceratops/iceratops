@@ -6,6 +6,7 @@ export const fieldLimits = {
   email: 254,
   business: 200,
   region: 100,
+  'preferred-language': 100,
   website: 2048,
   message: 5000,
 } as const
@@ -16,8 +17,20 @@ export type ContactErrors = Partial<Record<ContactField, string>>
 
 const countryNames = new Set<string>(countries.map((country) => country.name))
 
+// Normalize international domain names for delivery while preserving the mailbox.
+// Unicode mailbox names need SMTPUTF8 support from the receiving mail service.
+export function normalizeContactEmail(value: string) {
+  const parts = value.trim().split('@')
+  if (parts.length !== 2 || /[\s/:?#[\]\\%]/u.test(parts[1])) return value.trim()
+  try {
+    return `${parts[0]}@${new URL(`https://${parts[1]}`).hostname}`
+  } catch {
+    return value.trim()
+  }
+}
+
 function isEmail(value: string) {
-  const parts = value.split('@')
+  const parts = normalizeContactEmail(value).split('@')
   if (parts.length !== 2) return false
   const [local, domain] = parts
   if (
@@ -46,9 +59,12 @@ export function validateContactField(field: ContactField, rawValue: string): str
     return
   }
   if (value.length > fieldLimits[field]) {
-    return `Use ${fieldLimits[field].toLocaleString('en-US')} characters or fewer.`
+    return 'Use {limit} characters or fewer.'
   }
   if (field === 'email' && !isEmail(value)) {
+    if (Array.from(value.split('@')[0]).some((character) => character.charCodeAt(0) > 127)) {
+      return 'Use an email address with Latin letters before the @ sign. International domain names are supported.'
+    }
     return 'Enter a valid email address, such as name@example.com.'
   }
   if (field === 'region' && !countryNames.has(value)) {

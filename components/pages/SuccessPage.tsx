@@ -2,16 +2,11 @@ import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
 import { contactPage } from '@/content/site'
-import { buildMetadata } from '@/lib/seo'
+import type { Locale } from '@/lib/i18n'
+import { getTranslator } from '@/lib/translations'
 
-export const metadata = buildMetadata({
-  title: 'Request received',
-  description: 'Thanks for contacting Iceratops. We reply within one business day.',
-  path: '/free-workflow-review/success',
-  noIndex: true,
-})
-
-export default function FreeWorkflowReviewSuccessPage() {
+export default function SuccessPage({ locale = 'en' }: { locale?: Locale }) {
+  const t = getTranslator(locale)
   return (
     <Section className="pb-20 pt-16 sm:pb-28 sm:pt-24">
       <Container size="narrow">
@@ -29,17 +24,17 @@ export default function FreeWorkflowReviewSuccessPage() {
             </svg>
           </span>
           <h1 className="font-orbitron mt-6 break-words text-2xl font-bold leading-snug text-white sm:text-3xl">
-            {contactPage.success.title}
+            {t(contactPage.success.title)}
           </h1>
           <p className="mx-auto mt-4 max-w-md text-base leading-7 text-slate-300">
-            {contactPage.success.description}
+            {t(contactPage.success.description)}
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <ButtonLink className="w-full sm:w-auto" href="/" variant="secondary">
-              Back to home
+              {t('Back to home')}
             </ButtonLink>
             <ButtonLink className="w-full sm:w-auto" href="/services" variant="secondary">
-              Explore capabilities
+              {t('Explore capabilities')}
             </ButtonLink>
           </div>
         </div>

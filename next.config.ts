@@ -19,6 +19,8 @@ const securityHeaders = [
 ] as const
 
 const nextConfig: NextConfig = {
+  // The global 404 supplies its own document because languages use separate root layouts.
+  experimental: { globalNotFound: true },
   poweredByHeader: false,
   reactStrictMode: true,
   async headers() {
@@ -37,6 +39,16 @@ const nextConfig: NextConfig = {
     // The contact page was renamed to the conversion-framed Free workflow
     // review route. Keep old inbound links (outreach, prior shares) working.
     return [
+      {
+        source: '/:locale(ar|ur|hi|es|fr|pt|zh-Hans|zh-Hant)/contact',
+        destination: '/:locale/free-workflow-review',
+        permanent: true,
+      },
+      {
+        source: '/:locale(ar|ur|hi|es|fr|pt|zh-Hans|zh-Hant)/contact/success',
+        destination: '/:locale/free-workflow-review/success',
+        permanent: true,
+      },
       {
         source: '/contact',
         destination: '/free-workflow-review',

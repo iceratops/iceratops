@@ -483,8 +483,9 @@ html.js.reveal-off .reveal {
 }
 
 .io-story-layer {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  grid-area: 1 / 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   padding: 1rem;
@@ -617,4 +618,65 @@ html.js.reveal-off .reveal {
     transform: none;
     transition: none;
   }
+}
+
+/* Script-specific fonts are self-hosted by next/font and loaded only as needed.
+   Keep the Latin brand face while giving joining scripts natural spacing. */
+html:lang(ar),
+html:lang(ur) {
+  --script-font: var(--font-arabic);
+}
+html:lang(hi) {
+  --script-font: var(--font-devanagari);
+}
+html:lang(zh-Hans) {
+  --script-font: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+}
+html:lang(zh-Hant) {
+  --script-font: "PingFang TC", "Microsoft JhengHei", "Noto Sans CJK TC", sans-serif;
+}
+html:lang(ar) body,
+html:lang(ur) body,
+html:lang(hi) body,
+html:lang(zh) body {
+  font-family: var(--font-inter), var(--script-font), sans-serif;
+}
+html:lang(ar) .font-orbitron,
+html:lang(ur) .font-orbitron,
+html:lang(hi) .font-orbitron,
+html:lang(zh) .font-orbitron {
+  font-family: var(--font-orbitron), var(--script-font), sans-serif;
+}
+html:lang(ar) [class*="tracking-"],
+html:lang(ur) [class*="tracking-"],
+html:lang(hi) [class*="tracking-"],
+html:lang(ar) .font-orbitron,
+html:lang(ur) .font-orbitron,
+html:lang(hi) .font-orbitron {
+  letter-spacing: normal;
+}
+/* Long translated words must wrap instead of forcing wider cards or buttons. */
+h1,
+h2,
+h3,
+p,
+label,
+button,
+summary,
+a {
+  overflow-wrap: anywhere;
+}
+
+/* Autonyms remain readable even when opened from a different language. */
+a[lang^="ar"],
+a[lang="ur"],
+span[lang^="ar"],
+span[lang="ur"] {
+  font-family: var(--font-arabic), sans-serif;
+  letter-spacing: normal;
+}
+a[lang="hi"],
+span[lang="hi"] {
+  font-family: var(--font-devanagari), sans-serif;
+  letter-spacing: normal;
 }

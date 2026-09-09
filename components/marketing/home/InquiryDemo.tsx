@@ -1,6 +1,7 @@
 'use client'
 
 import { type CSSProperties, useEffect, useReducer, useRef, useState } from 'react'
+import { useI18n } from '@/components/i18n/I18nProvider'
 import { Eyebrow } from '@/components/marketing/Eyebrow'
 import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
@@ -151,18 +152,19 @@ function playerReducer(state: PlayerState, action: PlayerAction): PlayerState {
 }
 
 function StaticSummaryCards() {
+  const { t } = useI18n()
   return (
-    <div className="grid h-full content-center gap-3 p-4 sm:grid-cols-2 sm:gap-4 sm:p-6">
+    <div className="grid min-h-[inherit] content-center gap-3 p-4 md:grid-cols-2 sm:gap-4 sm:p-6">
       {STATIC_SUMMARY.map((item) => (
         <article
           className="rounded-2xl border border-white/10 bg-slate-950/45 p-4 sm:p-5"
           key={item.title}
         >
           <div className="flex items-center gap-3">
-            <span className="font-orbitron text-xs font-bold text-amber-300">{item.number}</span>
-            <h3 className="text-base font-semibold text-white">{item.title}</h3>
+            <span className="font-orbitron text-xs font-bold text-amber-300">{t(item.number)}</span>
+            <h3 className="text-base font-semibold text-white">{t(item.title)}</h3>
           </div>
-          <p className="mt-2 text-sm leading-6 text-slate-300">{item.detail}</p>
+          <p className="mt-2 text-sm leading-6 text-slate-300">{t(item.detail)}</p>
         </article>
       ))}
     </div>
@@ -170,14 +172,17 @@ function StaticSummaryCards() {
 }
 
 function BrandDot({ label }: { label: string }) {
+  const { t } = useI18n()
   return (
     <span className="flex h-11 w-11 flex-none items-center justify-center rounded-2xl border border-amber-300/25 bg-amber-300/10 font-orbitron text-xs font-bold text-amber-200">
-      {label}
+      {t(label)}
     </span>
   )
 }
 
 function TypingMessage() {
+  const { locale, t } = useI18n()
+  if (locale !== 'en') return <span>{t(CUSTOMER_MESSAGE)}</span>
   return (
     <span>
       {CUSTOMER_MESSAGE_WORDS.map((word, index) => (
@@ -190,7 +195,7 @@ function TypingMessage() {
             } as CSSProperties
           }
         >
-          {word}{' '}
+          {t(word)}{' '}
         </span>
       ))}
       <span
@@ -203,6 +208,7 @@ function TypingMessage() {
 }
 
 function ComposeScene() {
+  const { t } = useI18n()
   return (
     <div className="mx-auto w-full max-w-xl">
       <div className="overflow-hidden rounded-3xl border border-white/15 bg-slate-950/75 shadow-2xl shadow-purple-950/40">
@@ -210,23 +216,23 @@ function ComposeScene() {
           <div className="flex items-center gap-3">
             <BrandDot label="AC" />
             <div>
-              <p className="text-sm font-semibold text-white">Acme Plumbing Co.</p>
-              <p className="text-xs text-slate-400">Website inquiry</p>
+              <p className="text-sm font-semibold text-white">{t('Acme Plumbing Co.')}</p>
+              <p className="text-xs text-slate-400">{t('Website inquiry')}</p>
             </div>
           </div>
           <span className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-200">
-            Online
+            {t('Online')}
           </span>
         </div>
         <div className="bg-white/[0.035] p-4 sm:p-6">
           <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4 sm:p-5">
             <div className="flex items-center gap-3">
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-400/15 text-sm font-bold text-purple-200">
-                M
+                {t('M')}
               </span>
               <div>
-                <p className="text-sm font-semibold text-white">Maya</p>
-                <p className="text-xs text-slate-400">How can we help?</p>
+                <p className="text-sm font-semibold text-white">{t('Maya')}</p>
+                <p className="text-xs text-slate-400">{t('How can we help?')}</p>
               </div>
             </div>
             <div className="mt-4 min-h-28 rounded-xl border border-white/10 bg-white/[0.05] p-4 text-base leading-7 text-slate-100">
@@ -234,7 +240,7 @@ function ComposeScene() {
             </div>
             <div className="mt-3 flex justify-end">
               <span className="io-compose-send inline-flex min-h-11 items-center rounded-xl bg-amber-300 px-5 text-sm font-bold text-slate-950 shadow-lg shadow-amber-300/10">
-                Send
+                {t('Send')}
               </span>
             </div>
           </div>
@@ -245,52 +251,56 @@ function ComposeScene() {
 }
 
 function SendScene() {
+  const { t } = useI18n()
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col justify-center">
       <div className="relative h-64 rounded-3xl border border-white/10 bg-slate-950/45 p-5 sm:h-60 sm:p-7">
         <div className="absolute left-5 top-5 flex items-center gap-3 sm:left-8 sm:top-8">
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-400/15 text-sm font-bold text-purple-200">
-            M
+            {t('M')}
           </span>
-          <span className="text-sm font-semibold text-slate-300">Customer</span>
+          <span className="text-sm font-semibold text-slate-300">{t('Customer')}</span>
         </div>
         <div className="absolute bottom-5 right-5 flex items-center gap-3 sm:bottom-8 sm:right-8">
-          <span className="text-sm font-semibold text-slate-300">Acme inbox</span>
+          <span className="text-sm font-semibold text-slate-300">{t('Acme inbox')}</span>
           <BrandDot label="AC" />
         </div>
         <div className="io-flight-path absolute left-16 right-16 top-1/2 h-px bg-gradient-to-r from-purple-300/20 via-amber-300/50 to-emerald-300/20" />
         <div className="io-flight-bubble absolute left-1/2 top-1/2 max-w-52 rounded-2xl rounded-br-md border border-amber-300/25 bg-slate-900 px-4 py-3 text-sm leading-5 text-white shadow-2xl shadow-purple-950/60">
-          Water heater replacement, Tuesday afternoon?
+          {t('Water heater replacement, Tuesday afternoon?')}
         </div>
       </div>
-      <p className="mt-4 text-center text-sm font-medium text-amber-200">Moving to Acme inbox</p>
+      <p className="mt-4 text-center text-sm font-medium text-amber-200">
+        {t('Moving to Acme inbox')}
+      </p>
     </div>
   )
 }
 
 function InboxScene() {
+  const { t } = useI18n()
   return (
     <div className="mx-auto w-full max-w-2xl">
       <div className="relative rounded-3xl border border-white/15 bg-slate-950/75 p-4 shadow-2xl shadow-purple-950/40 sm:p-6">
         <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
           <div>
-            <p className="font-orbitron text-sm font-bold text-white">Inquiry inbox</p>
-            <p className="mt-1 text-xs text-slate-400">Acme Plumbing Co.</p>
+            <p className="font-orbitron text-sm font-bold text-white">{t('Inquiry inbox')}</p>
+            <p className="mt-1 text-xs text-slate-400">{t('Acme Plumbing Co.')}</p>
           </div>
           <span className="inline-flex items-center gap-2 rounded-full bg-emerald-300/10 px-3 py-1.5 text-xs font-semibold text-emerald-200">
-            <span className="h-2 w-2 rounded-full bg-emerald-300" /> Connected
+            <span className="h-2 w-2 rounded-full bg-emerald-300" /> {t('Connected')}
           </span>
         </div>
         <div className="io-inbox-row mt-4 flex items-start gap-3 rounded-2xl border border-amber-300/30 bg-amber-300/[0.07] p-4">
           <BrandDot label="W" />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="text-sm font-semibold text-white">Maya · Website</p>
+              <p className="text-sm font-semibold text-white">{t('Maya · Website')}</p>
               <span className="rounded-full bg-amber-300 px-2.5 py-1 text-[11px] font-bold text-slate-950">
-                New
+                {t('New')}
               </span>
             </div>
-            <p className="mt-2 text-sm leading-6 text-slate-300">{CUSTOMER_MESSAGE}</p>
+            <p className="mt-2 text-sm leading-6 text-slate-300">{t(CUSTOMER_MESSAGE)}</p>
           </div>
         </div>
         <div className="io-notification-toast mt-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.06] p-3.5 shadow-xl sm:absolute sm:-right-6 sm:-top-8 sm:mt-0 sm:max-w-xs">
@@ -299,9 +309,9 @@ function InboxScene() {
           </span>
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-emerald-200">
-              New website inquiry
+              {t('New website inquiry')}
             </p>
-            <p className="mt-1 text-sm font-medium text-white">Water heater replacement</p>
+            <p className="mt-1 text-sm font-medium text-white">{t('Water heater replacement')}</p>
           </div>
         </div>
       </div>
@@ -310,43 +320,45 @@ function InboxScene() {
 }
 
 function ThreadHeader() {
+  const { t } = useI18n()
   return (
     <div className="flex items-center justify-between border-b border-white/10 pb-3">
       <div className="flex items-center gap-3">
         <span className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-400/15 text-sm font-bold text-purple-200">
-          M
+          {t('M')}
         </span>
         <div>
-          <p className="text-sm font-semibold text-white">Maya</p>
-          <p className="text-xs text-slate-400">Water heater replacement</p>
+          <p className="text-sm font-semibold text-white">{t('Maya')}</p>
+          <p className="text-xs text-slate-400">{t('Water heater replacement')}</p>
         </div>
       </div>
       <span className="rounded-full border border-white/10 px-2.5 py-1 text-[11px] font-semibold text-slate-300">
-        Website
+        {t('Website')}
       </span>
     </div>
   )
 }
 
 function ApprovedReplyScene() {
+  const { t } = useI18n()
   return (
     <div className="mx-auto w-full max-w-2xl rounded-3xl border border-white/15 bg-slate-950/75 p-4 shadow-2xl shadow-purple-950/40 sm:p-6">
       <ThreadHeader />
       <div className="mt-4 space-y-3">
-        <div className="ml-auto max-w-[88%] rounded-2xl rounded-br-md bg-purple-400/15 px-4 py-3 text-sm leading-6 text-purple-50">
-          {CUSTOMER_MESSAGE}
+        <div className="ms-auto max-w-[88%] rounded-2xl rounded-br-md bg-purple-400/15 px-4 py-3 text-sm leading-6 text-purple-50">
+          {t(CUSTOMER_MESSAGE)}
         </div>
         <div className="io-reply-bubble max-w-[92%] rounded-2xl rounded-bl-md border border-emerald-300/20 bg-emerald-300/[0.08] px-4 py-3 text-sm leading-6 text-slate-100">
           <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-emerald-200">
-            <span className="font-orbitron">AI</span>
-            <span>Approved reply</span>
+            <span className="font-orbitron">{t('AI')}</span>
+            <span>{t('Approved reply')}</span>
           </div>
-          {APPROVED_REPLY}
+          {t(APPROVED_REPLY)}
         </div>
         <div className="io-trust-label inline-flex max-w-full items-start gap-2 rounded-xl border border-amber-300/20 bg-amber-300/[0.06] px-3 py-2 text-xs leading-5 text-amber-100">
           <span className="mt-0.5 text-amber-300">✓</span>
           <span>
-            Sent using an approved response rule. Acme controls what can send automatically.
+            {t('Sent using an approved response rule. Acme controls what can send automatically.')}
           </span>
         </div>
       </div>
@@ -355,18 +367,19 @@ function ApprovedReplyScene() {
 }
 
 function CustomerReplyScene() {
+  const { t } = useI18n()
   return (
     <div className="mx-auto w-full max-w-2xl rounded-3xl border border-white/15 bg-slate-950/75 p-4 shadow-2xl shadow-purple-950/40 sm:p-6">
       <ThreadHeader />
       <div className="mt-4 space-y-3">
         <div className="max-w-[92%] rounded-2xl rounded-bl-md border border-emerald-300/15 bg-emerald-300/[0.06] px-4 py-3 text-sm leading-6 text-slate-200">
-          {APPROVED_REPLY}
+          {t(APPROVED_REPLY)}
         </div>
-        <div className="io-customer-reply ml-auto max-w-[88%] rounded-2xl rounded-br-md bg-purple-400/20 px-4 py-3 text-sm font-medium leading-6 text-white">
-          {CUSTOMER_CONFIRMATION}
+        <div className="io-customer-reply ms-auto max-w-[88%] rounded-2xl rounded-br-md bg-purple-400/20 px-4 py-3 text-sm font-medium leading-6 text-white">
+          {t(CUSTOMER_CONFIRMATION)}
         </div>
-        <p className="io-reply-received text-right text-xs font-semibold text-emerald-200">
-          Reply received · Ready to confirm
+        <p className="io-reply-received text-end text-xs font-semibold text-emerald-200">
+          {t('Reply received · Ready to confirm')}
         </p>
       </div>
     </div>
@@ -382,16 +395,17 @@ const CALENDAR_DAYS = [
 ]
 
 function CalendarScene() {
+  const { t } = useI18n()
   return (
     <div className="mx-auto grid w-full max-w-3xl gap-4 md:grid-cols-[1.15fr_0.85fr]">
       <div className="rounded-3xl border border-white/15 bg-slate-950/75 p-3 shadow-2xl shadow-purple-950/40 sm:p-6">
         <div className="flex items-center justify-between">
           <div>
-            <p className="font-orbitron text-sm font-bold text-white">Service calendar</p>
-            <p className="mt-1 text-xs text-slate-400">Available appointments</p>
+            <p className="font-orbitron text-sm font-bold text-white">{t('Service calendar')}</p>
+            <p className="mt-1 text-xs text-slate-400">{t('Available appointments')}</p>
           </div>
           <span className="rounded-full border border-white/10 px-3 py-1 text-xs font-semibold text-slate-300">
-            May
+            {t('May')}
           </span>
         </div>
         <div className="mt-5 grid min-w-0 grid-cols-5 gap-1 sm:gap-2">
@@ -405,16 +419,16 @@ function CalendarScene() {
               key={item.day}
             >
               <p className="text-[10px] font-semibold uppercase tracking-wide sm:text-[11px] sm:tracking-wider">
-                {item.day}
+                {t(item.day)}
               </p>
-              <p className="mt-1 font-orbitron text-base font-bold">{item.date}</p>
+              <p className="mt-1 font-orbitron text-base font-bold">{t(item.date)}</p>
               {item.selected ? (
                 <p className="mt-2 text-[11px] font-bold leading-4 text-amber-200">
                   <span className="block sm:inline">2:00</span>
-                  <span className="block sm:inline"> PM</span>
+                  <span className="block sm:inline"> {t('PM')}</span>
                 </p>
               ) : (
-                <p className="mt-2 text-[11px] text-slate-400">Open</p>
+                <p className="mt-2 text-[11px] text-slate-400">{t('Open')}</p>
               )}
             </div>
           ))}
@@ -424,10 +438,12 @@ function CalendarScene() {
         <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-300/15 text-xl font-bold text-emerald-200">
           ✓
         </span>
-        <p className="mt-4 font-orbitron text-base font-bold text-white">Appointment confirmed</p>
-        <p className="mt-2 text-sm font-semibold text-emerald-200">Tuesday at 2:00 PM</p>
+        <p className="mt-4 font-orbitron text-base font-bold text-white">
+          {t('Appointment confirmed')}
+        </p>
+        <p className="mt-2 text-sm font-semibold text-emerald-200">{t('Tuesday at 2:00 PM')}</p>
         <p className="mt-2 text-sm leading-6 text-slate-300">
-          Added to Acme Plumbing Co.&apos;s calendar
+          {t("Added to Acme Plumbing Co.'s calendar")}
         </p>
       </div>
     </div>
@@ -435,35 +451,36 @@ function CalendarScene() {
 }
 
 function ServiceScene() {
+  const { t } = useI18n()
   return (
     <div className="mx-auto w-full max-w-2xl rounded-3xl border border-white/15 bg-slate-950/75 p-5 shadow-2xl shadow-purple-950/40 sm:p-7">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-200">
-            Tuesday · 1:55 PM
+            {t('Tuesday · 1:55 PM')}
           </p>
-          <p className="mt-2 font-orbitron text-lg font-bold text-white">Service handoff</p>
+          <p className="mt-2 font-orbitron text-lg font-bold text-white">{t('Service handoff')}</p>
         </div>
         <span className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1.5 text-xs font-semibold text-emerald-200">
-          On site
+          {t('On site')}
         </span>
       </div>
       <div className="mt-5 grid gap-4 sm:grid-cols-[auto_1fr] sm:items-center">
         <div className="io-technician-avatar flex h-20 w-20 items-center justify-center rounded-3xl border border-purple-300/20 bg-purple-400/10 font-orbitron text-lg font-bold text-purple-100">
-          JR
+          {t('JR')}
         </div>
         <div>
           <p className="io-service-status text-lg font-semibold text-emerald-200">
-            Technician arrived
+            {t('Technician arrived')}
           </p>
           <p className="mt-2 text-base font-semibold text-white">
-            Water heater replacement: Job in progress
+            {t('Water heater replacement: Job in progress')}
           </p>
           <div className="mt-4 h-2 overflow-hidden rounded-full bg-white/10">
             <div className="io-service-progress h-full rounded-full bg-gradient-to-r from-amber-300 to-emerald-300" />
           </div>
           <p className="mt-2 text-xs text-slate-400">
-            Appointment details and customer notes included
+            {t('Appointment details and customer notes included')}
           </p>
         </div>
       </div>
@@ -472,6 +489,7 @@ function ServiceScene() {
 }
 
 function PayoffScene() {
+  const { t } = useI18n()
   return (
     <div className="io-payoff mx-auto flex w-full max-w-3xl flex-col items-center text-center">
       <div className="flex items-center gap-2" aria-hidden="true">
@@ -487,13 +505,15 @@ function PayoffScene() {
         ))}
       </div>
       <p className="font-orbitron mt-7 max-w-2xl text-2xl font-bold leading-tight text-white sm:text-3xl md:text-4xl">
-        One inquiry. One clean handoff. A booked job without the back-and-forth.
+        {t('One inquiry. One clean handoff. A booked job without the back-and-forth.')}
       </p>
       <p className="mt-5 max-w-xl text-base leading-7 text-slate-300">
-        Approved rules handle the routine steps. The business stays in control of what happens next.
+        {t(
+          'Approved rules handle the routine steps. The business stays in control of what happens next.',
+        )}
       </p>
       <span className="mt-7 inline-flex items-center gap-2 rounded-full border border-amber-300/25 bg-amber-300/[0.08] px-4 py-2 text-sm font-semibold text-amber-100">
-        Acme Plumbing Co. · Demonstration workflow
+        {t('Acme Plumbing Co. · Demonstration workflow')}
       </span>
     </div>
   )
@@ -521,6 +541,7 @@ function StorySceneVisual({ id }: { id: SceneId }) {
 }
 
 export function InquiryDemo({ workingDemoUrl }: { workingDemoUrl?: string }) {
+  const { t } = useI18n()
   const [player, dispatch] = useReducer(playerReducer, initialPlayerState)
   const [enhanced, setEnhanced] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -644,22 +665,23 @@ export function InquiryDemo({ workingDemoUrl }: { workingDemoUrl?: string }) {
     <section className="scroll-mt-24 py-14 sm:py-16 lg:py-20" id="example">
       <Container>
         <div className="max-w-2xl">
-          <Eyebrow>Example: Service inquiry workflow</Eyebrow>
+          <Eyebrow>{t('Example: Service inquiry workflow')}</Eyebrow>
           <h2 className="font-orbitron mt-4 text-xl font-bold leading-tight text-white sm:text-2xl">
-            One example of connected systems at work.
+            {t('One example of connected systems at work.')}
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-300">
-            A service inquiry becomes a scheduled job through approved rules and a clear team
-            handoff. Explore this demonstration using a fictional business.
+            {t(
+              'A service inquiry becomes a scheduled job through approved rules and a clear team handoff. Explore this demonstration using a fictional business.',
+            )}
           </p>
         </div>
 
         <details className="mt-6 rounded-2xl border border-white/10 bg-white/[0.02] p-4 sm:p-6">
           <summary className="min-h-11 cursor-pointer content-center rounded-lg text-base font-semibold text-amber-200 marker:text-amber-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300">
-            Watch the service workflow
+            {t('Watch the service workflow')}
           </summary>
           <ol
-            aria-label="Workflow progress"
+            aria-label={t('Workflow progress')}
             className="mx-auto mt-7 flex max-w-3xl items-start justify-between gap-2"
           >
             {PHASES.map((phase, index) => {
@@ -685,7 +707,7 @@ export function InquiryDemo({ workingDemoUrl }: { workingDemoUrl?: string }) {
                       }`}
                     >
                       <span className="sr-only">
-                        {active ? 'Current: ' : complete ? 'Complete: ' : ''}
+                        {t(active ? 'Current: ' : complete ? 'Complete: ' : '')}
                       </span>
                     </span>
                     <span
@@ -695,20 +717,20 @@ export function InquiryDemo({ workingDemoUrl }: { workingDemoUrl?: string }) {
                   <span
                     className={`hidden text-xs font-semibold sm:block ${active ? 'text-amber-200' : complete ? 'text-emerald-200' : 'text-slate-400'}`}
                   >
-                    {phase}
+                    {t(phase)}
                   </span>
-                  <span className="sr-only sm:hidden">{phase}</span>
+                  <span className="sr-only sm:hidden">{t(phase)}</span>
                 </li>
               )
             })}
           </ol>
           <p className="mt-3 text-center text-xs font-semibold uppercase tracking-[0.16em] text-amber-200 sm:hidden">
-            {showStaticSummary ? 'Four-step summary' : currentScene.phase}
+            {t(showStaticSummary ? 'Four-step summary' : currentScene.phase)}
           </p>
 
           <figure className="mx-auto mt-6 max-w-5xl">
             <div
-              className="io-story-stage relative h-[35rem] min-w-0 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.025] shadow-2xl shadow-purple-950/30 sm:h-[31rem] md:h-[28rem]"
+              className="io-story-stage relative min-h-[35rem] min-w-0 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.025] shadow-2xl shadow-purple-950/30 sm:min-h-[31rem] md:min-h-[28rem]"
               data-cycle={player.cycle}
               data-enhanced={enhanced}
               data-has-started={hasStarted}
@@ -727,7 +749,7 @@ export function InquiryDemo({ workingDemoUrl }: { workingDemoUrl?: string }) {
               {showStaticSummary ? (
                 <StaticSummaryCards />
               ) : (
-                <div aria-hidden="true" className="absolute inset-0">
+                <div aria-hidden="true" className="relative grid min-h-[inherit]">
                   {previousScene ? (
                     <div
                       className="io-story-layer io-story-layer-exit"
@@ -749,61 +771,63 @@ export function InquiryDemo({ workingDemoUrl }: { workingDemoUrl?: string }) {
             <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <figcaption className="min-h-6 text-sm leading-6 text-slate-300">
                 <span className="font-semibold text-amber-200">
-                  {showStaticSummary ? 'Summary' : currentScene.phase}:
+                  {t(showStaticSummary ? 'Summary' : currentScene.phase)}:
                 </span>{' '}
-                {showStaticSummary
-                  ? 'A clear four-step path from inquiry to scheduled service.'
-                  : currentScene.caption}
+                {t(
+                  showStaticSummary
+                    ? 'A clear four-step path from inquiry to scheduled service.'
+                    : currentScene.caption,
+                )}
               </figcaption>
 
               {enhanced && !showStaticSummary ? (
                 <fieldset className="flex items-center gap-2">
-                  <legend className="sr-only">Animation controls</legend>
+                  <legend className="sr-only">{t('Animation controls')}</legend>
                   <button
-                    aria-label={
-                      player.manuallyPaused ? 'Resume workflow story' : 'Pause workflow story'
-                    }
+                    aria-label={t(
+                      player.manuallyPaused ? 'Resume workflow story' : 'Pause workflow story',
+                    )}
                     aria-pressed={player.manuallyPaused}
                     className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-4 text-base font-semibold text-slate-200 transition hover:border-amber-300/35 hover:bg-white/[0.07] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
                     onClick={togglePause}
                     type="button"
                   >
-                    {player.manuallyPaused ? 'Resume' : 'Pause'}
+                    {t(player.manuallyPaused ? 'Resume' : 'Pause')}
                   </button>
                   <button
-                    aria-label="Replay workflow story from the beginning"
+                    aria-label={t('Replay workflow story from the beginning')}
                     className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-4 text-base font-semibold text-slate-200 transition hover:border-amber-300/35 hover:bg-white/[0.07] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
                     onClick={replay}
                     type="button"
                   >
-                    Replay
+                    {t('Replay')}
                   </button>
                 </fieldset>
               ) : enhanced ? (
                 <span className="text-sm font-semibold text-slate-400">
-                  {reducedMotion ? 'Reduced motion summary' : 'Static workflow summary'}
+                  {t(reducedMotion ? 'Reduced motion summary' : 'Static workflow summary')}
                 </span>
               ) : null}
             </div>
           </figure>
 
           <div className="sr-only">
-            <h3>Workflow story transcript</h3>
+            <h3>{t('Workflow story transcript')}</h3>
             <ol>
               {STATIC_SUMMARY.map((item) => (
                 <li key={item.title}>
-                  <strong>{item.title}.</strong> {item.detail}
+                  <strong>{t(item.title)}.</strong> {t(item.detail)}
                 </li>
               ))}
             </ol>
           </div>
           <p aria-live="polite" className="sr-only">
-            {announcement}
+            {t(announcement)}
           </p>
           {workingDemoUrl ? (
             <div className="mt-6">
               <ButtonLink data-working-demo-cta="true" href={workingDemoUrl} variant="secondary">
-                Try the working demo
+                {t('Try the working demo')}
               </ButtonLink>
             </div>
           ) : null}
