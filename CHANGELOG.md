@@ -6,6 +6,13 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Search identity and service metadata
+
+- Added the documented Pflugerville founding city to Organization structured data and a stable business identifier. This describes company origin, not a public office address.
+- Added homepage WebSite data and translated Service data on Services, linked to the same business identity and drawn from existing visible copy.
+- Aligned sitemap language alternatives with the page metadata's English fallback and added rendered structured-data checks across all nine languages.
+- Preserved the visual design, visible copy, navigation, and worldwide positioning. City-specific acquisition content and Business Profile setup still depend on the target market and in-person service model.
+
 ### Navigation and URL consistency
 
 - Aligned the menu and browser titles around Services (`/services`), Approach (`/approach`), About (`/about`), and Start a project (`/start-a-project`).

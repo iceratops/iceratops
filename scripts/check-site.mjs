@@ -380,6 +380,66 @@ function textContent(html) {
     .replace(/\s+/g, ' ')
     .trim()
 }
+
+async function checkStructuredData() {
+  for (const locale of locales) {
+    for (const route of ['/', '/services']) {
+      const path = localPath(route, locale)
+      const { html } = await loadPage(path)
+      const nodes = []
+      for (const [, attributes, body] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+        if (findAttribute(attributes, 'type') !== 'application/ld+json') continue
+        try {
+          nodes.push(JSON.parse(body))
+        } catch {
+          recordFailure(`${path} contains invalid JSON-LD`)
+        }
+      }
+      const organization = nodes.find((node) => node['@type'] === 'Organization')
+      const organizationId = `${canonicalOrigin}/#organization`
+      if (organization?.['@id'] !== organizationId) {
+        recordFailure(`${path} lacks the shared organization identity`)
+      }
+      if (organization?.foundingLocation?.address?.addressLocality !== 'Pflugerville') {
+        recordFailure(`${path} lacks the documented founding city`)
+      }
+      if (route === '/') {
+        const website = nodes.find((node) => node['@type'] === 'WebSite')
+        if (
+          website?.name !== 'Iceratops' ||
+          website?.url !== `${canonicalOrigin}/` ||
+          website?.publisher?.['@id'] !== organizationId
+        ) {
+          recordFailure(`${path} lacks website identity linked to its publisher`)
+        }
+      } else {
+        const catalog = nodes.find((node) => node['@type'] === 'ItemList')
+        const items = catalog?.itemListElement
+        if (!Array.isArray(items) || items.length !== 4) {
+          recordFailure(`${path} lacks structured data for the four approved services`)
+          continue
+        }
+        const visibleText = textContent(html)
+        for (const { item } of items) {
+          if (
+            item?.['@type'] !== 'Service' ||
+            item?.provider?.['@id'] !== organizationId ||
+            item?.url !== new URL(path, canonicalOrigin).toString() ||
+            !item?.name ||
+            !item?.description ||
+            !visibleText.includes(item.name) ||
+            !visibleText.includes(item.description)
+          ) {
+            recordFailure(
+              `${path} has service data that differs from its visible content or provider`,
+            )
+          }
+        }
+      }
+    }
+  }
+}
+
 async function checkLocalizedPages() {
   const english = JSON.parse(await readFile('content/locales/en.json', 'utf8'))
   for (const [index, locale] of locales.entries()) {
@@ -513,6 +573,7 @@ async function checkHeaders() {
 
 try {
   await checkPublicRoutes()
+  await checkStructuredData()
   await checkInternalLinks()
   await checkWorkingDemoLinks()
   await checkUtilityRoutes()
@@ -528,5 +589,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  `site check: passed (${expectedPublicRoutes.length} public routes, app-page inventory, retired URLs, navigation, links, metadata, form contracts, mobile fallbacks, and headers)`,
+  `site check: passed (${expectedPublicRoutes.length} public routes, app-page inventory, retired URLs, navigation, links, metadata, structured data, form contracts, mobile fallbacks, and headers)`,
 )

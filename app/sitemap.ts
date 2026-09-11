@@ -7,12 +7,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     publicRoutes.map((route) => ({
       url: absoluteUrl(localizedPath(route.path, locale)),
       alternates: {
-        languages: Object.fromEntries(
-          locales.map((language) => [
+        languages: Object.fromEntries([
+          ...locales.map((language) => [
             localeInfo[language].tag,
             absoluteUrl(localizedPath(route.path, language)),
           ]),
-        ),
+          ['x-default', absoluteUrl(route.path)],
+        ]),
       },
       changeFrequency: route.path === '/' ? 'weekly' : 'monthly',
       priority: route.path === '/' ? 1 : 0.7,

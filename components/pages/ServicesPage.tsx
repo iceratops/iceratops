@@ -6,6 +6,7 @@ import { SystemsDiagram } from '@/components/marketing/visuals/SystemsDiagram'
 import { ButtonLink } from '@/components/primitives/Button'
 import { Container } from '@/components/primitives/Container'
 import { Section } from '@/components/primitives/Section'
+import { ServicesJsonLd } from '@/components/seo/ServicesJsonLd'
 import { services } from '@/content/services'
 import { servicesHowWeWork, servicesPage } from '@/content/site'
 import type { Locale } from '@/lib/i18n'
@@ -18,6 +19,7 @@ export default function ServicesPage({ locale = 'en' }: { locale?: Locale }) {
 
   return (
     <>
+      <ServicesJsonLd locale={locale} />
       <PageHero
         description={t(servicesPage.description)}
         eyebrow={t(servicesPage.eyebrow)}

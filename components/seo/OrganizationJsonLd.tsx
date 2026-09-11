@@ -8,6 +8,7 @@ export function OrganizationJsonLd({ locale }: { locale: Locale }) {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': absoluteUrl('/#organization'),
     name: site.name,
     description: t(site.shortDescription),
     url: siteConfig.url,
@@ -16,7 +17,13 @@ export function OrganizationJsonLd({ locale }: { locale: Locale }) {
     logo: absoluteUrl('/iceratops_logo.svg'),
     foundingLocation: {
       '@type': 'Place',
-      name: `${site.origin.state}, ${site.origin.country}`,
+      name: `${site.origin.city}, ${site.origin.state}, ${site.origin.country}`,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: site.origin.city,
+        addressRegion: site.origin.state,
+        addressCountry: 'US',
+      },
     },
     areaServed: { '@type': 'Place', name: t('Worldwide') },
     knowsAbout: [
@@ -32,7 +39,7 @@ export function OrganizationJsonLd({ locale }: { locale: Locale }) {
   return (
     <script
       // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD is built from trusted static site data.
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }}
       type="application/ld+json"
     />
   )

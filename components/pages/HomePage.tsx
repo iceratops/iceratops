@@ -5,6 +5,7 @@ import { Hero } from '@/components/marketing/home/Hero'
 import { InquiryDemo } from '@/components/marketing/home/InquiryDemo'
 import { ProcessSteps } from '@/components/marketing/home/ProcessSteps'
 import { WhatWeBuild } from '@/components/marketing/home/WhatWeBuild'
+import { WebsiteJsonLd } from '@/components/seo/WebsiteJsonLd'
 import type { Locale } from '@/lib/i18n'
 import { getWorkingDemoUrl } from '@/lib/working-demo'
 
@@ -13,6 +14,7 @@ export default function HomePage({ locale = 'en' }: { locale?: Locale }) {
 
   return (
     <>
+      <WebsiteJsonLd />
       <Hero locale={locale} />
       <WhatWeBuild locale={locale} />
       <ProcessSteps locale={locale} />
