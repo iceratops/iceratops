@@ -1,4 +1,4 @@
-import { ClosingCta } from 'iceratops-website'
+import { ClosingCta, PreviewProvider } from 'iceratops-website'
 
 const surface: React.CSSProperties = {
   background: 'linear-gradient(160deg,#0f172a 0%,#2a1a4a 58%,#0f172a 100%)',
@@ -8,19 +8,23 @@ const surface: React.CSSProperties = {
 
 export function Default() {
   return (
-    <div style={surface}>
-      <ClosingCta />
-    </div>
+    <PreviewProvider>
+      <div style={surface}>
+        <ClosingCta />
+      </div>
+    </PreviewProvider>
   )
 }
 
 export function CustomCopy() {
   return (
-    <div style={surface}>
-      <ClosingCta
-        title="Ready to simplify the workflow that keeps getting stuck?"
-        reassurance="Tell us where inquiries, follow-up, or repetitive admin work gets stuck. We reply within one business day."
-      />
-    </div>
+    <PreviewProvider>
+      <div style={surface}>
+        <ClosingCta
+          title="Ready to simplify the workflow that keeps getting stuck?"
+          reassurance="Tell us where inquiries, follow-up, or repetitive admin work gets stuck. We reply within one business day."
+        />
+      </div>
+    </PreviewProvider>
   )
 }

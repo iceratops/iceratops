@@ -1,61 +1,20 @@
 # CLAUDE.md
 
-Claude-specific guide for this repo. Keep this file focused on Claude's role and decision posture. Shared commands and Codex workflow rules live in `AGENTS.md`; product and content truth lives in `WEBSITE_BRIEF.md`.
+Claude owns architecture and content review; Codex owns implementation and validation. Shared repository instructions live in [AGENTS.md](AGENTS.md), and developer workflows live in [README.md](README.md).
 
-## Repo Context
+## Before reviewing
 
-Iceratops is a Next.js 15 App Router marketing site for a Texas-founded, founder-led technology company serving clients in the United States and worldwide. The site converts qualified traffic into the project inquiry path.
+Read the relevant sections of [WEBSITE_BRIEF.md](WEBSITE_BRIEF.md), then the affected source/diff and recent [CHANGELOG.md](CHANGELOG.md) entries. The brief is the canonical product direction; founder-approved direction changes should update it explicitly.
 
-## Read Order
+## Review responsibilities
 
-Before substantive architecture, copy, SEO, or positioning work:
+- Review positioning, information architecture, copy, trust, conversion, and SEO against the brief. Check visible content alongside titles, descriptions, canonicals, language alternatives, JSON-LD, and internal links.
+- Check the single primary CTA, factual claims, approved brand, and content rules. Review changes across saved translations, including Arabic/Urdu reading direction.
+- Review accessibility and mobile behavior at the viewports listed in `AGENTS.md`.
+- Report actionable mismatches with file references and distinguish implementation defects from proposed product changes. Keep reversible reasoning in the review; record lasting decisions in the owning document.
 
-1. `WEBSITE_BRIEF.md`: canonical positioning, services, tone, content rules, pricing direction, trust posture, brand, CTA, and IA.
-2. `AGENTS.md`: current commands, repo map, validation rules, context discipline, and implementation ownership.
-3. `CHANGELOG.md`: recent meaningful changes.
+## Role boundaries
 
-If chat history conflicts with `WEBSITE_BRIEF.md`, the brief wins. Direction changes should update the brief explicitly.
-
-## Claude's Role
-
-Claude is the architect and reviewer. Codex is the implementation and validation worker.
-
-Claude owns:
-
-- Site architecture and information architecture decisions.
-- Content strategy, copy direction, and copy review.
-- SEO strategy, local SEO posture, metadata review, schema review, and internal-linking review.
-- Trust and conversion architecture.
-- Implementation review against `WEBSITE_BRIEF.md`.
-- Updates to `WEBSITE_BRIEF.md` when the founder approves direction changes.
-- Mobile-first responsive design review across common phone, tablet, and desktop widths.
-
-Claude should not:
-
-- Bulk-edit the codebase unless explicitly asked.
-- Run lint, typecheck, build, or tests as the primary worker.
-- Open PRs, push branches, or commit code unless explicitly asked.
-- Create new top-level documentation files without a specific need.
-- Duplicate product strategy here instead of pointing to `WEBSITE_BRIEF.md`.
-- Create new git worktrees. The project operates linearly on branches off `master` in the main checkout.
-
-## Working Rules
-
-- Confirm recommendations against `WEBSITE_BRIEF.md` before suggesting changes.
-- For copy work, draft in chat or in content-owned files when they exist. Avoid burying strategy-only copy inside JSX.
-- For architecture decisions, document lightweight reasoning in chat when reversible. Use `CHANGELOG.md` or an approved existing doc when a decision is costly to reverse.
-- For SEO review, check titles, descriptions, canonical URLs, OG posture, JSON-LD, and internal links against the brief.
-- For implementation review, inspect the diff and flag mismatches with the brief, inaccessible UI, missing validation, invented claims, banned hype words, em dashes in website copy, or competing primary CTAs.
-- For responsive review, verify routes and components at the viewports listed in `AGENTS.md` (320, 375, 390, 430, 768, 1024, 1280).
-
-## Content Guardrails
-
-Do not restate the full brief here. The high-signal reminders are:
-
-- One primary CTA: Start a project.
-- No invented social proof, clients, logos, partnerships, metrics, case studies, pricing, or testimonials.
-- No exaggerated AI claims.
-- No em dashes in website copy.
-- Texas is the company origin; global availability is the primary reach statement.
-
-When in doubt, ask one focused question and default to the smaller change that stays closest to the brief.
+- Do not bulk-edit code, commit, push, or open PRs unless explicitly asked. Leave primary lint/typecheck/build execution to the implementation worker; review its reported evidence.
+- Update `WEBSITE_BRIEF.md` only with the founder's approval. Draft copy in the conversation or relevant content files; do not duplicate strategy here.
+- Follow `AGENTS.md` for branch, documentation, and verification rules. Prefer the smallest change consistent with the brief.

@@ -109,7 +109,10 @@ function findTitle(html) {
 }
 
 async function request(path, options = {}) {
-  const response = await fetch(new URL(path, baseUrl), options)
+  const response = await fetch(new URL(path, baseUrl), {
+    ...options,
+    signal: AbortSignal.timeout(15000),
+  })
   const html = options.method === 'HEAD' ? '' : await response.text()
   return { response, html }
 }

@@ -33,7 +33,7 @@
     "SectionHeading": "eyebrow?: string;\n  title?: string;\n  description?: string;\n  className?: string;",
     "CheckList": "/** List entries, each rendered with the standard check marker. */\n  items: readonly string[];\n  className?: string;",
     "PageHero": "/** Small label above the page title. */\n  eyebrow: string;\n  /** Page heading. */\n  title: string;\n  /** Supporting paragraph under the heading. */\n  description: string;",
-    "ClosingCta": "/** Heading. Defaults to \"Start with a free workflow review.\" */\n  title?: string;\n  /** Reassurance line under the heading. Defaults to the site response commitment. */\n  reassurance?: string;",
-    "ContactForm": "// No props. Renders the free workflow review form (name, email, optional business, workflow message) with Netlify AJAX submission and an email fallback when scripts are disabled."
+    "ClosingCta": "/** Language for saved copy. */\n  locale?: \"en\" | \"ar\" | \"ur\" | \"hi\" | \"es\" | \"fr\" | \"pt\" | \"zh-Hans\" | \"zh-Hant\";\n  /** Heading. Defaults to \"Let us talk about what you need to build.\" */\n  title?: string;\n  /** Reassurance line under the heading. Defaults to the site response commitment. */\n  reassurance?: string;",
+    "ContactForm": "// No props. Requires the language provider. Renders the project inquiry form with first/last name, email, optional business, country/code, website, preferred reply language, site language, and project details. Preserves combined name. Netlify AJAX submission; loopback previews validate without posting."
   }
 }
