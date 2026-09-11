@@ -9,7 +9,7 @@
   },
   "pnpm": {
     "overrides": {
-      "postcss": "8.5.14"
+      "postcss": "8.5.23"
     }
   },
   "scripts": {
@@ -26,7 +26,7 @@
     "validate:translations": "node scripts/check-translations.mjs"
   },
   "dependencies": {
-    "next": "^15.0.0",
+    "next": "^15.5.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

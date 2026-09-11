@@ -6,6 +6,12 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Release security patches
+
+- Updated Next.js within version 15 to 15.5.25 and advanced the existing PostCSS override to 8.5.23 after the release audit found published security advisories. Refreshed affected transitive image and build dependencies within supported ranges; no new direct dependencies or application source changes.
+- The complete locked dependency audit reports zero known vulnerabilities after these targeted updates. Retained static locale routing and the branded 404; its diagnostic noise matches the confirmed upstream Next.js issue #90537.
+- Added a production HTTP canary scheduled every five minutes with a confirmation retry. It checks three key pages, the form contract, RTL markup, and JavaScript availability, using no new dependencies. GitHub email preferences and inbox delivery require user verification; hydrated form checks and dedicated uptime monitoring remain follow-ups.
+
 ### Verification and preview regression coverage
 
 - Added Node tests for multilingual contact validation and all design preview exports, using existing TypeScript and React dependencies. Reproduced and repaired five previews missing language context; refreshed preview CTA and form metadata.
