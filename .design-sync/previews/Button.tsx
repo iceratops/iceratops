@@ -1,4 +1,4 @@
-import { Button, ButtonLink } from 'iceratops-website'
+import { Button, ButtonLink, PreviewProvider } from 'iceratops-website'
 
 // Iceratops components are built for the site's dark ambient backdrop. Preview
 // cards render on white, so each cell supplies the equivalent brand surface.
@@ -18,7 +18,7 @@ export function Variants() {
   return (
     <div style={surface}>
       <div style={row}>
-        <Button variant="primary">Free workflow review</Button>
+        <Button variant="primary">Start a project</Button>
         <Button variant="secondary">View services</Button>
       </div>
     </div>
@@ -51,13 +51,15 @@ export function Disabled() {
 
 export function AsLink() {
   return (
-    <div style={surface}>
-      <div style={row}>
-        <ButtonLink href="/free-workflow-review">Free workflow review</ButtonLink>
-        <ButtonLink href="/services" variant="secondary">
-          View services
-        </ButtonLink>
+    <PreviewProvider>
+      <div style={surface}>
+        <div style={row}>
+          <ButtonLink href="/start-a-project">Start a project</ButtonLink>
+          <ButtonLink href="/services" variant="secondary">
+            View services
+          </ButtonLink>
+        </div>
       </div>
-    </div>
+    </PreviewProvider>
   )
 }

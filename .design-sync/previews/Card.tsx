@@ -1,4 +1,4 @@
-import { ButtonLink, Card, CardText, CardTitle } from 'iceratops-website'
+import { ButtonLink, Card, CardText, CardTitle, PreviewProvider } from 'iceratops-website'
 
 // Brand dark surface. Cards use light text on translucent
 // fills, so they only read correctly on the app's dark background.
@@ -24,19 +24,21 @@ export function Default() {
 
 export function WithAction() {
   return (
-    <div style={surface}>
-      <Card>
-        <CardTitle as="h3">Inquiry capture &amp; follow-up</CardTitle>
-        <CardText>
-          Bring forms, texts, calls, DMs, and other request channels into a workflow you can see.
-        </CardText>
-        <div style={{ marginTop: 20 }}>
-          <ButtonLink href="/services" variant="secondary">
-            View services
-          </ButtonLink>
-        </div>
-      </Card>
-    </div>
+    <PreviewProvider>
+      <div style={surface}>
+        <Card>
+          <CardTitle as="h3">Inquiry capture &amp; follow-up</CardTitle>
+          <CardText>
+            Bring forms, texts, calls, DMs, and other request channels into a workflow you can see.
+          </CardText>
+          <div style={{ marginTop: 20 }}>
+            <ButtonLink href="/services" variant="secondary">
+              View services
+            </ButtonLink>
+          </div>
+        </Card>
+      </div>
+    </PreviewProvider>
   )
 }
 

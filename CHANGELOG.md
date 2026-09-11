@@ -6,6 +6,21 @@ We do not track tiny copy edits, formatting-only changes, experimental work that
 
 ## Unreleased
 
+### Verification and preview regression coverage
+
+- Added Node tests for multilingual contact validation and all design preview exports, using existing TypeScript and React dependencies. Reproduced and repaired five previews missing language context; refreshed preview CTA and form metadata.
+- Added a shared `check` command and a GitHub Actions workflow for lint, typecheck, tests, build, and HTTP site validation. Netlify now runs checks before building, and HTTP validation has a per-request timeout.
+- Selected Node 24 LTS through `.nvmrc` and the package engines policy, shared by local development, GitHub Actions, and Netlify.
+- Documented the existing Netlify notification hooks and a small live-monitoring plan. Continuous uptime alerts, browser submission checks, and actual Netlify delivery monitoring still require operational setup.
+- Validated on Node 24.21.0: all 28 tests, lint, typecheck, production build, and the workflow's 54-page HTTP check passed locally. GitHub-hosted execution and deployment remain pending.
+
+### Repository development guide
+
+- Replaced the root agent guide with a concise source map and current routing, translation, form, and verification boundaries; shortened Claude's guide to its review role.
+- Added a README covering setup, existing commands, build-time environment behavior, Netlify integration, validation limits, and focused follow-up tasks.
+- Corrected stale design-preview instructions and simplified the changelog entry template. Application source, dependencies, and deployment configuration are unchanged.
+- Baseline and final lint, typecheck, build, and 54-page site validation passed. Recorded existing 404 server diagnostics and preview integration gaps for separate work.
+
 ### Search identity and service metadata
 
 - Added the documented Pflugerville founding city to Organization structured data and a stable business identifier. This describes company origin, not a public office address.
@@ -266,45 +281,7 @@ Initial repo documentation for the rebuild. No code or content changes yet.
 
 ## How to add a future entry
 
-When a meaningful batch ships, add it under `## Unreleased` and move it to a versioned section on release. Use this shape:
-
-```
-## X.Y.Z — Short batch title
-
-One or two lines on the goal of the batch and any notes that future agents should know.
-
-### Pages
-- Added /services overview with six service cards
-- Updated /about with new founder paragraph
-
-### Components
-- Added Hero, ServiceCardGrid, IndustryCardGrid
-- Refactored NavBar to use shared Link primitive
-
-### Content and positioning
-- Replaced global hero copy with Pflugerville-led positioning
-- Removed banned hype words from /services copy
-
-### SEO
-- Added LocalBusiness JSON-LD with Pflugerville and service-area cities
-- Wired sitemap.ts and robots.ts
-- Added per-page OG image route at /og
-
-### Forms and integrations
-- Contact form server action wired to Resend
-- Added confirmation page at /contact/thanks
-
-### Design system
-- Ported Tailwind theme to Next.js (Orbitron + Inter, slate-to-purple gradient, yellow #fbbf24)
-- Added glass-card and gradient-text utility classes
-
-### Build, lint, deploy
-- Added em dash lint check
-- CI runs lint, typecheck, build on every PR
-- Configured Netlify deploy previews
-```
-
-Sections that do not apply in a given batch can be omitted. Keep entries short. If a section needs more than a handful of bullets, the batch is probably too big.
+When a meaningful batch ships, add a `### Short batch title` under `## Unreleased` and move it to a versioned section on release. Use a few bullets describing the resulting behavior, affected areas, and any lasting migration or validation limitation. Older entries preserve historical decisions; current architecture and commands live in `README.md` and `AGENTS.md`.
 
 ## What to track
 

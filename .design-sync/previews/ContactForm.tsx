@@ -1,4 +1,4 @@
-import { ContactForm } from 'iceratops-website'
+import { ContactForm, PreviewProvider } from 'iceratops-website'
 
 const surface: React.CSSProperties = {
   background: 'linear-gradient(160deg,#0f172a 0%,#2a1a4a 58%,#0f172a 100%)',
@@ -8,10 +8,12 @@ const surface: React.CSSProperties = {
 
 export function Default() {
   return (
-    <div style={surface}>
-      <div style={{ maxWidth: 560 }}>
-        <ContactForm />
+    <PreviewProvider>
+      <div style={surface}>
+        <div style={{ maxWidth: 560 }}>
+          <ContactForm />
+        </div>
       </div>
-    </div>
+    </PreviewProvider>
   )
 }

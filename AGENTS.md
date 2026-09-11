@@ -1,173 +1,50 @@
 # AGENTS.md
 
-Lean operating guide for AI agents working in this repo. Keep this file focused on workflow, commands, and safe context discovery. Product strategy, positioning, services, voice, CTA rules, and information architecture live in `WEBSITE_BRIEF.md`.
+Iceratops is a multilingual marketing site: Next.js 15 App Router, React 19, TypeScript, Tailwind CSS 3, and Netlify. This is a single app.
 
-## Current Repo
+## Sources of truth
 
-Iceratops marketing website for a Texas-founded, founder-led technology and digital systems company serving clients worldwide.
+- [WEBSITE_BRIEF.md](WEBSITE_BRIEF.md): founder-owned positioning, copy, brand, CTA, and route policy. Changes to that direction require the founder's explicit approval.
+- [README.md](README.md): setup, commands, architecture boundaries, environment, and verification details.
+- [CHANGELOG.md](CHANGELOG.md): meaningful batches, newest first under Unreleased. Older entries describe history, not current requirements.
+- [CLAUDE.md](CLAUDE.md): Claude's architecture and content review role. Codex owns implementation and validation.
 
-Current stack:
+## Repository map
 
-- Next.js 15 App Router
-- React 19
-- TypeScript
-- Tailwind CSS
-- Biome for linting and formatting
-- Netlify hosting via `@netlify/plugin-nextjs`
-- pnpm `10.29.1`
+| Path | Responsibility |
+| --- | --- |
+| `app/(english)/`, `app/[locale]/` | Thin route wrappers for unprefixed English and statically generated translations; each has a root layout. |
+| `app/global-not-found.tsx`, `app/sitemap.ts`, `app/robots.ts` | Global 404 and metadata routes. The 404 owns its document because the app has multiple root layouts. |
+| `components/pages/` | Shared page implementations used by both route trees. `ContactPage.tsx` serves `/start-a-project`. |
+| `components/layout/`, `components/nav/`, `components/i18n/` | Document, fonts, site shell, navigation, language provider, and localized links. |
+| `components/marketing/`, `components/primitives/`, `components/seo/` | Marketing sections, reusable UI, and JSON-LD. |
+| `content/` | Site copy, services, navigation/CTA, country data, and saved translation catalogs in `locales/`. Some copy also lives in components and metadata helpers. |
+| `lib/` | SEO/page metadata, locale routing and translation, contact validation, demo URL validation, and small shared helpers. |
+| `app/globals.css`, `public/` | Brand styles/animations and static assets, including Netlify's `__forms.html` detector. |
+| `scripts/` | Copy lint, translation assertions, contact/preview tests, and HTTP site validation. |
+| `.design-sync/` | Auxiliary component-preview inputs, outside the app build/typecheck; `pnpm test` checks preview rendering. Read its [notes](.design-sync/NOTES.md) before reuse. |
 
-This is a single-app repo, not a monorepo.
+## Change boundaries
 
-## Source Of Truth
+- Keep page bodies shared in `components/pages/`; route wrappers supply locale and metadata. English URLs stay unprefixed. Retired routes stay 404 as specified in the brief.
+- When English source copy changes, update its keys and translations across all nine `content/locales/*.json` catalogs; preserve placeholders. Use `getTranslator` in server components and `useI18n` in client components. Use `LocalizedLink` or `localizedPath` for internal links; Arabic and Urdu are RTL.
+- Contact field changes span `components/marketing/ContactForm.tsx`, `lib/contact-form.ts`, `public/__forms.html`, and `scripts/check-site.mjs`. Preserve the `contact` form name and compatibility fields; never log inquiry PII.
+- Security headers exist in both `next.config.ts` and `netlify.toml`. Keep production policies aligned; development permits script evaluation for Next tooling.
+- Preserve the brief's dark slate/purple gradient, yellow accent, Orbitron/Inter typography, mobile-first layout, and single primary CTA, **Start a project**. No invented social proof or em dashes in website copy.
 
-- `WEBSITE_BRIEF.md`: canonical product, positioning, content, services, CTA, brand, and IA direction.
-- `CHANGELOG.md`: meaningful shipped batches and recent repo history.
-- `CLAUDE.md`: Claude-specific architecture and content review role.
-- `AGENTS.md`: this operating guide.
+## Development and verification
 
-Do not change positioning, services, tone, pricing direction, CTA strategy, or brand rules unless `WEBSITE_BRIEF.md` is explicitly updated by the founder.
+Use Node 24 from `.nvmrc` and pnpm `10.29.1` from `package.json`: `pnpm install --frozen-lockfile`, then `pnpm run dev`. Netlify and GitHub Actions read the same Node version file. See the [command reference](README.md#commands) for targeted checks and production startup.
 
-## Repo Map
+- Before handing off application changes, run `pnpm run check` (lint, typecheck, and tests), then `pnpm run build`. Lint includes copy and translation checks. Build alone does not run those repository checks.
+- For routes, metadata, navigation, translations, forms, headers, or demo-link configuration, also run `pnpm run validate:site` against a built server. Match `WORKING_DEMO_URL` to the build; the validator does not load `.env.local`. See [site validation](README.md#site-validation).
+- `pnpm test` uses Node's built-in runner and the existing TypeScript/React packages for contact validation and preview render tests. There is no browser test suite; current automated checks do not exercise hydrated submission behavior or Netlify delivery.
+- For route/component changes, check 320, 375, 390, 430, 768, 1024, and 1280px: no horizontal scrolling, usable header/nav and CTA, stacked mobile cards, and usable forms. Include RTL, keyboard access, and reduced motion when affected.
+- For docs-only changes, inspect the full diff and verify links/commands; rerun executable checks if their behavior changed. Do not run repository-wide formatting for a focused edit.
 
-- `app/`: Next.js App Router pages, metadata routes, global CSS.
-- `components/`: layout, nav, marketing, and primitive UI components.
-- `lib/`: shared helpers such as SEO and class utilities.
-- `public/`: static images, favicons, logos, manifests.
-- `scripts/`: repo validation scripts, including copy lint.
-- `docs/`: retained project documentation when present. Review only when the task asks for it.
+## Repository workflow
 
-Generated, dependency, or local-heavy paths to avoid unless directly relevant:
-
-- `.next/`
-- `node_modules/`
-- `.pnpm-store/`
-- `.claude/worktrees/`
-- `tsconfig.tsbuildinfo`
-- `dist/`, `out/`, `.netlify/` if present
-
-## Commands
-
-Use pnpm.
-
-```bash
-pnpm install
-pnpm run dev
-pnpm run build
-pnpm run start
-pnpm run lint
-pnpm run lint:copy
-pnpm run format
-pnpm run typecheck
-```
-
-Command meanings:
-
-- `pnpm run dev`: start Next dev server.
-- `pnpm run build`: production Next build.
-- `pnpm run start`: serve a built Next app.
-- `pnpm run lint`: `biome check .` plus copy lint.
-- `pnpm run lint:copy`: checks website source for em dashes.
-- `pnpm run format`: apply Biome formatting.
-- `pnpm run typecheck`: `tsc --noEmit`.
-
-No test script currently exists. Do not report tests as run unless a test command is added or the user asks for a specific manual check.
-
-## Working Demo Configuration
-
-The optional working-demo links use the build-time `WORKING_DEMO_URL` environment variable.
-
-- For local development, copy `.env.example` to `.env.local` and set an absolute HTTPS URL. HTTP is accepted only for localhost testing.
-- For production, set `WORKING_DEMO_URL=https://demo.iceratops.com/` in the Netlify site environment and trigger a new deploy.
-- Leave the variable unset or blank to hide the links. Invalid or credential-bearing URLs are also hidden.
-
-The homepage and Services links are rendered during the build, so changing the variable requires a rebuild or deploy.
-When running `pnpm run validate:site` against a configured build, pass the same `WORKING_DEMO_URL` value to the validation command.
-
-## Validation
-
-For user-visible code changes, run before handoff when feasible:
-
-```bash
-pnpm run lint
-pnpm run typecheck
-pnpm run build
-```
-
-For docs-only instruction changes, a focused diff/readback is usually enough. Run heavier checks only if the doc change affects commands, generated source, or validation behavior.
-
-The copy lint scans `.ts`, `.tsx`, and `.mdx` files in source/content paths for em dashes. Top-level Markdown docs are intentionally excluded, but website copy should still avoid em dashes.
-
-## Context Discipline
-
-Start with the smallest useful context:
-
-- Inspect the relevant file, route, component, symbol, diff, log, or command output first.
-- Prefer `rg`, `rg --files`, focused file reads, and targeted snippets.
-- Avoid broad repo scans unless the task needs them.
-- Do not read full large files when headings, nearby lines, or a narrow search answer the question.
-- Do not copy deep product or architecture content into this file. Link to the owning doc instead.
-- Ignore generated and dependency directories unless debugging their output directly.
-
-Unknown or potentially large command output must be scoped and byte-capped. Prefer:
-
-```bash
-COMMAND 2>&1 | head -c 4000
-COMMAND 2>&1 | tail -c 4000
-```
-
-When using tools that support output limits, set a small output cap first and increase only if needed.
-
-## Implementation Guardrails
-
-- Follow existing Next.js App Router, TypeScript, Tailwind, and component patterns.
-- Keep reusable UI in `components/`; keep shared helpers in `lib/`.
-- Preserve the brand system from `WEBSITE_BRIEF.md`: dark slate-to-purple gradient, yellow `#fbbf24` accent, Orbitron headings, Inter body, glass-card feel.
-- The single primary CTA is "Start a project."
-- Do not invent testimonials, clients, logos, case studies, metrics, partnerships, pricing, or customer data.
-- Do not log PII from contact forms or integrations.
-- Do not add new top-level docs unless the user explicitly asks. Prefer updating existing docs.
-- Do not touch `.claude/worktrees/` unless the user specifically asks.
-- Do not create new git worktrees. The project operates linearly on branches off `master`. Existing entries under `.claude/worktrees/` are being phased out; new work goes on a regular branch in the main checkout.
-
-## Responsive Design
-
-The site is mobile-first. Most first impressions come from phones (see `WEBSITE_BRIEF.md` → Primary surface).
-
-Implementation rules:
-
-- Build the mobile layout first, then add `sm:`, `md:`, `lg:`, `xl:` Tailwind variants for larger screens. Do not start from a desktop layout and shrink it down.
-- No fixed pixel widths that can break narrow viewports. Use `max-w-*`, `w-full`, percentages, or fluid utilities.
-- No horizontal scrolling at any common width.
-- No hover-only interactions for primary actions. Anything reachable by hover on desktop is reachable by tap on mobile.
-- The primary CTA stays visible and usable on a 375px viewport without zoom.
-- Cards collapse to a single column at mobile widths. Multi-column grids only above `md:`.
-- Forms use a single column on mobile with comfortable spacing, native input types, and no horizontal overflow.
-- Hero sections are compact on mobile. Avoid 100vh heroes on small screens.
-
-Required viewport checks before returning a route or component:
-
-- 320px (small phones)
-- 375px (iPhone SE class, common baseline)
-- 390px (iPhone 13/14/15 class)
-- 430px (iPhone Pro Max class)
-- 768px (tablet portrait)
-- 1024px (tablet landscape, small laptop)
-- 1280px (desktop)
-
-At each width verify: no horizontal scroll, header and nav function cleanly, primary CTA is visible and tappable, cards stack as expected, and forms are usable. Manual visual checks in browser devtools are enough for Phase 1B guidance. Note any tradeoffs in the PR description.
-
-## Agent Roles
-
-- Founder plus Claude own positioning, services, tone, content strategy, IA, SEO posture, and changes to `WEBSITE_BRIEF.md`.
-- Codex owns component implementation, routing, refactors, forms, integrations, validation, build health, and changelog entries for shipped batches.
-- Claude reviews implementation against the brief and should not bulk-edit code unless explicitly asked.
-
-## Final Response Expectations
-
-End with:
-
-- What changed, with file paths.
-- Validation run, or why it was not run.
-- Any residual risk, blocker, or follow-up that matters.
-
-Keep the final response concise and concrete. Do not imply unrun checks passed.
+- Work linearly on regular branches off `master` in the main checkout. Do not create worktrees or touch `.claude/worktrees/` unless explicitly requested.
+- Do not add dependencies without approval. Prefer existing documentation; create new top-level docs only when requested.
+- Start with the relevant files. Skip `.next/`, `node_modules/`, `.pnpm-store/`, `.claude/`, `.ds-sync/`, `ds-bundle/`, and `tsconfig.tsbuildinfo` unless directly relevant. Cap command output.
+- Record meaningful batches in `CHANGELOG.md`. Handoff: changed paths, validation results (including unrun/failed checks), and material risks or follow-ups.
