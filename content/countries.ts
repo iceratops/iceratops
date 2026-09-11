@@ -439,10 +439,6 @@ export const countries = [
     name: 'Isle of Man',
   },
   {
-    code: 'IL',
-    name: 'Israel',
-  },
-  {
     code: 'IT',
     name: 'Italy',
   },
